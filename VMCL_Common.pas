@@ -19,13 +19,13 @@ type
                ftdFPC,                      // compiled using FPC
                ftdDelphi,                   // compiled using Delphi
                ftdASMSuppressSizeWarnings,  // ASMSuppressSizeWarnings symbol is defined
-               ftdASMDirectOPCodes);        // ftdASMDirectOPCodes symbol is defined
+               ftdASMDirectOPCodes);        // ASMDirectOPCodes symbol is defined
 
   TVMCLInfoSet = set of TVMCLInfo;
 
 var
-  VMCLInfo:         TVMCLInfoSet;     // set of
-  VMCLSupportsSSE:  Boolean = False;  // true when the library offers SSE-based functions
+  VMCLInfoSet:  TVMCLInfoSet;
+  SupportsSSE:  Boolean = False;  // true when the library offers SSE-based functions
 
 //= Calculation constants ======================================================
 
@@ -231,19 +231,19 @@ procedure Initialize;
   procedure InfoSet(Value: TVMCLInfo; Active: Boolean);
   begin
     If Active then
-      Include(VMCLInfo,Value)
+      Include(VMCLInfoSet,Value)
     else
-      Exclude(VMCLInfo,Value);
+      Exclude(VMCLInfoSet,Value);
   end;
   
 begin
 with TSimpleCPUID.Create do
 try
-  VMCLInfo := [];
+  VMCLInfoSet := [];
   InfoSet(ftsSSE,Info.ProcessorFeatures.SSE);
   InfoSet(ftsSSE2,Info.ProcessorFeatures.SSE2);
   InfoSet(ftsSSE3,Info.ProcessorFeatures.SSE3);
-  InfoSet(ftsSupportsSSE,[ftsSSE,ftsSSE2,ftsSSE3] <= VMCLInfo);
+  InfoSet(ftsSupportsSSE,[ftsSSE,ftsSSE2,ftsSSE3] <= VMCLInfoSet);
   InfoSet(ftdPurePascal,{$IFDEF PurePascal}True{$ELSE}False{$ENDIF});
   InfoSet(ftdX86,{$IFDEF x86}True{$ELSE}False{$ENDIF});
   InfoSet(ftdX64,{$IFDEF x64}True{$ELSE}False{$ENDIF});
@@ -253,7 +253,7 @@ try
   InfoSet(ftdDelphi,{$IFDEF Delphi}True{$ELSE}False{$ENDIF});
   InfoSet(ftdASMSuppressSizeWarnings,{$IFDEF ASMSuppressSizeWarnings}True{$ELSE}False{$ENDIF});
   InfoSet(ftdASMDirectOPCodes,{$IFDEF ASMDirectOPCodes}True{$ELSE}False{$ENDIF});
-  VMCLSupportsSSE := ftsSupportsSSE in VMCLInfo;
+  SupportsSSE := ftsSupportsSSE in VMCLInfoSet;
 finally
   Free;
 end;
