@@ -1868,13 +1868,18 @@ end;
 
 procedure Normalize(var Vector: TVMCLVector2s);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVector(Vector) then
   begin
-    VectorLengthRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
+    VectorMagnitude := Magnitude(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
@@ -1882,14 +1887,19 @@ end;
 
 procedure Normalize(var Vector: TVMCLVector3s);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVector(Vector) then
   begin
-    VectorLengthRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
-    Vector[2] := Vector[2] * VectorLengthRcp;
+    VectorMagnitude := Magnitude(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+        Vector[2] := Vector[2] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
@@ -1897,15 +1907,20 @@ end;
 
 procedure Normalize(var Vector: TVMCLVector4s);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVector(Vector) then
   begin
-    VectorLengthRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
-    Vector[2] := Vector[2] * VectorLengthRcp;
-    Vector[3] := Vector[3] * VectorLengthRcp;
+    VectorMagnitude := Magnitude(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+        Vector[2] := Vector[2] * VectorMagnitudeRcp;
+        Vector[3] := Vector[3] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
@@ -1913,14 +1928,19 @@ end;
 
 procedure NormalizeXYZ(var Vector: TVMCLVector4s);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVectorXYZ(Vector) then
   begin
-    VectorLengthRcp := 1 / MagnitudeXYZ(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
-    Vector[2] := Vector[2] * VectorLengthRcp;
+    VectorMagnitude := MagnitudeXYZ(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+        Vector[2] := Vector[2] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
@@ -1928,13 +1948,18 @@ end;
 
 procedure Normalize(var Vector: TVMCLVector2d);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVector(Vector) then
   begin
-    VectorLengthRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
+    VectorMagnitude := Magnitude(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
@@ -1942,14 +1967,19 @@ end;
 
 procedure Normalize(var Vector: TVMCLVector3d);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVector(Vector) then
   begin
-    VectorLengthRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
-    Vector[2] := Vector[2] * VectorLengthRcp;
+    VectorMagnitude := Magnitude(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+        Vector[2] := Vector[2] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
@@ -1957,15 +1987,20 @@ end;
 
 procedure Normalize(var Vector: TVMCLVector4d);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVector(Vector) then
   begin
-    VectorLengthRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
-    Vector[2] := Vector[2] * VectorLengthRcp;
-    Vector[3] := Vector[3] * VectorLengthRcp;
+    VectorMagnitude := Magnitude(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+        Vector[2] := Vector[2] * VectorMagnitudeRcp;
+        Vector[3] := Vector[3] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
@@ -1973,14 +2008,19 @@ end;
 
 procedure NormalizeXYZ(var Vector: TVMCLVector4d);
 var
-  VectorLengthRcp:  Extended;
+  VectorMagnitude:    Extended;
+  VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroMagnitudeVectorXYZ(Vector) then
   begin
-    VectorLengthRcp := 1 / MagnitudeXYZ(Vector);
-    Vector[0] := Vector[0] * VectorLengthRcp;
-    Vector[1] := Vector[1] * VectorLengthRcp;
-    Vector[2] := Vector[2] * VectorLengthRcp;
+    VectorMagnitude := MagnitudeXYZ(Vector);
+    If VectorMagnitude <> 0.0 then
+      begin
+        VectorMagnitudeRcp := 1 / VectorMagnitude;
+        Vector[0] := Vector[0] * VectorMagnitudeRcp;
+        Vector[1] := Vector[1] * VectorMagnitudeRcp;
+        Vector[2] := Vector[2] * VectorMagnitudeRcp;
+      end;
   end;
 end;
 
