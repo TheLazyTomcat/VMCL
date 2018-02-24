@@ -114,7 +114,7 @@ type
 Function MemAlignmentBytes(Alignment: TVMCLMemoryAlignment): TMemSize;
 
 {===============================================================================
-    Unit initialization and finalization - declaration
+    Memory manager routines - declaration
 ===============================================================================}
 
 procedure Initialize;
@@ -154,32 +154,32 @@ end;
 end;
 
 {===============================================================================
-    Unit initialization and finalization - implementation
+    Memory manager routines - implementation
 ===============================================================================}
 
 var
-  MemoryManager:  TVMCLMemoryManager = nil;
+  VMCL_MemoryManager: TVMCLMemoryManager = nil;
 
 const
 {$IFDEF AllocLargeMemSegment}
-  AllocSegmentSize = 1024 * 1024; // 1MiB
+  VMCL_AllocSegmentSize = 1024 * 1024;  // 1MiB
 {$ELSE}
-  AllocSegmentSize = 32 * 1024;   // 32KiB
+  VMCL_AllocSegmentSize = 32 * 1024;    // 32KiB
 {$ENDIF}
 
 //------------------------------------------------------------------------------
 
 procedure Initialize;
 begin
-If not Assigned(MemoryManager) then
-  MemoryManager := TVMCLMemoryManager.Create({$IFDEF AllocGrowOnly}gmGrowing{$ELSE}gmDynamic{$ENDIF},AllocSegmentSize,ma128b);
+If not Assigned(VMCL_MemoryManager) then
+  VMCL_MemoryManager := TVMCLMemoryManager.Create({$IFDEF AllocGrowOnly}gmGrowing{$ELSE}gmDynamic{$ENDIF},VMCL_AllocSegmentSize,ma128b);
 end;
 
 //------------------------------------------------------------------------------
 
 procedure Finalize;
 begin
-FreeAndNil(MemoryManager);
+FreeAndNil(VMCL_MemoryManager);
 end;
 
 {===============================================================================
@@ -652,8 +652,8 @@ end;
 
 procedure VMCL_GetMem(out Ptr: Pointer; Size: TMemSize);
 begin
-If Assigned(MemoryManager) then
-  Ptr := MemoryManager.AlignedAllocate(Size)
+If Assigned(VMCL_MemoryManager) then
+  Ptr := VMCL_MemoryManager.AlignedAllocate(Size)
 else
   raise Exception.Create('VMCL_GetMem: Memory manager object not initialized.');
 end;
@@ -670,13 +670,15 @@ end;
 
 procedure VMCL_FreeMem(Ptr: Pointer; Size: TMemSize);
 begin
-If Assigned(MemoryManager) then
-  MemoryManager.AlignedFree(Ptr,Size)
+If Assigned(VMCL_MemoryManager) then
+  VMCL_MemoryManager.AlignedFree(Ptr,Size)
 else
   raise Exception.Create('VMCL_FreeMem: Memory manager object not initialized.');
 end;
 
-{==============================================================================}
+{===============================================================================
+    Unit initialization and finalization
+===============================================================================}
 
 {$IFDEF AllocAutoInit}
 initialization

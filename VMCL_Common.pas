@@ -24,14 +24,14 @@ type
   TVMCLInfoSet = set of TVMCLInfo;
 
 var
-  VMCLInfoSet:  TVMCLInfoSet;
-  SupportsSSE:  Boolean = False;  // true when the library offers SSE-based functions
+  VMCL_InfoSet:       TVMCLInfoSet;
+  VMCL_SupportsSSE:   Boolean = False;  // true when the library offers SSE-based functions
 
 //= Calculation constants ======================================================
 
 const
-  RadToDegCoef: Double = 180 / Pi;
-  DegToRadCoef: Double = Pi / 180;
+  VMCL_RadToDegCoef:  Double = 180 / Pi;
+  VMCL_DegToRadCoef:  Double = Pi / 180;
 
 //= Common functions ===========================================================
 
@@ -70,12 +70,12 @@ type
   end;
 
 const
-  DefaultValueFormat: TVMCLValueFormat = (
+  VMCL_DefaultValueFormat: TVMCLValueFormat = (
     ThousandSeparator:  #0;
     DecimalSeparator:   '.';
     DecimalPlaces:      -1);
 
-  DefaultCommonFormat: TVMCLCommonFormat = (
+  VMCL_DefaultCommonFormat: TVMCLCommonFormat = (
     ValueFormat: (
       ThousandSeparator:    #0;
       DecimalSeparator:     '.';
@@ -221,7 +221,7 @@ end;
 
 Function ValueToStr(Value: Extended): String;
 begin
-Result := ValueToStr(Value,DefaultValueFormat);
+Result := ValueToStr(Value,VMCL_DefaultValueFormat);
 end;
 
 //= Initialization =============================================================
@@ -231,19 +231,19 @@ procedure Initialize;
   procedure InfoSet(Value: TVMCLInfo; Active: Boolean);
   begin
     If Active then
-      Include(VMCLInfoSet,Value)
+      Include(VMCL_InfoSet,Value)
     else
-      Exclude(VMCLInfoSet,Value);
+      Exclude(VMCL_InfoSet,Value);
   end;
   
 begin
 with TSimpleCPUID.Create do
 try
-  VMCLInfoSet := [];
+  VMCL_InfoSet := [];
   InfoSet(ftsSSE,Info.ProcessorFeatures.SSE);
   InfoSet(ftsSSE2,Info.ProcessorFeatures.SSE2);
   InfoSet(ftsSSE3,Info.ProcessorFeatures.SSE3);
-  InfoSet(ftsSupportsSSE,[ftsSSE,ftsSSE2,ftsSSE3] <= VMCLInfoSet);
+  InfoSet(ftsSupportsSSE,[ftsSSE,ftsSSE2,ftsSSE3] <= VMCL_InfoSet);
   InfoSet(ftdPurePascal,{$IFDEF PurePascal}True{$ELSE}False{$ENDIF});
   InfoSet(ftdX86,{$IFDEF x86}True{$ELSE}False{$ENDIF});
   InfoSet(ftdX64,{$IFDEF x64}True{$ELSE}False{$ENDIF});
@@ -253,7 +253,7 @@ try
   InfoSet(ftdDelphi,{$IFDEF Delphi}True{$ELSE}False{$ENDIF});
   InfoSet(ftdASMSuppressSizeWarnings,{$IFDEF ASMSuppressSizeWarnings}True{$ELSE}False{$ENDIF});
   InfoSet(ftdASMDirectOPCodes,{$IFDEF ASMDirectOPCodes}True{$ELSE}False{$ENDIF});
-  SupportsSSE := ftsSupportsSSE in VMCLInfoSet;
+  VMCL_SupportsSSE := ftsSupportsSSE in VMCL_InfoSet;
 finally
   Free;
 end;
