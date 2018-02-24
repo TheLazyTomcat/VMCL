@@ -383,6 +383,19 @@ Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d; overload;
 Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
 Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
 
+{===============================================================================
+    Calculations with one vector
+===============================================================================}
+
+Function ScalarMultiply(const Vector: TVector2s; Scalar: Single): TVector2s; overload;
+Function ScalarMultiply(const Vector: TVector3s; Scalar: Single): TVector3s; overload;
+Function ScalarMultiply(const Vector: TVector4s; Scalar: Single): TVector4s; overload;
+Function ScalarMultiplyXYZ(const Vector: TVector4s; Scalar: Single): TVector4s; overload;
+Function ScalarMultiply(const Vector: TVector2d; Scalar: Double): TVector2d; overload;
+Function ScalarMultiply(const Vector: TVector3d; Scalar: Double): TVector3d; overload;
+Function ScalarMultiply(const Vector: TVector4d; Scalar: Double): TVector4d; overload;
+Function ScalarMultiplyXYZ(const Vector: TVector4d; Scalar: Double): TVector4d; overload;
+
 implementation
 
 uses
