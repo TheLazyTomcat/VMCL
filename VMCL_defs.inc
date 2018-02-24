@@ -30,12 +30,15 @@
   {$DEFINE ASMSuppressSizeWarnings}
 {$ELSE}
   {$DEFINE Delphi}
-  {$IFNDEF x64}  // let's assume all 64bit compilers support SSE3
+  {$IFNDEF x64}
+    // let's assume all 64bit compilers support SSE3
     {$DEFINE ASMDirectOPCodes}
   {$ENDIF}
 {$ENDIF}
 
 //= Individual VMCL units defines ==============================================
+
+//- VMCL_Common ----------------------------------------------------------------
 
 //- VMCL_Alloc -----------------------------------------------------------------
 
@@ -43,3 +46,5 @@
 {$DEFINE AllocOptimizeForSpeed} // Sligtly faster allocation, worse memory utilization
 {$DEFINE AllocAutoInit}
 {.$DEFINE AllocGrowOnly}
+
+//- VMCL_Vectors ---------------------------------------------------------------
