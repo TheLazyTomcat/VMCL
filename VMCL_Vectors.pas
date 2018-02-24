@@ -387,14 +387,84 @@ Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
     Calculations with one vector
 ===============================================================================}
 
-Function ScalarMultiply(const Vector: TVector2s; Scalar: Single): TVector2s; overload;
-Function ScalarMultiply(const Vector: TVector3s; Scalar: Single): TVector3s; overload;
-Function ScalarMultiply(const Vector: TVector4s; Scalar: Single): TVector4s; overload;
-Function ScalarMultiplyXYZ(const Vector: TVector4s; Scalar: Single): TVector4s; overload;
-Function ScalarMultiply(const Vector: TVector2d; Scalar: Double): TVector2d; overload;
-Function ScalarMultiply(const Vector: TVector3d; Scalar: Double): TVector3d; overload;
-Function ScalarMultiply(const Vector: TVector4d; Scalar: Double): TVector4d; overload;
-Function ScalarMultiplyXYZ(const Vector: TVector4d; Scalar: Double): TVector4d; overload;
+Function ScalarMultiply(const Vector: TVMCLVector2s; Scalar: Single): TVMCLVector2s; overload;
+Function ScalarMultiply(const Vector: TVMCLVector3s; Scalar: Single): TVMCLVector3s; overload;
+Function ScalarMultiply(const Vector: TVMCLVector4s; Scalar: Single): TVMCLVector4s; overload;
+Function ScalarMultiplyXYZ(const Vector: TVMCLVector4s; Scalar: Single): TVMCLVector4s; overload;
+Function ScalarMultiply(const Vector: TVMCLVector2d; Scalar: Double): TVMCLVector2d; overload;
+Function ScalarMultiply(const Vector: TVMCLVector3d; Scalar: Double): TVMCLVector3d; overload;
+Function ScalarMultiply(const Vector: TVMCLVector4d; Scalar: Double): TVMCLVector4d; overload;
+Function ScalarMultiplyXYZ(const Vector: TVMCLVector4d; Scalar: Double): TVMCLVector4d; overload;
+
+{===============================================================================
+    Calculations with multiple vectors
+===============================================================================}
+
+Function VectorsAdd(const aVector,bVector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorsAdd(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsAdd(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsAddXYZ(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsAdd(const aVector,bVector: TVMCLVector2d): TVMCLVector2d; overload;
+Function VectorsAdd(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsAdd(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorsAddXYZ(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
+
+Function VectorsSubtract(const aVector,bVector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorsSubtract(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsSubtract(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsSubtractXYZ(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsSubtract(const aVector,bVector: TVMCLVector2d): TVMCLVector2d; overload;
+Function VectorsSubtract(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsSubtract(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorsSubtractXYZ(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
+
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector2s): Single; overload;
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector3s): Single; overload;
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector4s): Single; overload;
+Function VectorsDotProductXYZ(const aVector,bVector: TVMCLVector4s): Single; overload;
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector2d): Double; overload;
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector3d): Double; overload;
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector4d): Double; overload;
+Function VectorsDotProductXYZ(const aVector,bVector: TVMCLVector4d): Double; overload;
+
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
+
+// also known as scalar triple product or mixed product
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector3s): Single; overload;
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector4s): Single; overload;
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector3d): Double; overload;
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector4d): Double; overload;
+
+// calculated according to right-hand rule
+Function VectorsNormal(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsNormal(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsNormal(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsNormal(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
+
+// opposite vector to normal vector
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
+
+// angle between two vectors, in radians
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector2s): Single; overload;
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector3s): Single; overload;
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector4s): Single; overload;
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector2d): Double; overload;
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector3d): Double; overload;
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector4d): Double; overload;
+
+// angle between two vectors, in degrees
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector2s): Single; overload;
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector3s): Single; overload;
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector4s): Single; overload;
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector2d): Double; overload;
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector3d): Double; overload;
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector4d): Double; overload;
 
 implementation
 
@@ -2101,9 +2171,575 @@ Result := Vector;
 NormalizeXYZ(Result);
 end;
 
+{===============================================================================
+    Calculations with one vector
+===============================================================================}
 
+Function ScalarMultiply(const Vector: TVMCLVector2s; Scalar: Single): TVMCLVector2s;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+end;
 
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
+Function ScalarMultiply(const Vector: TVMCLVector3s; Scalar: Single): TVMCLVector3s;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+Result[2] := Vector[2] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Vector: TVMCLVector4s; Scalar: Single): TVMCLVector4s;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+Result[2] := Vector[2] * Scalar;
+Result[3] := Vector[3] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiplyXYZ(const Vector: TVMCLVector4s; Scalar: Single): TVMCLVector4s;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+Result[2] := Vector[2] * Scalar;
+Result[3] := Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Vector: TVMCLVector2d; Scalar: Double): TVMCLVector2d;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Vector: TVMCLVector3d; Scalar: Double): TVMCLVector3d;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+Result[2] := Vector[2] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Vector: TVMCLVector4d; Scalar: Double): TVMCLVector4d;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+Result[2] := Vector[2] * Scalar;
+Result[3] := Vector[3] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiplyXYZ(const Vector: TVMCLVector4d; Scalar: Double): TVMCLVector4d;
+begin
+Result[0] := Vector[0] * Scalar;
+Result[1] := Vector[1] * Scalar;
+Result[2] := Vector[2] * Scalar;
+Result[3] := Vector[3];
+end;
+
+{===============================================================================
+    Calculations with multiple vectors
+===============================================================================}
+
+Function VectorsAdd(const aVector,bVector: TVMCLVector2s): TVMCLVector2s;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAdd(const aVector,bVector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+Result[2] := aVector[2] + bVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAdd(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+Result[2] := aVector[2] + bVector[2];
+Result[3] := aVector[3] + bVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAddXYZ(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+Result[2] := aVector[2] + bVector[2];
+Result[3] := aVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAdd(const aVector,bVector: TVMCLVector2d): TVMCLVector2d;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAdd(const aVector,bVector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+Result[2] := aVector[2] + bVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAdd(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+Result[2] := aVector[2] + bVector[2];
+Result[3] := aVector[3] + bVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAddXYZ(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result[0] := aVector[0] + bVector[0];
+Result[1] := aVector[1] + bVector[1];
+Result[2] := aVector[2] + bVector[2];
+Result[3] := aVector[3];
+end;
+
+//==============================================================================
+
+Function VectorsSubtract(const aVector,bVector: TVMCLVector2s): TVMCLVector2s;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsSubtract(const aVector,bVector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+Result[2] := aVector[2] - bVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsSubtract(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+Result[2] := aVector[2] - bVector[2];
+Result[3] := aVector[3] - bVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsSubtractXYZ(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+Result[2] := aVector[2] - bVector[2];
+Result[3] := aVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsSubtract(const aVector,bVector: TVMCLVector2d): TVMCLVector2d;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsSubtract(const aVector,bVector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+Result[2] := aVector[2] - bVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsSubtract(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+Result[2] := aVector[2] - bVector[2];
+Result[3] := aVector[3] - bVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsSubtractXYZ(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result[0] := aVector[0] - bVector[0];
+Result[1] := aVector[1] - bVector[1];
+Result[2] := aVector[2] - bVector[2];
+Result[3] := aVector[3];
+end;
+
+//==============================================================================
+
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector2s): Single;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector3s): Single;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1] +
+          aVector[2] * bVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector4s): Single;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1] +
+          aVector[2] * bVector[2] + aVector[3] * bVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsDotProductXYZ(const aVector,bVector: TVMCLVector4s): Single;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1] +
+          aVector[2] * bVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector2d): Double;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector3d): Double;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1] +
+          aVector[2] * bVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsDotProduct(const aVector,bVector: TVMCLVector4d): Double;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1] +
+          aVector[2] * bVector[2] + aVector[3] * bVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsDotProductXYZ(const aVector,bVector: TVMCLVector4d): Double;
+begin
+Result := aVector[0] * bVector[0] + aVector[1] * bVector[1] +
+          aVector[2] * bVector[2];
+end;
+
+//==============================================================================
+
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result[0] := aVector[1] * bVector[2] - aVector[2] * bVector[1];
+Result[1] := aVector[2] * bVector[0] - aVector[0] * bVector[2];
+Result[2] := aVector[0] * bVector[1] - aVector[1] * bVector[0];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result[0] := aVector[1] * bVector[2] - aVector[2] * bVector[1];
+Result[1] := aVector[2] * bVector[0] - aVector[0] * bVector[2];
+Result[2] := aVector[0] * bVector[1] - aVector[1] * bVector[0];
+Result[3] := aVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result[0] := aVector[1] * bVector[2] - aVector[2] * bVector[1];
+Result[1] := aVector[2] * bVector[0] - aVector[0] * bVector[2];
+Result[2] := aVector[0] * bVector[1] - aVector[1] * bVector[0];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsCrossProduct(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result[0] := aVector[1] * bVector[2] - aVector[2] * bVector[1];
+Result[1] := aVector[2] * bVector[0] - aVector[0] * bVector[2];
+Result[2] := aVector[0] * bVector[1] - aVector[1] * bVector[0];
+Result[3] := aVector[3];
+end;
+
+//==============================================================================
+
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector3s): Single;
+begin
+Result := VectorsDotProduct(aVector,VectorsCrossProduct(bVector,cVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector4s): Single;
+begin
+Result := VectorsDotProductXYZ(aVector,VectorsCrossProduct(bVector,cVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector3d): Double;
+begin
+Result := VectorsDotProduct(aVector,VectorsCrossProduct(bVector,cVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector4d): Double;
+begin
+Result := VectorsDotProductXYZ(aVector,VectorsCrossProduct(bVector,cVector));
+end;
+
+//==============================================================================-
+
+Function VectorsNormal(const aVector,bVector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result := Normalized(VectorsCrossProduct(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsNormal(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result := NormalizedXYZ(VectorsCrossProduct(aVector,bVector));
+Result[3] := 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsNormal(const aVector,bVector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result := Normalized(VectorsCrossProduct(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsNormal(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result := NormalizedXYZ(VectorsCrossProduct(aVector,bVector));
+Result[3] := 0;
+end;
+
+//==============================================================================
+
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result := Opposite(VectorsNormal(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result := OppositeXYZ(VectorsNormal(aVector,bVector));
+Result[3] := 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result := Opposite(VectorsNormal(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAntinormal(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result := OppositeXYZ(VectorsNormal(aVector,bVector));
+Result[3] := 0;
+end;
+
+//==============================================================================
+
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector2s): Single;
+var
+  Ma,Mb,Cos:  Extended;
+begin
+Ma := Magnitude(aVector);
+Mb := Magnitude(bVector);
+If (Ma <> 0.0) and (Mb <> 0.0) then
+  begin
+    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
+    If SameValue(Cos,1.0,1e-6) then
+      Result := 0.0
+    else
+      Result := ArcCos(Cos);
+  end
+else Result := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector3s): Single;
+var
+  Ma,Mb,Cos:  Extended;
+begin
+Ma := Magnitude(aVector);
+Mb := Magnitude(bVector);
+If (Ma <> 0.0) and (Mb <> 0.0) then
+  begin
+    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
+    If SameValue(Cos,1.0,1e-6) then
+      Result := 0.0
+    else
+      Result := ArcCos(Cos);
+  end
+else Result := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector4s): Single;
+var
+  Ma,Mb,Cos:  Extended;
+begin
+Ma := MagnitudeXYZ(aVector);
+Mb := MagnitudeXYZ(bVector);
+If (Ma <> 0.0) and (Mb <> 0.0) then
+  begin
+    Cos := VectorsDotProductXYZ(aVector,bVector) / (Ma * Mb);
+    If SameValue(Cos,1.0,1e-6) then
+      Result := 0.0
+    else
+      Result := ArcCos(Cos);
+  end
+else Result := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector2d): Double;
+var
+  Ma,Mb,Cos:  Extended;
+begin
+Ma := Magnitude(aVector);
+Mb := Magnitude(bVector);
+If (Ma <> 0.0) and (Mb <> 0.0) then
+  begin
+    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
+    If SameValue(Cos,1.0,1e-13) then
+      Result := 0.0
+    else
+      Result := ArcCos(Cos);
+  end
+else Result := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector3d): Double;
+var
+  Ma,Mb,Cos:  Extended;
+begin
+Ma := Magnitude(aVector);
+Mb := Magnitude(bVector);
+If (Ma <> 0.0) and (Mb <> 0.0) then
+  begin
+    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
+    If SameValue(Cos,1.0,1e-13) then
+      Result := 0.0
+    else
+      Result := ArcCos(Cos);
+  end
+else Result := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleRad(const aVector,bVector: TVMCLVector4d): Double;
+var
+  Ma,Mb,Cos:  Extended;
+begin
+Ma := MagnitudeXYZ(aVector);
+Mb := MagnitudeXYZ(bVector);
+If (Ma <> 0.0) and (Mb <> 0.0) then
+  begin
+    Cos := VectorsDotProductXYZ(aVector,bVector) / (Ma * Mb);
+    If SameValue(Cos,1.0,1e-13) then
+      Result := 0.0
+    else
+      Result := ArcCos(Cos);
+  end
+else Result := 0.0;
+end;
+
+//==============================================================================
+
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector2s): Single;
+begin
+Result := RadToDeg(VectorsAngleRad(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector3s): Single;
+begin
+Result:= RadToDeg(VectorsAngleRad(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector4s): Single;
+begin
+Result := RadToDeg(VectorsAngleRad(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector2d): Double;
+begin
+Result := RadToDeg(VectorsAngleRad(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector3d): Double;
+begin
+Result := RadToDeg(VectorsAngleRad(aVector,bVector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsAngleDeg(const aVector,bVector: TVMCLVector4d): Double;
+begin
+Result := RadToDeg(VectorsAngleRad(aVector,bVector));
+end;
 
 
 end.
