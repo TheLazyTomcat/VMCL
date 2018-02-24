@@ -300,6 +300,15 @@ Function IsZeroVector(const Vector: TVMCLVector3d): Boolean; overload;
 Function IsZeroVector(const Vector: TVMCLVector4d): Boolean; overload;
 Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;
 
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector2s): Boolean; overload;
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector3s): Boolean; overload;
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector4s): Boolean; overload;
+Function IsZeroMagnitudeVectorXYZ(const Vector: TVMCLVector4s): Boolean; overload;
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector2d): Boolean; overload;
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector3d): Boolean; overload;
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector4d): Boolean; overload;
+Function IsZeroMagnitudeVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;
+
 procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s); overload;
 procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s); overload;
 procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;
@@ -326,6 +335,53 @@ Function SameVectors(const aVector, bVector: TVMCLVector2d; Epsilon: Double = 0)
 Function SameVectors(const aVector, bVector: TVMCLVector3d; Epsilon: Double = 0): Boolean; overload;
 Function SameVectors(const aVector, bVector: TVMCLVector4d; Epsilon: Double = 0): Boolean; overload;
 Function SameVectorsXYZ(const aVector, bVector: TVMCLVector4d; Epsilon: Double = 0): Boolean; overload;
+
+{===============================================================================
+    Basic vector calculations
+===============================================================================}
+
+Function Opposite(const Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function Opposite(const Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function Opposite(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function OppositeXYZ(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function Opposite(const Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function Opposite(const Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function Opposite(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function OppositeXYZ(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
+
+Function Magnitude(const Vector: TVMCLVector2s): Single; overload;
+Function Magnitude(const Vector: TVMCLVector3s): Single; overload;
+Function Magnitude(const Vector: TVMCLVector4s): Single; overload;
+Function MagnitudeXYZ(const Vector: TVMCLVector4s): Single; overload;
+Function Magnitude(const Vector: TVMCLVector2d): Double; overload;
+Function Magnitude(const Vector: TVMCLVector3d): Double; overload;
+Function Magnitude(const Vector: TVMCLVector4d): Double; overload;
+Function MagnitudeXYZ(const Vector: TVMCLVector4d): Double; overload;
+
+procedure Normalize(var X, Y: Single); overload;
+procedure Normalize(var X, Y, Z: Single); overload;
+procedure Normalize(var X, Y, Z, W: Single); overload;
+procedure Normalize(var X, Y: Double); overload;
+procedure Normalize(var X, Y, Z: Double); overload;
+procedure Normalize(var X, Y, Z, W: Double); overload;
+
+procedure Normalize(var Vector: TVMCLVector2s); overload;
+procedure Normalize(var Vector: TVMCLVector3s); overload;
+procedure Normalize(var Vector: TVMCLVector4s); overload;
+procedure NormalizeXYZ(var Vector: TVMCLVector4s); overload;
+procedure Normalize(var Vector: TVMCLVector2d); overload;
+procedure Normalize(var Vector: TVMCLVector3d); overload;
+procedure Normalize(var Vector: TVMCLVector4d); overload;
+procedure NormalizeXYZ(var Vector: TVMCLVector4d); overload;
+
+Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function Normalized(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function NormalizedXYZ(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function Normalized(const Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
 
 implementation
 
@@ -1354,6 +1410,62 @@ end;
 
 //==============================================================================
 
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector2s): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector3s): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0) or (Vector[2] = 0.0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector4s): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0) or (Vector[2] = 0.0) or (Vector[3] = 0.0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMagnitudeVectorXYZ(const Vector: TVMCLVector4s): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0) or (Vector[2] = 0.0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector2d): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector3d): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0) or (Vector[2] = 0.0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMagnitudeVector(const Vector: TVMCLVector4d): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0) or (Vector[2] = 0.0) or (Vector[3] = 0.0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMagnitudeVectorXYZ(const Vector: TVMCLVector4d): Boolean;
+begin
+Result := (Vector[0] = 0.0) or (Vector[1] = 0.0) or (Vector[2] = 0.0);
+end;
+
+//==============================================================================
+
 procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s);
 begin
 Move(Src,Dest,SizeOf(TVMCLVector2s));
@@ -1541,5 +1653,404 @@ Result := SameValue(aVector[0],bVector[0],Epsilon) and
           SameValue(aVector[1],bVector[1],Epsilon) and
           SameValue(aVector[2],bVector[2],Epsilon);
 end;
+
+{===============================================================================
+    Basic vector calculations
+===============================================================================}
+
+Function Opposite(const Vector: TVMCLVector2s): TVMCLVector2s;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Opposite(const Vector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+Result[2] := -Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Opposite(const Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+Result[2] := -Vector[2];
+Result[3] := -Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function OppositeXYZ(const Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+Result[2] := -Vector[2];
+Result[3] := Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Opposite(const Vector: TVMCLVector2d): TVMCLVector2d;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Opposite(const Vector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+Result[2] := -Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Opposite(const Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+Result[2] := -Vector[2];
+Result[3] := -Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function OppositeXYZ(const Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result[0] := -Vector[0];
+Result[1] := -Vector[1];
+Result[2] := -Vector[2];
+Result[3] := Vector[3];
+end;
+
+//==============================================================================
+
+Function Magnitude(const Vector: TVMCLVector2s): Single;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Magnitude(const Vector: TVMCLVector3s): Single;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]) + Sqr(Vector[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Magnitude(const Vector: TVMCLVector4s): Single;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]) + Sqr(Vector[2]) + Sqr(Vector[3]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MagnitudeXYZ(const Vector: TVMCLVector4s): Single;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]) + Sqr(Vector[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Magnitude(const Vector: TVMCLVector2d): Double;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Magnitude(const Vector: TVMCLVector3d): Double;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]) + Sqr(Vector[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Magnitude(const Vector: TVMCLVector4d): Double;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]) + Sqr(Vector[2]) + Sqr(Vector[3]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MagnitudeXYZ(const Vector: TVMCLVector4d): Double;
+begin
+Result := Sqrt(Sqr(Vector[0]) + Sqr(Vector[1]) + Sqr(Vector[2]));
+end;
+
+//==============================================================================
+
+procedure Normalize(var X, Y: Single);
+var
+  TempVector: TVMCLVector2s;
+begin
+TempVector := Vector2s(X,Y);
+Normalize(TempVector);
+X := TempVector[0];
+Y := TempVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z: Single);
+var
+  TempVector: TVMCLVector3s;
+begin
+TempVector := Vector3s(X,Y,Z);
+Normalize(TempVector);
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z, W: Single);
+var
+  TempVector: TVMCLVector4s;
+begin
+TempVector := Vector4s(X,Y,Z,W);
+Normalize(TempVector);
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+W := TempVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y: Double);
+var
+  TempVector: TVMCLVector2d;
+begin
+TempVector := Vector2d(X,Y);
+Normalize(TempVector);
+X := TempVector[0];
+Y := TempVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z: Double);
+var
+  TempVector: TVMCLVector3d;
+begin
+TempVector := Vector3d(X,Y,Z);
+Normalize(TempVector);
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z, W: Double);
+var
+  TempVector: TVMCLVector4d;
+begin
+TempVector := Vector4d(X,Y,Z,W);
+Normalize(TempVector);
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+W := TempVector[3];
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Normalize(var Vector: TVMCLVector2s);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVector(Vector) then
+  begin
+    VectorLengthRcp := 1 / Magnitude(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector3s);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVector(Vector) then
+  begin
+    VectorLengthRcp := 1 / Magnitude(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+    Vector[2] := Vector[2] * VectorLengthRcp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector4s);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVector(Vector) then
+  begin
+    VectorLengthRcp := 1 / Magnitude(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+    Vector[2] := Vector[2] * VectorLengthRcp;
+    Vector[3] := Vector[3] * VectorLengthRcp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure NormalizeXYZ(var Vector: TVMCLVector4s);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVectorXYZ(Vector) then
+  begin
+    VectorLengthRcp := 1 / MagnitudeXYZ(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+    Vector[2] := Vector[2] * VectorLengthRcp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector2d);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVector(Vector) then
+  begin
+    VectorLengthRcp := 1 / Magnitude(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector3d);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVector(Vector) then
+  begin
+    VectorLengthRcp := 1 / Magnitude(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+    Vector[2] := Vector[2] * VectorLengthRcp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector4d);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVector(Vector) then
+  begin
+    VectorLengthRcp := 1 / Magnitude(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+    Vector[2] := Vector[2] * VectorLengthRcp;
+    Vector[3] := Vector[3] * VectorLengthRcp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure NormalizeXYZ(var Vector: TVMCLVector4d);
+var
+  VectorLengthRcp:  Extended;
+begin
+If not IsZeroMagnitudeVectorXYZ(Vector) then
+  begin
+    VectorLengthRcp := 1 / MagnitudeXYZ(Vector);
+    Vector[0] := Vector[0] * VectorLengthRcp;
+    Vector[1] := Vector[1] * VectorLengthRcp;
+    Vector[2] := Vector[2] * VectorLengthRcp;
+  end;
+end;
+
+//==============================================================================
+
+Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s;
+begin
+Result := Vector;
+Normalize(Result);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result := Vector;
+Normalize(Result);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Normalized(const Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result := Vector;
+Normalize(Result);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function NormalizedXYZ(const Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result := Vector;
+NormalizeXYZ(Result);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Normalized(const Vector: TVMCLVector2d): TVMCLVector2d;
+begin
+Result := Vector;
+Normalize(Result);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result := Vector;
+Normalize(Result);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result := Vector;
+Normalize(Result);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result := Vector;
+NormalizeXYZ(Result);
+end;
+
+
+
+
+
 
 end.
