@@ -39,7 +39,7 @@
 
 //- VMCL_Alloc -----------------------------------------------------------------
 
-{$DEFINE AllocLargeMemSegment}  // 1MiB segments
+{.$DEFINE AllocLargeMemSegment}  // 1MiB segments
 {$DEFINE AllocOptimizeForSpeed} // Sligtly faster allocation, worse memory utilization
 {$DEFINE AllocAutoInit}
 {.$DEFINE AllocGrowOnly}

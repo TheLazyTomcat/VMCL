@@ -6,7 +6,7 @@ interface
 
 uses
   SyncObjs, Contnrs,
-  BitVector, AuxTypes;
+  BitVector, AuxTypes, VMCL_Vectors;
 
 {===============================================================================
 --------------------------------------------------------------------------------
@@ -127,6 +127,40 @@ procedure Finalize;
 procedure VMCL_GetMem(out Ptr: Pointer; Size: TMemSize);
 Function VMCL_AllocMem(Size: TMemSize): Pointer;
 procedure VMCL_FreeMem(Ptr: Pointer; Size: TMemSize);
+
+//------------------------------------------------------------------------------
+
+procedure VMCL_New(out Vec: PVMCLVector2s; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector3s; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector4s; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector2d; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector3d; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector4d; Count: UInt32 = 1); overload;
+
+procedure VMCL_New(out Vec: PVMCLVector2sr; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector3sr; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector4sr; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector2s; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector3s; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector4s; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector2d; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector3d; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector4d; Count: UInt32 = 1); overload;
+
+procedure VMCL_Dispose(Vec: PVMCLVector2sr; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector3sr; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector4sr; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;
+
+//------------------------------------------------------------------------------
 
 implementation
 
@@ -674,6 +708,174 @@ If Assigned(VMCL_MemoryManager) then
   VMCL_MemoryManager.AlignedFree(Ptr,Size)
 else
   raise Exception.Create('VMCL_FreeMem: Memory manager object not initialized.');
+end;
+
+//= Vectors allocation =========================================================
+
+procedure VMCL_New(out Vec: PVMCLVector2s; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector3s; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector4s; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector2d; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector3d; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector4d; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector2sr; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector3sr; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector4sr; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector2dr; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector3dr; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Vec: PVMCLVector4dr; Count: UInt32 = 1);
+begin
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VMCL_Dispose(Vec: PVMCLVector2s; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector3s; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector4s; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector2d; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector3d; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector4d; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector2sr; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector3sr; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector4sr; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector2dr; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector3dr; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Vec: PVMCLVector4dr; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
 end;
 
 {===============================================================================
