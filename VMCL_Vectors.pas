@@ -174,6 +174,110 @@ Function VecToStr(const Vector: TVMCLVector2dr): String; overload;
 Function VecToStr(const Vector: TVMCLVector3dr): String; overload;
 Function VecToStr(const Vector: TVMCLVector4dr): String; overload;
 
+{===============================================================================
+    Vector building
+===============================================================================}
+
+Function Vector2s(const X, Y: Single): TVMCLVector2s; overload;
+Function Vector3s(const X, Y, Z: Single): TVMCLVector3s; overload;
+Function Vector3s(const Vector: TVMCLVector2s; const Z: Single): TVMCLVector3s; overload;
+Function Vector3s(const X: Single; const Vector: TVMCLVector2s): TVMCLVector3s; overload;
+Function Vector4s(const X, Y, Z, W: Single): TVMCLVector4s; overload;
+Function Vector4s(const aVector, bVector: TVMCLVector2s): TVMCLVector4s; overload;
+Function Vector4s(const Vector: TVMCLVector2s; const Z, W: Single): TVMCLVector4s; overload;
+Function Vector4s(const X: Single; const Vector: TVMCLVector2s; const W: Single): TVMCLVector4s; overload;
+Function Vector4s(const X, Y: Single; const Vector: TVMCLVector2s): TVMCLVector4s; overload;
+Function Vector4s(const X: Single; const Vector: TVMCLVector3s): TVMCLVector4s; overload;
+Function Vector4s(const Vector: TVMCLVector3s; const W: Single): TVMCLVector4s; overload;
+
+Function Vector2d(const X, Y: Double): TVMCLVector2d; overload;
+Function Vector3d(const X, Y, Z: Double): TVMCLVector3d; overload;
+Function Vector3d(const Vector: TVMCLVector2d; const Z: Double): TVMCLVector3d; overload;
+Function Vector3d(const X: Double; const Vector: TVMCLVector2d): TVMCLVector3d; overload;
+Function Vector4d(const X, Y, Z, W: Double): TVMCLVector4d; overload;
+Function Vector4d(const aVector, bVector: TVMCLVector2d): TVMCLVector4d; overload;
+Function Vector4d(const Vector: TVMCLVector2d; const Z, W: Double): TVMCLVector4d; overload;
+Function Vector4d(const X: Double; const Vector: TVMCLVector2d; const W: Double): TVMCLVector4d; overload;
+Function Vector4d(const X, Y: Double; const Vector: TVMCLVector2d): TVMCLVector4d; overload;
+Function Vector4d(const X: Double; const Vector: TVMCLVector3d): TVMCLVector4d; overload;
+Function Vector4d(const Vector: TVMCLVector3d; const W: Double): TVMCLVector4d; overload;
+
+{===============================================================================
+    Vector swizzling
+===============================================================================}
+
+Function Swizzle(const Vector: TVMCLVector2s; f0: TVMCLVectorField): TVMCLVector2s; overload;
+Function Swizzle(const Vector: TVMCLVector2s; f0,f1: TVMCLVectorField): TVMCLVector2s; overload;
+Function Swizzle(const Vector: TVMCLVector3s; f0: TVMCLVectorField): TVMCLVector3s; overload;
+Function Swizzle(const Vector: TVMCLVector3s; f0,f1: TVMCLVectorField): TVMCLVector3s; overload;
+Function Swizzle(const Vector: TVMCLVector3s; f0,f1,f2: TVMCLVectorField): TVMCLVector3s; overload;
+Function Swizzle(const Vector: TVMCLVector4s; f0: TVMCLVectorField): TVMCLVector4s; overload;
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1: TVMCLVectorField): TVMCLVector4s; overload;
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1,f2: TVMCLVectorField): TVMCLVector4s; overload;
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1,f2,f3: TVMCLVectorField): TVMCLVector4s; overload;
+
+Function Swizzle(const Vector: TVMCLVector2d; f0: TVMCLVectorField): TVMCLVector2d; overload;
+Function Swizzle(const Vector: TVMCLVector2d; f0,f1: TVMCLVectorField): TVMCLVector2d; overload;
+Function Swizzle(const Vector: TVMCLVector3d; f0: TVMCLVectorField): TVMCLVector3d; overload;
+Function Swizzle(const Vector: TVMCLVector3d; f0,f1: TVMCLVectorField): TVMCLVector3d; overload;
+Function Swizzle(const Vector: TVMCLVector3d; f0,f1,f2: TVMCLVectorField): TVMCLVector3d; overload;
+Function Swizzle(const Vector: TVMCLVector4d; f0: TVMCLVectorField): TVMCLVector4d; overload;
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1: TVMCLVectorField): TVMCLVector4d; overload;
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1,f2: TVMCLVectorField): TVMCLVector4d; overload;
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1,f2,f3: TVMCLVectorField): TVMCLVector4d; overload;
+
+{===============================================================================
+    Vector conversion
+===============================================================================}
+
+// higher to lower dimension
+Function Vector2s(const Vector: TVMCLVector3s): TVMCLVector2s; overload;
+Function Vector2s(const Vector: TVMCLVector4s): TVMCLVector2s; overload;
+Function Vector3s(const Vector: TVMCLVector4s): TVMCLVector3s; overload;
+Function Vector2d(const Vector: TVMCLVector3d): TVMCLVector2d; overload;
+Function Vector2d(const Vector: TVMCLVector4d): TVMCLVector2d; overload;
+Function Vector3d(const Vector: TVMCLVector4d): TVMCLVector3d; overload;
+
+// lower to higher dimension
+Function Vector3s(const Vector: TVMCLVector2s): TVMCLVector3; overload;
+Function Vector4s(const Vector: TVMCLVector2s; PositionVector: Boolean = True): TVMCLVector4s; overload;
+Function Vector4s(const Vector: TVMCLVector3s; PositionVector: Boolean = True): TVMCLVector4s; overload;
+Function Vector3d(const Vector: TVMCLVector2d): TVMCLVector3d; overload;
+Function Vector4d(const Vector: TVMCLVector2d; PositionVector: Boolean = True): TVMCLVector4d; overload;
+Function Vector4d(const Vector: TVMCLVector3d; PositionVector: Boolean = True): TVMCLVector4d; overload;
+
+// array type to record type
+Function Vector2sr(const Vector: TVMCLVector2s): TVMCLVector2sr; overload;
+Function Vector3sr(const Vector: TVMCLVector3s): TVMCLVector3sr; overload;
+Function Vector4sr(const Vector: TVMCLVector4s): TVMCLVector4sr; overload;
+Function Vector2dr(const Vector: TVMCLVector2d): TVMCLVector2dr; overload;
+Function Vector3dr(const Vector: TVMCLVector3d): TVMCLVector3dr; overload;
+Function Vector4dr(const Vector: TVMCLVector4d): TVMCLVector4dr; overload;
+
+// record type to array type
+Function Vector2s(const Vector: TVMCLVector2sr): TVMCLVector2s; overload;
+Function Vector3s(const Vector: TVMCLVector3sr): TVMCLVector3s; overload;
+Function Vector4s(const Vector: TVMCLVector4sr): TVMCLVector4s; overload;
+Function Vector2d(const Vector: TVMCLVector2dr): TVMCLVector2d; overload;
+Function Vector3d(const Vector: TVMCLVector3dr): TVMCLVector3d; overload;
+Function Vector4d(const Vector: TVMCLVector4dr): TVMCLVector4d; overload;
+
+// to different precision (array type)
+Function Vector2s(const Vector: TVMCLVector2d): TVMCLVector2s; overload;
+Function Vector3s(const Vector: TVMCLVector3d): TVMCLVector3s; overload;
+Function Vector4s(const Vector: TVMCLVector4d): TVMCLVector4s; overload;
+Function Vector2d(const Vector: TVMCLVector2s): TVMCLVector2d; overload;
+Function Vector3d(const Vector: TVMCLVector3s): TVMCLVector3d; overload;
+Function Vector4d(const Vector: TVMCLVector4s): TVMCLVector4d; overload;
+
+// to different precision (record type)
+Function Vector2sr(const Vector: TVMCLVector2dr): TVMCLVector2sr; overload;
+Function Vector3sr(const Vector: TVMCLVector3dr): TVMCLVector3sr; overload;
+Function Vector4sr(const Vector: TVMCLVector4dr): TVMCLVector4sr; overload;
+Function Vector2dr(const Vector: TVMCLVector2sr): TVMCLVector2dr; overload;
+Function Vector3dr(const Vector: TVMCLVector3sr): TVMCLVector3dr; overload;
+Function Vector4dr(const Vector: TVMCLVector4sr): TVMCLVector4dr; overload;
+
 implementation
 
 uses
@@ -396,5 +500,689 @@ Function VecToStr(const Vector: TVMCLVector4dr): String;
 begin
 Result := VecToStr(TVMCLVector4d(Vector),VMCL_DefaultVectorFormat);
 end;
+
+{===============================================================================
+    Vector building
+===============================================================================}
+
+Function Vector2s(const X, Y: Single): TVMCLVector2s;
+begin
+Result[0] := X;
+Result[1] := Y;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3s(const X, Y, Z: Single): TVMCLVector3s;
+begin
+Result[0] := X;
+Result[1] := Y;
+Result[2] := Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3s(const Vector: TVMCLVector2s; const Z: Single): TVMCLVector3s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3s(const X: Single; const Vector: TVMCLVector2s): TVMCLVector3s;
+begin
+Result[0] := X;
+Result[1] := Vector[0];
+Result[2] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const X, Y, Z, W: Single): TVMCLVector4s;
+begin
+Result[0] := X;
+Result[1] := Y;
+Result[2] := Z;
+Result[3] := W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const aVector, bVector: TVMCLVector2s): TVMCLVector4s;
+begin
+Result[0] := aVector[0];
+Result[1] := aVector[1];
+Result[2] := bVector[0];
+Result[3] := bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const Vector: TVMCLVector2s; const Z, W: Single): TVMCLVector4s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Z;
+Result[3] := W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const X: Single; const Vector: TVMCLVector2s; const W: Single): TVMCLVector4s;
+begin
+Result[0] := X;
+Result[1] := Vector[0];
+Result[2] := Vector[1];
+Result[3] := W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const X, Y: Single; const Vector: TVMCLVector2s): TVMCLVector4s;
+begin
+Result[0] := X;
+Result[1] := Y;
+Result[2] := Vector[0];
+Result[3] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const X: Single; const Vector: TVMCLVector3s): TVMCLVector4s;
+begin
+Result[0] := X;
+Result[1] := Vector[0];
+Result[2] := Vector[1];
+Result[3] := Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const Vector: TVMCLVector3s; const W: Single): TVMCLVector4s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+Result[3] := W;
+end;
+
+//------------------------------------------------------------------------------
+
+Function Vector2d(const X, Y: Double): TVMCLVector2d;
+begin
+Result[0] := X;
+Result[1] := Y;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3d(const X, Y, Z: Double): TVMCLVector3d;
+begin
+Result[0] := X;
+Result[1] := Y;
+Result[2] := Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3d(const Vector: TVMCLVector2d; const Z: Double): TVMCLVector3d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3d(const X: Double; const Vector: TVMCLVector2d): TVMCLVector3d;
+begin
+Result[0] := X;
+Result[1] := Vector[0];
+Result[2] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const X, Y, Z, W: Double): TVMCLVector4d;
+begin
+Result[0] := X;
+Result[1] := Y;
+Result[2] := Z;
+Result[3] := W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const aVector, bVector: TVMCLVector2d): TVMCLVector4d;
+begin
+Result[0] := aVector[0];
+Result[1] := aVector[1];
+Result[2] := bVector[0];
+Result[3] := bVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const Vector: TVMCLVector2d; const Z, W: Double): TVMCLVector4d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Z;
+Result[3] := W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const X: Double; const Vector: TVMCLVector2d; const W: Double): TVMCLVector4d;
+begin
+Result[0] := X;
+Result[1] := Vector[0];
+Result[2] := Vector[1];
+Result[3] := W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const X, Y: Double; const Vector: TVMCLVector2d): TVMCLVector4d;
+begin
+Result[0] := X;
+Result[1] := Y;
+Result[2] := Vector[0];
+Result[3] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const X: Double; const Vector: TVMCLVector3d): TVMCLVector4d;
+begin
+Result[0] := X;
+Result[1] := Vector[0];
+Result[2] := Vector[1];
+Result[3] := Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const Vector: TVMCLVector3d; const W: Double): TVMCLVector4d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+Result[3] := W;
+end;
+
+{===============================================================================
+    Vector swizzling
+===============================================================================}
+
+Function Swizzle(const Vector: TVMCLVector2s; f0: TVMCLVectorField): TVMCLVector2s;
+begin
+Result := Swizzle(Vector,f0,f0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector2s; f0,f1: TVMCLVectorField): TVMCLVector2s;
+begin
+Result[0] := Vector[Clipped(Ord(f0),0,1)];
+Result[1] := Vector[Clipped(Ord(f1),0,1)];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector3s; f0: TVMCLVectorField): TVMCLVector3s;
+begin
+Result := Swizzle(Vector,f0,f0,f0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector3s; f0,f1: TVMCLVectorField): TVMCLVector3s;
+begin
+Result := Swizzle(Vector,f0,f1,f1);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector3s; f0,f1,f2: TVMCLVectorField): TVMCLVector3s;
+begin
+Result[0] := Vector[Clipped(Ord(f0),0,2)];
+Result[1] := Vector[Clipped(Ord(f1),0,2)];
+Result[2] := Vector[Clipped(Ord(f2),0,2)];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4s; f0: TVMCLVectorField): TVMCLVector4s;
+begin
+Result := Swizzle(Vector,f0,f0,f0,f0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1: TVMCLVectorField): TVMCLVector4s;
+begin
+Result := Swizzle(Vector,f0,f1,f1,f1);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1,f2: TVMCLVectorField): TVMCLVector4s;
+begin
+Result := Swizzle(Vector,f0,f1,f2,f2);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1,f2,f3: TVMCLVectorField): TVMCLVector4s;
+begin
+Result[0] := Vector[Clipped(Ord(f0),0,3)];
+Result[1] := Vector[Clipped(Ord(f1),0,3)];
+Result[2] := Vector[Clipped(Ord(f2),0,3)];
+Result[3] := Vector[Clipped(Ord(f3),0,3)];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector2d; f0: TVMCLVectorField): TVMCLVector2d;
+begin
+Result := Swizzle(Vector,f0,f0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector2d; f0,f1: TVMCLVectorField): TVMCLVector2d;
+begin
+Result[0] := Vector[Clipped(Ord(f0),0,1)];
+Result[1] := Vector[Clipped(Ord(f1),0,1)];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector3d; f0: TVMCLVectorField): TVMCLVector3d;
+begin
+Result := Swizzle(Vector,f0,f0,f0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector3d; f0,f1: TVMCLVectorField): TVMCLVector3d;
+begin
+Result := Swizzle(Vector,f0,f1,f1);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector3d; f0,f1,f2: TVMCLVectorField): TVMCLVector3d;
+begin
+Result[0] := Vector[Clipped(Ord(f0),0,2)];
+Result[1] := Vector[Clipped(Ord(f1),0,2)];
+Result[2] := Vector[Clipped(Ord(f2),0,2)];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4d; f0: TVMCLVectorField): TVMCLVector4d;
+begin
+Result := Swizzle(Vector,f0,f0,f0,f0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1: TVMCLVectorField): TVMCLVector4d;
+begin
+Result := Swizzle(Vector,f0,f1,f1,f1);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1,f2: TVMCLVectorField): TVMCLVector4d;
+begin
+Result := Swizzle(Vector,f0,f1,f2,f2);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1,f2,f3: TVMCLVectorField): TVMCLVector4d;
+begin
+Result[0] := Vector[Clipped(Ord(f0),0,1)];
+Result[1] := Vector[Clipped(Ord(f1),0,1)];
+Result[2] := Vector[Clipped(Ord(f2),0,1)];
+Result[3] := Vector[Clipped(Ord(f3),0,1)];
+end;
+
+{===============================================================================
+    Vector conversion
+===============================================================================}
+
+Function Vector2s(const Vector: TVMCLVector3s): TVMCLVector2s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector2s(const Vector: TVMCLVector4s): TVMCLVector2s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3s(const Vector: TVMCLVector4s): TVMCLVector3s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector2d(const Vector: TVMCLVector3d): TVMCLVector2d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector2d(const Vector: TVMCLVector4d): TVMCLVector2d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3d(const Vector: TVMCLVector4d): TVMCLVector3d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+end;
+
+//------------------------------------------------------------------------------
+
+Function Vector3s(const Vector: TVMCLVector2s): TVMCLVector3;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const Vector: TVMCLVector2s; PositionVector: Boolean = True): TVMCLVector4s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := 0.0;
+If PositionVector then Result[3] := 1.0
+  else Result[3] := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const Vector: TVMCLVector3s; PositionVector: Boolean = True): TVMCLVector4s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+If PositionVector then Result[3] := 1.0
+  else Result[3] := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3d(const Vector: TVMCLVector2d): TVMCLVector3d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const Vector: TVMCLVector2d; PositionVector: Boolean = True): TVMCLVector4d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := 0.0;
+If PositionVector then Result[3] := 1.0
+  else Result[3] := 0.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const Vector: TVMCLVector3d; PositionVector: Boolean = True): TVMCLVector4d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+If PositionVector then Result[3] := 1.0
+  else Result[3] := 0.0;
+end;
+
+//------------------------------------------------------------------------------
+
+Function Vector2sr(const Vector: TVMCLVector2s): TVMCLVector2sr;
+begin
+Result.X := Vector[0];
+Result.Y := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3sr(const Vector: TVMCLVector3s): TVMCLVector3sr;
+begin
+Result.X := Vector[0];
+Result.Y := Vector[1];
+Result.Z := Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4sr(const Vector: TVMCLVector4s): TVMCLVector4sr;
+begin
+Result.X := Vector[0];
+Result.Y := Vector[1];
+Result.Z := Vector[2];
+Result.W := Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector2dr(const Vector: TVMCLVector2d): TVMCLVector2dr;
+begin
+Result.X := Vector[0];
+Result.Y := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3dr(const Vector: TVMCLVector3d): TVMCLVector3dr;
+begin
+Result.X := Vector[0];
+Result.Y := Vector[1];
+Result.Z := Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4dr(const Vector: TVMCLVector4d): TVMCLVector4dr;
+begin
+Result.X := Vector[0];
+Result.Y := Vector[1];
+Result.Z := Vector[2];
+Result.W := Vector[3];
+end;
+
+//------------------------------------------------------------------------------
+
+Function Vector2s(const Vector: TVMCLVector2sr): TVMCLVector2s;
+begin
+Result[0] := Vector.X;
+Result[1] := Vector.Y;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3s(const Vector: TVMCLVector3sr): TVMCLVector3s;
+begin
+Result[0] := Vector.X;
+Result[1] := Vector.Y;
+Result[2] := Vector.Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const Vector: TVMCLVector4sr): TVMCLVector4s;
+begin
+Result[0] := Vector.X;
+Result[1] := Vector.Y;
+Result[2] := Vector.Z;
+Result[3] := Vector.W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector2d(const Vector: TVMCLVector2dr): TVMCLVector2d;
+begin
+Result[0] := Vector.X;
+Result[1] := Vector.Y;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3d(const Vector: TVMCLVector3dr): TVMCLVector3d;
+begin
+Result[0] := Vector.X;
+Result[1] := Vector.Y;
+Result[2] := Vector.Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const Vector: TVMCLVector4dr): TVMCLVector4d;
+begin
+Result[0] := Vector.X;
+Result[1] := Vector.Y;
+Result[2] := Vector.Z;
+Result[3] := Vector.W;
+end;
+
+//------------------------------------------------------------------------------
+
+Function Vector2s(const Vector: TVMCLVector2d): TVMCLVector2s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3s(const Vector: TVMCLVector3d): TVMCLVector3s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4s(const Vector: TVMCLVector4d): TVMCLVector4s;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+Result[3] := Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector2d(const Vector: TVMCLVector2s): TVMCLVector2d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3d(const Vector: TVMCLVector3s): TVMCLVector3d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4d(const Vector: TVMCLVector4s): TVMCLVector4d;
+begin
+Result[0] := Vector[0];
+Result[1] := Vector[1];
+Result[2] := Vector[2];
+Result[3] := Vector[3];
+end;
+
+//------------------------------------------------------------------------------
+
+Function Vector2sr(const Vector: TVMCLVector2dr): TVMCLVector2sr;
+begin
+Result.X := Vector.X;
+Result.Y := Vector.Y;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3sr(const Vector: TVMCLVector3dr): TVMCLVector3sr;
+begin
+Result.X := Vector.X;
+Result.Y := Vector.Y;
+Result.Z := Vector.Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4sr(const Vector: TVMCLVector4dr): TVMCLVector4sr;
+begin
+Result.X := Vector.X;
+Result.Y := Vector.Y;
+Result.Z := Vector.Z;
+Result.W := Vector.W;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector2dr(const Vector: TVMCLVector2sr): TVMCLVector2dr;
+begin
+Result.X := Vector.X;
+Result.Y := Vector.Y;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector3dr(const Vector: TVMCLVector3sr): TVMCLVector3dr;
+begin
+Result.X := Vector.X;
+Result.Y := Vector.Y;
+Result.Z := Vector.Z;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Vector4dr(const Vector: TVMCLVector4sr): TVMCLVector4dr;
+begin
+Result.X := Vector.X;
+Result.Y := Vector.Y;
+Result.Z := Vector.Z;
+Result.W := Vector.W;
+end;
+
+
 
 end.
