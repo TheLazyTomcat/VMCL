@@ -278,6 +278,55 @@ Function Vector2dr(const Vector: TVMCLVector2sr): TVMCLVector2dr; overload;
 Function Vector3dr(const Vector: TVMCLVector3sr): TVMCLVector3dr; overload;
 Function Vector4dr(const Vector: TVMCLVector4sr): TVMCLVector4dr; overload;
 
+{===============================================================================
+    Basic vector functions (zeroing, comparison, etc.)
+===============================================================================}
+
+procedure LoadZeroVector(var Vector: TVMCLVector2s); overload;
+procedure LoadZeroVector(var Vector: TVMCLVector3s); overload;
+procedure LoadZeroVectorXYZ(var Vector: TVMCLVector4s); overload;
+procedure LoadZeroVector(var Vector: TVMCLVector4s; PositionVector: Boolean = False); overload;
+procedure LoadZeroVector(var Vector: TVMCLVector2d); overload;
+procedure LoadZeroVector(var Vector: TVMCLVector3d); overload;
+procedure LoadZeroVectorXYZ(var Vector: TVMCLVector4d); overload;
+procedure LoadZeroVector(var Vector: TVMCLVector4d; PositionVector: Boolean = False); overload;
+
+Function IsZeroVector(const Vector: TVMCLVector2s): Boolean; overload;
+Function IsZeroVector(const Vector: TVMCLVector3s): Boolean; overload;
+Function IsZeroVector(const Vector: TVMCLVector4s): Boolean; overload;
+Function IsZeroVectorXYZ(const Vector: TVMCLVector4s): Boolean; overload;
+Function IsZeroVector(const Vector: TVMCLVector2d): Boolean; overload;
+Function IsZeroVector(const Vector: TVMCLVector3d): Boolean; overload;
+Function IsZeroVector(const Vector: TVMCLVector4d): Boolean; overload;
+Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;
+
+procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s); overload;
+procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s); overload;
+procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;
+procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;
+procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d); overload;
+procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d); overload;
+procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;
+procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;
+
+Function EqualVectors(const aVector, bVector: TVMCLVector2s): Boolean; overload;
+Function EqualVectors(const aVector, bVector: TVMCLVector3s): Boolean; overload;
+Function EqualVectors(const aVector, bVector: TVMCLVector4s): Boolean; overload;
+Function EqualVectorsXYZ(const aVector, bVector: TVMCLVector4s): Boolean; overload;
+Function EqualVectors(const aVector, bVector: TVMCLVector2d): Boolean; overload;
+Function EqualVectors(const aVector, bVector: TVMCLVector3d): Boolean; overload;
+Function EqualVectors(const aVector, bVector: TVMCLVector4d): Boolean; overload;
+Function EqualVectorsXYZ(const aVector, bVector: TVMCLVector4d): Boolean; overload;
+
+Function SameVectors(const aVector, bVector: TVMCLVector2s; Epsilon: Single = 0): Boolean; overload;
+Function SameVectors(const aVector, bVector: TVMCLVector3s; Epsilon: Single = 0): Boolean; overload;
+Function SameVectors(const aVector, bVector: TVMCLVector4s; Epsilon: Single = 0): Boolean; overload;
+Function SameVectorsXYZ(const aVector, bVector: TVMCLVector4s; Epsilon: Single = 0): Boolean; overload;
+Function SameVectors(const aVector, bVector: TVMCLVector2d; Epsilon: Double = 0): Boolean; overload;
+Function SameVectors(const aVector, bVector: TVMCLVector3d; Epsilon: Double = 0): Boolean; overload;
+Function SameVectors(const aVector, bVector: TVMCLVector4d; Epsilon: Double = 0): Boolean; overload;
+Function SameVectorsXYZ(const aVector, bVector: TVMCLVector4d; Epsilon: Double = 0): Boolean; overload;
+
 implementation
 
 uses
@@ -1183,6 +1232,314 @@ Result.Z := Vector.Z;
 Result.W := Vector.W;
 end;
 
+{===============================================================================
+    Basic vector functions (zeroing, comparison, etc.)
+===============================================================================}
 
+procedure LoadZeroVector(var Vector: TVMCLVector2s);
+begin
+Vector := VMCL_ZeroVector2s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroVector(var Vector: TVMCLVector3s);
+begin
+Vector := VMCL_ZeroVector3s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroVectorXYZ(var Vector: TVMCLVector4s);
+begin
+Vector[0] := VMCL_ZeroVector4s[0];
+Vector[1] := VMCL_ZeroVector4s[1];
+Vector[2] := VMCL_ZeroVector4s[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroVector(var Vector: TVMCLVector4s; PositionVector: Boolean = False);
+begin
+Vector := VMCL_ZeroVector4s;
+If PositionVector then Vector[3] := 1.0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroVector(var Vector: TVMCLVector2d);
+begin
+Vector := VMCL_ZeroVector2d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroVector(var Vector: TVMCLVector3d);
+begin
+Vector := VMCL_ZeroVector3d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroVectorXYZ(var Vector: TVMCLVector4d);
+begin
+Vector[0] := VMCL_ZeroVector4d[0];
+Vector[1] := VMCL_ZeroVector4d[1];
+Vector[2] := VMCL_ZeroVector4d[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroVector(var Vector: TVMCLVector4d; PositionVector: Boolean = False);
+begin
+Vector := VMCL_ZeroVector4d;
+If PositionVector then Vector[3] := 1.0;
+end;
+
+//==============================================================================
+
+Function IsZeroVector(const Vector: TVMCLVector2s): Boolean;
+begin
+Result := EqualVectors(Vector,VMCL_ZeroVector2s);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroVector(const Vector: TVMCLVector3s): Boolean;
+begin
+Result := EqualVectors(Vector,VMCL_ZeroVector3s);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroVector(const Vector: TVMCLVector4s): Boolean;
+begin
+Result := EqualVectors(Vector,VMCL_ZeroVector4s);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroVectorXYZ(const Vector: TVMCLVector4s): Boolean;
+begin
+Result := EqualVectorsXYZ(Vector,VMCL_ZeroVector4s);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroVector(const Vector: TVMCLVector2d): Boolean;
+begin
+Result := EqualVectors(Vector,VMCL_ZeroVector2d);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroVector(const Vector: TVMCLVector3d): Boolean;
+begin
+Result := EqualVectors(Vector,VMCL_ZeroVector3d);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroVector(const Vector: TVMCLVector4d): Boolean;
+begin
+Result := EqualVectors(Vector,VMCL_ZeroVector4d);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean;
+begin
+Result := EqualVectorsXYZ(Vector,VMCL_ZeroVector4d);
+end;
+
+//==============================================================================
+
+procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector2s));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector3s));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector4s));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector4s) - SizeOf(Single));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector2d));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector3d));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector4d));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
+begin
+Move(Src,Dest,SizeOf(TVMCLVector4d) - SizeOf(Double));
+end;
+
+//==============================================================================
+
+Function EqualVectors(const aVector, bVector: TVMCLVector2s): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualVectors(const aVector, bVector: TVMCLVector3s): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]) and
+          (aVector[2] = bVector[2]);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualVectors(const aVector, bVector: TVMCLVector4s): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]) and
+          (aVector[2] = bVector[2]) and (aVector[3] = bVector[3]);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualVectorsXYZ(const aVector, bVector: TVMCLVector4s): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]) and
+          (aVector[2] = bVector[2]);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualVectors(const aVector, bVector: TVMCLVector2d): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualVectors(const aVector, bVector: TVMCLVector3d): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]) and
+          (aVector[2] = bVector[2]);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualVectors(const aVector, bVector: TVMCLVector4d): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]) and
+          (aVector[2] = bVector[2]) and (aVector[3] = bVector[3]);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualVectorsXYZ(const aVector, bVector: TVMCLVector4d): Boolean;
+begin
+Result := (aVector[0] = bVector[0]) and (aVector[1] = bVector[1]) and
+          (aVector[2] = bVector[2]);
+end;
+
+//==============================================================================
+
+Function SameVectors(const aVector, bVector: TVMCLVector2s; Epsilon: Single = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameVectors(const aVector, bVector: TVMCLVector3s; Epsilon: Single = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon) and
+          SameValue(aVector[2],bVector[2],Epsilon);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameVectors(const aVector, bVector: TVMCLVector4s; Epsilon: Single = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon) and
+          SameValue(aVector[2],bVector[2],Epsilon) and
+          SameValue(aVector[3],bVector[3],Epsilon);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameVectorsXYZ(const aVector, bVector: TVMCLVector4s; Epsilon: Single = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon) and
+          SameValue(aVector[2],bVector[2],Epsilon);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameVectors(const aVector, bVector: TVMCLVector2d; Epsilon: Double = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameVectors(const aVector, bVector: TVMCLVector3d; Epsilon: Double = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon) and
+          SameValue(aVector[2],bVector[2],Epsilon);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameVectors(const aVector, bVector: TVMCLVector4d; Epsilon: Double = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon) and
+          SameValue(aVector[2],bVector[2],Epsilon) and
+          SameValue(aVector[3],bVector[3],Epsilon);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameVectorsXYZ(const aVector, bVector: TVMCLVector4d; Epsilon: Double = 0): Boolean;
+begin
+Result := SameValue(aVector[0],bVector[0],Epsilon) and
+          SameValue(aVector[1],bVector[1],Epsilon) and
+          SameValue(aVector[2],bVector[2],Epsilon);
+end;
 
 end.
