@@ -23,7 +23,7 @@ const
   VMCL_RESULT_AUTO = -3;
 
 Function Prompt(Min,Max: Integer): Integer;
-Function Select(Caption, Text: String; Functions: array of TVMCLTestFunction; Tests: array of String): Integer;
+Function Select(Caption, Text: String; Functions: array of TVMCLTestFunction; Tests: array of String; AutoTest: Boolean = False): Integer;
 
 
 //= Vectors randomization ======================================================
@@ -114,38 +114,42 @@ end;
 
 //------------------------------------------------------------------------------
 
-Function Select(Caption, Text: String; Functions: array of TVMCLTestFunction; Tests: array of String): Integer;
+Function Select(Caption, Text: String; Functions: array of TVMCLTestFunction; Tests: array of String; AutoTest: Boolean = False): Integer;
 var
   i:  Integer;
 begin
 repeat
   WriteLn;
   WriteLn(LineText(Caption,'='));
-  WriteLn;
-  WriteLn(Text);
-  WriteLn;
-  // list of functions
-  i := Low(Functions);
-  while i < High(Functions) do
+  If not AutoTest then
     begin
-      If (i >= Low(Tests)) and (i <= High(Tests)) then
-        Write(Format('%-30s',[Format('%4d - %s',[i,Tests[i]])]))
-      else
-        Write(Format('%-30s',[Format('%4d - unknown #%d',[i,i])]));
-      If (Succ(i) >= Low(Tests)) and (Succ(i) <= High(Tests)) then
-        WriteLn(Format('%-30s',[Format('%4d - %s',[Succ(i),Tests[Succ(i)]])]))
-      else
-        WriteLn(Format('%-30s',[Format('%4d - unknown #%d',[Succ(i),Succ(i)])]));
-      Inc(i,2);
-    end;
-  If (Length(Functions) and 1) <> 0 then
-    If (High(Functions) >= Low(Tests)) and (High(Functions) <= High(Tests)) then
-      WriteLn(Format('%-30s',[Format('%4d - %s',[High(Functions),Tests[High(Functions)]])]))
-    else
-      WriteLn(Format('%-30s',[Format('%4d - unknown #%d',[High(Functions),High(Functions)])]));
-  // prompt
-  WriteLn;
-  Result := Prompt(1,Length(Functions));
+      WriteLn;
+      WriteLn(Text);
+      WriteLn;
+      // list of functions
+      i := Low(Functions);
+      while i < High(Functions) do
+        begin
+          If (i >= Low(Tests)) and (i <= High(Tests)) then
+            Write(Format('%-30s',[Format('%4d - %s',[i + 1,Tests[i]])]))
+          else
+            Write(Format('%-30s',[Format('%4d - unknown #%d',[i + 1,i])]));
+          If (Succ(i) >= Low(Tests)) and (Succ(i) <= High(Tests)) then
+            WriteLn(Format('%-30s',[Format('%4d - %s',[i + 2,Tests[Succ(i)]])]))
+          else
+            WriteLn(Format('%-30s',[Format('%4d - unknown #%d',[i + 2,Succ(i)])]));
+          Inc(i,2);
+        end;
+      If (Length(Functions) and 1) <> 0 then
+        If (High(Functions) >= Low(Tests)) and (High(Functions) <= High(Tests)) then
+          WriteLn(Format('%-30s',[Format('%4d - %s',[High(Functions) + 1,Tests[High(Functions)]])]))
+        else
+          WriteLn(Format('%-30s',[Format('%4d - unknown #%d',[High(Functions) + 1,High(Functions)])]));
+      // prompt
+      WriteLn;
+      Result := Prompt(1,Length(Functions));
+    end
+  else Result := VMCL_RESULT_AUTO;
   case Result of
     VMCL_RESULT_BACK: WriteLn('Back...');
     VMCL_RESULT_INVL: WriteLn('Invalid value...');
@@ -155,9 +159,11 @@ repeat
         WriteLn('Autotest...');
         For i := Low(Functions) to High(Functions) do
           Functions[i](True);
+        If AutoTest then
+          Result := VMCL_RESULT_BACK;
       end;
   else
-    If Functions[Result](False) = VMCL_RESULT_EXIT then
+    If Functions[Result - 1](False) = VMCL_RESULT_EXIT then
       Result := VMCL_RESULT_EXIT;
   end;
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);

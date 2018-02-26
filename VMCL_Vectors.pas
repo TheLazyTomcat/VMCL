@@ -63,6 +63,8 @@ type
 
 //- shortened name types (only aliasses for TVMCL* types) ----------------------
 
+  TVectorField = TVMCLVectorField;
+
   TVector2s = TVMCLVector2s;    PVector2s = PVMCLVector2s;
   TVector2d = TVMCLVector2d;    PVector2d = PVMCLVector2d;
   TVector2  = TVMCLVector2;     PVector2  = PVMCLVector2;

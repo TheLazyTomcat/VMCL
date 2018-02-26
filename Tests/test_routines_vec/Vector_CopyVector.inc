@@ -1,0 +1,35 @@
+Function Vector_CopyVector(AutoTest: Boolean = False): Integer;
+var
+  v2s_s,v2s_d:  TVector2s;
+  v3s_s,v3s_d:  TVector3s;
+  v4s_s,v4s_d:  TVector4s;
+  v2d_s,v2d_d:  TVector2d;
+  v3d_s,v3d_d:  TVector3d;
+  v4d_s,v4d_d:  TVector4d;
+begin
+WriteLn;
+WriteLn(LineText('CopyVector'));
+RandomVec(v2s_s); RandomVec(v3s_s); RandomVec(v4s_s);
+RandomVec(v2d_s); RandomVec(v3d_s); RandomVec(v4d_s);
+RandomVec(v2s_d); RandomVec(v3s_d); RandomVec(v4s_d);
+RandomVec(v2d_d); RandomVec(v3d_d); RandomVec(v4d_d);
+WriteLn; Write('v2s:      ' + VecToStr(v2s_s) + ' -> ' + VecToStr(v2s_d) + ' >> ');
+CopyVector(v2s_s,v2s_d); WriteLn(VecToStr(v2s_d));
+WriteLn; Write('v3s:      ' + VecToStr(v3s_s) + ' -> ' + VecToStr(v3s_d) + ' >> ');
+CopyVector(v3s_s,v3s_d); WriteLn(VecToStr(v3s_d));
+WriteLn; Write('v4s:      ' + VecToStr(v4s_s) + ' -> ' + VecToStr(v4s_d) + ' >> ');
+CopyVector(v4s_s,v4s_d); WriteLn(VecToStr(v4s_d));
+RandomVec(v4s_s);
+WriteLn; Write('v4s(XYZ): ' + VecToStr(v4s_s) + ' -> ' + VecToStr(v4s_d) + ' >> ');
+CopyVectorXYZ(v4s_s,v4s_d); WriteLn(VecToStr(v4s_d));
+WriteLn; Write('v2d:      ' + VecToStr(v2d_s) + ' -> ' + VecToStr(v2d_d) + ' >> ');
+CopyVector(v2d_s,v2d_d); WriteLn(VecToStr(v2d_d));
+WriteLn; Write('v3d:      ' + VecToStr(v3d_s) + ' -> ' + VecToStr(v3d_d) + ' >> ');
+CopyVector(v3d_s,v3d_d); WriteLn(VecToStr(v3d_d));
+WriteLn; Write('v4d:      ' + VecToStr(v4d_s) + ' -> ' + VecToStr(v4d_d) + ' >> ');
+CopyVector(v4d_s,v4d_d); WriteLn(VecToStr(v4d_d));
+RandomVec(v4d_s);
+WriteLn; Write('v4d(XYZ): ' + VecToStr(v4d_s) + ' -> ' + VecToStr(v4d_d) + ' >> ');
+CopyVectorXYZ(v4d_s,v4d_d); WriteLn(VecToStr(v4d_d));
+Result := 0;
+end;

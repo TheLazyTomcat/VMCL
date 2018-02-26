@@ -11,7 +11,7 @@ implementation
 uses
   SysUtils,
   VMCL_Common,
-  VMCL_Tests_Common;
+  VMCL_Tests_Common, VMCL_Tests_Vectors;
 
 //= Main procedure implemntation ===============================================
 
@@ -51,7 +51,8 @@ try
     Write(Format('  %s AllocAutoInit            ',[BoolToMark(ftdAllocAutoInit in VMCL_InfoSet)]));
   WriteLn(Format('  %s AllocGrowOnly',            [BoolToMark(ftdAllocGrowOnly in VMCL_InfoSet)]));
   repeat
-    SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',[nil,nil,nil],['vec','mat','3','4','5','6']);
+    SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
+      [Vectors_Main],['Vectors']);
   until (SelectResult = VMCL_RESULT_BACK) or (SelectResult = VMCL_RESULT_EXIT);
 except
   on E: Exception do
