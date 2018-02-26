@@ -1,0 +1,33 @@
+Function Vector_Magnitude(AutoTest: Boolean = False): Integer;
+var
+  v2s:  TVector2s;
+  v3s:  TVector3s;
+  v4s:  TVector4s;
+  v2d:  TVector2d;
+  v3d:  TVector3d;
+  v4d:  TVector4d;
+begin
+WriteLn;
+WriteLn(LineText('Magnitude'));
+RandomVec(v2s); RandomVec(v3s); RandomVec(v4s);
+RandomVec(v2d); RandomVec(v3d); RandomVec(v4d);
+WriteLn;
+WriteLn('v2s:      ' + VecToStr(v2s) + ' -> M: ' + FloatToStr(Magnitude(v2s)));
+WriteLn;
+WriteLn('v3s:      ' + VecToStr(v3s) + ' -> M: ' + FloatToStr(Magnitude(v3s)));
+WriteLn;
+WriteLn('v4s:      ' + VecToStr(v4s) + ' -> M: ' + FloatToStr(Magnitude(v4s)));
+RandomVec(v4s);
+WriteLn;
+WriteLn('v4s(XYZ): ' + VecToStr(v4s) + ' -> M: ' + FloatToStr(MagnitudeXYZ(v4s)));
+WriteLn;
+WriteLn('v2d:      ' + VecToStr(v2d) + ' -> M: ' + FloatToStr(Magnitude(v2d)));
+WriteLn;
+WriteLn('v3d:      ' + VecToStr(v3d) + ' -> M: ' + FloatToStr(Magnitude(v3d)));
+WriteLn;
+WriteLn('v4d:      ' + VecToStr(v4d) + ' -> M: ' + FloatToStr(Magnitude(v4d)));
+RandomVec(v4d);
+WriteLn;
+WriteLn('v4d(XYZ): ' + VecToStr(v4d) + ' -> M: ' + FloatToStr(MagnitudeXYZ(v4d)));
+Result := 0;
+end;

@@ -1,0 +1,33 @@
+Function Vector_Opposite(AutoTest: Boolean = False): Integer;
+var
+  v2s:  TVector2s;
+  v3s:  TVector3s;
+  v4s:  TVector4s;
+  v2d:  TVector2d;
+  v3d:  TVector3d;
+  v4d:  TVector4d;
+begin
+WriteLn;
+WriteLn(LineText('Opposite'));
+RandomVec(v2s); RandomVec(v3s); RandomVec(v4s);
+RandomVec(v2d); RandomVec(v3d); RandomVec(v4d);
+WriteLn;
+WriteLn('v2s:      ' + VecToStr(v2s) + ' -> ' + VecToStr(Opposite(v2s)));
+WriteLn;
+WriteLn('v3s:      ' + VecToStr(v3s) + ' -> ' + VecToStr(Opposite(v3s)));
+WriteLn;
+WriteLn('v4s:      ' + VecToStr(v4s) + ' -> ' + VecToStr(Opposite(v4s)));
+RandomVec(v4s);
+WriteLn;
+WriteLn('v4s(XYZ): ' + VecToStr(v4s) + ' -> ' + VecToStr(OppositeXYZ(v4s)));
+WriteLn;
+WriteLn('v2d:      ' + VecToStr(v2d) + ' -> ' + VecToStr(Opposite(v2d)));
+WriteLn;
+WriteLn('v3d:      ' + VecToStr(v3d) + ' -> ' + VecToStr(Opposite(v3d)));
+WriteLn;
+WriteLn('v4d:      ' + VecToStr(v4d) + ' -> ' + VecToStr(Opposite(v4d)));
+RandomVec(v4d);
+WriteLn;
+WriteLn('v4d(XYZ): ' + VecToStr(v4d) + ' -> ' + VecToStr(OppositeXYZ(v4d)));
+Result := 0;
+end;
