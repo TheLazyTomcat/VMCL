@@ -19,7 +19,11 @@ type
                ftdFPC,                      // compiled using FPC
                ftdDelphi,                   // compiled using Delphi
                ftdASMSuppressSizeWarnings,  // ASMSuppressSizeWarnings symbol is defined
-               ftdASMDirectOPCodes);        // ASMDirectOPCodes symbol is defined
+               ftdASMDirectOPCodes,         // ASMDirectOPCodes symbol is defined
+               ftdAllocLargeMemSegment,
+               ftdAllocOptimizeForSpeed,
+               ftdAllocAutoInit,
+               ftdAllocGrowOnly);
 
   TVMCLInfoSet = set of TVMCLInfo;
 
@@ -253,6 +257,10 @@ try
   InfoSet(ftdDelphi,{$IFDEF Delphi}True{$ELSE}False{$ENDIF});
   InfoSet(ftdASMSuppressSizeWarnings,{$IFDEF ASMSuppressSizeWarnings}True{$ELSE}False{$ENDIF});
   InfoSet(ftdASMDirectOPCodes,{$IFDEF ASMDirectOPCodes}True{$ELSE}False{$ENDIF});
+  InfoSet(ftdAllocLargeMemSegment,{$IFDEF AllocLargeMemSegment}True{$ELSE}False{$ENDIF});
+  InfoSet(ftdAllocOptimizeForSpeed,{$IFDEF AllocOptimizeForSpeed}True{$ELSE}False{$ENDIF});
+  InfoSet(ftdAllocAutoInit,{$IFDEF AllocAutoInit}True{$ELSE}False{$ENDIF});
+  InfoSet(ftdAllocGrowOnly,{$IFDEF AllocGrowOnly}True{$ELSE}False{$ENDIF});
   VMCL_SupportsSSE := ftsSupportsSSE in VMCL_InfoSet;
 finally
   Free;
