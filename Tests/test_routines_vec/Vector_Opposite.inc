@@ -1,4 +1,4 @@
-Function Vector_Opposite(AutoTest: Boolean = False): Integer;
+Function Vector_Opposite({%H-}AutoTest: Boolean = False): Integer;
 var
   v2s:  TVector2s;
   v3s:  TVector3s;

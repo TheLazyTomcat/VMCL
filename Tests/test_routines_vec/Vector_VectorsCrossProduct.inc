@@ -1,4 +1,4 @@
-Function Vector_VectorsCrossProduct(AutoTest: Boolean = False): Integer;
+Function Vector_VectorsCrossProduct({%H-}AutoTest: Boolean = False): Integer;
 var
   v3s1,v3s2:  TVector3s;
   v4s1,v4s2:  TVector4s;

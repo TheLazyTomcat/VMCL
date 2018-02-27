@@ -1,3 +1,36 @@
+{-------------------------------------------------------------------------------
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+-------------------------------------------------------------------------------}
+{===============================================================================
+
+  VMCL - Vectors & Matrices calculation library
+
+  Memory allocation
+
+    Provides routines for allocation of memory buffers for vectors and matrices
+    storage. It is also possible to allocate general memory space, although with
+    limited size (32KiB, or 1MiB when symbol AllocLargeMemSegment is defined).
+    All returned pointers are guaranteed to be properly aligned for use in fast
+    SSE instructions (currently the alignment is set to 128bit boundary, but
+    this can be changed). General memory managers might not necessarily
+    guarantee that, that is the main reason why this unit exists.
+
+  ©František Milt 2018-02-26
+
+  Version 1.0 dev
+
+  Dependencies:
+    AuxTypes    - github.com/ncs-sniper/Lib.AuxTypes
+    BitVector   - github.com/ncs-sniper/Lib.BitVector
+    BitOps      - github.com/ncs-sniper/Lib.BitOps
+    StrRect     - github.com/ncs-sniper/Lib.StrRect
+    SimpleCPUID - github.com/ncs-sniper/Lib.SimpleCPUID
+
+===============================================================================}
 unit VMCL_Alloc;
 
 {$INCLUDE 'VMCL_defs.inc'}
@@ -15,7 +48,7 @@ uses
 ===============================================================================}
 
 type
-  TVMCLMemoryAlignment = (ma8b,ma32b,ma64b,ma128b,ma256b,ma512b,ma1024b,ma2048b,maNone = ma8b);
+  TVMCLMemoryAlignment = (ma8b,ma32b,ma64b,ma128b,ma256b,ma512b,ma1024b,ma2048b,maNone = ma8b{%H-});
 
 {===============================================================================
     TVMCLMemorySegment - declaration
@@ -128,7 +161,7 @@ procedure VMCL_GetMem(out Ptr: Pointer; Size: TMemSize);
 Function VMCL_AllocMem(Size: TMemSize): Pointer;
 procedure VMCL_FreeMem(Ptr: Pointer; Size: TMemSize);
 
-//------------------------------------------------------------------------------
+//= Vectors allocation =========================================================
 
 procedure VMCL_New(out Vec: PVMCLVector2s; Count: UInt32 = 1); overload;
 procedure VMCL_New(out Vec: PVMCLVector3s; Count: UInt32 = 1); overload;
@@ -309,8 +342,8 @@ fSize := MinSegmentSize + Pred(MemAlignmentBytes(Alignment));
 GetMem(fMemoryBase,fSize);
 // get actual aligned memory
 If ({%H-}PtrUInt(fMemoryBase) mod PtrUInt(MemAlignmentBytes(fAlignment))) <> 0 then
-  fMemory := {%H-}Pointer({%H-}PtrUInt(fMemoryBase) + PtrUInt(MemAlignmentBytes(fAlignment)) -
-              ({%H-}PtrUInt(fMemoryBase) mod PtrUInt(MemAlignmentBytes(fAlignment))))
+  fMemory := {%H-}Pointer({%H-}PtrUInt(fMemoryBase) + (PtrUInt(MemAlignmentBytes(fAlignment)) -
+              ({%H-}PtrUInt(fMemoryBase) mod PtrUInt(MemAlignmentBytes(fAlignment)))))
 else
   fMemory := fMemoryBase;
 // get count according to usable aligned memory
@@ -379,7 +412,7 @@ end;
 Function TVMCLMemorySegment.OwnsMemory(Ptr: Pointer): Boolean;
 begin
 Result := ({%H-}PtrUInt(Ptr) >= {%H-}PtrUInt(GetBlock(0))) and
-          ({%H-}PtrUInt(Ptr) <= ({%H-}PtrUInt(GetBlock(Pred(fCount))) + fBlockSize - 1));
+          ({%H-}PtrUInt(Ptr) <= ({%H-}PtrUInt(GetBlock(Pred(fCount))) + (fBlockSize - 1)));
 end;
 
 //------------------------------------------------------------------------------
@@ -714,84 +747,84 @@ end;
 
 procedure VMCL_New(out Vec: PVMCLVector2s; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3s; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4s; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector2d; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3d; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4d; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector2sr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3sr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4sr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector2dr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3dr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4dr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
 end;
 
 //------------------------------------------------------------------------------

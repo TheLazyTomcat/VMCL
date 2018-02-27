@@ -1,4 +1,4 @@
-Function Vector_Build(AutoTest: Boolean = False): Integer;
+Function Vector_Build({%H-}AutoTest: Boolean = False): Integer;
 var
   Xs,Ys,Zs,Ws:  Single;
   Xd,Yd,Zd,Wd:  Double;

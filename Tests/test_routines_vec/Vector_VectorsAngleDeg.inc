@@ -1,4 +1,4 @@
-Function Vector_VectorsAngleDeg(AutoTest: Boolean = False): Integer;
+Function Vector_VectorsAngleDeg({%H-}AutoTest: Boolean = False): Integer;
 var
   v2s1,v2s2:  TVector2s;
   v3s1,v3s2:  TVector3s;
@@ -25,4 +25,5 @@ WriteLn;
 WriteLn('v3d: ' + VecToStr(v3d1) + ' > ' + VecToStr(v3d2) + ' -> ' + FloatToStr(VectorsAngleDeg(v3d1,v3d2)));
 WriteLn;
 WriteLn('v4d: ' + VecToStr(v4d1) + ' > ' + VecToStr(v4d2) + ' -> ' + FloatToStr(VectorsAngleDeg(v4d1,v4d2)));
+Result := 0;
 end;

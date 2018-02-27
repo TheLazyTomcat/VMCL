@@ -1,4 +1,4 @@
-Function Vector_VectorsAngleRad(AutoTest: Boolean = False): Integer;
+Function Vector_VectorsAngleRad({%H-}AutoTest: Boolean = False): Integer;
 var
   v2s1,v2s2:  TVector2s;
   v3s1,v3s2:  TVector3s;

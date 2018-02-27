@@ -1,3 +1,28 @@
+{-------------------------------------------------------------------------------
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+-------------------------------------------------------------------------------}
+{===============================================================================
+
+  VMCL - Vectors & Matrices calculation library
+
+  Common types, constants, functions, ...
+
+  ©František Milt 2018-02-26
+
+  Version 1.0 dev
+
+  Dependencies:
+    AuxTypes    - github.com/ncs-sniper/Lib.AuxTypes
+    BitVector   - github.com/ncs-sniper/Lib.BitVector
+    BitOps      - github.com/ncs-sniper/Lib.BitOps
+    StrRect     - github.com/ncs-sniper/Lib.StrRect
+    SimpleCPUID - github.com/ncs-sniper/Lib.SimpleCPUID
+
+===============================================================================}
 unit VMCL_Common;
 
 {$INCLUDE 'VMCL_defs.inc'}
@@ -7,28 +32,29 @@ interface
 //= Library informations =======================================================
 
 type
-  TVMCLInfo = (ftsSSE,                      // CPU supports SSE instructions
-               ftsSSE2,                     // CPU supports SSE2 instructions
-               ftsSSE3,                     // CPU supports SSE3 instructions
-               ftsSupportsSSE,              // library provides SSE-based functions
-               ftdPurePascal,               // PurePascal symbol is defined
-               ftdX86,                      // compiled for x86 instruction set
-               ftdX64,                      // compiled for x86-64 instruction set
-               ftdWindows,                  // compiled for Windows OS
-               ftdUnix,                     // compiled for Unix OS (ie. Linux)
-               ftdFPC,                      // compiled using FPC
-               ftdDelphi,                   // compiled using Delphi
-               ftdASMSuppressSizeWarnings,  // ASMSuppressSizeWarnings symbol is defined
-               ftdASMDirectOPCodes,         // ASMDirectOPCodes symbol is defined
-               ftdAllocLargeMemSegment,
-               ftdAllocOptimizeForSpeed,
-               ftdAllocAutoInit,
-               ftdAllocGrowOnly);
+  TVMCLInfo = (
+    ftsSSE,                      // CPU supports SSE instructions
+    ftsSSE2,                     // CPU supports SSE2 instructions
+    ftsSSE3,                     // CPU supports SSE3 instructions
+    ftsSupportsSSE,              // library provides SSE-based functions
+    ftdPurePascal,               // PurePascal symbol is defined
+    ftdX86,                      // compiled for x86 instruction set
+    ftdX64,                      // compiled for x86-64 instruction set
+    ftdWindows,                  // compiled for Windows OS
+    ftdUnix,                     // compiled for Unix OS (ie. Linux)
+    ftdFPC,                      // compiled using FPC
+    ftdDelphi,                   // compiled using Delphi
+    ftdASMSuppressSizeWarnings,  // ASMSuppressSizeWarnings symbol is defined
+    ftdASMDirectOPCodes,         // ASMDirectOPCodes symbol is defined
+    ftdAllocLargeMemSegment,     // AllocLargeMemSegment symbol is defined
+    ftdAllocOptimizeForSpeed,    // AllocOptimizeForSpeed symbol is defined
+    ftdAllocAutoInit,            // AllocAutoInit symbol is defined
+    ftdAllocGrowOnly);           // AllocGrowOnly symbol is defined
 
   TVMCLInfoSet = set of TVMCLInfo;
 
 var
-  VMCL_InfoSet:       TVMCLInfoSet;
+  VMCL_InfoSet:       TVMCLInfoSet;     // information about the library
   VMCL_SupportsSSE:   Boolean = False;  // true when the library offers SSE-based functions
 
 //= Calculation constants ======================================================

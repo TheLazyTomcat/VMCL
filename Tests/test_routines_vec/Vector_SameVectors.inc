@@ -1,4 +1,4 @@
-Function Vector_SameVectors(AutoTest: Boolean = False): Integer;
+Function Vector_SameVectors({%H-}AutoTest: Boolean = False): Integer;
 var
   v2s_s,v2s_d:  TVector2s;
   v3s_s,v3s_d:  TVector3s;

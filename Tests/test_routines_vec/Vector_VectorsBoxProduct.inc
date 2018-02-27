@@ -1,4 +1,4 @@
-Function Vector_VectorsBoxProduct(AutoTest: Boolean = False): Integer;
+Function Vector_VectorsBoxProduct({%H-}AutoTest: Boolean = False): Integer;
 var
   v3s1,v3s2,v3s3:  TVector3s;
   v4s1,v4s2,v4s3:  TVector4s;

@@ -1,4 +1,31 @@
+{-------------------------------------------------------------------------------
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+-------------------------------------------------------------------------------}
+{===============================================================================
+
+  VMCL Test Suite
+
+  Vector tests
+
+  ©František Milt 2018-02-26
+
+  Version 1.0 dev
+
+  Dependencies:
+    AuxTypes    - github.com/ncs-sniper/Lib.AuxTypes
+    BitVector   - github.com/ncs-sniper/Lib.BitVector
+    BitOps      - github.com/ncs-sniper/Lib.BitOps
+    StrRect     - github.com/ncs-sniper/Lib.StrRect
+    SimpleCPUID - github.com/ncs-sniper/Lib.SimpleCPUID
+
+===============================================================================}
 unit VMCL_Tests_Vectors;
+
+{$INCLUDE '..\VMCL_defs.inc'}
 
 interface
 
@@ -11,6 +38,7 @@ uses
   VMCL_Vectors,
   VMCL_Tests_Common;
 
+// testing routines
 {$INCLUDE '.\test_routines_vec\Vector_build.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_swizzle.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_convert.inc'}

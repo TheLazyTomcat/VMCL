@@ -2,6 +2,14 @@
 
 //- CPU ------------------------------------------------------------------------
 
+{$IF defined(CPU64) or defined(CPU64BITS)}
+  {$DEFINE 64bit}
+{$ELSEIF defined(CPU16)}
+  {$DEFINE 16bit}
+{$ELSE}
+  {$DEFINE 32bit}
+{$IFEND}
+
 {$IF defined(CPUX86_64) or defined(CPUX64)}
   {$DEFINE x64}
 {$ELSEIF defined(CPU386)}
@@ -24,8 +32,20 @@
 
 //- Compiler -------------------------------------------------------------------
 
+{
+  ASMSuppressSizeWarnings
+
+    Supresses some nonsensical warnings about operand size in ASM code.
+
+  ASMDirectOPCodes
+
+    When defined, some instructions in ASM code are inserted directly as an
+    OP-codes. It is done for instructions that are not supported by a used
+    compiler.
+}
 {$IFDEF FPC}
   {$MODE ObjFPC}{$H+}
+  {$MODESWITCH CLASSICPROCVARS+}
   {$ASMMODE Intel}
   {$DEFINE ASMSuppressSizeWarnings}
 {$ELSE}
@@ -42,9 +62,50 @@
 
 //- VMCL_Alloc -----------------------------------------------------------------
 
-{.$DEFINE AllocLargeMemSegment}  // 1MiB segments
-{$DEFINE AllocOptimizeForSpeed} // Sligtly faster allocation, worse memory utilization
+{
+  AllocLargeMemSegment
+
+    When defined, memory manager allocates segments of memory that are 1MiB
+    large, instead of 32KiB when the symbol is not defined.
+
+  Not defined by default.
+}
+{.$DEFINE AllocLargeMemSegment}
+
+{
+  AllocOptimizeForSpeed
+
+    When defined, allocation using the memory manager is sligthly faster in
+    exchange for slightly worse memory utilization.
+
+  Defined by default.
+}
+{$DEFINE AllocOptimizeForSpeed}
+
+{
+  AllocAutoInit
+
+    When defined, internal memory manager object is automatically created and
+    freed. Must be defined if any of the allocation function is to be used.
+
+  Defined by default.
+}
 {$DEFINE AllocAutoInit}
+
+{
+  AllocGrowOnly
+
+    Internal memory manager is created in grow-only mode when defined. This
+    prevents freeing of unused memory segments, resulting in larger memory
+    use, but might lower the memory fragmentation.
+    When not defined, the manager is created in dynamic mode.
+
+  Not defined by default.
+}
 {.$DEFINE AllocGrowOnly}
 
 //- VMCL_Vectors ---------------------------------------------------------------
+
+//= Do not touch following =====================================================
+
+
