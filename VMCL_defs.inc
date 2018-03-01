@@ -42,11 +42,17 @@
     When defined, some instructions in ASM code are inserted directly as an
     OP-codes. It is done for instructions that are not supported by a used
     compiler.
+
+  CanInline
+
+    Indicates that some functions can be inlined (inline directive)
 }
 {$IFDEF FPC}
   {$MODE ObjFPC}{$H+}
   {$MODESWITCH CLASSICPROCVARS+}
   {$ASMMODE Intel}
+  {$INLINE ON}
+  {$DEFINE CanInline}
   {$DEFINE ASMSuppressSizeWarnings}
 {$ELSE}
   {$DEFINE Delphi}
@@ -54,6 +60,11 @@
     // let's assume all 64bit compilers support SSE3
     {$DEFINE ASMDirectOPCodes}
   {$ENDIF}
+  {$IF Declared(CompilerVersion)}
+    {$IF CompilerVersion >= 17 then}  // Delphi 2005+
+      {$DEFINE CanInline}
+    {$IFEND}
+  {$IFEND}
 {$ENDIF}
 
 //= Individual VMCL units defines ==============================================
@@ -105,6 +116,13 @@
 {.$DEFINE AllocGrowOnly}
 
 //- VMCL_Vectors ---------------------------------------------------------------
+
+{.$DEFINE VectorsDoubleIsDefault}
+
+//- VMCL_Matrices --------------------------------------------------------------
+
+{.$DEFINE MatricesColumnMajorIsDefault}
+{.$DEFINE MatricesDoubleIsDefault}
 
 //= Do not touch following =====================================================
 

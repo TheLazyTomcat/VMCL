@@ -33,23 +33,26 @@ interface
 
 type
   TVMCLInfo = (
-    ftsSSE,                      // CPU supports SSE instructions
-    ftsSSE2,                     // CPU supports SSE2 instructions
-    ftsSSE3,                     // CPU supports SSE3 instructions
-    ftsSupportsSSE,              // library provides SSE-based functions
-    ftdPurePascal,               // PurePascal symbol is defined
-    ftdX86,                      // compiled for x86 instruction set
-    ftdX64,                      // compiled for x86-64 instruction set
-    ftdWindows,                  // compiled for Windows OS
-    ftdUnix,                     // compiled for Unix OS (ie. Linux)
-    ftdFPC,                      // compiled using FPC
-    ftdDelphi,                   // compiled using Delphi
-    ftdASMSuppressSizeWarnings,  // ASMSuppressSizeWarnings symbol is defined
-    ftdASMDirectOPCodes,         // ASMDirectOPCodes symbol is defined
-    ftdAllocLargeMemSegment,     // AllocLargeMemSegment symbol is defined
-    ftdAllocOptimizeForSpeed,    // AllocOptimizeForSpeed symbol is defined
-    ftdAllocAutoInit,            // AllocAutoInit symbol is defined
-    ftdAllocGrowOnly);           // AllocGrowOnly symbol is defined
+    infSSE,                           // CPU supports SSE instructions
+    infSSE2,                          // CPU supports SSE2 instructions
+    infSSE3,                          // CPU supports SSE3 instructions
+    infSupportsSSE,                   // library provides SSE-based functions
+    infPurePascal,                    // PurePascal symbol is defined
+    infX86,                           // compiled for x86 instruction set
+    infX64,                           // compiled for x86-64 instruction set
+    infWindows,                       // compiled for Windows OS
+    infUnix,                          // compiled for Unix OS (ie. Linux)
+    infFPC,                           // compiled using FPC
+    infDelphi,                        // compiled using Delphi
+    infASMSuppressSizeWarnings,       // ASMSuppressSizeWarnings symbol is defined
+    infASMDirectOPCodes,              // ASMDirectOPCodes symbol is defined
+    infAllocLargeMemSegment,          // AllocLargeMemSegment symbol is defined
+    infAllocOptimizeForSpeed,         // AllocOptimizeForSpeed symbol is defined
+    infAllocAutoInit,                 // AllocAutoInit symbol is defined
+    infAllocGrowOnly,                 // AllocGrowOnly symbol is defined
+    infVectorsDoubleIsDefault,        // VectorsDoubleIsDefault symbol is defined
+    infMatricesColumnMajorIsDefault,  // MatricesColumnMajorIsDefault symbol is defined
+    infMatricesDoubleIsDefault);      // MatricesDoubleIsDefault symbol is defined
 
   TVMCLInfoSet = set of TVMCLInfo;
 
@@ -270,24 +273,27 @@ begin
 with TSimpleCPUID.Create do
 try
   VMCL_InfoSet := [];
-  InfoSet(ftsSSE,Info.ProcessorFeatures.SSE);
-  InfoSet(ftsSSE2,Info.ProcessorFeatures.SSE2);
-  InfoSet(ftsSSE3,Info.ProcessorFeatures.SSE3);
-  InfoSet(ftsSupportsSSE,[ftsSSE,ftsSSE2,ftsSSE3] <= VMCL_InfoSet);
-  InfoSet(ftdPurePascal,{$IFDEF PurePascal}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdX86,{$IFDEF x86}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdX64,{$IFDEF x64}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdWindows,{$IFDEF Windows}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdUnix,{$IFDEF Unix}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdFPC,{$IFDEF FPC}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdDelphi,{$IFDEF Delphi}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdASMSuppressSizeWarnings,{$IFDEF ASMSuppressSizeWarnings}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdASMDirectOPCodes,{$IFDEF ASMDirectOPCodes}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdAllocLargeMemSegment,{$IFDEF AllocLargeMemSegment}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdAllocOptimizeForSpeed,{$IFDEF AllocOptimizeForSpeed}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdAllocAutoInit,{$IFDEF AllocAutoInit}True{$ELSE}False{$ENDIF});
-  InfoSet(ftdAllocGrowOnly,{$IFDEF AllocGrowOnly}True{$ELSE}False{$ENDIF});
-  VMCL_SupportsSSE := ftsSupportsSSE in VMCL_InfoSet;
+  InfoSet(infSSE,Info.ProcessorFeatures.SSE);
+  InfoSet(infSSE2,Info.ProcessorFeatures.SSE2);
+  InfoSet(infSSE3,Info.ProcessorFeatures.SSE3);
+  InfoSet(infSupportsSSE,[infSSE,infSSE2,infSSE3] <= VMCL_InfoSet);
+  InfoSet(infPurePascal,{$IFDEF PurePascal}True{$ELSE}False{$ENDIF});
+  InfoSet(infX86,{$IFDEF x86}True{$ELSE}False{$ENDIF});
+  InfoSet(infX64,{$IFDEF x64}True{$ELSE}False{$ENDIF});
+  InfoSet(infWindows,{$IFDEF Windows}True{$ELSE}False{$ENDIF});
+  InfoSet(infUnix,{$IFDEF Unix}True{$ELSE}False{$ENDIF});
+  InfoSet(infFPC,{$IFDEF FPC}True{$ELSE}False{$ENDIF});
+  InfoSet(infDelphi,{$IFDEF Delphi}True{$ELSE}False{$ENDIF});
+  InfoSet(infASMSuppressSizeWarnings,{$IFDEF ASMSuppressSizeWarnings}True{$ELSE}False{$ENDIF});
+  InfoSet(infASMDirectOPCodes,{$IFDEF ASMDirectOPCodes}True{$ELSE}False{$ENDIF});
+  InfoSet(infAllocLargeMemSegment,{$IFDEF AllocLargeMemSegment}True{$ELSE}False{$ENDIF});
+  InfoSet(infAllocOptimizeForSpeed,{$IFDEF AllocOptimizeForSpeed}True{$ELSE}False{$ENDIF});
+  InfoSet(infAllocAutoInit,{$IFDEF AllocAutoInit}True{$ELSE}False{$ENDIF});
+  InfoSet(infAllocGrowOnly,{$IFDEF AllocGrowOnly}True{$ELSE}False{$ENDIF});
+  InfoSet(infVectorsDoubleIsDefault,{$IFDEF VectorsDoubleIsDefault}True{$ELSE}False{$ENDIF});
+  InfoSet(infMatricesColumnMajorIsDefault,{$IFDEF MatricesColumnMajorIsDefault}True{$ELSE}False{$ENDIF});
+  InfoSet(infMatricesDoubleIsDefault,{$IFDEF MatricesDoubleIsDefault}True{$ELSE}False{$ENDIF});
+  VMCL_SupportsSSE := infSupportsSSE in VMCL_InfoSet;
 finally
   Free;
 end;

@@ -32,23 +32,35 @@ interface
 uses
   VMCL_Common;
 
-{==============================================================================}
-{   Vector types and constants                                                 }
-{==============================================================================}
+{===============================================================================
+    Vector types and constants
+===============================================================================}
 type
   TVMCLVectorField = (X = 0,Y,Z,W); //used for swizzling
 
   TVMCLVector2s = packed array[0..1] of Single;     PVMCLVector2s = ^TVMCLVector2s;
   TVMCLVector2d = packed array[0..1] of Double;     PVMCLVector2d = ^TVMCLVector2d;
+{$IFDEF VectorsDoubleIsDefault}
+  TVMCLVector2  = TVMCLVector2d;                    PVMCLVector2  = ^TVMCLVector2;
+{$ELSE}
   TVMCLVector2  = TVMCLVector2s;                    PVMCLVector2  = ^TVMCLVector2;
+{$ENDIF}
 
   TVMCLVector3s = packed array[0..2] of Single;     PVMCLVector3s = ^TVMCLVector3s;
   TVMCLVector3d = packed array[0..2] of Double;     PVMCLVector3d = ^TVMCLVector3d;
+{$IFDEF VectorsDoubleIsDefault}
+  TVMCLVector3  = TVMCLVector3d;                    PVMCLVector3  = ^TVMCLVector3;
+{$ELSE}
   TVMCLVector3  = TVMCLVector3s;                    PVMCLVector3  = ^TVMCLVector3;
+{$ENDIF}
 
   TVMCLVector4s = packed array[0..3] of Single;     PVMCLVector4s = ^TVMCLVector4s;
   TVMCLVector4d = packed array[0..3] of Double;     PVMCLVector4d = ^TVMCLVector4d;
+{$IFDEF VectorsDoubleIsDefault}
+  TVMCLVector4  = TVMCLVector4d;                    PVMCLVector4  = ^TVMCLVector4;
+{$ELSE}
   TVMCLVector4  = TVMCLVector4s;                    PVMCLVector4  = ^TVMCLVector4;
+{$ENDIF}
 
   TVMCLVector2sr = packed record
     X,Y:  Single;
@@ -60,7 +72,11 @@ type
   end;
   PVMCLVector2dr = ^TVMCLVector2dr;
 
+{$IFDEF VectorsDoubleIsDefault}
+  TVMCLVector2r = TVMCLVector2dr;   PVMCLVector2r = ^TVMCLVector2r;
+{$ELSE}
   TVMCLVector2r = TVMCLVector2sr;   PVMCLVector2r = ^TVMCLVector2r;
+{$ENDIF}
 
   TVMCLVector3sr = packed record
     X,Y,Z:  Single;
@@ -72,7 +88,11 @@ type
   end;
   PVMCLVector3dr = ^TVMCLVector3dr;
 
+{$IFDEF VectorsDoubleIsDefault}
+  TVMCLVector3r = TVMCLVector3dr;   PVMCLVector3r = ^TVMCLVector3r;
+{$ELSE}
   TVMCLVector3r = TVMCLVector3sr;   PVMCLVector3r = ^TVMCLVector3r;
+{$ENDIF}
 
   TVMCLVector4sr = packed record
     X,Y,Z,W:  Single;
@@ -84,9 +104,13 @@ type
   end;
   PVMCLVector4dr = ^TVMCLVector4dr;
 
+{$IFDEF VectorsDoubleIsDefault}
+  TVMCLVector4r = TVMCLVector4dr;   PVMCLVector4r = ^TVMCLVector4r;
+{$ELSE}
   TVMCLVector4r = TVMCLVector4sr;   PVMCLVector4r = ^TVMCLVector4r;
+{$ENDIF}
 
-//- shortened name types (only aliasses for TVMCL* types) ----------------------
+//- shortened-name types (aliasses for TVMCL* types) ---------------------------
 
   TVectorField = TVMCLVectorField;
 
@@ -187,19 +211,19 @@ Function VecToStr(const Vector: TVMCLVector2d; const VectorFormat: TVMCLVectorFo
 Function VecToStr(const Vector: TVMCLVector3d; const VectorFormat: TVMCLVectorFormat): String; overload;
 Function VecToStr(const Vector: TVMCLVector4d; const VectorFormat: TVMCLVectorFormat): String; overload;
 
-Function VecToStr(const Vector: TVMCLVector2s): String; overload;
-Function VecToStr(const Vector: TVMCLVector3s): String; overload;
-Function VecToStr(const Vector: TVMCLVector4s): String; overload;
-Function VecToStr(const Vector: TVMCLVector2d): String; overload;
-Function VecToStr(const Vector: TVMCLVector3d): String; overload;
-Function VecToStr(const Vector: TVMCLVector4d): String; overload;
+Function VecToStr(const Vector: TVMCLVector2s): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector3s): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector4s): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector2d): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector3d): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector4d): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function VecToStr(const Vector: TVMCLVector2sr): String; overload;
-Function VecToStr(const Vector: TVMCLVector3sr): String; overload;
-Function VecToStr(const Vector: TVMCLVector4sr): String; overload;
-Function VecToStr(const Vector: TVMCLVector2dr): String; overload;
-Function VecToStr(const Vector: TVMCLVector3dr): String; overload;
-Function VecToStr(const Vector: TVMCLVector4dr): String; overload;
+Function VecToStr(const Vector: TVMCLVector2sr): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector3sr): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector4sr): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector2dr): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector3dr): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function VecToStr(const Vector: TVMCLVector4dr): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 {===============================================================================
     Vector building
