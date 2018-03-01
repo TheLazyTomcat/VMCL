@@ -30,7 +30,7 @@ unit VMCL_Tests_Common;
 interface
 
 uses
-  VMCL_Vectors;
+  VMCL_Vectors, VMCL_Matrices;
 
 type
   TVMCLTestFunction = Function(AutoTest: Boolean = False): Integer;
@@ -66,6 +66,22 @@ procedure RandomVec(out Vec: TVMCLVector4sr; Max: Integer = 100; Offset: Single 
 procedure RandomVec(out Vec: TVMCLVector2dr; Max: Integer = 100; Offset: Double = 0.0); overload;
 procedure RandomVec(out Vec: TVMCLVector3dr; Max: Integer = 100; Offset: Double = 0.0); overload;
 procedure RandomVec(out Vec: TVMCLVector4dr; Max: Integer = 100; Offset: Double = 0.0); overload;
+
+//= Matrices randomization =====================================================
+
+procedure RandomMat(out Mat: TMatrix2s; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix3s; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix4s; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix2d; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix3d; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix4d; Max: Integer = 100; Offset: Double = 0.0); overload;
+
+//= Specialized functions ======================================================
+
+{$IFNDEF PurePascal}
+procedure PrintSSERegisters_Single;
+procedure PrintSSERegisters_Double;
+{$ENDIF}
 
 implementation
 
@@ -301,5 +317,211 @@ Vec.Y := Random(Max) + Offset;
 Vec.Z := Random(Max) + Offset;
 Vec.W := Random(Max) + Offset;
 end;
+
+//= Matrices randomization ======================================================
+
+procedure RandomMat(out Mat: TMatrix2s; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix2so) to High(TMatrix2so) do
+   TMatrix2so(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix3s; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix3so) to High(TMatrix3so) do
+   TMatrix3so(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix4s; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix4so) to High(TMatrix4so) do
+   TMatrix4so(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix2d; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix2do) to High(TMatrix2do) do
+   TMatrix2do(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix3d; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix3do) to High(TMatrix3do) do
+   TMatrix3do(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix4d; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix4do) to High(TMatrix4do) do
+   TMatrix4do(Mat)[i] := Random(Max) + Offset;
+end;
+
+//= Specialized functions ======================================================
+
+{$IFNDEF PurePascal}
+
+procedure PrintSSERegisters_Single;
+var
+{$IFDEF x64}
+  Buff: array[0..15] of TVector4s;
+{$ELSE}
+  Buff: array[0..7] of TVector4s;
+{$ENDIF}
+begin
+asm
+  MOVUPS  dqword ptr [Buff],       XMM0
+  MOVUPS  dqword ptr [Buff + 16],  XMM1
+  MOVUPS  dqword ptr [Buff + 32],  XMM2
+  MOVUPS  dqword ptr [Buff + 48],  XMM3
+  MOVUPS  dqword ptr [Buff + 64],  XMM4
+  MOVUPS  dqword ptr [Buff + 80],  XMM5
+  MOVUPS  dqword ptr [Buff + 96],  XMM6
+  MOVUPS  dqword ptr [Buff + 112], XMM7
+{$IFDEF x64}
+  MOVUPS  dqword ptr [Buff + 128], XMM8
+  MOVUPS  dqword ptr [Buff + 144], XMM9
+  MOVUPS  dqword ptr [Buff + 160], XMM10
+  MOVUPS  dqword ptr [Buff + 176], XMM11
+  MOVUPS  dqword ptr [Buff + 192], XMM12
+  MOVUPS  dqword ptr [Buff + 208], XMM13
+  MOVUPS  dqword ptr [Buff + 224], XMM14
+  MOVUPS  dqword ptr [Buff + 240], XMM15
+{$ENDIF}  
+end;
+WriteLn;
+WriteLn('XMM0  ' + VecToStr(Buff[0]));
+WriteLn('XMM1  ' + VecToStr(Buff[1]));
+WriteLn('XMM2  ' + VecToStr(Buff[2]));
+WriteLn('XMM3  ' + VecToStr(Buff[3]));
+WriteLn('XMM4  ' + VecToStr(Buff[4]));
+WriteLn('XMM5  ' + VecToStr(Buff[5]));
+WriteLn('XMM6  ' + VecToStr(Buff[6]));
+WriteLn('XMM7  ' + VecToStr(Buff[7]));
+{$IFDEF x64}
+WriteLn('XMM8  ' + VecToStr(Buff[8]));
+WriteLn('XMM9  ' + VecToStr(Buff[9]));
+WriteLn('XMM10 ' + VecToStr(Buff[10]));
+WriteLn('XMM11 ' + VecToStr(Buff[11]));
+WriteLn('XMM12 ' + VecToStr(Buff[12]));
+WriteLn('XMM13 ' + VecToStr(Buff[13]));
+WriteLn('XMM14 ' + VecToStr(Buff[14]));
+WriteLn('XMM15 ' + VecToStr(Buff[15]));
+{$ENDIF}
+asm
+  MOVUPD  XMM0, dqword ptr [Buff]
+  MOVUPD  XMM1, dqword ptr [Buff + 16]
+  MOVUPD  XMM2, dqword ptr [Buff + 32]
+  MOVUPD  XMM3, dqword ptr [Buff + 48]
+  MOVUPD  XMM4, dqword ptr [Buff + 64]
+  MOVUPD  XMM5, dqword ptr [Buff + 80]
+  MOVUPD  XMM6, dqword ptr [Buff + 96]
+  MOVUPD  XMM7, dqword ptr [Buff + 112]
+{$IFDEF x64}
+  MOVUPD  XMM8,  dqword ptr [Buff + 128]
+  MOVUPD  XMM9,  dqword ptr [Buff + 144]
+  MOVUPD  XMM10, dqword ptr [Buff + 160]
+  MOVUPD  XMM11, dqword ptr [Buff + 176]
+  MOVUPD  XMM12, dqword ptr [Buff + 192]
+  MOVUPD  XMM13, dqword ptr [Buff + 208]
+  MOVUPD  XMM14, dqword ptr [Buff + 224]
+  MOVUPD  XMM15, dqword ptr [Buff + 240]
+{$ENDIF}
+end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure PrintSSERegisters_Double;
+var
+{$IFDEF x64}
+  Buff: array[0..15] of TVector2d;
+{$ELSE}
+  Buff: array[0..7] of TVector2d;
+{$ENDIF}
+begin
+asm
+  MOVUPD  dqword ptr [Buff],       XMM0
+  MOVUPD  dqword ptr [Buff + 16],  XMM1
+  MOVUPD  dqword ptr [Buff + 32],  XMM2
+  MOVUPD  dqword ptr [Buff + 48],  XMM3
+  MOVUPD  dqword ptr [Buff + 64],  XMM4
+  MOVUPD  dqword ptr [Buff + 80],  XMM5
+  MOVUPD  dqword ptr [Buff + 96],  XMM6
+  MOVUPD  dqword ptr [Buff + 112], XMM7
+{$IFDEF x64}
+  MOVUPD  dqword ptr [Buff + 128], XMM8
+  MOVUPD  dqword ptr [Buff + 144], XMM9
+  MOVUPD  dqword ptr [Buff + 160], XMM10
+  MOVUPD  dqword ptr [Buff + 176], XMM11
+  MOVUPD  dqword ptr [Buff + 192], XMM12
+  MOVUPD  dqword ptr [Buff + 208], XMM13
+  MOVUPD  dqword ptr [Buff + 224], XMM14
+  MOVUPD  dqword ptr [Buff + 240], XMM15
+{$ENDIF}
+end;
+WriteLn;
+WriteLn('XMM0  ' + VecToStr(Buff[0]));
+WriteLn('XMM1  ' + VecToStr(Buff[1]));
+WriteLn('XMM2  ' + VecToStr(Buff[2]));
+WriteLn('XMM3  ' + VecToStr(Buff[3]));
+WriteLn('XMM4  ' + VecToStr(Buff[4]));
+WriteLn('XMM5  ' + VecToStr(Buff[5]));
+WriteLn('XMM6  ' + VecToStr(Buff[6]));
+WriteLn('XMM7  ' + VecToStr(Buff[7]));
+{$IFDEF x64}
+WriteLn('XMM8  ' + VecToStr(Buff[8]));
+WriteLn('XMM9  ' + VecToStr(Buff[9]));
+WriteLn('XMM10 ' + VecToStr(Buff[10]));
+WriteLn('XMM11 ' + VecToStr(Buff[11]));
+WriteLn('XMM12 ' + VecToStr(Buff[12]));
+WriteLn('XMM13 ' + VecToStr(Buff[13]));
+WriteLn('XMM14 ' + VecToStr(Buff[14]));
+WriteLn('XMM15 ' + VecToStr(Buff[15]));
+{$ENDIF}
+asm
+  MOVUPD  XMM0, dqword ptr [Buff]
+  MOVUPD  XMM1, dqword ptr [Buff + 16]
+  MOVUPD  XMM2, dqword ptr [Buff + 32]
+  MOVUPD  XMM3, dqword ptr [Buff + 48]
+  MOVUPD  XMM4, dqword ptr [Buff + 64]
+  MOVUPD  XMM5, dqword ptr [Buff + 80]
+  MOVUPD  XMM6, dqword ptr [Buff + 96]
+  MOVUPD  XMM7, dqword ptr [Buff + 112]
+{$IFDEF x64}
+  MOVUPD  XMM8,  dqword ptr [Buff + 128]
+  MOVUPD  XMM9,  dqword ptr [Buff + 144]
+  MOVUPD  XMM10, dqword ptr [Buff + 160]
+  MOVUPD  XMM11, dqword ptr [Buff + 176]
+  MOVUPD  XMM12, dqword ptr [Buff + 192]
+  MOVUPD  XMM13, dqword ptr [Buff + 208]
+  MOVUPD  XMM14, dqword ptr [Buff + 224]
+  MOVUPD  XMM15, dqword ptr [Buff + 240]
+{$ENDIF}
+end;
+end;
+
+{$ENDIF}
 
 end.

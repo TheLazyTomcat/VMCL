@@ -80,6 +80,32 @@ type
   TVMCLMatrix4  = TVMCLMatrix4RM;     PVMCLMatrix4  = ^TVMCLMatrix4;
 {$ENDIF}
 
+//- 1 dimensional (linear) overlays --------------------------------------------
+
+  TVMCLMatrix2so = packed array[0..3] of Single;        PVMCLMatrix2so = ^TVMCLMatrix2so;
+  TVMCLMatrix2do = packed array[0..3] of Double;        PVMCLMatrix2do = ^TVMCLMatrix2do;
+{$IFDEF MatricesDoubleIsDefault}
+  TVMCLMatrix2o  = TVMCLMatrix2do;                      PVMCLMatrix2o  = PVMCLMatrix2do;
+{$ELSE}
+  TVMCLMatrix2o  = TVMCLMatrix2so;                      PVMCLMatrix2o  = PVMCLMatrix2so;
+{$ENDIF}
+
+  TVMCLMatrix3so = packed array[0..8] of Single;        PVMCLMatrix3so = ^TVMCLMatrix3so;
+  TVMCLMatrix3do = packed array[0..8] of Double;        PVMCLMatrix3do = ^TVMCLMatrix3do;
+{$IFDEF MatricesDoubleIsDefault}
+  TVMCLMatrix3o  = TVMCLMatrix3do;                      PVMCLMatrix3o  = PVMCLMatrix3do;
+{$ELSE}
+  TVMCLMatrix3o  = TVMCLMatrix3so;                      PVMCLMatrix3o  = PVMCLMatrix3so;
+{$ENDIF}
+
+  TVMCLMatrix4so = packed array[0..15] of Single;       PVMCLMatrix4so = ^TVMCLMatrix4so;
+  TVMCLMatrix4do = packed array[0..15] of Double;       PVMCLMatrix4do = ^TVMCLMatrix4do;
+{$IFDEF MatricesDoubleIsDefault}
+  TVMCLMatrix4o  = TVMCLMatrix4do;                      PVMCLMatrix4o  = PVMCLMatrix4do;
+{$ELSE}
+  TVMCLMatrix4o  = TVMCLMatrix4so;                      PVMCLMatrix4o  = PVMCLMatrix4so;
+{$ENDIF}
+
 //- shortened-name types (aliasses for TVMCL* types) ---------------------------
 
   TMatrix2RMs = TVMCLMatrix2RMs;    PMatrix2RMs = PVMCLMatrix2RMs;
@@ -112,31 +138,17 @@ type
   TMatrix4d   = TVMCLMatrix4d;      PMatrix4d   = PVMCLMatrix4d;
   TMatrix4    = TVMCLMatrix4;       PMatrix4    = PVMCLMatrix4;
 
-//- 1 dimensional (linear) overlays --------------------------------------------
+  TMatrix2so = TVMCLMatrix2so;      PMatrix2so = PVMCLMatrix2so;
+  TMatrix2do = TVMCLMatrix2do;      PMatrix2do = PVMCLMatrix2do;
+  TMatrix2o  = TVMCLMatrix2o;       PMatrix2o  = PVMCLMatrix2o;
 
-  TVMCLMatrix2so = packed array[0..3] of Single;        PVMCLMatrix2so = ^TVMCLMatrix2so;
-  TVMCLMatrix2do = packed array[0..3] of Double;        PVMCLMatrix2do = ^TVMCLMatrix2do;
-{$IFDEF MatricesDoubleIsDefault}
-  TVMCLMatrix2o  = TVMCLMatrix2do;                      PVMCLMatrix2o  = PVMCLMatrix2do;
-{$ELSE}
-  TVMCLMatrix2o  = TVMCLMatrix2so;                      PVMCLMatrix2o  = PVMCLMatrix2so;
-{$ENDIF}
+  TMatrix3so = TVMCLMatrix3so;      PMatrix3so = PVMCLMatrix3so;
+  TMatrix3do = TVMCLMatrix3do;      PMatrix3do = PVMCLMatrix3do;
+  TMatrix3o  = TVMCLMatrix3o;       PMatrix3o  = PVMCLMatrix3o;
 
-  TVMCLMatrix3so = packed array[0..8] of Single;        PVMCLMatrix3so = ^TVMCLMatrix3so;
-  TVMCLMatrix3do = packed array[0..8] of Double;        PVMCLMatrix3do = ^TVMCLMatrix3do;
-{$IFDEF MatricesDoubleIsDefault}
-  TVMCLMatrix3o  = TVMCLMatrix3do;                      PVMCLMatrix3o  = PVMCLMatrix3do;
-{$ELSE}
-  TVMCLMatrix3o  = TVMCLMatrix3so;                      PVMCLMatrix3o  = PVMCLMatrix3so;
-{$ENDIF}
-
-  TVMCLMatrix4so = packed array[0..15] of Single;       PVMCLMatrix4so = ^TVMCLMatrix4so;
-  TVMCLMatrix4do = packed array[0..15] of Double;       PVMCLMatrix4do = ^TVMCLMatrix4do;
-{$IFDEF MatricesDoubleIsDefault}
-  TVMCLMatrix4o  = TVMCLMatrix4do;                      PVMCLMatrix4o  = PVMCLMatrix4do;
-{$ELSE}
-  TVMCLMatrix4o  = TVMCLMatrix4so;                      PVMCLMatrix4o  = PVMCLMatrix4so;
-{$ENDIF}
+  TMatrix4so = TVMCLMatrix4so;      PMatrix4so = PVMCLMatrix4so;
+  TMatrix4do = TVMCLMatrix4do;      PMatrix4do = PVMCLMatrix4do;
+  TMatrix4o  = TVMCLMatrix4o;       PMatrix4o  = PVMCLMatrix4o;
 
 //= Matrix constants ===========================================================
 

@@ -36,7 +36,7 @@ implementation
 uses
   SysUtils,
   VMCL_Common,
-  VMCL_Tests_Common, VMCL_Tests_Vectors;
+  VMCL_Tests_Common, VMCL_Tests_Vectors, VMCL_Tests_Matrices;
 
 //= Main procedure implemntation ===============================================
 
@@ -82,7 +82,7 @@ try
   WriteLn(Format('  %s MatricesDoubleIsDefault',     [BoolToMark(infMatricesDoubleIsDefault in VMCL_InfoSet)]));
   repeat
     SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
-      [Vectors_Main],['Vectors']);
+      [Vectors_Main,Matrices_Main],['Vectors','Matrices']);
   until (SelectResult = VMCL_RESULT_BACK) or (SelectResult = VMCL_RESULT_EXIT);
 except
   on E: Exception do
