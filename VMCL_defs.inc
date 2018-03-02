@@ -45,7 +45,7 @@
 
   CanInline
 
-    Indicates that some functions can be inlined (inline directive)
+    Indicates that functions can be inlined (inline directive can be used).
 }
 {$IFDEF FPC}
   {$MODE ObjFPC}{$H+}

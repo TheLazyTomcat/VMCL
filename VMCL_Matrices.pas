@@ -345,6 +345,100 @@ Function MatrixFromColumns(const Column1,Column2,Column3: TVMCLVector3d): TVMCLM
 Function MatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4s): TVMCLMatrix4s; overload;
 Function MatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4d): TVMCLMatrix4d; overload;
 
+{===============================================================================
+    Matrix entries access - declaration
+===============================================================================}
+
+// getting entry
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMs; Row, Column: Integer): Single; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMd; Row, Column: Integer): Double; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2CMs; Row, Column: Integer): Single; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2CMd; Row, Column: Integer): Double; overload;
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3RMs; Row, Column: Integer): Single; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3RMd; Row, Column: Integer): Double; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3CMs; Row, Column: Integer): Single; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3CMd; Row, Column: Integer): Double; overload;
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4RMs; Row, Column: Integer): Single; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4RMd; Row, Column: Integer): Double; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMs; Row, Column: Integer): Single; overload;
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMd; Row, Column: Integer): Double; overload;
+
+// settings entry
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMs; Row, Column: Integer; Value: Single); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMd; Row, Column: Integer; Value: Double); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2CMs; Row, Column: Integer; Value: Single); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2CMd; Row, Column: Integer; Value: Double); overload;
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3RMs; Row, Column: Integer; Value: Single); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3RMd; Row, Column: Integer; Value: Double); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3CMs; Row, Column: Integer; Value: Single); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3CMd; Row, Column: Integer; Value: Double); overload;
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4RMs; Row, Column: Integer; Value: Single); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4RMd; Row, Column: Integer; Value: Double); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMs; Row, Column: Integer; Value: Single); overload;
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMd; Row, Column: Integer; Value: Double); overload;
+
+{===============================================================================
+    Matrix conversions - declaration
+===============================================================================}
+(*
+// higher to lower dimension
+Function Matrix2(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix2RMs; overload;
+Function Matrix2(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix2RMd; overload;
+Function Matrix2(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix2CMs; overload;
+Function Matrix2(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix2CMd; overload;
+
+Function Matrix2(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix2RMs; overload;
+Function Matrix2(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix2RMd; overload;
+Function Matrix2(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix2CMs; overload;
+Function Matrix2(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix2CMd; overload;
+
+Function Matrix3(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix3RMs; overload;
+Function Matrix3(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix3RMd; overload;
+Function Matrix3(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix3CMs; overload;
+Function Matrix3(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix3CMd; overload;
+
+// lower to higher dimension
+Function Matrix3(const Matrix: TVMCLMatrix2RMs; IdentityMatrix: Boolean = False): TVMCLMatrix3RMs; overload;
+Function Matrix3(const Matrix: TVMCLMatrix2RMd; IdentityMatrix: Boolean = False): TVMCLMatrix3RMd; overload;
+Function Matrix3(const Matrix: TVMCLMatrix2CMs; IdentityMatrix: Boolean = False): TVMCLMatrix3CMs; overload;
+Function Matrix3(const Matrix: TVMCLMatrix2CMd; IdentityMatrix: Boolean = False): TVMCLMatrix3CMd; overload;
+
+Function Matrix4(const Matrix: TVMCLMatrix2RMs; IdentityMatrix: Boolean = False): TVMCLMatrix4RMs; overload;
+Function Matrix4(const Matrix: TVMCLMatrix2RMd; IdentityMatrix: Boolean = False): TVMCLMatrix4RMd; overload;
+Function Matrix4(const Matrix: TVMCLMatrix2CMs; IdentityMatrix: Boolean = False): TVMCLMatrix4CMs; overload;
+Function Matrix4(const Matrix: TVMCLMatrix2CMd; IdentityMatrix: Boolean = False): TVMCLMatrix4CMd; overload;
+
+Function Matrix4(const Matrix: TVMCLMatrix3RMs; IdentityMatrix: Boolean = False): TVMCLMatrix4RMs; overload;
+Function Matrix4(const Matrix: TVMCLMatrix3RMd; IdentityMatrix: Boolean = False): TVMCLMatrix4RMd; overload;
+Function Matrix4(const Matrix: TVMCLMatrix3CMs; IdentityMatrix: Boolean = False): TVMCLMatrix4CMs; overload;
+Function Matrix4(const Matrix: TVMCLMatrix3CMd; IdentityMatrix: Boolean = False): TVMCLMatrix4CMd; overload;
+
+// precision coversion
+Function Matrix2s(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMs; overload;
+Function Matrix2d(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMs; overload;
+Function Matrix2s(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMs; overload;
+Function Matrix2d(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMs; overload;
+
+Function Matrix3s(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMs; overload;
+Function Matrix3d(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMs; overload;
+Function Matrix3s(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMs; overload;
+Function Matrix3d(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMs; overload;
+
+Function Matrix4s(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMs; overload;
+Function Matrix4d(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMs; overload;
+Function Matrix4s(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMs; overload;
+Function Matrix4d(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMs; overload;
+
+// order conversion
+Function Matrix2(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2RMs; overload;
+Function Matrix2(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2RMd; overload;
+Function Matrix2(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2CMs; overload;
+Function Matrix2(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2CMd; overload;
+*)
 implementation
 
 uses
@@ -854,7 +948,7 @@ Function RMMatrixFromRows(const Row1,Row2,Row3: TVMCLVector3s): TVMCLMatrix3RMs;
 begin
 Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
-Move(Row2,Result[2],SizeOf(Row3));
+Move(Row3,Result[2],SizeOf(Row3));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -863,7 +957,7 @@ Function RMMatrixFromRows(const Row1,Row2,Row3: TVMCLVector3d): TVMCLMatrix3RMd;
 begin
 Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
-Move(Row2,Result[2],SizeOf(Row3));
+Move(Row3,Result[2],SizeOf(Row3));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -1163,5 +1257,225 @@ Result := CMMatrixFromColumns(Column1,Column2,Column3,Column4);
 Result := RMMatrixFromColumns(Column1,Column2,Column3,Column4);
 {$ENDIF}
 end;
+
+{===============================================================================
+    Matrix entries access - declaration
+===============================================================================}
+
+// getting entry
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMs; Row, Column: Integer): Single;
+begin
+Clip(Row,Low(Matrix),High(Matrix));
+Clip(Column,Low(Matrix[0]),High(Matrix[0]));
+Result := Matrix[Row,Column];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMd; Row, Column: Integer): Double;
+begin
+Clip(Row,Low(Matrix),High(Matrix));
+Clip(Column,Low(Matrix[0]),High(Matrix[0]));
+Result := Matrix[Row,Column];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2CMs; Row, Column: Integer): Single;
+begin
+Clip(Row,Low(Matrix[0]),High(Matrix[0]));
+Clip(Column,Low(Matrix),High(Matrix));
+Result := Matrix[Column,Row];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix2CMd; Row, Column: Integer): Double;
+begin
+Clip(Row,Low(Matrix[0]),High(Matrix[0]));
+Clip(Column,Low(Matrix),High(Matrix));
+Result := Matrix[Column,Row];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3RMs; Row, Column: Integer): Single;
+begin
+Clip(Row,Low(Matrix),High(Matrix));
+Clip(Column,Low(Matrix[0]),High(Matrix[0]));
+Result := Matrix[Row,Column];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3RMd; Row, Column: Integer): Double;
+begin
+Clip(Row,Low(Matrix),High(Matrix));
+Clip(Column,Low(Matrix[0]),High(Matrix[0]));
+Result := Matrix[Row,Column];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3CMs; Row, Column: Integer): Single;
+begin
+Clip(Row,Low(Matrix[0]),High(Matrix[0]));
+Clip(Column,Low(Matrix),High(Matrix));
+Result := Matrix[Column,Row];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix3CMd; Row, Column: Integer): Double;
+begin
+Clip(Row,Low(Matrix[0]),High(Matrix[0]));
+Clip(Column,Low(Matrix),High(Matrix));
+Result := Matrix[Column,Row];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4RMs; Row, Column: Integer): Single;
+begin
+Clip(Row,Low(Matrix),High(Matrix));
+Clip(Column,Low(Matrix[0]),High(Matrix[0]));
+Result := Matrix[Row,Column];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4RMd; Row, Column: Integer): Double;
+begin
+Clip(Row,Low(Matrix),High(Matrix));
+Clip(Column,Low(Matrix[0]),High(Matrix[0]));
+Result := Matrix[Row,Column];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMs; Row, Column: Integer): Single;
+begin
+Clip(Row,Low(Matrix[0]),High(Matrix[0]));
+Clip(Column,Low(Matrix),High(Matrix));
+Result := Matrix[Column,Row];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMd; Row, Column: Integer): Double;
+begin
+Clip(Row,Low(Matrix[0]),High(Matrix[0]));
+Clip(Column,Low(Matrix),High(Matrix));
+Result := Matrix[Column,Row];
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMs; Row, Column: Integer; Value: Single);
+begin
+If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
+  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
+    Matrix[Row,Column] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMd; Row, Column: Integer; Value: Double);
+begin
+If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
+  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
+    Matrix[Row,Column] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2CMs; Row, Column: Integer; Value: Single);
+begin
+If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
+  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
+    Matrix[Column,Row] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix2CMd; Row, Column: Integer; Value: Double); 
+begin
+If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
+  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
+    Matrix[Column,Row] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3RMs; Row, Column: Integer; Value: Single);
+begin
+If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
+  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
+    Matrix[Row,Column] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3RMd; Row, Column: Integer; Value: Double);
+begin
+If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
+  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
+    Matrix[Row,Column] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3CMs; Row, Column: Integer; Value: Single);
+begin
+If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
+  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
+    Matrix[Column,Row] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix3CMd; Row, Column: Integer; Value: Double);
+begin
+If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
+  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
+    Matrix[Column,Row] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4RMs; Row, Column: Integer; Value: Single);
+begin
+If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
+  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
+    Matrix[Row,Column] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4RMd; Row, Column: Integer; Value: Double);
+begin
+If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
+  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
+    Matrix[Row,Column] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMs; Row, Column: Integer; Value: Single);
+begin
+If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
+  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
+    Matrix[Column,Row] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMd; Row, Column: Integer; Value: Double);
+begin
+If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
+  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
+    Matrix[Column,Row] := Value;
+end;
+
 
 end.
