@@ -37,9 +37,9 @@ type
 
 Function BoolToMark(Value: Boolean; MarkTrue: String = '+'; MarkFalse: String = '-'): String;
 
-Function Splitter(SplitterChar: Char = '-'; Count: Integer = 60): String;
-Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 60): String;
-Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = 60): String;
+Function Splitter(SplitterChar: Char = '-'; Count: Integer = 64): String;
+Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 64): String;
+Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = 64): String;
 
 const
   VMCL_RESULT_BACK = 0;
@@ -98,14 +98,14 @@ end;
 
 //------------------------------------------------------------------------------
 
-Function Splitter(SplitterChar: Char = '-'; Count: Integer = 60): String;
+Function Splitter(SplitterChar: Char = '-'; Count: Integer = 64): String;
 begin
 Result := StringOfChar(SplitterChar,Count);
 end;
 
 //------------------------------------------------------------------------------
 
-Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 60): String;
+Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 64): String;
 var
   WhiteSpace: Integer;
 begin
@@ -120,7 +120,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = 60): String;
+Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = 64): String;
 begin
 If Length(Text) < (Width - 6) then
   begin
@@ -172,20 +172,20 @@ repeat
       while i < High(Functions) do
         begin
           If (i >= Low(Tests)) and (i <= High(Tests)) then
-            Write(Format('%-30s',[Format('%4d - %s',[i + 1,Tests[i]])]))
+            Write(Format('%-32s',[Format('%4d - %s',[i + 1,Tests[i]])]))
           else
-            Write(Format('%-30s',[Format('%4d - unknown #%d',[i + 1,i])]));
+            Write(Format('%-32s',[Format('%4d - unknown #%d',[i + 1,i])]));
           If (Succ(i) >= Low(Tests)) and (Succ(i) <= High(Tests)) then
-            WriteLn(Format('%-30s',[Format('%4d - %s',[i + 2,Tests[Succ(i)]])]))
+            WriteLn(Format('%-32s',[Format('%4d - %s',[i + 2,Tests[Succ(i)]])]))
           else
-            WriteLn(Format('%-30s',[Format('%4d - unknown #%d',[i + 2,Succ(i)])]));
+            WriteLn(Format('%-32s',[Format('%4d - unknown #%d',[i + 2,Succ(i)])]));
           Inc(i,2);
         end;
       If (Length(Functions) and 1) <> 0 then
         If (High(Functions) >= Low(Tests)) and (High(Functions) <= High(Tests)) then
-          WriteLn(Format('%-30s',[Format('%4d - %s',[High(Functions) + 1,Tests[High(Functions)]])]))
+          WriteLn(Format('%-32s',[Format('%4d - %s',[High(Functions) + 1,Tests[High(Functions)]])]))
         else
-          WriteLn(Format('%-30s',[Format('%4d - unknown #%d',[High(Functions) + 1,High(Functions)])]));
+          WriteLn(Format('%-32s',[Format('%4d - unknown #%d',[High(Functions) + 1,High(Functions)])]));
       // prompt
       WriteLn;
       Result := Prompt(1,Length(Functions));

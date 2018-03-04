@@ -70,20 +70,26 @@ const
 
 //- Checking for 128bit pointer alignment --------------------------------------
 
-Function CheckMemAlign16(Ptr: Pointer): Boolean; overload;
-Function CheckMemAlign16(Ptr1, Ptr2: Pointer): Boolean; overload;
-Function CheckMemAlign16(Ptr1, Ptr2, Ptr3: Pointer): Boolean; overload;
+Function CheckMemAlign16(Ptr: Pointer): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function CheckMemAlign16(Ptr1, Ptr2: Pointer): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function CheckMemAlign16(Ptr1, Ptr2, Ptr3: Pointer): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function CheckMemAlign16(Ptrs: array of Pointer): Boolean; overload;
+
+//- Checking if value is in a given range --------------------------------------
+
+Function CheckRange(Value: Integer; Min,Max: Integer): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function CheckRange(Value: Single; Min,Max: Single): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function CheckRange(Value: Double; Min,Max: Double): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 //- Clipping (also known as clamping) value to a range -------------------------
 
-procedure Clip(var Value: Integer; Min,Max: Integer); overload;
-procedure Clip(var Value: Single; Min,Max: Single); overload;
-procedure Clip(var Value: Double; Min,Max: Double); overload;
+procedure Clip(var Value: Integer; Min,Max: Integer); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Clip(var Value: Single; Min,Max: Single); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Clip(var Value: Double; Min,Max: Double); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function Clipped(Value: Integer; Min,Max: Integer): Integer; overload;
-Function Clipped(Value: Single; Min,Max: Single): Single; overload;
-Function Clipped(Value: Double; Min,Max: Double): Double; overload;
+Function Clipped(Value: Integer; Min,Max: Integer): Integer; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Clipped(Value: Single; Min,Max: Single): Single; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Clipped(Value: Double; Min,Max: Double): Double; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 //- Formatting types, constants and functions ----------------------------------
 
@@ -122,7 +128,7 @@ Function ValueFormat(ThousandSeparator, DecimalSeparator: Char; DecimalPlaces: I
 Function CommonFormat(ValueFormat: TVMCLValueFormat; WhiteSpace, ComponentsDelimiter: Char; LeadingString, TrailingString: String): TVMCLCommonFormat;
 
 Function ValueToStr(Value: Extended; const ValueFormat: TVMCLValueFormat): String; overload;
-Function ValueToStr(Value: Extended): String; overload;
+Function ValueToStr(Value: Extended): String; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 implementation
 
@@ -163,6 +169,27 @@ For i := Low(Ptrs) to High(Ptrs) do
       Result := False;
       Break{For i};
     end;
+end;
+
+//==============================================================================
+
+Function CheckRange(Value: Integer; Min,Max: Integer): Boolean;
+begin
+Result := (Value >= Min) and (Value <= Max);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function CheckRange(Value: Single; Min,Max: Single): Boolean;
+begin
+Result := (Value >= Min) and (Value <= Max);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function CheckRange(Value: Double; Min,Max: Double): Boolean;
+begin
+Result := (Value >= Min) and (Value <= Max);
 end;
 
 //==============================================================================

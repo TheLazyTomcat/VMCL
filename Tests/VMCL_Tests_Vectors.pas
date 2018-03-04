@@ -35,7 +35,7 @@ implementation
 
 uses
   SysUtils,
-  VMCL_Vectors,
+  VMCL_Common, VMCL_Vectors,
   VMCL_Tests_Common;
 
 // testing routines
@@ -61,6 +61,9 @@ uses
 {$INCLUDE '.\test_routines_vec\Vector_VectorsAntinormal.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_VectorsAngleRad.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_VectorsAngleDeg.inc'}
+{$INCLUDE '.\test_routines_vec\Vector_VectorsProjection.inc'}
+{$INCLUDE '.\test_routines_vec\Vector_VectorsOrthogonal.inc'}
+{$INCLUDE '.\test_routines_vec\Vector_VectorsOrthonormal.inc'}
 
 //==============================================================================
 
@@ -72,12 +75,14 @@ repeat
     [Vector_Build,Vector_Swizzle,Vector_Convert,Vector_LoadZeroVector,Vector_IsZeroVector,
      Vector_CopyVector,Vector_EqualVectors,Vector_SameVectors,Vector_Opposite,Vector_Magnitude,Vector_Normalize,Vector_Normalized,
      Vector_ScalarMultiply,Vector_VectorsAdd,Vector_VectorsSubtract,Vector_VectorsDotProduct,Vector_VectorsCrossProduct,
-     Vector_VectorsBoxProduct,Vector_VectorsNormal,Vector_VectorsAntinormal,Vector_VectorsAngleRad,Vector_VectorsAngleDeg],
+     Vector_VectorsBoxProduct,Vector_VectorsNormal,Vector_VectorsAntinormal,Vector_VectorsAngleRad,Vector_VectorsAngleDeg,
+     Vector_VectorsProjection,Vector_VectorsOrthogonal,Vector_VectorsOrthonormal],
 
     ['Vector building','Vector swizzling','Vector conversions','LoadZeroVector','IsZeroVector',
      'CopyVector','EqualVectors','SameVectors','Opposite','Magnitude','Normalize','Normalized',
      'ScalarMultiply','VectorsAdd','VectorsSubtract','VectorsDotProduct','VectorsCrossProduct',
-     'VectorsBoxProduct','VectorsNormal','VectorsAntinormal','VectorsAngleRad','VectorsAngleDeg'],
+     'VectorsBoxProduct','VectorsNormal','VectorsAntinormal','VectorsAngleRad','VectorsAngleDeg',
+     'VectorsProjection','VectorsOrthogonal','VectorsOrthonormal'],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);

@@ -163,35 +163,35 @@ procedure VMCL_FreeMem(Ptr: Pointer; Size: TMemSize);
 
 //= Vectors allocation =========================================================
 
-procedure VMCL_New(out Vec: PVMCLVector2s; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector3s; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector4s; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector2d; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector3d; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector4d; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector2s; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector3s; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector4s; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector2d; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector3d; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector4d; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure VMCL_New(out Vec: PVMCLVector2sr; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector3sr; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector4sr; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;
-procedure VMCL_New(out Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;
+procedure VMCL_New(out Vec: PVMCLVector2sr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector3sr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector4sr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure VMCL_Dispose(Vec: PVMCLVector2s; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector3s; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector4s; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector2d; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector3d; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector4d; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector2s; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector3s; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector4s; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector2d; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector3d; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector4d; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure VMCL_Dispose(Vec: PVMCLVector2sr; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector3sr; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector4sr; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;
-procedure VMCL_Dispose(Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;
+procedure VMCL_Dispose(Vec: PVMCLVector2sr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector3sr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector4sr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 //------------------------------------------------------------------------------
 

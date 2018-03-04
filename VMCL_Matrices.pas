@@ -154,70 +154,70 @@ type
 
 //- null/zero matrices ---------------------------------------------------------
 const
-  ZeroMatrix2RMs:   TVMCLMatrix2RMs = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2RMd:   TVMCLMatrix2RMd = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2CMs:   TVMCLMatrix2CMs = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2CMd:   TVMCLMatrix2CMd = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2RM:    TVMCLMatrix2RM  = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2CM:    TVMCLMatrix2CM  = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2s:     TVMCLMatrix2s   = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2d:     TVMCLMatrix2d   = ((0.0, 0.0), (0.0, 0.0));
-  ZeroMatrix2:      TVMCLMatrix2    = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2RMs:  TVMCLMatrix2RMs = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2RMd:  TVMCLMatrix2RMd = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2CMs:  TVMCLMatrix2CMs = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2CMd:  TVMCLMatrix2CMd = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2RM:   TVMCLMatrix2RM  = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2CM:   TVMCLMatrix2CM  = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2s:    TVMCLMatrix2s   = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2d:    TVMCLMatrix2d   = ((0.0, 0.0), (0.0, 0.0));
+  VMCL_ZeroMatrix2:     TVMCLMatrix2    = ((0.0, 0.0), (0.0, 0.0));
 
-  ZeroMatrix3RMs:   TVMCLMatrix3RMs = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3RMd:   TVMCLMatrix3RMd = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3CMs:   TVMCLMatrix3CMs = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3CMd:   TVMCLMatrix3CMd = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3RM:    TVMCLMatrix3RM  = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3CM:    TVMCLMatrix3CM  = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3s:     TVMCLMatrix3s   = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3d:     TVMCLMatrix3d   = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
-  ZeroMatrix3:      TVMCLMatrix3    = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3RMs:  TVMCLMatrix3RMs = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3RMd:  TVMCLMatrix3RMd = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3CMs:  TVMCLMatrix3CMs = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3CMd:  TVMCLMatrix3CMd = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3RM:   TVMCLMatrix3RM  = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3CM:   TVMCLMatrix3CM  = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3s:    TVMCLMatrix3s   = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3d:    TVMCLMatrix3d   = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix3:     TVMCLMatrix3    = ((0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0));
 
-  ZeroMatrix4RMs:   TVMCLMatrix4RMs = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4RMd:   TVMCLMatrix4RMd = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4CMs:   TVMCLMatrix4CMs = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4CMd:   TVMCLMatrix4CMd = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4RM:    TVMCLMatrix4RM  = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4CM:    TVMCLMatrix4CM  = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4s:     TVMCLMatrix4s   = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4d:     TVMCLMatrix4d   = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
-  ZeroMatrix4:      TVMCLMatrix4    = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4RMs:  TVMCLMatrix4RMs = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4RMd:  TVMCLMatrix4RMd = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4CMs:  TVMCLMatrix4CMs = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4CMd:  TVMCLMatrix4CMd = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4RM:   TVMCLMatrix4RM  = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4CM:   TVMCLMatrix4CM  = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4s:    TVMCLMatrix4s   = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4d:    TVMCLMatrix4d   = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
+  VMCL_ZeroMatrix4:     TVMCLMatrix4    = ((0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0), (0.0, 0.0, 0.0, 0.0));
 
 //- identity matrices ----------------------------------------------------------
 {
   Identity matrices have all entries set to zero, only main diagonal is filled
   with ones
 }
-  IdentityMatrix2RMs: TVMCLMatrix2RMs = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2RMd: TVMCLMatrix2RMd = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2CMs: TVMCLMatrix2CMs = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2CMd: TVMCLMatrix2CMd = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2RM:  TVMCLMatrix2RM  = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2CM:  TVMCLMatrix2CM  = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2s:   TVMCLMatrix2s   = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2d:   TVMCLMatrix2d   = ((1.0, 0.0), (0.0, 1.0));
-  IdentityMatrix2:    TVMCLMatrix2    = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2RMs:  TVMCLMatrix2RMs = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2RMd:  TVMCLMatrix2RMd = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2CMs:  TVMCLMatrix2CMs = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2CMd:  TVMCLMatrix2CMd = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2RM:   TVMCLMatrix2RM  = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2CM:   TVMCLMatrix2CM  = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2s:    TVMCLMatrix2s   = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2d:    TVMCLMatrix2d   = ((1.0, 0.0), (0.0, 1.0));
+  VMCL_IdentityMatrix2:     TVMCLMatrix2    = ((1.0, 0.0), (0.0, 1.0));
 
-  IdentityMatrix3RMs: TVMCLMatrix3RMs = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3RMd: TVMCLMatrix3RMd = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3CMs: TVMCLMatrix3CMs = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3CMd: TVMCLMatrix3CMd = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3RM:  TVMCLMatrix3RM  = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3CM:  TVMCLMatrix3CM  = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3s:   TVMCLMatrix3s   = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3d:   TVMCLMatrix3d   = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
-  IdentityMatrix3:    TVMCLMatrix3    = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3RMs:  TVMCLMatrix3RMs = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3RMd:  TVMCLMatrix3RMd = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3CMs:  TVMCLMatrix3CMs = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3CMd:  TVMCLMatrix3CMd = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3RM:   TVMCLMatrix3RM  = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3CM:   TVMCLMatrix3CM  = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3s:    TVMCLMatrix3s   = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3d:    TVMCLMatrix3d   = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix3:     TVMCLMatrix3    = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0));
 
-  IdentityMatrix4RMs: TVMCLMatrix4RMs = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
-  IdentityMatrix4RMd: TVMCLMatrix4RMd = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));  
-  IdentityMatrix4CMs: TVMCLMatrix4CMs = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
-  IdentityMatrix4CMd: TVMCLMatrix4CMd = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
-  IdentityMatrix4RM:  TVMCLMatrix4RM  = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
-  IdentityMatrix4CM:  TVMCLMatrix4CM  = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
-  IdentityMatrix4s:   TVMCLMatrix4s   = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
-  IdentityMatrix4d:   TVMCLMatrix4d   = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
-  IdentityMatrix4:    TVMCLMatrix4    = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4RMs:  TVMCLMatrix4RMs = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4RMd:  TVMCLMatrix4RMd = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4CMs:  TVMCLMatrix4CMs = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4CMd:  TVMCLMatrix4CMd = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4RM:   TVMCLMatrix4RM  = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4CM:   TVMCLMatrix4CM  = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4s:    TVMCLMatrix4s   = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4d:    TVMCLMatrix4d   = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
+  VMCL_IdentityMatrix4:     TVMCLMatrix4    = ((1.0, 0.0, 0.0, 0.0), (0.0, 1.0, 0.0, 0.0), (0.0, 0.0, 1.0, 0.0), (0.0, 0.0, 0.0, 1.0));
 
 {===============================================================================
     Matrix formatting types, constants and functions - declaration
@@ -382,9 +382,234 @@ procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMs; Row, Column: Integer; Valu
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMd; Row, Column: Integer; Value: Double); overload;
 
 {===============================================================================
+    Matrix vector extraction - declaration
+===============================================================================}
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix2RMs; Row: Integer): TVMCLVector2s; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix2RMd; Row: Integer): TVMCLVector2d; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix2CMs; Row: Integer): TVMCLVector2s; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix2CMd; Row: Integer): TVMCLVector2d; overload;
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix3RMs; Row: Integer): TVMCLVector3s; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix3RMd; Row: Integer): TVMCLVector3d; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix3CMs; Row: Integer): TVMCLVector3s; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix3CMd; Row: Integer): TVMCLVector3d; overload;
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix4RMs; Row: Integer): TVMCLVector4s; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix4RMd; Row: Integer): TVMCLVector4d; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix4CMs; Row: Integer): TVMCLVector4s; overload;
+Function MatrixGetRow(const Matrix: TVMCLMatrix4CMd; Row: Integer): TVMCLVector4d; overload;
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2RMs; Column: Integer): TVMCLVector2s; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2RMd; Column: Integer): TVMCLVector2d; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2CMs; Column: Integer): TVMCLVector2s; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2CMd; Column: Integer): TVMCLVector2d; overload;
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3RMs; Column: Integer): TVMCLVector3s; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3RMd; Column: Integer): TVMCLVector3d; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3CMs; Column: Integer): TVMCLVector3s; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3CMd; Column: Integer): TVMCLVector3d; overload;
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4RMs; Column: Integer): TVMCLVector4s; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4RMd; Column: Integer): TVMCLVector4d; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4CMs; Column: Integer): TVMCLVector4s; overload;
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4CMd; Column: Integer): TVMCLVector4d; overload;
+
+{===============================================================================
+   Matrix vector insertion - declaration
+===============================================================================}
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2RMs; Row: Integer; const Data: TVMCLVector2s); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2RMd; Row: Integer; const Data: TVMCLVector2d); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2CMs; Row: Integer; const Data: TVMCLVector2s); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2CMd; Row: Integer; const Data: TVMCLVector2d); overload;
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3RMs; Row: Integer; const Data: TVMCLVector3s); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3RMd; Row: Integer; const Data: TVMCLVector3d); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3CMs; Row: Integer; const Data: TVMCLVector3s); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3CMd; Row: Integer; const Data: TVMCLVector3d); overload;
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4RMs; Row: Integer; const Data: TVMCLVector4s); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4RMd; Row: Integer; const Data: TVMCLVector4d); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4CMs; Row: Integer; const Data: TVMCLVector4s); overload;
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4CMd; Row: Integer; const Data: TVMCLVector4d); overload;
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer; const Data: TVMCLVector2s); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer; const Data: TVMCLVector2d); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer; const Data: TVMCLVector2s); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2CMd; Column: Integer; const Data: TVMCLVector2d); overload;
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3RMs; Column: Integer; const Data: TVMCLVector3s); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3RMd; Column: Integer; const Data: TVMCLVector3d); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3CMs; Column: Integer; const Data: TVMCLVector3s); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3CMd; Column: Integer; const Data: TVMCLVector3d); overload;
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4RMs; Column: Integer; const Data: TVMCLVector4s); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4RMd; Column: Integer; const Data: TVMCLVector4d); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4CMs; Column: Integer; const Data: TVMCLVector4s); overload;
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer; const Data: TVMCLVector4d); overload;
+
+{===============================================================================
+    Matrix filling - declaration
+===============================================================================}
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2RMs; Row: Integer; Value: Single); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2RMd; Row: Integer; Value: Double); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2CMs; Row: Integer; Value: Single); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2CMd; Row: Integer; Value: Double); overload;
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3RMs; Row: Integer; Value: Single); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3RMd; Row: Integer; Value: Double); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3CMs; Row: Integer; Value: Single); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3CMd; Row: Integer; Value: Double); overload;
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4RMs; Row: Integer; Value: Single); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4RMd; Row: Integer; Value: Double); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4CMs; Row: Integer; Value: Single); overload;
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4CMd; Row: Integer; Value: Double); overload;
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer; Value: Single); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer; Value: Double); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer; Value: Single); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2CMd; Column: Integer; Value: Double); overload;
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3RMs; Column: Integer; Value: Single); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3RMd; Column: Integer; Value: Double); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3CMs; Column: Integer; Value: Single); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3CMd; Column: Integer; Value: Double); overload;
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4RMs; Column: Integer; Value: Single); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4RMd; Column: Integer; Value: Double); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4CMs; Column: Integer; Value: Single); overload;
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer; Value: Double); overload;
+
+procedure MatrixFill(var Matrix: TVMCLMatrix2RMs; Value: Single); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix2RMd; Value: Double); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix2CMs; Value: Single); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix2CMd; Value: Double); overload;
+
+procedure MatrixFill(var Matrix: TVMCLMatrix3RMs; Value: Single); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix3RMd; Value: Double); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix3CMs; Value: Single); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix3CMd; Value: Double); overload;
+
+procedure MatrixFill(var Matrix: TVMCLMatrix4RMs; Value: Single); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix4RMd; Value: Double); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix4CMs; Value: Single); overload;
+procedure MatrixFill(var Matrix: TVMCLMatrix4CMd; Value: Double); overload;
+
+{===============================================================================
+    Matrix spreading - declaration
+===============================================================================}
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2RMs; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2RMd; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2CMs; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2CMd; Row: Integer); overload;
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3RMs; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3RMd; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3CMs; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3CMd; Row: Integer); overload;
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4RMs; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4RMd; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4CMs; Row: Integer); overload;
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4CMd; Row: Integer); overload;
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2CMd; Column: Integer); overload;
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3RMs; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3RMd; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3CMs; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3CMd; Column: Integer); overload;
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4RMs; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4RMd; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4CMs; Column: Integer); overload;
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer); overload;
+
+{===============================================================================
+    Submatrix read access - declaration
+===============================================================================}
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3RMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMs; overload;
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3RMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMd; overload;
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMs; overload;
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3CMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMd; overload;
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4RMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMs; overload;
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4RMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMd; overload;
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMs; overload;
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMd; overload;
+
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4RMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3RMs; overload;
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4RMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3RMd; overload;
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3CMs; overload;
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3CMd; overload;
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3RMs; Row,Column: Integer): TVMCLMatrix2RMs; overload;
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3RMd; Row,Column: Integer): TVMCLMatrix2RMd; overload;
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3CMs; Row,Column: Integer): TVMCLMatrix2CMs; overload;
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3CMd; Row,Column: Integer): TVMCLMatrix2CMd; overload;
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4RMs; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2RMs; overload;
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4RMd; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2RMd; overload;
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4CMs; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2CMs; overload;
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4CMd; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2CMd; overload;
+
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4RMs; Row,Column: Integer): TVMCLMatrix3RMs; overload;
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4RMd; Row,Column: Integer): TVMCLMatrix3RMd; overload;
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4CMs; Row,Column: Integer): TVMCLMatrix3CMs; overload;
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer): TVMCLMatrix3CMd; overload;
+
+{===============================================================================
+    Submatrix write access - declaration
+===============================================================================}
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3RMs; const Submatrix: TVMCLMatrix2RMs; Row,Column: Integer); overload;
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3RMd; const Submatrix: TVMCLMatrix2RMd; Row,Column: Integer); overload;
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3CMs; const Submatrix: TVMCLMatrix2CMs; Row,Column: Integer); overload;
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3CMd; const Submatrix: TVMCLMatrix2CMd; Row,Column: Integer); overload;
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4RMs; const Submatrix: TVMCLMatrix2RMs; Row,Column: Integer); overload;
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4RMd; const Submatrix: TVMCLMatrix2RMd; Row,Column: Integer); overload;
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4CMs; const Submatrix: TVMCLMatrix2CMs; Row,Column: Integer); overload;
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4CMd; const Submatrix: TVMCLMatrix2CMd; Row,Column: Integer); overload;
+
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4RMs; const Submatrix: TVMCLMatrix3RMs; Row,Column: Integer); overload;
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4RMd; const Submatrix: TVMCLMatrix3RMd; Row,Column: Integer); overload;
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4CMs; const Submatrix: TVMCLMatrix3CMs; Row,Column: Integer); overload;
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4CMd; const Submatrix: TVMCLMatrix3CMd; Row,Column: Integer); overload;
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2RMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2RMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2CMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2CMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double); overload;
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3RMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3RMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3CMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3CMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double); overload;
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4RMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4RMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4CMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4CMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double); overload;
+
+{===============================================================================
+    Matrix exchanges - declaration
+===============================================================================}
+
+// matrix entry/column/row exchange
+
+{===============================================================================
     Matrix conversions - declaration
 ===============================================================================}
-(*
+
 // higher to lower dimension
 Function Matrix2(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix2RMs; overload;
 Function Matrix2(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix2RMd; overload;
@@ -400,7 +625,7 @@ Function Matrix3(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix3RMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix3RMd; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix3CMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix3CMd; overload;
-
+(*
 // lower to higher dimension
 Function Matrix3(const Matrix: TVMCLMatrix2RMs; IdentityMatrix: Boolean = False): TVMCLMatrix3RMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix2RMd; IdentityMatrix: Boolean = False): TVMCLMatrix3RMd; overload;
@@ -1259,223 +1484,2456 @@ Result := RMMatrixFromColumns(Column1,Column2,Column3,Column4);
 end;
 
 {===============================================================================
-    Matrix entries access - declaration
+    Matrix entries access - implementation
 ===============================================================================}
 
 // getting entry
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMs; Row, Column: Integer): Single;
 begin
-Clip(Row,Low(Matrix),High(Matrix));
-Clip(Column,Low(Matrix[0]),High(Matrix[0]));
-Result := Matrix[Row,Column];
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Matrix[Row,Column]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMd; Row, Column: Integer): Double;
 begin
-Clip(Row,Low(Matrix),High(Matrix));
-Clip(Column,Low(Matrix[0]),High(Matrix[0]));
-Result := Matrix[Row,Column];
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Matrix[Row,Column]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2CMs; Row, Column: Integer): Single;
 begin
-Clip(Row,Low(Matrix[0]),High(Matrix[0]));
-Clip(Column,Low(Matrix),High(Matrix));
-Result := Matrix[Column,Row];
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Result := Matrix[Column,Row]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2CMd; Row, Column: Integer): Double;
 begin
-Clip(Row,Low(Matrix[0]),High(Matrix[0]));
-Clip(Column,Low(Matrix),High(Matrix));
-Result := Matrix[Column,Row];
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Result := Matrix[Column,Row]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix3RMs; Row, Column: Integer): Single;
 begin
-Clip(Row,Low(Matrix),High(Matrix));
-Clip(Column,Low(Matrix[0]),High(Matrix[0]));
-Result := Matrix[Row,Column];
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Matrix[Row,Column]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix3RMd; Row, Column: Integer): Double;
 begin
-Clip(Row,Low(Matrix),High(Matrix));
-Clip(Column,Low(Matrix[0]),High(Matrix[0]));
-Result := Matrix[Row,Column];
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Matrix[Row,Column]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix3CMs; Row, Column: Integer): Single;
 begin
-Clip(Row,Low(Matrix[0]),High(Matrix[0]));
-Clip(Column,Low(Matrix),High(Matrix));
-Result := Matrix[Column,Row];
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Result := Matrix[Column,Row]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix3CMd; Row, Column: Integer): Double;
 begin
-Clip(Row,Low(Matrix[0]),High(Matrix[0]));
-Clip(Column,Low(Matrix),High(Matrix));
-Result := Matrix[Column,Row];
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Result := Matrix[Column,Row]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix4RMs; Row, Column: Integer): Single;
 begin
-Clip(Row,Low(Matrix),High(Matrix));
-Clip(Column,Low(Matrix[0]),High(Matrix[0]));
-Result := Matrix[Row,Column];
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Matrix[Row,Column]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix4RMd; Row, Column: Integer): Double;
 begin
-Clip(Row,Low(Matrix),High(Matrix));
-Clip(Column,Low(Matrix[0]),High(Matrix[0]));
-Result := Matrix[Row,Column];
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Matrix[Row,Column]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMs; Row, Column: Integer): Single;
 begin
-Clip(Row,Low(Matrix[0]),High(Matrix[0]));
-Clip(Column,Low(Matrix),High(Matrix));
-Result := Matrix[Column,Row];
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Result := Matrix[Column,Row]
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMd; Row, Column: Integer): Double;
 begin
-Clip(Row,Low(Matrix[0]),High(Matrix[0]));
-Clip(Column,Low(Matrix),High(Matrix));
-Result := Matrix[Column,Row];
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Result := Matrix[Column,Row]
+else
+  Result := 0.0;
 end;
 
-//------------------------------------------------------------------------------
+//==============================================================================
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMs; Row, Column: Integer; Value: Single);
 begin
-If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
-  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
-    Matrix[Row,Column] := Value;
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Matrix[Row,Column] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMd; Row, Column: Integer; Value: Double);
 begin
-If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
-  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
-    Matrix[Row,Column] := Value;
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Matrix[Row,Column] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix2CMs; Row, Column: Integer; Value: Single);
 begin
-If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
-  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
-    Matrix[Column,Row] := Value;
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Matrix[Column,Row] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix2CMd; Row, Column: Integer; Value: Double); 
 begin
-If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
-  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
-    Matrix[Column,Row] := Value;
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Matrix[Column,Row] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix3RMs; Row, Column: Integer; Value: Single);
 begin
-If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
-  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
-    Matrix[Row,Column] := Value;
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Matrix[Row,Column] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix3RMd; Row, Column: Integer; Value: Double);
 begin
-If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
-  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
-    Matrix[Row,Column] := Value;
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Matrix[Row,Column] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix3CMs; Row, Column: Integer; Value: Single);
 begin
-If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
-  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
-    Matrix[Column,Row] := Value;
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Matrix[Column,Row] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix3CMd; Row, Column: Integer; Value: Double);
 begin
-If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
-  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
-    Matrix[Column,Row] := Value;
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Matrix[Column,Row] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix4RMs; Row, Column: Integer; Value: Single);
 begin
-If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
-  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
-    Matrix[Row,Column] := Value;
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Matrix[Row,Column] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix4RMd; Row, Column: Integer; Value: Double);
 begin
-If (Row >= Low(Matrix)) and (Row <= High(Matrix)) then
-  If (Column >= Low(Matrix[Row])) and (Column <= High(Matrix[Row])) then
-    Matrix[Row,Column] := Value;
+If CheckRange(Row,Low(Matrix),High(Matrix)) and
+   CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Matrix[Row,Column] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMs; Row, Column: Integer; Value: Single);
 begin
-If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
-  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
-    Matrix[Column,Row] := Value;
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Matrix[Column,Row] := Value;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMd; Row, Column: Integer; Value: Double);
 begin
-If (Column >= Low(Matrix)) and (Column <= High(Matrix)) then
-  If (Row >= Low(Matrix[Column])) and (Row <= High(Matrix[Column])) then
-    Matrix[Column,Row] := Value;
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Matrix[Column,Row] := Value;
 end;
+
+{===============================================================================
+    Matrix vector extraction - implementation
+===============================================================================}
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix2RMs; Row: Integer): TVMCLVector2s;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Row],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector2S;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix2RMd; Row: Integer): TVMCLVector2d;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Row],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector2d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix2CMs; Row: Integer): TVMCLVector2s;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector2s(Matrix[0,Row],Matrix[1,Row])
+else
+  Result := VMCL_ZeroVector2s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix2CMd; Row: Integer): TVMCLVector2d;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector2d(Matrix[0,Row],Matrix[1,Row])
+else
+  Result := VMCL_ZeroVector2d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix3RMs; Row: Integer): TVMCLVector3s;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Row],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector3s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix3RMd; Row: Integer): TVMCLVector3d;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Row],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector3d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix3CMs; Row: Integer): TVMCLVector3s;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector3s(Matrix[0,Row],Matrix[1,Row],Matrix[2,Row])
+else
+  Result := VMCL_ZeroVector3s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix3CMd; Row: Integer): TVMCLVector3d;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector3d(Matrix[0,Row],Matrix[1,Row],Matrix[2,Row])
+else
+  Result := VMCL_ZeroVector3d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix4RMs; Row: Integer): TVMCLVector4s;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Row],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix4RMd; Row: Integer): TVMCLVector4d;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Row],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector4d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix4CMs; Row: Integer): TVMCLVector4s;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector4s(Matrix[0,Row],Matrix[1,Row],Matrix[2,Row],Matrix[3,Row])
+else
+  Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetRow(const Matrix: TVMCLMatrix4CMd; Row: Integer): TVMCLVector4d;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector4d(Matrix[0,Row],Matrix[1,Row],Matrix[2,Row],Matrix[3,Row])
+else
+  Result := VMCL_ZeroVector4d;
+end;
+
+//==============================================================================
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2RMs; Column: Integer): TVMCLVector2s;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector2s(Matrix[0,Column],Matrix[1,Column])
+else
+  Result := VMCL_ZeroVector2s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2RMd; Column: Integer): TVMCLVector2d;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector2d(Matrix[0,Column],Matrix[1,Column])
+else
+  Result := VMCL_ZeroVector2d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2CMs; Column: Integer): TVMCLVector2s;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Column],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector2s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix2CMd; Column: Integer): TVMCLVector2d; 
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Column],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector2d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3RMs; Column: Integer): TVMCLVector3s;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector3s(Matrix[0,Column],Matrix[1,Column],Matrix[2,Column])
+else
+  Result := VMCL_ZeroVector3s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3RMd; Column: Integer): TVMCLVector3d;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector3d(Matrix[0,Column],Matrix[1,Column],Matrix[2,Column])
+else
+  Result := VMCL_ZeroVector3d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3CMs; Column: Integer): TVMCLVector3s;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Column],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector3s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix3CMd; Column: Integer): TVMCLVector3d;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Column],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector3d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4RMs; Column: Integer): TVMCLVector4s;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector4s(Matrix[0,Column],Matrix[1,Column],Matrix[2,Column],Matrix[3,Column])
+else
+  Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4RMd; Column: Integer): TVMCLVector4d;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  Result := Vector4d(Matrix[0,Column],Matrix[1,Column],Matrix[2,Column],Matrix[3,Column])
+else
+  Result := VMCL_ZeroVector4d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4CMs; Column: Integer): TVMCLVector4s;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Column],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixGetColumn(const Matrix: TVMCLMatrix4CMd; Column: Integer): TVMCLVector4d;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Matrix[Column],Result,SizeOf(Result))
+else
+  Result := VMCL_ZeroVector4d;
+end;
+
+{===============================================================================
+   Matrix vector insertion - implementation
+===============================================================================}
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2RMs; Row: Integer; const Data: TVMCLVector2s);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Row],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2RMd; Row: Integer; const Data: TVMCLVector2d);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Row],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2CMs; Row: Integer; const Data: TVMCLVector2s);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Data[0];
+    Matrix[1,Row] := Data[1];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix2CMd; Row: Integer; const Data: TVMCLVector2d); 
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Data[0];
+    Matrix[1,Row] := Data[1];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3RMs; Row: Integer; const Data: TVMCLVector3s);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Row],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3RMd; Row: Integer; const Data: TVMCLVector3d);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Row],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3CMs; Row: Integer; const Data: TVMCLVector3s);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Data[0];
+    Matrix[1,Row] := Data[1];
+    Matrix[2,Row] := Data[2];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix3CMd; Row: Integer; const Data: TVMCLVector3d); 
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Data[0];
+    Matrix[1,Row] := Data[1];
+    Matrix[2,Row] := Data[2];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4RMs; Row: Integer; const Data: TVMCLVector4s);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Row],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4RMd; Row: Integer; const Data: TVMCLVector4d);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Row],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4CMs; Row: Integer; const Data: TVMCLVector4s);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Data[0];
+    Matrix[1,Row] := Data[1];
+    Matrix[2,Row] := Data[2];
+    Matrix[3,Row] := Data[3];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetRow(var Matrix: TVMCLMatrix4CMd; Row: Integer; const Data: TVMCLVector4d);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Data[0];
+    Matrix[1,Row] := Data[1];
+    Matrix[2,Row] := Data[2];
+    Matrix[3,Row] := Data[3];
+  end;
+end;
+
+//==============================================================================
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer; const Data: TVMCLVector2s);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Data[0];
+    Matrix[1,Column] := Data[1];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer; const Data: TVMCLVector2d);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Data[0];
+    Matrix[1,Column] := Data[1];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer; const Data: TVMCLVector2s);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Column],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix2CMd; Column: Integer; const Data: TVMCLVector2d);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Column],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3RMs; Column: Integer; const Data: TVMCLVector3s);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Data[0];
+    Matrix[1,Column] := Data[1];
+    Matrix[2,Column] := Data[2];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3RMd; Column: Integer; const Data: TVMCLVector3d);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Data[0];
+    Matrix[1,Column] := Data[1];
+    Matrix[2,Column] := Data[2];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3CMs; Column: Integer; const Data: TVMCLVector3s);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Column],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix3CMd; Column: Integer; const Data: TVMCLVector3d);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Column],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4RMs; Column: Integer; const Data: TVMCLVector4s);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Data[0];
+    Matrix[1,Column] := Data[1];
+    Matrix[2,Column] := Data[2];
+    Matrix[3,Column] := Data[3];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4RMd; Column: Integer; const Data: TVMCLVector4d);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Data[0];
+    Matrix[1,Column] := Data[1];
+    Matrix[2,Column] := Data[2];
+    Matrix[3,Column] := Data[3];
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4CMs; Column: Integer; const Data: TVMCLVector4s);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Column],SizeOf(Data));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSetColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer; const Data: TVMCLVector4d);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  Move(Data,Matrix[Column],SizeOf(Data));
+end;
+
+{===============================================================================
+    Matrix filling - implementation
+===============================================================================}
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2RMs; Row: Integer; Value: Single);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Row,0] := Value;
+    Matrix[Row,1] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2RMd; Row: Integer; Value: Double);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Row,0] := Value;
+    Matrix[Row,1] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2CMs; Row: Integer; Value: Single);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Value;
+    Matrix[1,Row] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix2CMd; Row: Integer; Value: Double);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Value;
+    Matrix[1,Row] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3RMs; Row: Integer; Value: Single);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Row,0] := Value;
+    Matrix[Row,1] := Value;
+    Matrix[Row,2] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3RMd; Row: Integer; Value: Double);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Row,0] := Value;
+    Matrix[Row,1] := Value;
+    Matrix[Row,2] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3CMs; Row: Integer; Value: Single);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Value;
+    Matrix[1,Row] := Value;
+    Matrix[2,Row] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix3CMd; Row: Integer; Value: Double); 
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Value;
+    Matrix[1,Row] := Value;
+    Matrix[2,Row] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4RMs; Row: Integer; Value: Single);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Row,0] := Value;
+    Matrix[Row,1] := Value;
+    Matrix[Row,2] := Value;
+    Matrix[Row,3] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4RMd; Row: Integer; Value: Double);
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Row,0] := Value;
+    Matrix[Row,1] := Value;
+    Matrix[Row,2] := Value;
+    Matrix[Row,3] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+ 
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4CMs; Row: Integer; Value: Single);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Value;
+    Matrix[1,Row] := Value;
+    Matrix[2,Row] := Value;
+    Matrix[3,Row] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillRow(var Matrix: TVMCLMatrix4CMd; Row: Integer; Value: Double);
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Row] := Value;
+    Matrix[1,Row] := Value;
+    Matrix[2,Row] := Value;
+    Matrix[3,Row] := Value;
+  end;
+end;
+
+//==============================================================================
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer; Value: Single);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Value;
+    Matrix[1,Column] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer; Value: Double);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Value;
+    Matrix[1,Column] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer; Value: Single);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Column,0] := Value;
+    Matrix[Column,1] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix2CMd; Column: Integer; Value: Double);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Column,0] := Value;
+    Matrix[Column,1] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3RMs; Column: Integer; Value: Single);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Value;
+    Matrix[1,Column] := Value;
+    Matrix[2,Column] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3RMd; Column: Integer; Value: Double);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Value;
+    Matrix[1,Column] := Value;
+    Matrix[2,Column] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3CMs; Column: Integer; Value: Single);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Column,0] := Value;
+    Matrix[Column,1] := Value;
+    Matrix[Column,2] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix3CMd; Column: Integer; Value: Double);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Column,0] := Value;
+    Matrix[Column,1] := Value;
+    Matrix[Column,2] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4RMs; Column: Integer; Value: Single);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Value;
+    Matrix[1,Column] := Value;
+    Matrix[2,Column] := Value;
+    Matrix[3,Column] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4RMd; Column: Integer; Value: Double);
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Matrix[0,Column] := Value;
+    Matrix[1,Column] := Value;
+    Matrix[2,Column] := Value;
+    Matrix[3,Column] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4CMs; Column: Integer; Value: Single);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Column,0] := Value;
+    Matrix[Column,1] := Value;
+    Matrix[Column,2] := Value;
+    Matrix[Column,3] := Value;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFillColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer; Value: Double);
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  begin
+    Matrix[Column,0] := Value;
+    Matrix[Column,1] := Value;
+    Matrix[Column,2] := Value;
+    Matrix[Column,3] := Value;
+  end;
+end;
+
+//==============================================================================
+
+procedure MatrixFill(var Matrix: TVMCLMatrix2RMs; Value: Single);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix2RMd; Value: Double);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix2CMs; Value: Single);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix2CMd; Value: Double);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix3RMs; Value: Single);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix3RMd; Value: Double);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix3CMs; Value: Single);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix3CMd; Value: Double);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix4RMs; Value: Single);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix4RMd; Value: Double);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix4CMs; Value: Single);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Matrix)[i] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixFill(var Matrix: TVMCLMatrix4CMd; Value: Double);
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Matrix)[i] := Value;
+end;
+
+{===============================================================================
+    Matrix spreading - implementation
+===============================================================================}
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2RMs; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Row then
+      begin
+        Matrix[i,0] := Matrix[Row,0];
+        Matrix[i,1] := Matrix[Row,1];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2RMd; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Row then
+      begin
+        Matrix[i,0] := Matrix[Row,0];
+        Matrix[i,1] := Matrix[Row,1];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2CMs; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Row then
+      begin
+        Matrix[0,i] := Matrix[0,Row];
+        Matrix[1,i] := Matrix[1,Row];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2CMd; Row: Integer); 
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Row then
+      begin
+        Matrix[0,i] := Matrix[0,Row];
+        Matrix[1,i] := Matrix[1,Row];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3RMs; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Row then
+      begin
+        Matrix[i,0] := Matrix[Row,0];
+        Matrix[i,1] := Matrix[Row,1];
+        Matrix[i,2] := Matrix[Row,2];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3RMd; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Row then
+      begin
+        Matrix[i,0] := Matrix[Row,0];
+        Matrix[i,1] := Matrix[Row,1];
+        Matrix[i,2] := Matrix[Row,2];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3CMs; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Row then
+      begin
+        Matrix[0,i] := Matrix[0,Row];
+        Matrix[1,i] := Matrix[1,Row];
+        Matrix[2,i] := Matrix[2,Row];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix3CMd; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Row then
+      begin
+        Matrix[0,i] := Matrix[0,Row];
+        Matrix[1,i] := Matrix[1,Row];
+        Matrix[2,i] := Matrix[2,Row];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4RMs; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Row then
+      begin
+        Matrix[i,0] := Matrix[Row,0];
+        Matrix[i,1] := Matrix[Row,1];
+        Matrix[i,2] := Matrix[Row,2];
+        Matrix[i,3] := Matrix[Row,3];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4RMd; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Row then
+      begin
+        Matrix[i,0] := Matrix[Row,0];
+        Matrix[i,1] := Matrix[Row,1];
+        Matrix[i,2] := Matrix[Row,2];
+        Matrix[i,3] := Matrix[Row,3];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+ 
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4CMs; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Row then
+      begin
+        Matrix[0,i] := Matrix[0,Row];
+        Matrix[1,i] := Matrix[1,Row];
+        Matrix[2,i] := Matrix[2,Row];
+        Matrix[3,i] := Matrix[3,Row];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4CMd; Row: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Row,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Row then
+      begin
+        Matrix[0,i] := Matrix[0,Row];
+        Matrix[1,i] := Matrix[1,Row];
+        Matrix[2,i] := Matrix[2,Row];
+        Matrix[3,i] := Matrix[3,Row];
+      end;
+end;
+
+//==============================================================================
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Column then
+      begin
+        Matrix[0,i] := Matrix[0,Column];
+        Matrix[1,i] := Matrix[1,Column];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Column then
+      begin
+        Matrix[0,i] := Matrix[0,Column];
+        Matrix[1,i] := Matrix[1,Column];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Column then
+      begin
+        Matrix[i,0] := Matrix[Column,0];
+        Matrix[i,1] := Matrix[Column,1];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2CMd; Column: Integer); 
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Column then
+      begin
+        Matrix[i,0] := Matrix[Column,0];
+        Matrix[i,1] := Matrix[Column,1];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3RMs; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Column then
+      begin
+        Matrix[0,i] := Matrix[0,Column];
+        Matrix[1,i] := Matrix[1,Column];
+        Matrix[2,i] := Matrix[2,Column];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3RMd; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Column then
+      begin
+        Matrix[0,i] := Matrix[0,Column];
+        Matrix[1,i] := Matrix[1,Column];
+        Matrix[2,i] := Matrix[2,Column];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3CMs; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Column then
+      begin
+        Matrix[i,0] := Matrix[Column,0];
+        Matrix[i,1] := Matrix[Column,1];
+        Matrix[i,2] := Matrix[Column,2];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix3CMd; Column: Integer); 
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Column then
+      begin
+        Matrix[i,0] := Matrix[Column,0];
+        Matrix[i,1] := Matrix[Column,1];
+        Matrix[i,2] := Matrix[Column,2];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4RMs; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Column then
+      begin
+        Matrix[0,i] := Matrix[0,Column];
+        Matrix[1,i] := Matrix[1,Column];
+        Matrix[2,i] := Matrix[2,Column];
+        Matrix[3,i] := Matrix[3,Column];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4RMd; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix[0]),High(Matrix[0])) then
+  For i := Low(Matrix[0]) to High(Matrix[0]) do
+    If i <> Column then
+      begin
+        Matrix[0,i] := Matrix[0,Column];
+        Matrix[1,i] := Matrix[1,Column];
+        Matrix[2,i] := Matrix[2,Column];
+        Matrix[3,i] := Matrix[3,Column];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+ 
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4CMs; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Column then
+      begin
+        Matrix[i,0] := Matrix[Column,0];
+        Matrix[i,1] := Matrix[Column,1];
+        Matrix[i,2] := Matrix[Column,2];
+        Matrix[i,3] := Matrix[Column,3];
+      end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer);
+var
+  i:  Integer;
+begin
+If CheckRange(Column,Low(Matrix),High(Matrix)) then
+  For i := Low(Matrix) to High(Matrix) do
+    If i <> Column then
+      begin
+        Matrix[i,0] := Matrix[Column,0];
+        Matrix[i,1] := Matrix[Column,1];
+        Matrix[i,2] := Matrix[Column,2];
+        Matrix[i,3] := Matrix[Column,3];
+      end;
+end;
+
+{===============================================================================
+    Submatrix read access - implementation
+===============================================================================}
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3RMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMs;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2RMs
+else
+  Result := VMCL_ZeroMatrix2RMs;
+For R := Low(Result) to High(Result) do
+  For C := Low(Result[0]) to High(Result[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Result[R,C] := Matrix[Row + R,Column + C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3RMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMd;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2RMd
+else
+  Result := VMCL_ZeroMatrix2RMd;
+For R := Low(Result) to High(Result) do
+  For C := Low(Result[0]) to High(Result[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Result[R,C] := Matrix[Row + R,Column + C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMs;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2CMs
+else
+  Result := VMCL_ZeroMatrix2CMs;
+For R := Low(Result[0]) to High(Result[0]) do
+  For C := Low(Result) to High(Result) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Result[C,R] := Matrix[Column + C,Row + R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix3CMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMd;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2CMd
+else
+  Result := VMCL_ZeroMatrix2CMd;
+For R := Low(Result[0]) to High(Result[0]) do
+  For C := Low(Result) to High(Result) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Result[C,R] := Matrix[Column + C,Row + R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4RMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMs;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2RMs
+else
+  Result := VMCL_ZeroMatrix2RMs;
+For R := Low(Result) to High(Result) do
+  For C := Low(Result[0]) to High(Result[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Result[R,C] := Matrix[Row + R,Column + C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4RMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMd;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2RMd
+else
+  Result := VMCL_ZeroMatrix2RMd;
+For R := Low(Result) to High(Result) do
+  For C := Low(Result[0]) to High(Result[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Result[R,C] := Matrix[Row + R,Column + C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMs;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2CMs
+else
+  Result := VMCL_ZeroMatrix2CMs;
+For R := Low(Result[0]) to High(Result[0]) do
+  For C := Low(Result) to High(Result) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Result[C,R] := Matrix[Column + C,Row + R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix2(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMd;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix2CMd
+else
+  Result := VMCL_ZeroMatrix2CMd;
+For R := Low(Result[0]) to High(Result[0]) do
+  For C := Low(Result) to High(Result) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Result[C,R] := Matrix[Column + C,Row + R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4RMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3RMs;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3RMs
+else
+  Result := VMCL_ZeroMatrix3RMs;
+For R := Low(Result) to High(Result) do
+  For C := Low(Result[0]) to High(Result[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Result[R,C] := Matrix[Row + R,Column + C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4RMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3RMd;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3RMd
+else
+  Result := VMCL_ZeroMatrix3RMd;
+For R := Low(Result) to High(Result) do
+  For C := Low(Result[0]) to High(Result[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Result[R,C] := Matrix[Row + R,Column + C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3CMs;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3CMs
+else
+  Result := VMCL_ZeroMatrix3CMs;
+For R := Low(Result[0]) to High(Result[0]) do
+  For C := Low(Result) to High(Result) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Result[C,R] := Matrix[Column + C,Row + R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function GetSubmatrix3(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3CMd;
+var
+  R,C:  Integer;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3CMd
+else
+  Result := VMCL_ZeroMatrix3CMd;
+For R := Low(Result[0]) to High(Result[0]) do
+  For C := Low(Result) to High(Result) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Result[C,R] := Matrix[Column + C,Row + R];
+end;
+
+//==============================================================================
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3RMs; Row,Column: Integer): TVMCLMatrix2RMs;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix) to High(Matrix) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix[0]) to High(Matrix[0]) do
+        If InCol <> Column then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result[0]) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3RMd; Row,Column: Integer): TVMCLMatrix2RMd;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix) to High(Matrix) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix[0]) to High(Matrix[0]) do
+        If InCol <> Column then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result[0]) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3CMs; Row,Column: Integer): TVMCLMatrix2CMs;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix[0]) to High(Matrix[0]) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix) to High(Matrix) do
+        If InCol <> Column then
+          begin
+            Result[OutCol,OutRow] := Matrix[InCol,InRow];
+            Inc(OutCol);
+            If OutCol > High(Result) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result[0]) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3CMd; Row,Column: Integer): TVMCLMatrix2CMd;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix[0]) to High(Matrix[0]) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix) to High(Matrix) do
+        If InCol <> Column then
+          begin
+            Result[OutCol,OutRow] := Matrix[InCol,InRow];
+            Inc(OutCol);
+            If OutCol > High(Result) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result[0]) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4RMs; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2RMs;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix) to High(Matrix) do
+  If not(InRow in [Row1,Row2]) then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix[0]) to High(Matrix[0]) do
+        If not(InCol in [Column1,Column2]) then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result[0]) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4RMd; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2RMd;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix) to High(Matrix) do
+  If not(InRow in [Row1,Row2]) then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix[0]) to High(Matrix[0]) do
+        If not(InCol in [Column1,Column2]) then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result[0]) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4CMs; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2CMs;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix[0]) to High(Matrix[0]) do
+  If not(InRow in [Row1,Row2]) then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix) to High(Matrix) do
+        If not(InCol in [Column1,Column2]) then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result[0]) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4CMd; Row1,Row2,Column1,Column2: Integer): TVMCLMatrix2CMd; 
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix[0]) to High(Matrix[0]) do
+  If not(InRow in [Row1,Row2]) then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix) to High(Matrix) do
+        If not(InCol in [Column1,Column2]) then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result[0]) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4RMs; Row,Column: Integer): TVMCLMatrix3RMs;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix) to High(Matrix) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix[0]) to High(Matrix[0]) do
+        If InCol <> Column then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result[0]) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4RMd; Row,Column: Integer): TVMCLMatrix3RMd;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix) to High(Matrix) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix[0]) to High(Matrix[0]) do
+        If InCol <> Column then
+          begin
+            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Inc(OutCol);
+            If OutCol > High(Result[0]) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4CMs; Row,Column: Integer): TVMCLMatrix3CMs;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix[0]) to High(Matrix[0]) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix) to High(Matrix) do
+        If InCol <> Column then
+          begin
+            Result[OutCol,OutRow] := Matrix[InCol,InRow];
+            Inc(OutCol);
+            If OutCol > High(Result) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result[0]) then
+        Break{For InRow};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer): TVMCLMatrix3CMd;
+var
+  InRow,InCol:    Integer;
+  OutRow,OutCol:  Integer;
+begin
+OutRow := 0;
+For InRow := Low(Matrix[0]) to High(Matrix[0]) do
+  If InRow <> Row then
+    begin
+      OutCol := 0;
+      For InCol := Low(Matrix) to High(Matrix) do
+        If InCol <> Column then
+          begin
+            Result[OutCol,OutRow] := Matrix[InCol,InRow];
+            Inc(OutCol);
+            If OutCol > High(Result) then
+              Break{For InCol};
+          end;
+      Inc(OutRow);
+      If OutRow > High(Result[0]) then
+        Break{For InRow};
+    end;
+end;
+
+{===============================================================================
+    Submatrix write access - implementation
+===============================================================================}
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3RMs; const Submatrix: TVMCLMatrix2RMs; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix) to High(Submatrix) do
+  For C := Low(Submatrix[0]) to High(Submatrix[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Matrix[Row + R,Column + C] := Submatrix[R,C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3RMd; const Submatrix: TVMCLMatrix2RMd; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix) to High(Submatrix) do
+  For C := Low(Submatrix[0]) to High(Submatrix[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Matrix[Row + R,Column + C] := Submatrix[R,C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3CMs; const Submatrix: TVMCLMatrix2CMs; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix[0]) to High(Submatrix[0]) do
+  For C := Low(Submatrix) to High(Submatrix) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Matrix[Column + C,Row + R] := Submatrix[C,R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+ 
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix3CMd; const Submatrix: TVMCLMatrix2CMd; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix[0]) to High(Submatrix[0]) do
+  For C := Low(Submatrix) to High(Submatrix) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Matrix[Column + C,Row + R] := Submatrix[C,R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4RMs; const Submatrix: TVMCLMatrix2RMs; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix) to High(Submatrix) do
+  For C := Low(Submatrix[0]) to High(Submatrix[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Matrix[Row + R,Column + C] := Submatrix[R,C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4RMd; const Submatrix: TVMCLMatrix2RMd; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix) to High(Submatrix) do
+  For C := Low(Submatrix[0]) to High(Submatrix[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Matrix[Row + R,Column + C] := Submatrix[R,C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4CMs; const Submatrix: TVMCLMatrix2CMs; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix[0]) to High(Submatrix[0]) do
+  For C := Low(Submatrix) to High(Submatrix) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Matrix[Column + C,Row + R] := Submatrix[C,R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix2(var Matrix: TVMCLMatrix4CMd; const Submatrix: TVMCLMatrix2CMd; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix[0]) to High(Submatrix[0]) do
+  For C := Low(Submatrix) to High(Submatrix) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Matrix[Column + C,Row + R] := Submatrix[C,R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4RMs; const Submatrix: TVMCLMatrix3RMs; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix) to High(Submatrix) do
+  For C := Low(Submatrix[0]) to High(Submatrix[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Matrix[Row + R,Column + C] := Submatrix[R,C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4RMd; const Submatrix: TVMCLMatrix3RMd; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix) to High(Submatrix) do
+  For C := Low(Submatrix[0]) to High(Submatrix[0]) do
+    If CheckRange(Row + R,Low(Matrix),High(Matrix)) and
+       CheckRange(Column + C,Low(Matrix[0]),High(Matrix[0])) then
+      Matrix[Row + R,Column + C] := Submatrix[R,C];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4CMs; const Submatrix: TVMCLMatrix3CMs; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix[0]) to High(Submatrix[0]) do
+  For C := Low(Submatrix) to High(Submatrix) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Matrix[Column + C,Row + R] := Submatrix[C,R];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure SetSubmatrix3(var Matrix: TVMCLMatrix4CMd; const Submatrix: TVMCLMatrix3CMd; Row,Column: Integer);
+var
+  R,C:  Integer;
+begin
+For R := Low(Submatrix[0]) to High(Submatrix[0]) do
+  For C := Low(Submatrix) to High(Submatrix) do
+    If CheckRange(Row + R,Low(Matrix[0]),High(Matrix[0])) and
+       CheckRange(Column + C,Low(Matrix),High(Matrix)) then
+      Matrix[Column + C,Row + R] := Submatrix[C,R];
+end;
+
+//==============================================================================
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2RMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix)) to Min(FromRow + Pred(Rows),High(Matrix)) do
+    For C := Max(FromColumn,Low(Matrix[0])) to Min(FromColumn + Pred(Columns),High(Matrix[0])) do
+      Matrix[R,C] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2RMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix)) to Min(FromRow + Pred(Rows),High(Matrix)) do
+    For C := Max(FromColumn,Low(Matrix[0])) to Min(FromColumn + Pred(Columns),High(Matrix[0])) do
+      Matrix[R,C] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2CMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix[0])) to Min(FromRow + Pred(Rows),High(Matrix[0])) do
+    For C := Max(FromColumn,Low(Matrix)) to Min(FromColumn + Pred(Columns),High(Matrix)) do
+      Matrix[C,R] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix2CMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix[0])) to Min(FromRow + Pred(Rows),High(Matrix[0])) do
+    For C := Max(FromColumn,Low(Matrix)) to Min(FromColumn + Pred(Columns),High(Matrix)) do
+      Matrix[C,R] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3RMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix)) to Min(FromRow + Pred(Rows),High(Matrix)) do
+    For C := Max(FromColumn,Low(Matrix[0])) to Min(FromColumn + Pred(Columns),High(Matrix[0])) do
+      Matrix[R,C] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3RMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix)) to Min(FromRow + Pred(Rows),High(Matrix)) do
+    For C := Max(FromColumn,Low(Matrix[0])) to Min(FromColumn + Pred(Columns),High(Matrix[0])) do
+      Matrix[R,C] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3CMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix[0])) to Min(FromRow + Pred(Rows),High(Matrix[0])) do
+    For C := Max(FromColumn,Low(Matrix)) to Min(FromColumn + Pred(Columns),High(Matrix)) do
+      Matrix[C,R] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix3CMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix[0])) to Min(FromRow + Pred(Rows),High(Matrix[0])) do
+    For C := Max(FromColumn,Low(Matrix)) to Min(FromColumn + Pred(Columns),High(Matrix)) do
+      Matrix[C,R] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4RMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix)) to Min(FromRow + Pred(Rows),High(Matrix)) do
+    For C := Max(FromColumn,Low(Matrix[0])) to Min(FromColumn + Pred(Columns),High(Matrix[0])) do
+      Matrix[R,C] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4RMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix)) to Min(FromRow + Pred(Rows),High(Matrix)) do
+    For C := Max(FromColumn,Low(Matrix[0])) to Min(FromColumn + Pred(Columns),High(Matrix[0])) do
+      Matrix[R,C] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4CMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix[0])) to Min(FromRow + Pred(Rows),High(Matrix[0])) do
+    For C := Max(FromColumn,Low(Matrix)) to Min(FromColumn + Pred(Columns),High(Matrix)) do
+      Matrix[C,R] := Value;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure FillSubmatrix(var Matrix: TVMCLMatrix4CMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double);
+var
+  R,C:  Integer;
+begin
+If (Rows > 0) and (Columns > 0) then
+  For R := Max(FromRow,Low(Matrix[0])) to Min(FromRow + Pred(Rows),High(Matrix[0])) do
+    For C := Max(FromColumn,Low(Matrix)) to Min(FromColumn + Pred(Columns),High(Matrix)) do
+      Matrix[C,R] := Value;
+end;
+
+{===============================================================================
+    Matrix exchanges - implementation
+===============================================================================}
+
+{===============================================================================
+    Matrix conversions - implementation
+===============================================================================}
+
+Function Matrix2(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix2RMs;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix2RMd;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix2CMs;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix2CMd;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix2RMs;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix2RMd;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix2CMs;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix2CMd;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix3RMs;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+Move(Matrix[2],Result[2],SizeOf(Result[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix3RMd;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+Move(Matrix[2],Result[2],SizeOf(Result[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix3CMs;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+Move(Matrix[2],Result[2],SizeOf(Result[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix3CMd;
+begin
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
+Move(Matrix[1],Result[1],SizeOf(Result[1]));
+Move(Matrix[2],Result[2],SizeOf(Result[2]));
+end;
+
+//==============================================================================
+
 
 
 end.

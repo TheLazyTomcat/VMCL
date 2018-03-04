@@ -16,6 +16,12 @@ uses
 // testing routines
 {$INCLUDE '.\test_routines_mat\Matrix_Build.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_EntriesAccess.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_VectorExtract.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_VectorReplace.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_Filling.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_Spreading.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_SubmatrixRead.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_SubmatrixWrite.inc'}
 
 //==============================================================================
 
@@ -24,9 +30,11 @@ begin
 repeat
   Result := Select('Matrices test group','Select test (X - Exit; 0 - Back; A - Autotest):',
 
-    [Matrix_Build,Matrix_EntriesAccess],
+    [Matrix_Build,Matrix_EntriesAccess,Matrix_VectorExtract,Matrix_VectorReplace,Matrix_Filling,
+     Matrix_Spreading,Matrix_SubmatrixRead,Matrix_SubmatrixWrite],
 
-    ['Matrix building','Matrix entries access'],
+    ['Matrix building','Matrix entries access','Matrix vector extract','Matrix vector replace','Matrix filling',
+     'Matrix spreading','Submatrix read access','Submatrix write access'],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);

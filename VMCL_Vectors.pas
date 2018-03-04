@@ -229,29 +229,29 @@ Function VecToStr(const Vector: TVMCLVector4dr): String; overload;{$IFDEF CanInl
     Vector building
 ===============================================================================}
 
-Function Vector2(const X, Y: Single): TVMCLVector2s; overload;
-Function Vector3(const X, Y, Z: Single): TVMCLVector3s; overload;
-Function Vector3(const Vector: TVMCLVector2s; const Z: Single): TVMCLVector3s; overload;
-Function Vector3(const X: Single; const Vector: TVMCLVector2s): TVMCLVector3s; overload;
-Function Vector4(const X, Y, Z, W: Single): TVMCLVector4s; overload;
-Function Vector4(const aVector, bVector: TVMCLVector2s): TVMCLVector4s; overload;
-Function Vector4(const Vector: TVMCLVector2s; const Z, W: Single): TVMCLVector4s; overload;
-Function Vector4(const X: Single; const Vector: TVMCLVector2s; const W: Single): TVMCLVector4s; overload;
-Function Vector4(const X, Y: Single; const Vector: TVMCLVector2s): TVMCLVector4s; overload;
-Function Vector4(const X: Single; const Vector: TVMCLVector3s): TVMCLVector4s; overload;
-Function Vector4(const Vector: TVMCLVector3s; const W: Single): TVMCLVector4s; overload;
+Function Vector2s(const X, Y: Single): TVMCLVector2s; overload;
+Function Vector3s(const X, Y, Z: Single): TVMCLVector3s; overload;
+Function Vector3s(const Vector: TVMCLVector2s; const Z: Single): TVMCLVector3s; overload;
+Function Vector3s(const X: Single; const Vector: TVMCLVector2s): TVMCLVector3s; overload;
+Function Vector4s(const X, Y, Z, W: Single): TVMCLVector4s; overload;
+Function Vector4s(const aVector, bVector: TVMCLVector2s): TVMCLVector4s; overload;
+Function Vector4s(const Vector: TVMCLVector2s; const Z, W: Single): TVMCLVector4s; overload;
+Function Vector4s(const X: Single; const Vector: TVMCLVector2s; const W: Single): TVMCLVector4s; overload;
+Function Vector4s(const X, Y: Single; const Vector: TVMCLVector2s): TVMCLVector4s; overload;
+Function Vector4s(const X: Single; const Vector: TVMCLVector3s): TVMCLVector4s; overload;
+Function Vector4s(const Vector: TVMCLVector3s; const W: Single): TVMCLVector4s; overload;
 
-Function Vector2(const X, Y: Double): TVMCLVector2d; overload;
-Function Vector3(const X, Y, Z: Double): TVMCLVector3d; overload;
-Function Vector3(const Vector: TVMCLVector2d; const Z: Double): TVMCLVector3d; overload;
-Function Vector3(const X: Double; const Vector: TVMCLVector2d): TVMCLVector3d; overload;
-Function Vector4(const X, Y, Z, W: Double): TVMCLVector4d; overload;
-Function Vector4(const aVector, bVector: TVMCLVector2d): TVMCLVector4d; overload;
-Function Vector4(const Vector: TVMCLVector2d; const Z, W: Double): TVMCLVector4d; overload;
-Function Vector4(const X: Double; const Vector: TVMCLVector2d; const W: Double): TVMCLVector4d; overload;
-Function Vector4(const X, Y: Double; const Vector: TVMCLVector2d): TVMCLVector4d; overload;
-Function Vector4(const X: Double; const Vector: TVMCLVector3d): TVMCLVector4d; overload;
-Function Vector4(const Vector: TVMCLVector3d; const W: Double): TVMCLVector4d; overload;
+Function Vector2d(const X, Y: Double): TVMCLVector2d; overload;
+Function Vector3d(const X, Y, Z: Double): TVMCLVector3d; overload;
+Function Vector3d(const Vector: TVMCLVector2d; const Z: Double): TVMCLVector3d; overload;
+Function Vector3d(const X: Double; const Vector: TVMCLVector2d): TVMCLVector3d; overload;
+Function Vector4d(const X, Y, Z, W: Double): TVMCLVector4d; overload;
+Function Vector4d(const aVector, bVector: TVMCLVector2d): TVMCLVector4d; overload;
+Function Vector4d(const Vector: TVMCLVector2d; const Z, W: Double): TVMCLVector4d; overload;
+Function Vector4d(const X: Double; const Vector: TVMCLVector2d; const W: Double): TVMCLVector4d; overload;
+Function Vector4d(const X, Y: Double; const Vector: TVMCLVector2d): TVMCLVector4d; overload;
+Function Vector4d(const X: Double; const Vector: TVMCLVector3d): TVMCLVector4d; overload;
+Function Vector4d(const Vector: TVMCLVector3d; const W: Double): TVMCLVector4d; overload;
 
 {===============================================================================
     Vector swizzling
@@ -508,6 +508,36 @@ Function VectorsAngleDeg(const aVector,bVector: TVMCLVector2d): Double; overload
 Function VectorsAngleDeg(const aVector,bVector: TVMCLVector3d): Double; overload;
 Function VectorsAngleDeg(const aVector,bVector: TVMCLVector4d): Double; overload;
 
+// projection of vector Vector to vector Base
+Function VectorsProjection(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorsProjection(const Base,Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsProjection(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsProjectionXYZ(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsProjection(const Base,Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function VectorsProjection(const Base,Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsProjection(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorsProjectionXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
+
+// returns orthogonalized Vector to Base
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
+
+// returns orthogonalized and normalized Vector to Base
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4d): TVMCLVector4d; overload;
+
 implementation
 
 uses
@@ -735,7 +765,7 @@ end;
     Vector building
 ===============================================================================}
 
-Function Vector2(const X, Y: Single): TVMCLVector2s;
+Function Vector2s(const X, Y: Single): TVMCLVector2s;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -743,7 +773,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector3(const X, Y, Z: Single): TVMCLVector3s;
+Function Vector3s(const X, Y, Z: Single): TVMCLVector3s;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -752,7 +782,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector3(const Vector: TVMCLVector2s; const Z: Single): TVMCLVector3s;
+Function Vector3s(const Vector: TVMCLVector2s; const Z: Single): TVMCLVector3s;
 begin
 Result[0] := Vector[0];
 Result[1] := Vector[1];
@@ -761,7 +791,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector3(const X: Single; const Vector: TVMCLVector2s): TVMCLVector3s;
+Function Vector3s(const X: Single; const Vector: TVMCLVector2s): TVMCLVector3s;
 begin
 Result[0] := X;
 Result[1] := Vector[0];
@@ -770,7 +800,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X, Y, Z, W: Single): TVMCLVector4s;
+Function Vector4s(const X, Y, Z, W: Single): TVMCLVector4s;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -780,7 +810,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const aVector, bVector: TVMCLVector2s): TVMCLVector4s;
+Function Vector4s(const aVector, bVector: TVMCLVector2s): TVMCLVector4s;
 begin
 Result[0] := aVector[0];
 Result[1] := aVector[1];
@@ -790,7 +820,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const Vector: TVMCLVector2s; const Z, W: Single): TVMCLVector4s;
+Function Vector4s(const Vector: TVMCLVector2s; const Z, W: Single): TVMCLVector4s;
 begin
 Result[0] := Vector[0];
 Result[1] := Vector[1];
@@ -800,7 +830,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X: Single; const Vector: TVMCLVector2s; const W: Single): TVMCLVector4s;
+Function Vector4s(const X: Single; const Vector: TVMCLVector2s; const W: Single): TVMCLVector4s;
 begin
 Result[0] := X;
 Result[1] := Vector[0];
@@ -810,7 +840,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X, Y: Single; const Vector: TVMCLVector2s): TVMCLVector4s;
+Function Vector4s(const X, Y: Single; const Vector: TVMCLVector2s): TVMCLVector4s;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -820,7 +850,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X: Single; const Vector: TVMCLVector3s): TVMCLVector4s;
+Function Vector4s(const X: Single; const Vector: TVMCLVector3s): TVMCLVector4s;
 begin
 Result[0] := X;
 Result[1] := Vector[0];
@@ -830,7 +860,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const Vector: TVMCLVector3s; const W: Single): TVMCLVector4s;
+Function Vector4s(const Vector: TVMCLVector3s; const W: Single): TVMCLVector4s;
 begin
 Result[0] := Vector[0];
 Result[1] := Vector[1];
@@ -840,7 +870,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-Function Vector2(const X, Y: Double): TVMCLVector2d;
+Function Vector2d(const X, Y: Double): TVMCLVector2d;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -848,7 +878,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector3(const X, Y, Z: Double): TVMCLVector3d;
+Function Vector3d(const X, Y, Z: Double): TVMCLVector3d;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -857,7 +887,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector3(const Vector: TVMCLVector2d; const Z: Double): TVMCLVector3d;
+Function Vector3d(const Vector: TVMCLVector2d; const Z: Double): TVMCLVector3d;
 begin
 Result[0] := Vector[0];
 Result[1] := Vector[1];
@@ -866,7 +896,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector3(const X: Double; const Vector: TVMCLVector2d): TVMCLVector3d;
+Function Vector3d(const X: Double; const Vector: TVMCLVector2d): TVMCLVector3d;
 begin
 Result[0] := X;
 Result[1] := Vector[0];
@@ -875,7 +905,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X, Y, Z, W: Double): TVMCLVector4d;
+Function Vector4d(const X, Y, Z, W: Double): TVMCLVector4d;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -885,7 +915,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const aVector, bVector: TVMCLVector2d): TVMCLVector4d;
+Function Vector4d(const aVector, bVector: TVMCLVector2d): TVMCLVector4d;
 begin
 Result[0] := aVector[0];
 Result[1] := aVector[1];
@@ -895,7 +925,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const Vector: TVMCLVector2d; const Z, W: Double): TVMCLVector4d;
+Function Vector4d(const Vector: TVMCLVector2d; const Z, W: Double): TVMCLVector4d;
 begin
 Result[0] := Vector[0];
 Result[1] := Vector[1];
@@ -905,7 +935,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X: Double; const Vector: TVMCLVector2d; const W: Double): TVMCLVector4d;
+Function Vector4d(const X: Double; const Vector: TVMCLVector2d; const W: Double): TVMCLVector4d;
 begin
 Result[0] := X;
 Result[1] := Vector[0];
@@ -915,7 +945,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X, Y: Double; const Vector: TVMCLVector2d): TVMCLVector4d;
+Function Vector4d(const X, Y: Double; const Vector: TVMCLVector2d): TVMCLVector4d;
 begin
 Result[0] := X;
 Result[1] := Y;
@@ -925,7 +955,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const X: Double; const Vector: TVMCLVector3d): TVMCLVector4d;
+Function Vector4d(const X: Double; const Vector: TVMCLVector3d): TVMCLVector4d;
 begin
 Result[0] := X;
 Result[1] := Vector[0];
@@ -935,7 +965,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Vector4(const Vector: TVMCLVector3d; const W: Double): TVMCLVector4d;
+Function Vector4d(const Vector: TVMCLVector3d; const W: Double): TVMCLVector4d;
 begin
 Result[0] := Vector[0];
 Result[1] := Vector[1];
@@ -1861,7 +1891,7 @@ procedure Normalize(var X, Y: Single);
 var
   TempVector: TVMCLVector2s;
 begin
-TempVector := Vector2(X,Y);
+TempVector := Vector2s(X,Y);
 Normalize(TempVector);
 X := TempVector[0];
 Y := TempVector[1];
@@ -1873,7 +1903,7 @@ procedure Normalize(var X, Y, Z: Single);
 var
   TempVector: TVMCLVector3s;
 begin
-TempVector := Vector3(X,Y,Z);
+TempVector := Vector3s(X,Y,Z);
 Normalize(TempVector);
 X := TempVector[0];
 Y := TempVector[1];
@@ -1886,7 +1916,7 @@ procedure Normalize(var X, Y, Z, W: Single);
 var
   TempVector: TVMCLVector4s;
 begin
-TempVector := Vector4(X,Y,Z,W);
+TempVector := Vector4s(X,Y,Z,W);
 Normalize(TempVector);
 X := TempVector[0];
 Y := TempVector[1];
@@ -1900,7 +1930,7 @@ procedure Normalize(var X, Y: Double);
 var
   TempVector: TVMCLVector2d;
 begin
-TempVector := Vector2(X,Y);
+TempVector := Vector2d(X,Y);
 Normalize(TempVector);
 X := TempVector[0];
 Y := TempVector[1];
@@ -1912,7 +1942,7 @@ procedure Normalize(var X, Y, Z: Double);
 var
   TempVector: TVMCLVector3d;
 begin
-TempVector := Vector3(X,Y,Z);
+TempVector := Vector3d(X,Y,Z);
 Normalize(TempVector);
 X := TempVector[0];
 Y := TempVector[1];
@@ -1925,7 +1955,7 @@ procedure Normalize(var X, Y, Z, W: Double);
 var
   TempVector: TVMCLVector4d;
 begin
-TempVector := Vector4(X,Y,Z,W);
+TempVector := Vector4d(X,Y,Z,W);
 Normalize(TempVector);
 X := TempVector[0];
 Y := TempVector[1];
@@ -2687,5 +2717,224 @@ begin
 Result := RadToDeg(VectorsAngleRad(aVector,bVector));
 end;
 
+//==============================================================================
+
+Function VectorsProjection(const Base,Vector: TVMCLVector2s): TVMCLVector2s;
+begin
+If not IsZeroVector(Base) then
+  Result := ScalarMultiply(Base,VectorsDotProduct(Base,Vector)/VectorsDotProduct(Base,Base))
+else
+  Result := VMCL_ZeroVector2s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsProjection(const Base,Vector: TVMCLVector3s): TVMCLVector3s;
+begin
+If not IsZeroVector(Base) then
+  Result := ScalarMultiply(Base,VectorsDotProduct(Base,Vector)/VectorsDotProduct(Base,Base))
+else
+  Result := VMCL_ZeroVector3s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsProjection(const Base,Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+If not IsZeroVector(Base) then
+  Result := ScalarMultiply(Base,VectorsDotProduct(Base,Vector)/VectorsDotProduct(Base,Base))
+else
+  Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsProjectionXYZ(const Base,Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+If not IsZeroVectorXYZ(Base) then
+  begin
+    Result := ScalarMultiplyXYZ(Base,VectorsDotProductXYZ(Base,Vector)/VectorsDotProductXYZ(Base,Base));
+    Result[3] := Vector[3];
+  end
+else Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsProjection(const Base,Vector: TVMCLVector2d): TVMCLVector2d;
+begin
+If not IsZeroVector(Base) then
+  Result := ScalarMultiply(Base,VectorsDotProduct(Base,Vector)/VectorsDotProduct(Base,Base))
+else
+  Result := VMCL_ZeroVector2d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsProjection(const Base,Vector: TVMCLVector3d): TVMCLVector3d;
+begin
+If not IsZeroVector(Base) then
+  Result := ScalarMultiply(Base,VectorsDotProduct(Base,Vector)/VectorsDotProduct(Base,Base))
+else
+  Result := VMCL_ZeroVector3d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsProjection(const Base,Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+If not IsZeroVector(Base) then
+  Result := ScalarMultiply(Base,VectorsDotProduct(Base,Vector)/VectorsDotProduct(Base,Base))
+else
+  Result := VMCL_ZeroVector4d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsProjectionXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+If not IsZeroVectorXYZ(Base) then
+  begin
+    Result := ScalarMultiplyXYZ(Base,VectorsDotProductXYZ(Base,Vector)/VectorsDotProductXYZ(Base,Base));
+    Result[3] := Vector[3];
+  end
+else Result := VMCL_ZeroVector4d;
+end;
+
+//==============================================================================
+
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
+else
+  Result := VMCL_ZeroVector2s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector3s): TVMCLVector3s;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
+else
+  Result := VMCL_ZeroVector3s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
+else
+  Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtractXYZ(Vector,VectorsProjectionXYZ(Base,Vector))
+else
+  Result := VMCL_ZeroVector4s;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector2d): TVMCLVector2d;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
+else
+  Result := VMCL_ZeroVector2d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector3d): TVMCLVector3d;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
+else
+  Result := VMCL_ZeroVector3d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
+else
+  Result := VMCL_ZeroVector4d;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+If not IsZeroVector(Base) then
+  Result := VectorsSubtractXYZ(Vector,VectorsProjectionXYZ(Base,Vector))
+else
+  Result := VMCL_ZeroVector4d;
+end;
+
+//==============================================================================
+
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector2s): TVMCLVector2s;
+begin
+Result := Normalized(VectorsOrthogonal(Base,Vector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector3s): TVMCLVector3s;
+begin
+Result := Normalized(VectorsOrthogonal(Base,Vector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result := Normalized(VectorsOrthogonal(Base,Vector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4s): TVMCLVector4s;
+begin
+Result := NormalizedXYZ(VectorsOrthogonalXYZ(Base,Vector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector2d): TVMCLVector2d;
+begin
+Result := Normalized(VectorsOrthogonal(Base,Vector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector3d): TVMCLVector3d;
+begin
+Result := Normalized(VectorsOrthogonal(Base,Vector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthonormal(const Base, Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result := Normalized(VectorsOrthogonal(Base,Vector));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4d): TVMCLVector4d;
+begin
+Result := NormalizedXYZ(VectorsOrthogonalXYZ(Base,Vector));
+end;
 
 end.
