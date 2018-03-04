@@ -604,7 +604,50 @@ procedure FillSubmatrix(var Matrix: TVMCLMatrix4CMd; FromRow,FromColumn,Rows,Col
     Matrix exchanges - declaration
 ===============================================================================}
 
-// matrix entry/column/row exchange
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2RMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2RMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2CMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3RMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3RMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3CMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4RMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4RMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4CMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2RMs; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2RMd; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2CMs; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2CMd; SrcRow,DstRow: Integer); overload;
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3RMs; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3RMd; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3CMs; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3CMd; SrcRow,DstRow: Integer); overload;
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4RMs; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4RMd; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4CMs; SrcRow,DstRow: Integer); overload;
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4CMd; SrcRow,DstRow: Integer); overload;
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2RMs; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2RMd; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2CMs; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2CMd; SrcColumn,DstColumn: Integer); overload;
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3RMs; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3RMd; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3CMs; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3CMd; SrcColumn,DstColumn: Integer); overload;
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4RMs; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4RMd; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4CMs; SrcColumn,DstColumn: Integer); overload;
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4CMd; SrcColumn,DstColumn: Integer); overload;
 
 {===============================================================================
     Matrix conversions - declaration
@@ -3829,6 +3872,604 @@ end;
 {===============================================================================
     Matrix exchanges - implementation
 ===============================================================================}
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2RMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Single;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := Matrix[SrcRow,SrcColumn];
+    Matrix[SrcRow,SrcColumn] := Matrix[DstRow,DstColumn];
+    Matrix[DstRow,DstColumn] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2RMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Double;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := Matrix[SrcRow,SrcColumn];
+    Matrix[SrcRow,SrcColumn] := Matrix[DstRow,DstColumn];
+    Matrix[DstRow,DstColumn] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Single;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := Matrix[SrcColumn,SrcRow];
+    Matrix[SrcColumn,SrcRow] := Matrix[DstColumn,DstRow];
+    Matrix[DstColumn,DstRow] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2CMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Double;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := Matrix[SrcColumn,SrcRow];
+    Matrix[SrcColumn,SrcRow] := Matrix[DstColumn,DstRow];
+    Matrix[DstColumn,DstRow] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3RMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Single;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := Matrix[SrcRow,SrcColumn];
+    Matrix[SrcRow,SrcColumn] := Matrix[DstRow,DstColumn];
+    Matrix[DstRow,DstColumn] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3RMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Double;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := Matrix[SrcRow,SrcColumn];
+    Matrix[SrcRow,SrcColumn] := Matrix[DstRow,DstColumn];
+    Matrix[DstRow,DstColumn] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Single;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := Matrix[SrcColumn,SrcRow];
+    Matrix[SrcColumn,SrcRow] := Matrix[DstColumn,DstRow];
+    Matrix[DstColumn,DstRow] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix3CMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+ var
+  Temp: Double;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := Matrix[SrcColumn,SrcRow];
+    Matrix[SrcColumn,SrcRow] := Matrix[DstColumn,DstRow];
+    Matrix[DstColumn,DstRow] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4RMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Single;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := Matrix[SrcRow,SrcColumn];
+    Matrix[SrcRow,SrcColumn] := Matrix[DstRow,DstColumn];
+    Matrix[DstRow,DstColumn] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4RMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Double;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := Matrix[SrcRow,SrcColumn];
+    Matrix[SrcRow,SrcColumn] := Matrix[DstRow,DstColumn];
+    Matrix[DstRow,DstColumn] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Single;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := Matrix[SrcColumn,SrcRow];
+    Matrix[SrcColumn,SrcRow] := Matrix[DstColumn,DstRow];
+    Matrix[DstColumn,DstRow] := Temp;
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4CMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer);
+var
+  Temp: Double;
+begin
+If (SrcRow <> DstRow) or (SrcColumn <> DstColumn) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := Matrix[SrcColumn,SrcRow];
+    Matrix[SrcColumn,SrcRow] := Matrix[DstColumn,DstRow];
+    Matrix[DstColumn,DstRow] := Temp;
+  end;
+end;
+
+//==============================================================================
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2RMs; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector2s;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2RMd; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector2d;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2CMs; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector2s;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2CMd; SrcRow,DstRow: Integer); 
+var
+  Temp: TVMCLVector2d;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3RMs; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector3s;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3RMd; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector3d;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3CMs; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector3s;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix3CMd; SrcRow,DstRow: Integer); 
+var
+  Temp: TVMCLVector3d;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4RMs; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector4s;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4RMd; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector4d;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix),High(Matrix)) and
+   CheckRange(DstRow,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4CMs; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector4s;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4CMd; SrcRow,DstRow: Integer);
+var
+  Temp: TVMCLVector4d;
+begin
+If (SrcRow <> DstRow) and
+   CheckRange(SrcRow,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstRow,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetRow(Matrix,DstRow);
+    MatrixSetRow(Matrix,DstRow,MatrixGetRow(Matrix,SrcRow));
+    MatrixSetRow(Matrix,SrcRow,Temp);
+  end;
+end;
+
+//==============================================================================
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2RMs; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector2s;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2RMd; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector2d;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2CMs; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector2s;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2CMd; SrcColumn,DstColumn: Integer); 
+var
+  Temp: TVMCLVector2d;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3RMs; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector3s;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3RMd; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector3d;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3CMs; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector3s;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix3CMd; SrcColumn,DstColumn: Integer); 
+var
+  Temp: TVMCLVector3d;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4RMs; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector4s;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4RMd; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector4d;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix[0]),High(Matrix[0])) and
+   CheckRange(DstColumn,Low(Matrix[0]),High(Matrix[0])) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4CMs; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector4s;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix4CMd; SrcColumn,DstColumn: Integer);
+var
+  Temp: TVMCLVector4d;
+begin
+If (SrcColumn <> DstColumn) and
+   CheckRange(SrcColumn,Low(Matrix),High(Matrix)) and
+   CheckRange(DstColumn,Low(Matrix),High(Matrix)) then
+  begin
+    Temp := MatrixGetColumn(Matrix,DstColumn);
+    MatrixSetColumn(Matrix,DstColumn,MatrixGetColumn(Matrix,SrcColumn));
+    MatrixSetColumn(Matrix,SrcColumn,Temp);
+  end;
+end;
 
 {===============================================================================
     Matrix conversions - implementation

@@ -22,6 +22,7 @@ uses
 {$INCLUDE '.\test_routines_mat\Matrix_Spreading.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_SubmatrixRead.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_SubmatrixWrite.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_Exchanging.inc'}
 
 //==============================================================================
 
@@ -31,10 +32,10 @@ repeat
   Result := Select('Matrices test group','Select test (X - Exit; 0 - Back; A - Autotest):',
 
     [Matrix_Build,Matrix_EntriesAccess,Matrix_VectorExtract,Matrix_VectorReplace,Matrix_Filling,
-     Matrix_Spreading,Matrix_SubmatrixRead,Matrix_SubmatrixWrite],
+     Matrix_Spreading,Matrix_SubmatrixRead,Matrix_SubmatrixWrite,Matrix_Exchanging],
 
     ['Matrix building','Matrix entries access','Matrix vector extract','Matrix vector replace','Matrix filling',
-     'Matrix spreading','Submatrix read access','Submatrix write access'],
+     'Matrix spreading','Submatrix read access','Submatrix write access','Matrix exchanges'],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);
