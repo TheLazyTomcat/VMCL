@@ -69,12 +69,19 @@ procedure RandomVec(out Vec: TVMCLVector4dr; Max: Integer = 100; Offset: Double 
 
 //= Matrices randomization =====================================================
 
-procedure RandomMat(out Mat: TMatrix2s; Max: Integer = 100; Offset: Double = 0.0); overload;
-procedure RandomMat(out Mat: TMatrix3s; Max: Integer = 100; Offset: Double = 0.0); overload;
-procedure RandomMat(out Mat: TMatrix4s; Max: Integer = 100; Offset: Double = 0.0); overload;
-procedure RandomMat(out Mat: TMatrix2d; Max: Integer = 100; Offset: Double = 0.0); overload;
-procedure RandomMat(out Mat: TMatrix3d; Max: Integer = 100; Offset: Double = 0.0); overload;
-procedure RandomMat(out Mat: TMatrix4d; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix2RMs; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix3RMs; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix4RMs; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix2RMd; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix3RMd; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix4RMd; Max: Integer = 100; Offset: Double = 0.0); overload;
+
+procedure RandomMat(out Mat: TMatrix2CMs; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix3CMs; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix4CMs; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix2CMd; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix3CMd; Max: Integer = 100; Offset: Double = 0.0); overload;
+procedure RandomMat(out Mat: TMatrix4CMd; Max: Integer = 100; Offset: Double = 0.0); overload;
 
 //= Specialized functions ======================================================
 
@@ -320,7 +327,7 @@ end;
 
 //= Matrices randomization ======================================================
 
-procedure RandomMat(out Mat: TMatrix2s; Max: Integer = 100; Offset: Double = 0.0);
+procedure RandomMat(out Mat: TMatrix2RMs; Max: Integer = 100; Offset: Double = 0.0);
 var
   i:  Integer;
 begin
@@ -330,7 +337,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure RandomMat(out Mat: TMatrix3s; Max: Integer = 100; Offset: Double = 0.0);
+procedure RandomMat(out Mat: TMatrix3RMs; Max: Integer = 100; Offset: Double = 0.0);
 var
   i:  Integer;
 begin
@@ -340,7 +347,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure RandomMat(out Mat: TMatrix4s; Max: Integer = 100; Offset: Double = 0.0);
+procedure RandomMat(out Mat: TMatrix4RMs; Max: Integer = 100; Offset: Double = 0.0);
 var
   i:  Integer;
 begin
@@ -350,7 +357,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure RandomMat(out Mat: TMatrix2d; Max: Integer = 100; Offset: Double = 0.0);
+procedure RandomMat(out Mat: TMatrix2RMd; Max: Integer = 100; Offset: Double = 0.0);
 var
   i:  Integer;
 begin
@@ -360,7 +367,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure RandomMat(out Mat: TMatrix3d; Max: Integer = 100; Offset: Double = 0.0);
+procedure RandomMat(out Mat: TMatrix3RMd; Max: Integer = 100; Offset: Double = 0.0);
 var
   i:  Integer;
 begin
@@ -370,7 +377,67 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure RandomMat(out Mat: TMatrix4d; Max: Integer = 100; Offset: Double = 0.0);
+procedure RandomMat(out Mat: TMatrix4RMd; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix4do) to High(TMatrix4do) do
+   TMatrix4do(Mat)[i] := Random(Max) + Offset;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure RandomMat(out Mat: TMatrix2CMs; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix2so) to High(TMatrix2so) do
+   TMatrix2so(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix3CMs; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix3so) to High(TMatrix3so) do
+   TMatrix3so(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix4CMs; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix4so) to High(TMatrix4so) do
+   TMatrix4so(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix2CMd; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix2do) to High(TMatrix2do) do
+   TMatrix2do(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix3CMd; Max: Integer = 100; Offset: Double = 0.0);
+var
+  i:  Integer;
+begin
+For i := Low(TMatrix3do) to High(TMatrix3do) do
+   TMatrix3do(Mat)[i] := Random(Max) + Offset;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure RandomMat(out Mat: TMatrix4CMd; Max: Integer = 100; Offset: Double = 0.0);
 var
   i:  Integer;
 begin

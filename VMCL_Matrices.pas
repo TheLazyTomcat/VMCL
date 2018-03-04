@@ -668,7 +668,7 @@ Function Matrix3(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix3RMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix3RMd; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix3CMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix3CMd; overload;
-(*
+
 // lower to higher dimension
 Function Matrix3(const Matrix: TVMCLMatrix2RMs; IdentityMatrix: Boolean = False): TVMCLMatrix3RMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix2RMd; IdentityMatrix: Boolean = False): TVMCLMatrix3RMd; overload;
@@ -687,26 +687,36 @@ Function Matrix4(const Matrix: TVMCLMatrix3CMd; IdentityMatrix: Boolean = False)
 
 // precision coversion
 Function Matrix2s(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMs; overload;
-Function Matrix2d(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMs; overload;
+Function Matrix2d(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMd; overload;
 Function Matrix2s(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMs; overload;
-Function Matrix2d(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMs; overload;
+Function Matrix2d(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMd; overload;
 
 Function Matrix3s(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMs; overload;
-Function Matrix3d(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMs; overload;
+Function Matrix3d(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMd; overload;
 Function Matrix3s(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMs; overload;
-Function Matrix3d(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMs; overload;
+Function Matrix3d(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMd; overload;
 
 Function Matrix4s(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMs; overload;
-Function Matrix4d(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMs; overload;
+Function Matrix4d(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMd; overload;
 Function Matrix4s(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMs; overload;
-Function Matrix4d(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMs; overload;
+Function Matrix4d(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMd; overload;
 
 // order conversion
 Function Matrix2(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2RMs; overload;
 Function Matrix2(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2RMd; overload;
 Function Matrix2(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2CMs; overload;
 Function Matrix2(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2CMd; overload;
-*)
+
+Function Matrix3(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3RMs; overload;
+Function Matrix3(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3RMd; overload;
+Function Matrix3(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3CMs; overload;
+Function Matrix3(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3CMd; overload;
+
+Function Matrix4(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4RMs; overload;
+Function Matrix4(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4RMd; overload;
+Function Matrix4(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4CMs; overload;
+Function Matrix4(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4CMd; overload;
+
 implementation
 
 uses
@@ -4575,6 +4585,344 @@ end;
 
 //==============================================================================
 
+Function Matrix3(const Matrix: TVMCLMatrix2RMs; IdentityMatrix: Boolean = False): TVMCLMatrix3RMs;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3RMs
+else
+  Result := VMCL_ZeroMatrix3RMs;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
 
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix2RMd; IdentityMatrix: Boolean = False): TVMCLMatrix3RMd;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3RMd
+else
+  Result := VMCL_ZeroMatrix3RMd;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix2CMs; IdentityMatrix: Boolean = False): TVMCLMatrix3CMs;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3CMs
+else
+  Result := VMCL_ZeroMatrix3CMs;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix2CMd; IdentityMatrix: Boolean = False): TVMCLMatrix3CMd;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix3CMd
+else
+  Result := VMCL_ZeroMatrix3CMd;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix2RMs; IdentityMatrix: Boolean = False): TVMCLMatrix4RMs;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4RMs
+else
+  Result := VMCL_ZeroMatrix4RMs;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix2RMd; IdentityMatrix: Boolean = False): TVMCLMatrix4RMd;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4RMd
+else
+  Result := VMCL_ZeroMatrix4RMd;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix2CMs; IdentityMatrix: Boolean = False): TVMCLMatrix4CMs;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4CMs
+else
+  Result := VMCL_ZeroMatrix4CMs;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix2CMd; IdentityMatrix: Boolean = False): TVMCLMatrix4CMd; 
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4CMd
+else
+  Result := VMCL_ZeroMatrix4CMd;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix3RMs; IdentityMatrix: Boolean = False): TVMCLMatrix4RMs;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4RMs
+else
+  Result := VMCL_ZeroMatrix4RMs;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+Move(Matrix[2],Result[2],SizeOf(Matrix[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix3RMd; IdentityMatrix: Boolean = False): TVMCLMatrix4RMd;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4RMd
+else
+  Result := VMCL_ZeroMatrix4RMd;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+Move(Matrix[2],Result[2],SizeOf(Matrix[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix3CMs; IdentityMatrix: Boolean = False): TVMCLMatrix4CMs;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4CMs
+else
+  Result := VMCL_ZeroMatrix4CMs;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+Move(Matrix[2],Result[2],SizeOf(Matrix[2]));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix3CMd; IdentityMatrix: Boolean = False): TVMCLMatrix4CMd;
+begin
+If IdentityMatrix then
+  Result := VMCL_IdentityMatrix4CMd
+else
+  Result := VMCL_ZeroMatrix4CMd;
+Move(Matrix[0],Result[0],SizeOf(Matrix[0]));
+Move(Matrix[1],Result[1],SizeOf(Matrix[1]));
+Move(Matrix[2],Result[2],SizeOf(Matrix[2]));
+end;
+
+//==============================================================================
+
+Function Matrix2s(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMs;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+ 
+Function Matrix2d(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMd;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2s(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMs;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2d(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMd;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3s(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMs;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3d(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMd;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3s(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMs;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3d(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMd;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4s(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMs;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
+Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4d(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMd;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
+Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4s(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMs;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
+Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4d(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMd;
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
+Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
+Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
+Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
+end;
+
+//==============================================================================
+
+Function Matrix2(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2RMs;
+begin
+Result := TVMCLMatrix2RMs(Matrix);
+//Result := TVMCLMatrix2RMs(Transposed(Matrix));
+{$message 'implement transposition'}
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2RMd;
+begin
+Result := TVMCLMatrix2RMd(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2CMs;
+begin
+Result := TVMCLMatrix2CMs(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix2(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2CMd;
+begin
+Result := TVMCLMatrix2CMd(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3RMs;
+begin
+Result := TVMCLMatrix3RMs(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3RMd;
+begin
+Result := TVMCLMatrix3RMd(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3CMs;
+begin
+Result := TVMCLMatrix3CMs(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix3(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3CMd;
+begin
+Result := TVMCLMatrix3CMd(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4RMs;
+begin
+Result := TVMCLMatrix4RMs(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4RMd;
+begin
+Result := TVMCLMatrix4RMd(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4CMs;
+begin
+Result := TVMCLMatrix4CMs(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Matrix4(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4CMd;
+begin
+Result := TVMCLMatrix4CMd(Matrix);
+end;
 
 end.
