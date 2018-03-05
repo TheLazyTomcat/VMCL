@@ -717,6 +717,53 @@ Function Matrix4(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4RMd; overload;
 Function Matrix4(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4CMs; overload;
 Function Matrix4(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4CMd; overload;
 
+{===============================================================================
+    Basic matrix functions (zeroing, comparison, etc.)
+===============================================================================}
+(*
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMd); overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMd); overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
+procedure CopyMatrix(const Src: TVMCLMatrix2RMd; var Dest: TVMCLMatrix2RMd); overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd; Epsilon: Single = 0): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
+*)
+{===============================================================================
+    Basic Matrix calculations
+===============================================================================}
+
+procedure Transpose(var Matrix: TVMCLMatrix2RMs); overload;
+procedure Transpose(var Matrix: TVMCLMatrix2RMd); overload;
+procedure Transpose(var Matrix: TVMCLMatrix2CMs); overload;
+procedure Transpose(var Matrix: TVMCLMatrix2CMd); overload;
+
+procedure Transpose(var Matrix: TVMCLMatrix3RMs); overload;
+procedure Transpose(var Matrix: TVMCLMatrix3RMd); overload;
+procedure Transpose(var Matrix: TVMCLMatrix3CMs); overload;
+procedure Transpose(var Matrix: TVMCLMatrix3CMd); overload;
+
+procedure Transpose(var Matrix: TVMCLMatrix4RMs); overload;
+procedure Transpose(var Matrix: TVMCLMatrix4RMd); overload;
+procedure Transpose(var Matrix: TVMCLMatrix4CMs); overload;
+procedure Transpose(var Matrix: TVMCLMatrix4CMd); overload;
+
+Function Transposed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function Transposed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
+Function Transposed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
+Function Transposed(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
+
+Function Transposed(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
+Function Transposed(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
+Function Transposed(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
+Function Transposed(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
+
+Function Transposed(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function Transposed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function Transposed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function Transposed(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
 implementation
 
 uses
@@ -4734,195 +4781,619 @@ end;
 //==============================================================================
 
 Function Matrix2s(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMs;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2do(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
  
 Function Matrix2d(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMd;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2so(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix2s(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMs;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2do(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix2d(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMd;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2so(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3s(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMs;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3do(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3d(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMd;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3so(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3s(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMs;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3do(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3d(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMd;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3so(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4s(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMs;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
 Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4do(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4d(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMd;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
 Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4so(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4s(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMs;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
 Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4do(Matrix)[i];
+end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4d(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMd;
+{$IFDEF MatricesUnwindLoops}
 begin
 Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[0,1]; Result[0,2] := Matrix[0,2]; Result[0,3] := Matrix[0,3];
 Result[1,0] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[1,2]; Result[1,3] := Matrix[1,3];
 Result[2,0] := Matrix[2,0]; Result[2,1] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[2,3];
 Result[3,0] := Matrix[3,0]; Result[3,1] := Matrix[3,1]; Result[3,2] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
 end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4so(Matrix)[i];
+end;
+{$ENDIF}
 
 //==============================================================================
 
 Function Matrix2(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2RMs;
 begin
-Result := TVMCLMatrix2RMs(Matrix);
-//Result := TVMCLMatrix2RMs(Transposed(Matrix));
-{$message 'implement transposition'}
+Result := TVMCLMatrix2RMs(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix2(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2RMd;
 begin
-Result := TVMCLMatrix2RMd(Matrix);
+Result := TVMCLMatrix2RMd(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix2(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2CMs;
 begin
-Result := TVMCLMatrix2CMs(Matrix);
+Result := TVMCLMatrix2CMs(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix2(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2CMd;
 begin
-Result := TVMCLMatrix2CMd(Matrix);
+Result := TVMCLMatrix2CMd(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3RMs;
 begin
-Result := TVMCLMatrix3RMs(Matrix);
+Result := TVMCLMatrix3RMs(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3RMd;
 begin
-Result := TVMCLMatrix3RMd(Matrix);
+Result := TVMCLMatrix3RMd(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3CMs;
 begin
-Result := TVMCLMatrix3CMs(Matrix);
+Result := TVMCLMatrix3CMs(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix3(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3CMd;
 begin
-Result := TVMCLMatrix3CMd(Matrix);
+Result := TVMCLMatrix3CMd(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4RMs;
 begin
-Result := TVMCLMatrix4RMs(Matrix);
+Result := TVMCLMatrix4RMs(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4RMd;
 begin
-Result := TVMCLMatrix4RMd(Matrix);
+Result := TVMCLMatrix4RMd(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4CMs;
 begin
-Result := TVMCLMatrix4CMs(Matrix);
+Result := TVMCLMatrix4CMs(Transposed(Matrix));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Matrix4(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4CMd;
 begin
-Result := TVMCLMatrix4CMd(Matrix);
+Result := TVMCLMatrix4CMd(Transposed(Matrix));
 end;
+
+{===============================================================================
+    Basic matrix functions (zeroing, comparison, etc.)
+===============================================================================}
+
+{===============================================================================
+    Basic Matrix calculations
+===============================================================================}
+
+procedure Transpose(var Matrix: TVMCLMatrix2RMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix2RMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix2CMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix2CMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3RMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3RMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3CMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3CMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//==============================================================================
+
+Function Transposed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[1,0];
+Result[1,0] := Matrix[0,1]; Result[1,1] := Matrix[1,1];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix) to High(Matrix) do
+  For C := Low(Matrix[0]) to High(Matrix[0]) do
+    Result[R,C] := Matrix[C,R];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[1,0];
+Result[1,0] := Matrix[0,1]; Result[1,1] := Matrix[1,1];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix) to High(Matrix) do
+  For C := Low(Matrix[0]) to High(Matrix[0]) do
+    Result[R,C] := Matrix[C,R];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[1,0] := Matrix[0,1];
+Result[0,1] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix[0]) to High(Matrix[0]) do
+  For C := Low(Matrix) to High(Matrix) do
+    Result[C,R] := Matrix[R,C];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[1,0] := Matrix[0,1];
+Result[0,1] := Matrix[1,0]; Result[1,1] := Matrix[1,1];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix[0]) to High(Matrix[0]) do
+  For C := Low(Matrix) to High(Matrix) do
+    Result[C,R] := Matrix[R,C];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[1,0]; Result[0,2] := Matrix[2,0];
+Result[1,0] := Matrix[0,1]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[2,1];
+Result[2,0] := Matrix[0,2]; Result[2,1] := Matrix[1,2]; Result[2,2] := Matrix[2,2];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix) to High(Matrix) do
+  For C := Low(Matrix[0]) to High(Matrix[0]) do
+    Result[R,C] := Matrix[C,R];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[1,0]; Result[0,2] := Matrix[2,0];
+Result[1,0] := Matrix[0,1]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[2,1];
+Result[2,0] := Matrix[0,2]; Result[2,1] := Matrix[1,2]; Result[2,2] := Matrix[2,2];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix) to High(Matrix) do
+  For C := Low(Matrix[0]) to High(Matrix[0]) do
+    Result[R,C] := Matrix[C,R];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[1,0] := Matrix[0,1]; Result[2,0] := Matrix[0,2];
+Result[0,1] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[2,1] := Matrix[1,2];
+Result[0,2] := Matrix[2,0]; Result[1,2] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix[0]) to High(Matrix[0]) do
+  For C := Low(Matrix) to High(Matrix) do
+    Result[C,R] := Matrix[R,C];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[1,0] := Matrix[0,1]; Result[2,0] := Matrix[0,2];
+Result[0,1] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[2,1] := Matrix[1,2];
+Result[0,2] := Matrix[2,0]; Result[1,2] := Matrix[2,1]; Result[2,2] := Matrix[2,2];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix[0]) to High(Matrix[0]) do
+  For C := Low(Matrix) to High(Matrix) do
+    Result[C,R] := Matrix[R,C];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[1,0]; Result[0,2] := Matrix[2,0]; Result[0,3] := Matrix[3,0];
+Result[1,0] := Matrix[0,1]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[2,1]; Result[1,3] := Matrix[3,1];
+Result[2,0] := Matrix[0,2]; Result[2,1] := Matrix[1,2]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[3,2];
+Result[3,0] := Matrix[0,3]; Result[3,1] := Matrix[1,3]; Result[3,2] := Matrix[2,3]; Result[3,3] := Matrix[3,3];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix) to High(Matrix) do
+  For C := Low(Matrix[0]) to High(Matrix[0]) do
+    Result[R,C] := Matrix[C,R];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[0,1] := Matrix[1,0]; Result[0,2] := Matrix[2,0]; Result[0,3] := Matrix[3,0];
+Result[1,0] := Matrix[0,1]; Result[1,1] := Matrix[1,1]; Result[1,2] := Matrix[2,1]; Result[1,3] := Matrix[3,1];
+Result[2,0] := Matrix[0,2]; Result[2,1] := Matrix[1,2]; Result[2,2] := Matrix[2,2]; Result[2,3] := Matrix[3,2];
+Result[3,0] := Matrix[0,3]; Result[3,1] := Matrix[1,3]; Result[3,2] := Matrix[2,3]; Result[3,3] := Matrix[3,3];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix) to High(Matrix) do
+  For C := Low(Matrix[0]) to High(Matrix[0]) do
+    Result[R,C] := Matrix[C,R];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[1,0] := Matrix[0,1]; Result[2,0] := Matrix[0,2]; Result[3,0] := Matrix[0,3];
+Result[0,1] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[2,1] := Matrix[1,2]; Result[3,1] := Matrix[1,3];
+Result[0,2] := Matrix[2,0]; Result[1,2] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[3,2] := Matrix[2,3];
+Result[0,3] := Matrix[3,0]; Result[1,3] := Matrix[3,1]; Result[2,3] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix[0]) to High(Matrix[0]) do
+  For C := Low(Matrix) to High(Matrix) do
+    Result[C,R] := Matrix[R,C];
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Transposed(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0]; Result[1,0] := Matrix[0,1]; Result[2,0] := Matrix[0,2]; Result[3,0] := Matrix[0,3];
+Result[0,1] := Matrix[1,0]; Result[1,1] := Matrix[1,1]; Result[2,1] := Matrix[1,2]; Result[3,1] := Matrix[1,3];
+Result[0,2] := Matrix[2,0]; Result[1,2] := Matrix[2,1]; Result[2,2] := Matrix[2,2]; Result[3,2] := Matrix[2,3];
+Result[0,3] := Matrix[3,0]; Result[1,3] := Matrix[3,1]; Result[2,3] := Matrix[3,2]; Result[3,3] := Matrix[3,3];
+end;
+{$ELSE}
+var
+  R,C:  Integer;
+begin
+For R := Low(Matrix[0]) to High(Matrix[0]) do
+  For C := Low(Matrix) to High(Matrix) do
+    Result[C,R] := Matrix[R,C];
+end;
+{$ENDIF}
 
 end.

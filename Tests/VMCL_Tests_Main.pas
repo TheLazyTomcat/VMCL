@@ -80,6 +80,7 @@ try
   WriteLn;
     Write(Format('  %s MatricesColumnMajorIsDefault',[BoolToMark(infMatricesColumnMajorIsDefault in VMCL_InfoSet)]));
   WriteLn(Format('  %s MatricesDoubleIsDefault',     [BoolToMark(infMatricesDoubleIsDefault in VMCL_InfoSet)]));
+  WriteLn(Format('  %s MatricesUnwindLoops',         [BoolToMark(infMatricesUnwindLoops in VMCL_InfoSet)]));  
   repeat
     SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
       [Vectors_Main,Matrices_Main],['Vectors','Matrices']);

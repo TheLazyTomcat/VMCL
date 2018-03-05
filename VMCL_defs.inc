@@ -123,6 +123,7 @@
 
 {.$DEFINE MatricesColumnMajorIsDefault}
 {.$DEFINE MatricesDoubleIsDefault}
+{$DEFINE MatricesUnwindLoops}
 
 //= Do not touch following =====================================================
 

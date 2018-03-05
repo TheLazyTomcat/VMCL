@@ -52,7 +52,8 @@ type
     infAllocGrowOnly,                 // AllocGrowOnly symbol is defined
     infVectorsDoubleIsDefault,        // VectorsDoubleIsDefault symbol is defined
     infMatricesColumnMajorIsDefault,  // MatricesColumnMajorIsDefault symbol is defined
-    infMatricesDoubleIsDefault);      // MatricesDoubleIsDefault symbol is defined
+    infMatricesDoubleIsDefault,       // MatricesDoubleIsDefault symbol is defined
+    infMatricesUnwindLoops);          // MatricesUnwindLoops symbol is defined
 
   TVMCLInfoSet = set of TVMCLInfo;
 
@@ -320,6 +321,7 @@ try
   InfoSet(infVectorsDoubleIsDefault,{$IFDEF VectorsDoubleIsDefault}True{$ELSE}False{$ENDIF});
   InfoSet(infMatricesColumnMajorIsDefault,{$IFDEF MatricesColumnMajorIsDefault}True{$ELSE}False{$ENDIF});
   InfoSet(infMatricesDoubleIsDefault,{$IFDEF MatricesDoubleIsDefault}True{$ELSE}False{$ENDIF});
+  InfoSet(infMatricesUnwindLoops,{$IFDEF MatricesUnwindLoops}True{$ELSE}False{$ENDIF});
   VMCL_SupportsSSE := infSupportsSSE in VMCL_InfoSet;
 finally
   Free;
