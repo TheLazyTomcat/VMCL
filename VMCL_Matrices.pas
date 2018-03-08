@@ -7562,7 +7562,7 @@ Matrix := InversedAffine(Matrix);
 end;
 
 //==============================================================================
-{$message 'unwind'}
+
 Function Inversed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
 var
   Det:  Extended;
@@ -7570,10 +7570,17 @@ begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
+    Det := 1 / Det;
+{$IFDEF MatricesUnwindLoops}
+    Result[0,0] :=  Matrix[1,1] * Det;
+    Result[0,1] := -Matrix[0,1] * Det;
+    Result[1,0] := -Matrix[1,0] * Det;
+    Result[1,1] :=  Matrix[0,0] * Det;
+{$ELSE}
     Result := ScalarMultiply(RMMatrixFromRows(
                 Vector2s(Matrix[1,1],-Matrix[0,1]),
-                Vector2s(-Matrix[1,0],Matrix[0,0])),
-              1/Det);
+                Vector2s(-Matrix[1,0],Matrix[0,0])),Det);
+{$ENDIF}
   end
 else Result := VMCL_ZeroMatrix2RMs;
 end;
@@ -7587,30 +7594,44 @@ begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
+    Det := 1 / Det;
+  {$IFDEF MatricesUnwindLoops}
+    Result[0,0] :=  Matrix[1,1] * Det;
+    Result[0,1] := -Matrix[0,1] * Det;
+    Result[1,0] := -Matrix[1,0] * Det;
+    Result[1,1] :=  Matrix[0,0] * Det;
+  {$ELSE}
     Result := ScalarMultiply(RMMatrixFromRows(
                 Vector2d(Matrix[1,1],-Matrix[0,1]),
-                Vector2d(-Matrix[1,0],Matrix[0,0])),
-              1/Det);
+                Vector2d(-Matrix[1,0],Matrix[0,0])),Det);
+  {$ENDIF}
   end
 else Result := VMCL_ZeroMatrix2RMd;
-end;
+end; 
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Inversed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+Function Inversed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; 
 var
   Det:  Extended;
 begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
+    Det := 1 / Det;
+  {$IFDEF MatricesUnwindLoops}
+    Result[0,0] :=  Matrix[1,1] * Det;
+    Result[1,0] := -Matrix[1,0] * Det;
+    Result[0,1] := -Matrix[0,1] * Det;
+    Result[1,1] :=  Matrix[0,0] * Det;
+  {$ELSE}
     Result := ScalarMultiply(CMMatrixFromColumns(
                 Vector2s(Matrix[1,1],-Matrix[0,1]),
-                Vector2s(-Matrix[1,0],Matrix[0,0])),
-              1/Det);
+                Vector2s(-Matrix[1,0],Matrix[0,0])),Det);
+  {$ENDIF}
   end
 else Result := VMCL_ZeroMatrix2CMs;
-end;
+end;  
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
@@ -7621,10 +7642,17 @@ begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
+    Det := 1 / Det;
+  {$IFDEF MatricesUnwindLoops}
+    Result[0,0] :=  Matrix[1,1] * Det;
+    Result[1,0] := -Matrix[1,0] * Det;
+    Result[0,1] := -Matrix[0,1] * Det;
+    Result[1,1] :=  Matrix[0,0] * Det;  
+  {$ELSE}
     Result := ScalarMultiply(CMMatrixFromColumns(
                 Vector2d(Matrix[1,1],-Matrix[0,1]),
-                Vector2d(-Matrix[1,0],Matrix[0,0])),
-              1/Det);
+                Vector2d(-Matrix[1,0],Matrix[0,0])),Det);
+  {$ENDIF}
   end
 else Result := VMCL_ZeroMatrix2CMd;
 end;
@@ -7634,87 +7662,144 @@ end;
 Function Inversed(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
 var
   Det:      Extended;
+{$IFNDEF MatricesUnwindLoops}
   Col,Row:  Integer;
+{$ENDIF}
 begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
     Det := 1/Det;
+  {$IFDEF MatricesUnwindLoops}
+    Result[0,0] := (Matrix[1,1] * Matrix[2,2] - Matrix[1,2] * Matrix[2,1]) * Det;
+    Result[0,1] := (Matrix[0,2] * Matrix[2,1] - Matrix[0,1] * Matrix[2,2]) * Det;
+    Result[0,2] := (Matrix[0,1] * Matrix[1,2] - Matrix[0,2] * Matrix[1,1]) * Det;
+    Result[1,0] := (Matrix[1,2] * Matrix[2,0] - Matrix[1,0] * Matrix[2,2]) * Det;
+    Result[1,1] := (Matrix[0,0] * Matrix[2,2] - Matrix[0,2] * Matrix[2,0]) * Det;
+    Result[1,2] := (Matrix[0,2] * Matrix[1,0] - Matrix[0,0] * Matrix[1,2]) * Det;
+    Result[2,0] := (Matrix[1,0] * Matrix[2,1] - Matrix[1,1] * Matrix[2,0]) * Det;
+    Result[2,1] := (Matrix[0,1] * Matrix[2,0] - Matrix[0,0] * Matrix[2,1]) * Det;
+    Result[2,2] := (Matrix[0,0] * Matrix[1,1] - Matrix[0,1] * Matrix[1,0]) * Det;
+  {$ELSE}
     For Row := Low(Matrix) to High(Matrix) do
       For Col := Low(Matrix[0]) to High(Matrix[0]) do
         If ((Row xor Col) and 1) = 0 then
           Result[Col,Row] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
         else
           Result[Col,Row] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  {$ENDIF}
   end
 else Result := VMCL_ZeroMatrix3RMs;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Inversed(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+Function Inversed(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; 
 var
   Det:      Extended;
+{$IFNDEF MatricesUnwindLoops}
   Col,Row:  Integer;
+{$ENDIF}
 begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
     Det := 1/Det;
+  {$IFDEF MatricesUnwindLoops}
+    Result[0,0] := (Matrix[1,1] * Matrix[2,2] - Matrix[1,2] * Matrix[2,1]) * Det;
+    Result[0,1] := (Matrix[0,2] * Matrix[2,1] - Matrix[0,1] * Matrix[2,2]) * Det;
+    Result[0,2] := (Matrix[0,1] * Matrix[1,2] - Matrix[0,2] * Matrix[1,1]) * Det;
+    Result[1,0] := (Matrix[1,2] * Matrix[2,0] - Matrix[1,0] * Matrix[2,2]) * Det;
+    Result[1,1] := (Matrix[0,0] * Matrix[2,2] - Matrix[0,2] * Matrix[2,0]) * Det;
+    Result[1,2] := (Matrix[0,2] * Matrix[1,0] - Matrix[0,0] * Matrix[1,2]) * Det;
+    Result[2,0] := (Matrix[1,0] * Matrix[2,1] - Matrix[1,1] * Matrix[2,0]) * Det;
+    Result[2,1] := (Matrix[0,1] * Matrix[2,0] - Matrix[0,0] * Matrix[2,1]) * Det;
+    Result[2,2] := (Matrix[0,0] * Matrix[1,1] - Matrix[0,1] * Matrix[1,0]) * Det;
+  {$ELSE}
     For Row := Low(Matrix) to High(Matrix) do
       For Col := Low(Matrix[0]) to High(Matrix[0]) do
         If ((Row xor Col) and 1) = 0 then
           Result[Col,Row] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
         else
           Result[Col,Row] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  {$ENDIF}
   end
 else Result := VMCL_ZeroMatrix3RMd;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Inversed(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+Function Inversed(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; 
 var
   Det:      Extended;
+{$IFNDEF MatricesUnwindLoops}
   Col,Row:  Integer;
+{$ENDIF}
 begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
     Det := 1/Det;
+  {$IFDEF MatricesUnwindLoops}
+    Result[0,0] := (Matrix[1,1] * Matrix[2,2] - Matrix[2,1] * Matrix[1,2]) * Det;
+    Result[1,0] := (Matrix[2,0] * Matrix[1,2] - Matrix[1,0] * Matrix[2,2]) * Det;
+    Result[2,0] := (Matrix[1,0] * Matrix[2,1] - Matrix[2,0] * Matrix[1,1]) * Det;
+    Result[0,1] := (Matrix[2,1] * Matrix[0,2] - Matrix[0,1] * Matrix[2,2]) * Det;
+    Result[1,1] := (Matrix[0,0] * Matrix[2,2] - Matrix[2,0] * Matrix[0,2]) * Det;
+    Result[2,1] := (Matrix[2,0] * Matrix[0,1] - Matrix[0,0] * Matrix[2,1]) * Det;
+    Result[0,2] := (Matrix[0,1] * Matrix[1,2] - Matrix[1,1] * Matrix[0,2]) * Det;
+    Result[1,2] := (Matrix[1,0] * Matrix[0,2] - Matrix[0,0] * Matrix[1,2]) * Det;
+    Result[2,2] := (Matrix[0,0] * Matrix[1,1] - Matrix[1,0] * Matrix[0,1]) * Det;
+  {$ELSE}
     For Row := Low(Matrix[0]) to High(Matrix[0]) do
       For Col := Low(Matrix) to High(Matrix) do
         If ((Row xor Col) and 1) = 0 then
           Result[Row,Col] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
         else
           Result[Row,Col] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  {$ENDIF}
   end
 else Result := VMCL_ZeroMatrix3CMs;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Inversed(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+Function Inversed(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; 
 var
   Det:      Extended;
+{$IFNDEF MatricesUnwindLoops}
   Col,Row:  Integer;
+{$ENDIF}
 begin
 Det := Determinant(Matrix);
 If Det <> 0.0 then
   begin
     Det := 1/Det;
+  {$IFDEF MatricesUnwindLoops}
+    Result[0,0] := (Matrix[1,1] * Matrix[2,2] - Matrix[2,1] * Matrix[1,2]) * Det;
+    Result[1,0] := (Matrix[2,0] * Matrix[1,2] - Matrix[1,0] * Matrix[2,2]) * Det;
+    Result[2,0] := (Matrix[1,0] * Matrix[2,1] - Matrix[2,0] * Matrix[1,1]) * Det;
+    Result[0,1] := (Matrix[2,1] * Matrix[0,2] - Matrix[0,1] * Matrix[2,2]) * Det;
+    Result[1,1] := (Matrix[0,0] * Matrix[2,2] - Matrix[2,0] * Matrix[0,2]) * Det;
+    Result[2,1] := (Matrix[2,0] * Matrix[0,1] - Matrix[0,0] * Matrix[2,1]) * Det;
+    Result[0,2] := (Matrix[0,1] * Matrix[1,2] - Matrix[1,1] * Matrix[0,2]) * Det;
+    Result[1,2] := (Matrix[1,0] * Matrix[0,2] - Matrix[0,0] * Matrix[1,2]) * Det;
+    Result[2,2] := (Matrix[0,0] * Matrix[1,1] - Matrix[1,0] * Matrix[0,1]) * Det;  
+  {$ELSE}
     For Row := Low(Matrix[0]) to High(Matrix[0]) do
       For Col := Low(Matrix) to High(Matrix) do
         If ((Row xor Col) and 1) = 0 then
           Result[Row,Col] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
         else
           Result[Row,Col] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  {$ENDIF}
   end
 else Result := VMCL_ZeroMatrix3CMd;
-end;
+end; 
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
+// unwinding inverse of 4-dim matrices would be... well insane, let's not go there
 Function Inversed(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
 var
   Det:      Extended;
@@ -7736,7 +7821,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Inversed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+Function Inversed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; 
 var
   Det:      Extended;
   Col,Row:  Integer;
@@ -7757,7 +7842,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Inversed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+Function Inversed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; 
 var
   Det:      Extended;
   Col,Row:  Integer;
@@ -7774,7 +7859,7 @@ If Det <> 0.0 then
           Result[Row,Col] := -Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det;
   end
 else Result := VMCL_ZeroMatrix4CMs;
-end;
+end; 
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
@@ -7795,11 +7880,11 @@ If Det <> 0.0 then
           Result[Row,Col] := -Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det;
   end
 else Result := VMCL_ZeroMatrix4CMd;
-end;
+end; 
 
 //------------------------------------------------------------------------------
 
-Function InversedAffine(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+Function InversedAffine(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; 
 var
   SubMat: TVMCLMatrix3RMs;
   Vec:    TVMCLVector3s;
@@ -7816,7 +7901,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function InversedAffine(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+Function InversedAffine(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; 
 var
   SubMat: TVMCLMatrix3RMd;
   Vec:    TVMCLVector3d;
