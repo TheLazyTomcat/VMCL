@@ -7868,208 +7868,388 @@ end;
 {===============================================================================
     Calculations with one matrix - implementation
 ===============================================================================}
-{$message 'unwind'}
+
 Function ScalarMultiply(const Matrix: TVMCLMatrix2RMs; Scalar: Single): TVMCLMatrix2RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[0,1] := Matrix[0,1] * Scalar;
+Result[1,0] := Matrix[1,0] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix2RMd; Scalar: Double): TVMCLMatrix2RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[0,1] := Matrix[0,1] * Scalar;
+Result[1,0] := Matrix[1,0] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix2CMs; Scalar: Single): TVMCLMatrix2CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[1,0] := Matrix[1,0] * Scalar;
+Result[0,1] := Matrix[0,1] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix2CMd; Scalar: Double): TVMCLMatrix2CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[1,0] := Matrix[1,0] * Scalar;
+Result[0,1] := Matrix[0,1] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix3RMs; Scalar: Single): TVMCLMatrix3RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[0,1] := Matrix[0,1] * Scalar; Result[0,2] := Matrix[0,2] * Scalar;
+Result[1,0] := Matrix[1,0] * Scalar; Result[1,1] := Matrix[1,1] * Scalar; Result[1,2] := Matrix[1,2] * Scalar;
+Result[2,0] := Matrix[2,0] * Scalar; Result[2,1] := Matrix[2,1] * Scalar; Result[2,2] := Matrix[2,2] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix3RMd; Scalar: Double): TVMCLMatrix3RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[0,1] := Matrix[0,1] * Scalar; Result[0,2] := Matrix[0,2] * Scalar;
+Result[1,0] := Matrix[1,0] * Scalar; Result[1,1] := Matrix[1,1] * Scalar; Result[1,2] := Matrix[1,2] * Scalar;
+Result[2,0] := Matrix[2,0] * Scalar; Result[2,1] := Matrix[2,1] * Scalar; Result[2,2] := Matrix[2,2] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix3CMs; Scalar: Single): TVMCLMatrix3CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[1,0] := Matrix[1,0] * Scalar; Result[2,0] := Matrix[2,0] * Scalar;
+Result[0,1] := Matrix[0,1] * Scalar; Result[1,1] := Matrix[1,1] * Scalar; Result[2,1] := Matrix[2,1] * Scalar;
+Result[0,2] := Matrix[0,2] * Scalar; Result[1,2] := Matrix[1,2] * Scalar; Result[2,2] := Matrix[2,2] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix3CMd; Scalar: Double): TVMCLMatrix3CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[1,0] := Matrix[1,0] * Scalar; Result[2,0] := Matrix[2,0] * Scalar;
+Result[0,1] := Matrix[0,1] * Scalar; Result[1,1] := Matrix[1,1] * Scalar; Result[2,1] := Matrix[2,1] * Scalar;
+Result[0,2] := Matrix[0,2] * Scalar; Result[1,2] := Matrix[1,2] * Scalar; Result[2,2] := Matrix[2,2] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix4RMs; Scalar: Single): TVMCLMatrix4RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[0,1] := Matrix[0,1] * Scalar;
+Result[0,2] := Matrix[0,2] * Scalar; Result[0,3] := Matrix[0,3] * Scalar;
+Result[1,0] := Matrix[1,0] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+Result[1,2] := Matrix[1,2] * Scalar; Result[1,3] := Matrix[1,3] * Scalar;
+Result[2,0] := Matrix[2,0] * Scalar; Result[2,1] := Matrix[2,1] * Scalar;
+Result[2,2] := Matrix[2,2] * Scalar; Result[2,3] := Matrix[2,3] * Scalar;
+Result[3,0] := Matrix[3,0] * Scalar; Result[3,1] := Matrix[3,1] * Scalar;
+Result[3,2] := Matrix[3,2] * Scalar; Result[3,3] := Matrix[3,3] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix4RMd; Scalar: Double): TVMCLMatrix4RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[0,1] := Matrix[0,1] * Scalar;
+Result[0,2] := Matrix[0,2] * Scalar; Result[0,3] := Matrix[0,3] * Scalar;
+Result[1,0] := Matrix[1,0] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+Result[1,2] := Matrix[1,2] * Scalar; Result[1,3] := Matrix[1,3] * Scalar;
+Result[2,0] := Matrix[2,0] * Scalar; Result[2,1] := Matrix[2,1] * Scalar;
+Result[2,2] := Matrix[2,2] * Scalar; Result[2,3] := Matrix[2,3] * Scalar;
+Result[3,0] := Matrix[3,0] * Scalar; Result[3,1] := Matrix[3,1] * Scalar;
+Result[3,2] := Matrix[3,2] * Scalar; Result[3,3] := Matrix[3,3] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix4CMs; Scalar: Single): TVMCLMatrix4CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[1,0] := Matrix[1,0] * Scalar;
+Result[2,0] := Matrix[2,0] * Scalar; Result[3,0] := Matrix[3,0] * Scalar;
+Result[0,1] := Matrix[0,1] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+Result[2,1] := Matrix[2,1] * Scalar; Result[3,1] := Matrix[3,1] * Scalar;
+Result[0,2] := Matrix[0,2] * Scalar; Result[1,2] := Matrix[1,2] * Scalar;
+Result[2,2] := Matrix[2,2] * Scalar; Result[3,2] := Matrix[3,2] * Scalar;
+Result[0,3] := Matrix[0,3] * Scalar; Result[1,3] := Matrix[1,3] * Scalar;
+Result[2,3] := Matrix[2,3] * Scalar; Result[3,3] := Matrix[3,3] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function ScalarMultiply(const Matrix: TVMCLMatrix4CMd; Scalar: Double): TVMCLMatrix4CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := Matrix[0,0] * Scalar; Result[1,0] := Matrix[1,0] * Scalar;
+Result[2,0] := Matrix[2,0] * Scalar; Result[3,0] := Matrix[3,0] * Scalar;
+Result[0,1] := Matrix[0,1] * Scalar; Result[1,1] := Matrix[1,1] * Scalar;
+Result[2,1] := Matrix[2,1] * Scalar; Result[3,1] := Matrix[3,1] * Scalar;
+Result[0,2] := Matrix[0,2] * Scalar; Result[1,2] := Matrix[1,2] * Scalar;
+Result[2,2] := Matrix[2,2] * Scalar; Result[3,2] := Matrix[3,2] * Scalar;
+Result[0,3] := Matrix[0,3] * Scalar; Result[1,3] := Matrix[1,3] * Scalar;
+Result[2,3] := Matrix[2,3] * Scalar; Result[3,3] := Matrix[3,3] * Scalar;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(Matrix)[i] * Scalar;
 end;
+{$ENDIF}
 
 //==============================================================================
-{$message 'unwind'}
+
 Function VectorMultiply(const Matrix: TVMCLMatrix2RMs; const Vector: TVMCLVector2s): TVMCLVector2s;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[0,1] * Vector[1];
+Result[1] := Matrix[1,0] * Vector[0] + Matrix[1,1] * Vector[1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix2RMd; const Vector: TVMCLVector2d): TVMCLVector2d;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[0,1] * Vector[1];
+Result[1] := Matrix[1,0] * Vector[0] + Matrix[1,1] * Vector[1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix2CMs; const Vector: TVMCLVector2s): TVMCLVector2s;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[1,0] * Vector[1];
+Result[1] := Matrix[0,1] * Vector[0] + Matrix[1,1] * Vector[1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix2CMd; const Vector: TVMCLVector2d): TVMCLVector2d;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[1,0] * Vector[1];
+Result[1] := Matrix[0,1] * Vector[0] + Matrix[1,1] * Vector[1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix3RMs; const Vector: TVMCLVector3s): TVMCLVector3s;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[0,1] * Vector[1] + Matrix[0,2] * Vector[2];
+Result[1] := Matrix[1,0] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[1,2] * Vector[2];
+Result[2] := Matrix[2,0] * Vector[0] + Matrix[2,1] * Vector[1] + Matrix[2,2] * Vector[2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] + Matrix[i,2] * Vector[2];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix3RMd; const Vector: TVMCLVector3d): TVMCLVector3d;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[0,1] * Vector[1] + Matrix[0,2] * Vector[2];
+Result[1] := Matrix[1,0] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[1,2] * Vector[2];
+Result[2] := Matrix[2,0] * Vector[0] + Matrix[2,1] * Vector[1] + Matrix[2,2] * Vector[2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] + Matrix[i,2] * Vector[2];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix3CMs; const Vector: TVMCLVector3s): TVMCLVector3s;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[1,0] * Vector[1] + Matrix[2,0] * Vector[2];
+Result[1] := Matrix[0,1] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[2,1] * Vector[2];
+Result[2] := Matrix[0,2] * Vector[0] + Matrix[1,2] * Vector[1] + Matrix[2,2] * Vector[2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] + Matrix[2,i] * Vector[2];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix3CMd; const Vector: TVMCLVector3d): TVMCLVector3d;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[1,0] * Vector[1] + Matrix[2,0] * Vector[2];
+Result[1] := Matrix[0,1] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[2,1] * Vector[2];
+Result[2] := Matrix[0,2] * Vector[0] + Matrix[1,2] * Vector[1] + Matrix[2,2] * Vector[2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] + Matrix[2,i] * Vector[2];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix4RMs; const Vector: TVMCLVector4s): TVMCLVector4s;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[0,1] * Vector[1] + Matrix[0,2] * Vector[2] + Matrix[0,3] * Vector[3];
+Result[1] := Matrix[1,0] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[1,2] * Vector[2] + Matrix[1,3] * Vector[3];
+Result[2] := Matrix[2,0] * Vector[0] + Matrix[2,1] * Vector[1] + Matrix[2,2] * Vector[2] + Matrix[2,3] * Vector[3];
+Result[3] := Matrix[3,0] * Vector[0] + Matrix[3,1] * Vector[1] + Matrix[3,2] * Vector[2] + Matrix[3,3] * Vector[3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -8077,10 +8257,19 @@ For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] +
                Matrix[i,2] * Vector[2] + Matrix[i,3] * Vector[3];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorMultiply(const Matrix: TVMCLMatrix4RMd; const Vector: TVMCLVector4d): TVMCLVector4d;
+Function VectorMultiply(const Matrix: TVMCLMatrix4RMd; const Vector: TVMCLVector4d): TVMCLVector4d; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[0,1] * Vector[1] + Matrix[0,2] * Vector[2] + Matrix[0,3] * Vector[3];
+Result[1] := Matrix[1,0] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[1,2] * Vector[2] + Matrix[1,3] * Vector[3];
+Result[2] := Matrix[2,0] * Vector[0] + Matrix[2,1] * Vector[1] + Matrix[2,2] * Vector[2] + Matrix[2,3] * Vector[3];
+Result[3] := Matrix[3,0] * Vector[0] + Matrix[3,1] * Vector[1] + Matrix[3,2] * Vector[2] + Matrix[3,3] * Vector[3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -8088,10 +8277,19 @@ For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] +
                Matrix[i,2] * Vector[2] + Matrix[i,3] * Vector[3];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix4CMs; const Vector: TVMCLVector4s): TVMCLVector4s;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[1,0] * Vector[1] + Matrix[2,0] * Vector[2] + Matrix[3,0] * Vector[3];
+Result[1] := Matrix[0,1] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[2,1] * Vector[2] + Matrix[3,1] * Vector[3];
+Result[2] := Matrix[0,2] * Vector[0] + Matrix[1,2] * Vector[1] + Matrix[2,2] * Vector[2] + Matrix[3,2] * Vector[3];
+Result[3] := Matrix[0,3] * Vector[0] + Matrix[1,3] * Vector[1] + Matrix[2,3] * Vector[2] + Matrix[3,3] * Vector[3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -8099,10 +8297,19 @@ For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] +
                Matrix[2,i] * Vector[2] + Matrix[3,i] * Vector[3];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorMultiply(const Matrix: TVMCLMatrix4CMd; const Vector: TVMCLVector4d): TVMCLVector4d;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0] := Matrix[0,0] * Vector[0] + Matrix[1,0] * Vector[1] + Matrix[2,0] * Vector[2] + Matrix[3,0] * Vector[3];
+Result[1] := Matrix[0,1] * Vector[0] + Matrix[1,1] * Vector[1] + Matrix[2,1] * Vector[2] + Matrix[3,1] * Vector[3];
+Result[2] := Matrix[0,2] * Vector[0] + Matrix[1,2] * Vector[1] + Matrix[2,2] * Vector[2] + Matrix[3,2] * Vector[3];
+Result[3] := Matrix[0,3] * Vector[0] + Matrix[1,3] * Vector[1] + Matrix[2,3] * Vector[2] + Matrix[3,3] * Vector[3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -8110,248 +8317,473 @@ For i := Low(Vector) to High(Vector) do
   Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] +
                Matrix[2,i] * Vector[2] + Matrix[3,i] * Vector[3];
 end;
+{$ENDIF}
 
 {===============================================================================
     Calculations with multiple matrices - implementation
 ===============================================================================}
-{$message 'unwind'}
+
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[0,1] := aMatrix[0,1] + bMatrix[0,1];
+Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] + TVMCLMatrix2so(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[0,1] := aMatrix[0,1] + bMatrix[0,1];
+Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] + TVMCLMatrix2do(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[1,0] := aMatrix[1,0] + bMatrix[1,0];
+Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] + TVMCLMatrix2so(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[1,0] := aMatrix[1,0] + bMatrix[1,0];
+Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] + TVMCLMatrix2do(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[0,2] := aMatrix[0,2] + bMatrix[0,2];
+Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1]; Result[1,2] := aMatrix[1,2] + bMatrix[1,2];
+Result[2,0] := aMatrix[2,0] + bMatrix[2,0]; Result[2,1] := aMatrix[2,1] + bMatrix[2,1]; Result[2,2] := aMatrix[2,2] + bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] + TVMCLMatrix3so(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[0,2] := aMatrix[0,2] + bMatrix[0,2];
+Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1]; Result[1,2] := aMatrix[1,2] + bMatrix[1,2];
+Result[2,0] := aMatrix[2,0] + bMatrix[2,0]; Result[2,1] := aMatrix[2,1] + bMatrix[2,1]; Result[2,2] := aMatrix[2,2] + bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] + TVMCLMatrix3do(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[2,0] := aMatrix[2,0] + bMatrix[2,0];
+Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1]; Result[2,1] := aMatrix[2,1] + bMatrix[2,1];
+Result[0,2] := aMatrix[0,2] + bMatrix[0,2]; Result[1,2] := aMatrix[1,2] + bMatrix[1,2]; Result[2,2] := aMatrix[2,2] + bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] + TVMCLMatrix3so(bMatrix)[i];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[2,0] := aMatrix[2,0] + bMatrix[2,0];
+Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1]; Result[2,1] := aMatrix[2,1] + bMatrix[2,1];
+Result[0,2] := aMatrix[0,2] + bMatrix[0,2]; Result[1,2] := aMatrix[1,2] + bMatrix[1,2]; Result[2,2] := aMatrix[2,2] + bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] + TVMCLMatrix3do(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[0,1] := aMatrix[0,1] + bMatrix[0,1];
+Result[0,2] := aMatrix[0,2] + bMatrix[0,2]; Result[0,3] := aMatrix[0,3] + bMatrix[0,3];
+Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+Result[1,2] := aMatrix[1,2] + bMatrix[1,2]; Result[1,3] := aMatrix[1,3] + bMatrix[1,3];
+Result[2,0] := aMatrix[2,0] + bMatrix[2,0]; Result[2,1] := aMatrix[2,1] + bMatrix[2,1];
+Result[2,2] := aMatrix[2,2] + bMatrix[2,2]; Result[2,3] := aMatrix[2,3] + bMatrix[2,3];
+Result[3,0] := aMatrix[3,0] + bMatrix[3,0]; Result[3,1] := aMatrix[3,1] + bMatrix[3,1];
+Result[3,2] := aMatrix[3,2] + bMatrix[3,2]; Result[3,3] := aMatrix[3,3] + bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] + TVMCLMatrix4so(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[0,1] := aMatrix[0,1] + bMatrix[0,1];
+Result[0,2] := aMatrix[0,2] + bMatrix[0,2]; Result[0,3] := aMatrix[0,3] + bMatrix[0,3];
+Result[1,0] := aMatrix[1,0] + bMatrix[1,0]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+Result[1,2] := aMatrix[1,2] + bMatrix[1,2]; Result[1,3] := aMatrix[1,3] + bMatrix[1,3];
+Result[2,0] := aMatrix[2,0] + bMatrix[2,0]; Result[2,1] := aMatrix[2,1] + bMatrix[2,1];
+Result[2,2] := aMatrix[2,2] + bMatrix[2,2]; Result[2,3] := aMatrix[2,3] + bMatrix[2,3];
+Result[3,0] := aMatrix[3,0] + bMatrix[3,0]; Result[3,1] := aMatrix[3,1] + bMatrix[3,1];
+Result[3,2] := aMatrix[3,2] + bMatrix[3,2]; Result[3,3] := aMatrix[3,3] + bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] + TVMCLMatrix4do(bMatrix)[i];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[1,0] := aMatrix[1,0] + bMatrix[1,0];
+Result[2,0] := aMatrix[2,0] + bMatrix[2,0]; Result[3,0] := aMatrix[3,0] + bMatrix[3,0];
+Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+Result[2,1] := aMatrix[2,1] + bMatrix[2,1]; Result[3,1] := aMatrix[3,1] + bMatrix[3,1];
+Result[0,2] := aMatrix[0,2] + bMatrix[0,2]; Result[1,2] := aMatrix[1,2] + bMatrix[1,2];
+Result[2,2] := aMatrix[2,2] + bMatrix[2,2]; Result[3,2] := aMatrix[3,2] + bMatrix[3,2];
+Result[0,3] := aMatrix[0,3] + bMatrix[0,3]; Result[1,3] := aMatrix[1,3] + bMatrix[1,3];
+Result[2,3] := aMatrix[2,3] + bMatrix[2,3]; Result[3,3] := aMatrix[3,3] + bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] + TVMCLMatrix4so(bMatrix)[i];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
  
 Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] + bMatrix[0,0]; Result[1,0] := aMatrix[1,0] + bMatrix[1,0];
+Result[2,0] := aMatrix[2,0] + bMatrix[2,0]; Result[3,0] := aMatrix[3,0] + bMatrix[3,0];
+Result[0,1] := aMatrix[0,1] + bMatrix[0,1]; Result[1,1] := aMatrix[1,1] + bMatrix[1,1];
+Result[2,1] := aMatrix[2,1] + bMatrix[2,1]; Result[3,1] := aMatrix[3,1] + bMatrix[3,1];
+Result[0,2] := aMatrix[0,2] + bMatrix[0,2]; Result[1,2] := aMatrix[1,2] + bMatrix[1,2];
+Result[2,2] := aMatrix[2,2] + bMatrix[2,2]; Result[3,2] := aMatrix[3,2] + bMatrix[3,2];
+Result[0,3] := aMatrix[0,3] + bMatrix[0,3]; Result[1,3] := aMatrix[1,3] + bMatrix[1,3];
+Result[2,3] := aMatrix[2,3] + bMatrix[2,3]; Result[3,3] := aMatrix[3,3] + bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] + TVMCLMatrix4do(bMatrix)[i];
-end;
+end;   
+{$ENDIF}
 
 //==============================================================================
-{$message 'unwind'}
+
 Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[0,1] := aMatrix[0,1] - bMatrix[0,1];
+Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] - TVMCLMatrix2so(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[0,1] := aMatrix[0,1] - bMatrix[0,1];
+Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] - TVMCLMatrix2do(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[1,0] := aMatrix[1,0] - bMatrix[1,0];
+Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] - TVMCLMatrix2so(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[1,0] := aMatrix[1,0] - bMatrix[1,0];
+Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] - TVMCLMatrix2do(bMatrix)[i];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[0,2] := aMatrix[0,2] - bMatrix[0,2];
+Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1]; Result[1,2] := aMatrix[1,2] - bMatrix[1,2];
+Result[2,0] := aMatrix[2,0] - bMatrix[2,0]; Result[2,1] := aMatrix[2,1] - bMatrix[2,1]; Result[2,2] := aMatrix[2,2] - bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] - TVMCLMatrix3so(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[0,2] := aMatrix[0,2] - bMatrix[0,2];
+Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1]; Result[1,2] := aMatrix[1,2] - bMatrix[1,2];
+Result[2,0] := aMatrix[2,0] - bMatrix[2,0]; Result[2,1] := aMatrix[2,1] - bMatrix[2,1]; Result[2,2] := aMatrix[2,2] - bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] - TVMCLMatrix3do(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[2,0] := aMatrix[2,0] - bMatrix[2,0];
+Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1]; Result[2,1] := aMatrix[2,1] - bMatrix[2,1];
+Result[0,2] := aMatrix[0,2] - bMatrix[0,2]; Result[1,2] := aMatrix[1,2] - bMatrix[1,2]; Result[2,2] := aMatrix[2,2] - bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] - TVMCLMatrix3so(bMatrix)[i];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[2,0] := aMatrix[2,0] - bMatrix[2,0];
+Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1]; Result[2,1] := aMatrix[2,1] - bMatrix[2,1];
+Result[0,2] := aMatrix[0,2] - bMatrix[0,2]; Result[1,2] := aMatrix[1,2] - bMatrix[1,2]; Result[2,2] := aMatrix[2,2] - bMatrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] - TVMCLMatrix3do(bMatrix)[i];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[0,1] := aMatrix[0,1] - bMatrix[0,1];
+Result[0,2] := aMatrix[0,2] - bMatrix[0,2]; Result[0,3] := aMatrix[0,3] - bMatrix[0,3];
+Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+Result[1,2] := aMatrix[1,2] - bMatrix[1,2]; Result[1,3] := aMatrix[1,3] - bMatrix[1,3];
+Result[2,0] := aMatrix[2,0] - bMatrix[2,0]; Result[2,1] := aMatrix[2,1] - bMatrix[2,1];
+Result[2,2] := aMatrix[2,2] - bMatrix[2,2]; Result[2,3] := aMatrix[2,3] - bMatrix[2,3];
+Result[3,0] := aMatrix[3,0] - bMatrix[3,0]; Result[3,1] := aMatrix[3,1] - bMatrix[3,1];
+Result[3,2] := aMatrix[3,2] - bMatrix[3,2]; Result[3,3] := aMatrix[3,3] - bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] - TVMCLMatrix4so(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[0,1] := aMatrix[0,1] - bMatrix[0,1];
+Result[0,2] := aMatrix[0,2] - bMatrix[0,2]; Result[0,3] := aMatrix[0,3] - bMatrix[0,3];
+Result[1,0] := aMatrix[1,0] - bMatrix[1,0]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+Result[1,2] := aMatrix[1,2] - bMatrix[1,2]; Result[1,3] := aMatrix[1,3] - bMatrix[1,3];
+Result[2,0] := aMatrix[2,0] - bMatrix[2,0]; Result[2,1] := aMatrix[2,1] - bMatrix[2,1];
+Result[2,2] := aMatrix[2,2] - bMatrix[2,2]; Result[2,3] := aMatrix[2,3] - bMatrix[2,3];
+Result[3,0] := aMatrix[3,0] - bMatrix[3,0]; Result[3,1] := aMatrix[3,1] - bMatrix[3,1];
+Result[3,2] := aMatrix[3,2] - bMatrix[3,2]; Result[3,3] := aMatrix[3,3] - bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] - TVMCLMatrix4do(bMatrix)[i];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[1,0] := aMatrix[1,0] - bMatrix[1,0];
+Result[2,0] := aMatrix[2,0] - bMatrix[2,0]; Result[3,0] := aMatrix[3,0] - bMatrix[3,0];
+Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+Result[2,1] := aMatrix[2,1] - bMatrix[2,1]; Result[3,1] := aMatrix[3,1] - bMatrix[3,1];
+Result[0,2] := aMatrix[0,2] - bMatrix[0,2]; Result[1,2] := aMatrix[1,2] - bMatrix[1,2];
+Result[2,2] := aMatrix[2,2] - bMatrix[2,2]; Result[3,2] := aMatrix[3,2] - bMatrix[3,2];
+Result[0,3] := aMatrix[0,3] - bMatrix[0,3]; Result[1,3] := aMatrix[1,3] - bMatrix[1,3];
+Result[2,3] := aMatrix[2,3] - bMatrix[2,3]; Result[3,3] := aMatrix[3,3] - bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] - TVMCLMatrix4so(bMatrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] - bMatrix[0,0]; Result[1,0] := aMatrix[1,0] - bMatrix[1,0];
+Result[2,0] := aMatrix[2,0] - bMatrix[2,0]; Result[3,0] := aMatrix[3,0] - bMatrix[3,0];
+Result[0,1] := aMatrix[0,1] - bMatrix[0,1]; Result[1,1] := aMatrix[1,1] - bMatrix[1,1];
+Result[2,1] := aMatrix[2,1] - bMatrix[2,1]; Result[3,1] := aMatrix[3,1] - bMatrix[3,1];
+Result[0,2] := aMatrix[0,2] - bMatrix[0,2]; Result[1,2] := aMatrix[1,2] - bMatrix[1,2];
+Result[2,2] := aMatrix[2,2] - bMatrix[2,2]; Result[3,2] := aMatrix[3,2] - bMatrix[3,2];
+Result[0,3] := aMatrix[0,3] - bMatrix[0,3]; Result[1,3] := aMatrix[1,3] - bMatrix[1,3];
+Result[2,3] := aMatrix[2,3] - bMatrix[2,3]; Result[3,3] := aMatrix[3,3] - bMatrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] - TVMCLMatrix4do(bMatrix)[i];
-end;
+end;  
+{$ENDIF}
 
 //==============================================================================
 {$message 'unwind'}
