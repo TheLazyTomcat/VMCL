@@ -720,16 +720,127 @@ Function Matrix4(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4CMd; overload;
 {===============================================================================
     Basic matrix functions (zeroing, comparison, etc.)
 ===============================================================================}
-(*
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMs); overload;
 procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMd); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMs); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMd); overload;
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMs); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMd); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMs); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMd); overload;
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMs); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMd); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMs); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMd); overload;
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMs): Boolean; overload;
 Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMs): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMd): Boolean; overload;
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMs): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMd): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMs): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMd): Boolean; overload;
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMs): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMd): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMs): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMd): Boolean; overload;
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMs); overload;
 procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMd); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMs); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMd); overload;
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMs); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMd); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMs); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMd); overload;
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMs); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMd); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMs); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMd); overload;
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMs): Boolean; overload;
 Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMs): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMd): Boolean; overload;
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMs): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMd): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMs): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMd): Boolean; overload;
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMs): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMd): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMs): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMd): Boolean; overload;
+
+procedure CopyMatrix(const Src: TVMCLMatrix2RMs; var Dest: TVMCLMatrix2RMs); overload;
 procedure CopyMatrix(const Src: TVMCLMatrix2RMd; var Dest: TVMCLMatrix2RMd); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix2CMs; var Dest: TVMCLMatrix2CMs); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix2CMd; var Dest: TVMCLMatrix2CMd); overload;
+
+procedure CopyMatrix(const Src: TVMCLMatrix3RMs; var Dest: TVMCLMatrix3RMs); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix3RMd; var Dest: TVMCLMatrix3RMd); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix3CMs; var Dest: TVMCLMatrix3CMs); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix3CMd; var Dest: TVMCLMatrix3CMd); overload;
+
+procedure CopyMatrix(const Src: TVMCLMatrix4RMs; var Dest: TVMCLMatrix4RMs); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix4RMd; var Dest: TVMCLMatrix4RMd); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix4CMs; var Dest: TVMCLMatrix4CMs); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix4CMd; var Dest: TVMCLMatrix4CMd); overload;
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs): Boolean; overload;
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd): Boolean; overload;
-Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd; Epsilon: Single = 0): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMs): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMd): Boolean; overload;
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMs): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMd): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMs): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMd): Boolean; overload;
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMs): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs): Boolean; overload;
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd): Boolean; overload;
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs; Epsilon: Single = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd; Epsilon: Double = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMs; Epsilon: Single = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMd; Epsilon: Double = 0): Boolean; overload;
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMs; Epsilon: Single = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMd; Epsilon: Double = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMs; Epsilon: Single = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMd; Epsilon: Double = 0): Boolean; overload;
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMs; Epsilon: Single = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd; Epsilon: Double = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs; Epsilon: Single = 0): Boolean; overload;
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd; Epsilon: Double = 0): Boolean; overload;
+
+Function Invertible(const Matrix: TVMCLMatrix2RMs): Boolean; overload;
 Function Invertible(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
-*)
+Function Invertible(const Matrix: TVMCLMatrix2CMs): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix2CMd): Boolean; overload;
+
+Function Invertible(const Matrix: TVMCLMatrix3RMs): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix3RMd): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix3CMs): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix3CMd): Boolean; overload;
+
+Function Invertible(const Matrix: TVMCLMatrix4RMs): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix4RMd): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix4CMs): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix4CMd): Boolean; overload;
+
 {===============================================================================
     Basic Matrix calculations
 ===============================================================================}
@@ -764,6 +875,74 @@ Function Transposed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
 Function Transposed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
 Function Transposed(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
 
+Function Negative(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function Negative(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
+Function Negative(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
+Function Negative(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
+
+Function Negative(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
+Function Negative(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
+Function Negative(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
+Function Negative(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
+
+Function Negative(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function Negative(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function Negative(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function Negative(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
+Function Determinant(const Matrix: TVMCLMatrix2RMs): Single; overload;
+Function Determinant(const Matrix: TVMCLMatrix2RMd): Double; overload;
+Function Determinant(const Matrix: TVMCLMatrix2CMs): Single; overload;
+Function Determinant(const Matrix: TVMCLMatrix2CMd): Double; overload;
+
+Function Determinant(const Matrix: TVMCLMatrix3RMs): Single; overload;
+Function Determinant(const Matrix: TVMCLMatrix3RMd): Double; overload;
+Function Determinant(const Matrix: TVMCLMatrix3CMs): Single; overload;
+Function Determinant(const Matrix: TVMCLMatrix3CMd): Double; overload;
+
+Function Determinant(const Matrix: TVMCLMatrix4RMs): Single; overload;
+Function Determinant(const Matrix: TVMCLMatrix4RMd): Double; overload;
+Function Determinant(const Matrix: TVMCLMatrix4CMs): Single; overload;
+Function Determinant(const Matrix: TVMCLMatrix4CMd): Double; overload;
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix2RMs); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix2RMd); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix2CMs); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix2CMd); overload;
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix3RMs); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix3RMd); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix3CMs); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix3CMd); overload;
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix4RMs); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix4RMd); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix4CMs); overload;
+procedure Orthonormalize(var Matrix: TVMCLMatrix4CMd); overload;
+(*
+procedure Inverse(var Matrix: TVMCLMatrix2RMs); overload;
+procedure Inverse(var Matrix: TVMCLMatrix2RMd); overload;
+procedure Inverse(var Matrix: TVMCLMatrix2CMs); overload;
+procedure Inverse(var Matrix: TVMCLMatrix2CMd); overload;
+
+procedure Inverse(var Matrix: TVMCLMatrix3RMs); overload;
+procedure Inverse(var Matrix: TVMCLMatrix3RMd); overload;
+procedure Inverse(var Matrix: TVMCLMatrix3CMs); overload;
+procedure Inverse(var Matrix: TVMCLMatrix3CMd); overload;
+
+procedure Inverse(var Matrix: TVMCLMatrix4RMs); overload;
+procedure Inverse(var Matrix: TVMCLMatrix4RMd); overload;
+procedure Inverse(var Matrix: TVMCLMatrix4CMs); overload;
+procedure Inverse(var Matrix: TVMCLMatrix4CMd); overload;
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMs); overload;
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMd); overload;
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMs); overload;
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMd); overload;
+(*
+Function Inversed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function InversedAffine(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+*)
 implementation
 
 uses
@@ -5082,6 +5261,869 @@ end;
     Basic matrix functions (zeroing, comparison, etc.)
 ===============================================================================}
 
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMs);
+begin
+Matrix := VMCL_ZeroMatrix2RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMd);
+begin
+Matrix := VMCL_ZeroMatrix2RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMs);
+begin
+Matrix := VMCL_ZeroMatrix2CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMd);
+begin
+Matrix := VMCL_ZeroMatrix2CMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMs);
+begin
+Matrix := VMCL_ZeroMatrix3RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMd);
+begin
+Matrix := VMCL_ZeroMatrix3RMd
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMs);
+begin
+Matrix := VMCL_ZeroMatrix3CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMd);
+begin
+Matrix := VMCL_ZeroMatrix3CMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := VMCL_ZeroMatrix4RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := VMCL_ZeroMatrix4RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := VMCL_ZeroMatrix4CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := VMCL_ZeroMatrix4CMd;
+end;
+
+//==============================================================================
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix2RMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix2RMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix2CMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix2CMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix3RMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix3RMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix3CMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix3CMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix4RMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix4RMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix4CMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_ZeroMatrix4CMd);
+end;
+
+//==============================================================================
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMs);
+begin
+Matrix := VMCL_IdentityMatrix2RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMd);
+begin
+Matrix := VMCL_IdentityMatrix2RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMs);
+begin
+Matrix := VMCL_IdentityMatrix2CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMd);
+begin
+Matrix := VMCL_IdentityMatrix2CMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMs);
+begin
+Matrix := VMCL_IdentityMatrix3RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMd);
+begin
+Matrix := VMCL_IdentityMatrix3RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMs);
+begin
+Matrix := VMCL_IdentityMatrix3CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMd);
+begin
+Matrix := VMCL_IdentityMatrix3CMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := VMCL_IdentityMatrix4RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := VMCL_IdentityMatrix4RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := VMCL_IdentityMatrix4CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := VMCL_IdentityMatrix4CMd;
+end;
+
+//==============================================================================
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix2RMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix2RMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix2CMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix2CMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix3RMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix3RMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix3CMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix3CMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix4RMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix4RMd);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMs): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix4CMs);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMd): Boolean;
+begin
+Result := EqualMatrices(Matrix,VMCL_IdentityMatrix4CMd);
+end;
+
+//==============================================================================
+
+procedure CopyMatrix(const Src: TVMCLMatrix2RMs; var Dest: TVMCLMatrix2RMs);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix2RMd; var Dest: TVMCLMatrix2RMd);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix2CMs; var Dest: TVMCLMatrix2CMs);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix2CMd; var Dest: TVMCLMatrix2CMd);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix3RMs; var Dest: TVMCLMatrix3RMs);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix3RMd; var Dest: TVMCLMatrix3RMd);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix3CMs; var Dest: TVMCLMatrix3CMs);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix3CMd; var Dest: TVMCLMatrix3CMd);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix4RMs; var Dest: TVMCLMatrix4RMs);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix4RMd; var Dest: TVMCLMatrix4RMd);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix4CMs; var Dest: TVMCLMatrix4CMs);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure CopyMatrix(const Src: TVMCLMatrix4CMd; var Dest: TVMCLMatrix4CMd);
+begin
+Move(Src,Dest,SizeOf(Src));
+end;
+
+//==============================================================================
+
+{$message 'unwind'}
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  If TVMCLMatrix2so(aMatrix)[i] <> TVMCLMatrix2so(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  If TVMCLMatrix2do(aMatrix)[i] <> TVMCLMatrix2do(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMs): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  If TVMCLMatrix2so(aMatrix)[i] <> TVMCLMatrix2so(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMd): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  If TVMCLMatrix2do(aMatrix)[i] <> TVMCLMatrix2do(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMs): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  If TVMCLMatrix3so(aMatrix)[i] <> TVMCLMatrix3so(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMd): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  If TVMCLMatrix3do(aMatrix)[i] <> TVMCLMatrix3do(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMs): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  If TVMCLMatrix3so(aMatrix)[i] <> TVMCLMatrix3so(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMd): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  If TVMCLMatrix3do(aMatrix)[i] <> TVMCLMatrix3do(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMs): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  If TVMCLMatrix4so(aMatrix)[i] <> TVMCLMatrix4so(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  If TVMCLMatrix4do(aMatrix)[i] <> TVMCLMatrix4do(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  If TVMCLMatrix4so(aMatrix)[i] <> TVMCLMatrix4so(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  If TVMCLMatrix4do(aMatrix)[i] <> TVMCLMatrix4do(bMatrix)[i] then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//==============================================================================
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs; Epsilon: Single = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  If not SameValue(TVMCLMatrix2so(aMatrix)[i],TVMCLMatrix2so(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd; Epsilon: Double = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  If not SameValue(TVMCLMatrix2do(aMatrix)[i],TVMCLMatrix2do(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMs; Epsilon: Single = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  If not SameValue(TVMCLMatrix2so(aMatrix)[i],TVMCLMatrix2so(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMd; Epsilon: Double = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  If not SameValue(TVMCLMatrix2do(aMatrix)[i],TVMCLMatrix2do(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMs; Epsilon: Single = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  If not SameValue(TVMCLMatrix3so(aMatrix)[i],TVMCLMatrix3so(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMd; Epsilon: Double = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  If not SameValue(TVMCLMatrix3do(aMatrix)[i],TVMCLMatrix3do(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMs; Epsilon: Single = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  If not SameValue(TVMCLMatrix3so(aMatrix)[i],TVMCLMatrix3so(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMd; Epsilon: Double = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  If not SameValue(TVMCLMatrix3do(aMatrix)[i],TVMCLMatrix3do(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMs; Epsilon: Single = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  If not SameValue(TVMCLMatrix4so(aMatrix)[i],TVMCLMatrix4so(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd; Epsilon: Double = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  If not SameValue(TVMCLMatrix4do(aMatrix)[i],TVMCLMatrix4do(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs; Epsilon: Single = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  If not SameValue(TVMCLMatrix4so(aMatrix)[i],TVMCLMatrix4so(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd; Epsilon: Double = 0): Boolean;
+var
+  i:  Integer;
+begin
+Result := True;
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  If not SameValue(TVMCLMatrix4do(aMatrix)[i],TVMCLMatrix4do(bMatrix)[i],Epsilon) then
+    begin
+      Result := False;
+      Break {For i};
+    end;
+end;
+
+//==============================================================================
+
+Function Invertible(const Matrix: TVMCLMatrix2RMs): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix2RMd): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix2CMs): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix2CMd): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix3RMs): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix3RMd): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix3CMs): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix3CMd): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix4RMs): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix4RMd): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix4CMs): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Invertible(const Matrix: TVMCLMatrix4CMd): Boolean;
+begin
+Result := Determinant(Matrix) <> 0;
+end;
+
 {===============================================================================
     Basic Matrix calculations
 ===============================================================================}
@@ -5395,5 +6437,569 @@ For R := Low(Matrix[0]) to High(Matrix[0]) do
     Result[C,R] := Matrix[R,C];
 end;
 {$ENDIF}
+
+//==============================================================================
+
+{$message 'unwind'}
+Function Negative(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := -TVMCLMatrix2so(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := -TVMCLMatrix2do(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := -TVMCLMatrix2so(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := -TVMCLMatrix2do(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := -TVMCLMatrix3so(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := -TVMCLMatrix3do(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := -TVMCLMatrix3so(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := -TVMCLMatrix3do(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := -TVMCLMatrix4so(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := -TVMCLMatrix4do(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := -TVMCLMatrix4so(Matrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Negative(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := -TVMCLMatrix4do(Matrix)[i];
+end;
+
+//==============================================================================
+
+Function Determinant(const Matrix: TVMCLMatrix2RMs): Single;
+begin
+Result := Matrix[0,0] * Matrix[1,1] - Matrix[0,1] * Matrix[1,0];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix2RMd): Double;
+begin
+Result := Matrix[0,0] * Matrix[1,1] - Matrix[0,1] * Matrix[1,0];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+ 
+Function Determinant(const Matrix: TVMCLMatrix2CMs): Single;
+begin
+Result := Matrix[0,0] * Matrix[1,1] - Matrix[1,0] * Matrix[0,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix2CMd): Double;
+begin
+Result := Matrix[0,0] * Matrix[1,1] - Matrix[1,0] * Matrix[0,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix3RMs): Single;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := Matrix[0,0] * Matrix[1,1] * Matrix[2,2] +
+          Matrix[0,1] * Matrix[1,2] * Matrix[2,0] +
+          Matrix[0,2] * Matrix[1,0] * Matrix[2,1] -
+          Matrix[0,0] * Matrix[1,2] * Matrix[2,1] -
+          Matrix[0,1] * Matrix[1,0] * Matrix[2,2] -
+          Matrix[0,2] * Matrix[1,1] * Matrix[2,0];
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix[0]) to High(Matrix[0]) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[0,i] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[0,i] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix3RMd): Double;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := Matrix[0,0] * Matrix[1,1] * Matrix[2,2] +
+          Matrix[0,1] * Matrix[1,2] * Matrix[2,0] +
+          Matrix[0,2] * Matrix[1,0] * Matrix[2,1] -
+          Matrix[0,0] * Matrix[1,2] * Matrix[2,1] -
+          Matrix[0,1] * Matrix[1,0] * Matrix[2,2] -
+          Matrix[0,2] * Matrix[1,1] * Matrix[2,0];
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix[0]) to High(Matrix[0]) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[0,i] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[0,i] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix3CMs): Single;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := Matrix[0,0] * Matrix[1,1] * Matrix[2,2] +
+          Matrix[1,0] * Matrix[2,1] * Matrix[0,2] +
+          Matrix[2,0] * Matrix[0,1] * Matrix[1,2] -
+          Matrix[0,0] * Matrix[2,1] * Matrix[1,2] -
+          Matrix[1,0] * Matrix[0,1] * Matrix[2,2] -
+          Matrix[2,0] * Matrix[1,1] * Matrix[0,2];
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix) to High(Matrix) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[i,0] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[i,0] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix3CMd): Double;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := Matrix[0,0] * Matrix[1,1] * Matrix[2,2] +
+          Matrix[1,0] * Matrix[2,1] * Matrix[0,2] +
+          Matrix[2,0] * Matrix[0,1] * Matrix[1,2] -
+          Matrix[0,0] * Matrix[2,1] * Matrix[1,2] -
+          Matrix[1,0] * Matrix[0,1] * Matrix[2,2] -
+          Matrix[2,0] * Matrix[1,1] * Matrix[0,2];
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix) to High(Matrix) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[i,0] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[i,0] * Determinant(ExtractSubmatrix2(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix4RMs): Single;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := ((Matrix[1,1] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[1,2] * Matrix[2,3] * Matrix[3,1] +
+            Matrix[1,3] * Matrix[2,1] * Matrix[3,2] -
+            Matrix[1,1] * Matrix[2,3] * Matrix[3,2] -
+            Matrix[1,2] * Matrix[2,1] * Matrix[3,3] -
+            Matrix[1,3] * Matrix[2,2] * Matrix[3,1]) * Matrix[0,0]) -
+          ((Matrix[1,0] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[1,2] * Matrix[2,3] * Matrix[3,0] +
+            Matrix[1,3] * Matrix[2,0] * Matrix[3,2] -
+            Matrix[1,0] * Matrix[2,3] * Matrix[3,2] -
+            Matrix[1,2] * Matrix[2,0] * Matrix[3,3] -
+            Matrix[1,3] * Matrix[2,2] * Matrix[3,0]) * Matrix[0,1]) +
+          ((Matrix[1,0] * Matrix[2,1] * Matrix[3,3] +
+            Matrix[1,1] * Matrix[2,3] * Matrix[3,0] +
+            Matrix[1,3] * Matrix[2,0] * Matrix[3,1] -
+            Matrix[1,0] * Matrix[2,3] * Matrix[3,1] -
+            Matrix[1,1] * Matrix[2,0] * Matrix[3,3] -
+            Matrix[1,3] * Matrix[2,1] * Matrix[3,0]) * Matrix[0,2]) -
+          ((Matrix[1,0] * Matrix[2,1] * Matrix[3,2] +
+            Matrix[1,1] * Matrix[2,2] * Matrix[3,0] +
+            Matrix[1,2] * Matrix[2,0] * Matrix[3,1] -
+            Matrix[1,0] * Matrix[2,2] * Matrix[3,1] -
+            Matrix[1,1] * Matrix[2,0] * Matrix[3,2] -
+            Matrix[1,2] * Matrix[2,1] * Matrix[3,0]) * Matrix[0,3]);
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix[0]) to High(Matrix[0]) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[0,i] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[0,i] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix4RMd): Double;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := ((Matrix[1,1] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[1,2] * Matrix[2,3] * Matrix[3,1] +
+            Matrix[1,3] * Matrix[2,1] * Matrix[3,2] -
+            Matrix[1,1] * Matrix[2,3] * Matrix[3,2] -
+            Matrix[1,2] * Matrix[2,1] * Matrix[3,3] -
+            Matrix[1,3] * Matrix[2,2] * Matrix[3,1]) * Matrix[0,0]) -
+          ((Matrix[1,0] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[1,2] * Matrix[2,3] * Matrix[3,0] +
+            Matrix[1,3] * Matrix[2,0] * Matrix[3,2] -
+            Matrix[1,0] * Matrix[2,3] * Matrix[3,2] -
+            Matrix[1,2] * Matrix[2,0] * Matrix[3,3] -
+            Matrix[1,3] * Matrix[2,2] * Matrix[3,0]) * Matrix[0,1]) +
+          ((Matrix[1,0] * Matrix[2,1] * Matrix[3,3] +
+            Matrix[1,1] * Matrix[2,3] * Matrix[3,0] +
+            Matrix[1,3] * Matrix[2,0] * Matrix[3,1] -
+            Matrix[1,0] * Matrix[2,3] * Matrix[3,1] -
+            Matrix[1,1] * Matrix[2,0] * Matrix[3,3] -
+            Matrix[1,3] * Matrix[2,1] * Matrix[3,0]) * Matrix[0,2]) -
+          ((Matrix[1,0] * Matrix[2,1] * Matrix[3,2] +
+            Matrix[1,1] * Matrix[2,2] * Matrix[3,0] +
+            Matrix[1,2] * Matrix[2,0] * Matrix[3,1] -
+            Matrix[1,0] * Matrix[2,2] * Matrix[3,1] -
+            Matrix[1,1] * Matrix[2,0] * Matrix[3,2] -
+            Matrix[1,2] * Matrix[2,1] * Matrix[3,0]) * Matrix[0,3]);
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix[0]) to High(Matrix[0]) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[0,i] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[0,i] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix4CMs): Single;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := ((Matrix[1,1] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[2,1] * Matrix[3,2] * Matrix[1,3] +
+            Matrix[3,1] * Matrix[1,2] * Matrix[2,3] -
+            Matrix[1,1] * Matrix[3,2] * Matrix[2,3] -
+            Matrix[2,1] * Matrix[1,2] * Matrix[3,3] -
+            Matrix[3,1] * Matrix[2,2] * Matrix[1,3]) * Matrix[0,0]) -
+          ((Matrix[0,1] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[2,1] * Matrix[3,2] * Matrix[0,3] +
+            Matrix[3,1] * Matrix[0,2] * Matrix[2,3] -
+            Matrix[0,1] * Matrix[3,2] * Matrix[2,3] -
+            Matrix[2,1] * Matrix[0,2] * Matrix[3,3] -
+            Matrix[3,1] * Matrix[2,2] * Matrix[0,3]) * Matrix[1,0]) +
+          ((Matrix[0,1] * Matrix[1,2] * Matrix[3,3] +
+            Matrix[1,1] * Matrix[3,2] * Matrix[0,3] +
+            Matrix[3,1] * Matrix[0,2] * Matrix[1,3] -
+            Matrix[0,1] * Matrix[3,2] * Matrix[1,3] -
+            Matrix[1,1] * Matrix[0,2] * Matrix[3,3] -
+            Matrix[3,1] * Matrix[1,2] * Matrix[0,3]) * Matrix[2,0]) -
+          ((Matrix[0,1] * Matrix[1,2] * Matrix[2,3] +
+            Matrix[1,1] * Matrix[2,2] * Matrix[0,3] +
+            Matrix[2,1] * Matrix[0,2] * Matrix[1,3] -
+            Matrix[0,1] * Matrix[2,2] * Matrix[1,3] -
+            Matrix[1,1] * Matrix[0,2] * Matrix[2,3] -
+            Matrix[2,1] * Matrix[1,2] * Matrix[0,3]) * Matrix[3,0]);
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix) to High(Matrix) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[i,0] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[i,0] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Determinant(const Matrix: TVMCLMatrix4CMd): Double;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := ((Matrix[1,1] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[2,1] * Matrix[3,2] * Matrix[1,3] +
+            Matrix[3,1] * Matrix[1,2] * Matrix[2,3] -
+            Matrix[1,1] * Matrix[3,2] * Matrix[2,3] -
+            Matrix[2,1] * Matrix[1,2] * Matrix[3,3] -
+            Matrix[3,1] * Matrix[2,2] * Matrix[1,3]) * Matrix[0,0]) -
+          ((Matrix[0,1] * Matrix[2,2] * Matrix[3,3] +
+            Matrix[2,1] * Matrix[3,2] * Matrix[0,3] +
+            Matrix[3,1] * Matrix[0,2] * Matrix[2,3] -
+            Matrix[0,1] * Matrix[3,2] * Matrix[2,3] -
+            Matrix[2,1] * Matrix[0,2] * Matrix[3,3] -
+            Matrix[3,1] * Matrix[2,2] * Matrix[0,3]) * Matrix[1,0]) +
+          ((Matrix[0,1] * Matrix[1,2] * Matrix[3,3] +
+            Matrix[1,1] * Matrix[3,2] * Matrix[0,3] +
+            Matrix[3,1] * Matrix[0,2] * Matrix[1,3] -
+            Matrix[0,1] * Matrix[3,2] * Matrix[1,3] -
+            Matrix[1,1] * Matrix[0,2] * Matrix[3,3] -
+            Matrix[3,1] * Matrix[1,2] * Matrix[0,3]) * Matrix[2,0]) -
+          ((Matrix[0,1] * Matrix[1,2] * Matrix[2,3] +
+            Matrix[1,1] * Matrix[2,2] * Matrix[0,3] +
+            Matrix[2,1] * Matrix[0,2] * Matrix[1,3] -
+            Matrix[0,1] * Matrix[2,2] * Matrix[1,3] -
+            Matrix[1,1] * Matrix[0,2] * Matrix[2,3] -
+            Matrix[2,1] * Matrix[1,2] * Matrix[0,3]) * Matrix[3,0]);
+end;
+{$ELSE}
+var
+  i:  Integer;
+begin
+Result := 0;
+For i := Low(Matrix) to High(Matrix) do
+  If (i and 1) <> 0 then
+    Result := Result - (Matrix[i,0] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+  else
+    Result := Result + (Matrix[i,0] * Determinant(ExtractSubmatrix3(Matrix,0,i)))
+end;
+{$ENDIF}
+
+//==============================================================================
+{$message 'check whether columns or rows should be really orthonormalized'}
+procedure Orthonormalize(var Matrix: TVMCLMatrix2RMs);
+var
+  Col1,Col2:  TVMCLVector2s;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Matrix := RMMatrixFromColumns(Col1,Col2);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix2RMd);
+var
+  Col1,Col2:  TVMCLVector2d;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Matrix := RMMatrixFromColumns(Col1,Col2);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix2CMs);
+var
+  Col1,Col2:  TVMCLVector2s;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Matrix := CMMatrixFromColumns(Col1,Col2);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix2CMd);
+var
+  Col1,Col2:  TVMCLVector2d;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Matrix := CMMatrixFromColumns(Col1,Col2);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix3RMs);
+var
+  Col1,Col2,Col3: TVMCLVector3s;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonal(Col1,MatrixGetColumn(Matrix,2));
+Matrix := RMMatrixFromColumns(Col1,Col2,VectorsOrthonormal(Col2,Col3));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix3RMd);
+var
+  Col1,Col2,Col3: TVMCLVector3d;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonal(Col1,MatrixGetColumn(Matrix,2));
+Matrix := RMMatrixFromColumns(Col1,Col2,VectorsOrthonormal(Col2,Col3));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix3CMs);
+var
+  Col1,Col2,Col3: TVMCLVector3s;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonal(Col1,MatrixGetColumn(Matrix,2));
+Matrix := CMMatrixFromColumns(Col1,Col2,VectorsOrthonormal(Col2,Col3));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix3CMd);
+var
+  Col1,Col2,Col3: TVMCLVector3d;
+begin
+Col1 := Normalized(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormal(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonal(Col1,MatrixGetColumn(Matrix,2));
+Matrix := CMMatrixFromColumns(Col1,Col2,VectorsOrthonormal(Col2,Col3));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix4RMs);
+var
+  Col1,Col2,Col3: TVMCLVector4s;
+begin
+Col1 := NormalizedXYZ(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormalXYZ(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonalXYZ(Col1,MatrixGetColumn(Matrix,2));
+Matrix := RMMatrixFromColumns(Col1,Col2,VectorsOrthonormalXYZ(Col2,Col3),MatrixGetColumn(Matrix,3));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix4RMd);
+var
+  Col1,Col2,Col3: TVMCLVector4d;
+begin
+Col1 := NormalizedXYZ(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormalXYZ(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonalXYZ(Col1,MatrixGetColumn(Matrix,2));
+Matrix := RMMatrixFromColumns(Col1,Col2,VectorsOrthonormalXYZ(Col2,Col3),MatrixGetColumn(Matrix,3));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix4CMs);
+var
+  Col1,Col2,Col3: TVMCLVector4s;
+begin
+Col1 := NormalizedXYZ(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormalXYZ(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonalXYZ(Col1,MatrixGetColumn(Matrix,2));
+Matrix := CMMatrixFromColumns(Col1,Col2,VectorsOrthonormalXYZ(Col2,Col3),MatrixGetColumn(Matrix,3));
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Orthonormalize(var Matrix: TVMCLMatrix4CMd);
+var
+  Col1,Col2,Col3: TVMCLVector4d;
+begin
+Col1 := NormalizedXYZ(MatrixGetColumn(Matrix,0));
+Col2 := VectorsOrthonormalXYZ(Col1,MatrixGetColumn(Matrix,1));
+Col3 := VectorsOrthogonalXYZ(Col1,MatrixGetColumn(Matrix,2));
+Matrix := CMMatrixFromColumns(Col1,Col2,VectorsOrthonormalXYZ(Col2,Col3),MatrixGetColumn(Matrix,3));
+end;
+
+//==============================================================================
+
 
 end.

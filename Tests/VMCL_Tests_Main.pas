@@ -46,6 +46,7 @@ var
 begin
 try
   Randomize;
+  RandSeed := 0;
   WriteLn(Splitter('='));
   WriteLn(CenteredText('','='));
   WriteLn(CenteredText('VMCL - Vectors & Matrices calculation library','='));

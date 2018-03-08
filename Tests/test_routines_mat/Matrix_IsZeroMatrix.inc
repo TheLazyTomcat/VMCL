@@ -1,0 +1,33 @@
+Function Matrix_IsZeroMatrix(AutoTest: Boolean = False): Integer;
+var
+  m2s:  TMatrix2s;
+  m3s:  TMatrix3s;
+  m4s:  TMatrix4s;
+  m2d:  TMatrix2d;
+  m3d:  TMatrix3d;
+  m4d:  TMatrix4d;
+begin
+WriteLn;
+WriteLn(LineText('IsZeroMatrix'));
+RandomMat(m2s); RandomMat(m3s); RandomMat(m4s);
+RandomMat(m2d); RandomMat(m3d); RandomMat(m4d);
+WriteLn;
+WriteLn('m2s: '); WriteLn; WriteLn(MatToStr(m2s) + ' ' + BoolToStr(IsZeroMatrix(m2s),True));
+LoadZeroMatrix(m2s); WriteLn; WriteLn(MatToStr(m2s) + ' ' + BoolToStr(IsZeroMatrix(m2s),True));
+WriteLn;
+WriteLn('m3s: '); WriteLn; WriteLn(MatToStr(m3s) + ' ' + BoolToStr(IsZeroMatrix(m3s),True));
+LoadZeroMatrix(m3s); WriteLn; WriteLn(MatToStr(m3s) + ' ' + BoolToStr(IsZeroMatrix(m3s),True));
+WriteLn;
+WriteLn('m4s: '); WriteLn; WriteLn(MatToStr(m4s) + ' ' + BoolToStr(IsZeroMatrix(m4s),True));
+LoadZeroMatrix(m4s); WriteLn; WriteLn(MatToStr(m4s) + ' ' + BoolToStr(IsZeroMatrix(m4s),True));
+WriteLn;
+WriteLn('m2d: '); WriteLn; WriteLn(MatToStr(m2d) + ' ' + BoolToStr(IsZeroMatrix(m2d),True));
+LoadZeroMatrix(m2d); WriteLn; WriteLn(MatToStr(m2d) + ' ' + BoolToStr(IsZeroMatrix(m2d),True));
+WriteLn;
+WriteLn('m3d: '); WriteLn; WriteLn(MatToStr(m3d) + ' ' + BoolToStr(IsZeroMatrix(m3d),True));
+LoadZeroMatrix(m3d); WriteLn; WriteLn(MatToStr(m3d) + ' ' + BoolToStr(IsZeroMatrix(m3d),True));
+WriteLn;
+WriteLn('m4d: '); WriteLn; WriteLn(MatToStr(m4d) + ' ' + BoolToStr(IsZeroMatrix(m4d),True));
+LoadZeroMatrix(m4d); WriteLn; WriteLn(MatToStr(m4d) + ' ' + BoolToStr(IsZeroMatrix(m4d),True));
+Result := 0;
+end;

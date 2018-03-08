@@ -1,0 +1,37 @@
+Function Matrix_SameMatrices(AutoTest: Boolean = False): Integer;
+var
+  m2s1,m2s2:  TMatrix2s;
+  m3s1,m3s2:  TMatrix3s;
+  m4s1,m4s2:  TMatrix4s;
+  m2d1,m2d2:  TMatrix2d;
+  m3d1,m3d2:  TMatrix3d;
+  m4d1,m4d2:  TMatrix4d;
+  es: Single;
+  ed: Double;
+begin
+WriteLn;
+WriteLn(LineText('SameMatrices'));
+RandomMat(m2s1); RandomMat(m3s1); RandomMat(m4s1);
+RandomMat(m2s2); RandomMat(m3s2); RandomMat(m4s2);
+RandomMat(m2d1); RandomMat(m3d1); RandomMat(m4d1);
+RandomMat(m2d2); RandomMat(m3d2); RandomMat(m4d2);
+WriteLn; es := Random(100);
+WriteLn(Format('m2s (epsilon: %f):',[es])); WriteLn; WriteLn(MatToStr(m2s1)); WriteLn; WriteLn(MatToStr(m2s2) + ' ' + BoolToStr(SameMatrices(m2s1,m2s2,es),True));
+CopyMatrix(m2s1,m2s2); WriteLn; WriteLn(MatToStr(m2s2) + ' ' + BoolToStr(SameMatrices(m2s1,m2s2,es),True));
+WriteLn; es := Random(100);
+WriteLn(Format('m3s (epsilon: %f):',[es])); WriteLn; WriteLn(MatToStr(m3s1)); WriteLn; WriteLn(MatToStr(m3s2) + ' ' + BoolToStr(SameMatrices(m3s1,m3s2,es),True));
+CopyMatrix(m3s1,m3s2); WriteLn; WriteLn(MatToStr(m3s2) + ' ' + BoolToStr(SameMatrices(m3s1,m3s2,es),True));
+WriteLn; es := Random(100);
+WriteLn(Format('m4s (epsilon: %f):',[es])); WriteLn; WriteLn(MatToStr(m4s1)); WriteLn; WriteLn(MatToStr(m4s2) + ' ' + BoolToStr(SameMatrices(m4s1,m4s2,es),True));
+CopyMatrix(m4s1,m4s2); WriteLn; WriteLn(MatToStr(m4s2) + ' ' + BoolToStr(SameMatrices(m4s1,m4s2,es),True));
+WriteLn; ed := Random(100);
+WriteLn(Format('m2d (epsilon: %f):',[ed])); WriteLn; WriteLn(MatToStr(m2d1)); WriteLn; WriteLn(MatToStr(m2d2) + ' ' + BoolToStr(SameMatrices(m2d1,m2d2,ed),True));
+CopyMatrix(m2d1,m2d2); WriteLn; WriteLn(MatToStr(m2d2) + ' ' + BoolToStr(SameMatrices(m2d1,m2d2,ed),True));
+WriteLn; ed := Random(100);
+WriteLn(Format('m3d (epsilon: %f):',[ed])); WriteLn; WriteLn(MatToStr(m3d1)); WriteLn; WriteLn(MatToStr(m3d2) + ' ' + BoolToStr(SameMatrices(m3d1,m3d2,ed),True));
+CopyMatrix(m3d1,m3d2); WriteLn; WriteLn(MatToStr(m3d2) + ' ' + BoolToStr(SameMatrices(m3d1,m3d2,ed),True));
+WriteLn; ed := Random(100);
+WriteLn(Format('m4d (epsilon: %f):',[ed])); WriteLn; WriteLn(MatToStr(m4d1)); WriteLn; WriteLn(MatToStr(m4d2) + ' ' + BoolToStr(SameMatrices(m4d1,m4d2,ed),True));
+CopyMatrix(m4d1,m4d2); WriteLn; WriteLn(MatToStr(m4d2) + ' ' + BoolToStr(SameMatrices(m4d1,m4d2,ed),True));
+Result := 0;
+end;

@@ -1,0 +1,33 @@
+Function Matrix_IsIdentityMatrix(AutoTest: Boolean = False): Integer;
+var
+  m2s:  TMatrix2s;
+  m3s:  TMatrix3s;
+  m4s:  TMatrix4s;
+  m2d:  TMatrix2d;
+  m3d:  TMatrix3d;
+  m4d:  TMatrix4d;
+begin
+WriteLn;
+WriteLn(LineText('IsIdentityMatrix'));
+RandomMat(m2s); RandomMat(m3s); RandomMat(m4s);
+RandomMat(m2d); RandomMat(m3d); RandomMat(m4d);
+WriteLn;
+WriteLn('m2s: '); WriteLn; WriteLn(MatToStr(m2s) + ' ' + BoolToStr(IsIdentityMatrix(m2s),True));
+LoadIdentityMatrix(m2s); WriteLn; WriteLn(MatToStr(m2s) + ' ' + BoolToStr(IsIdentityMatrix(m2s),True));
+WriteLn;
+WriteLn('m3s: '); WriteLn; WriteLn(MatToStr(m3s) + ' ' + BoolToStr(IsIdentityMatrix(m3s),True));
+LoadIdentityMatrix(m3s); WriteLn; WriteLn(MatToStr(m3s) + ' ' + BoolToStr(IsIdentityMatrix(m3s),True));
+WriteLn;
+WriteLn('m4s: '); WriteLn; WriteLn(MatToStr(m4s) + ' ' + BoolToStr(IsIdentityMatrix(m4s),True));
+LoadIdentityMatrix(m4s); WriteLn; WriteLn(MatToStr(m4s) + ' ' + BoolToStr(IsIdentityMatrix(m4s),True));
+WriteLn;
+WriteLn('m2d: '); WriteLn; WriteLn(MatToStr(m2d) + ' ' + BoolToStr(IsIdentityMatrix(m2d),True));
+LoadIdentityMatrix(m2d); WriteLn; WriteLn(MatToStr(m2d) + ' ' + BoolToStr(IsIdentityMatrix(m2d),True));
+WriteLn;
+WriteLn('m3d: '); WriteLn; WriteLn(MatToStr(m3d) + ' ' + BoolToStr(IsIdentityMatrix(m3d),True));
+LoadIdentityMatrix(m3d); WriteLn; WriteLn(MatToStr(m3d) + ' ' + BoolToStr(IsIdentityMatrix(m3d),True));
+WriteLn;
+WriteLn('m4d: '); WriteLn; WriteLn(MatToStr(m4d) + ' ' + BoolToStr(IsIdentityMatrix(m4d),True));
+LoadIdentityMatrix(m4d); WriteLn; WriteLn(MatToStr(m4d) + ' ' + BoolToStr(IsIdentityMatrix(m4d),True));
+Result := 0;
+end;

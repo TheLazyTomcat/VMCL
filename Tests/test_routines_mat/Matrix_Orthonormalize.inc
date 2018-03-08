@@ -1,0 +1,30 @@
+Function Matrix_Orthonormalize(AutoTest: Boolean = False): Integer;
+var
+  m2s:  TMatrix2s;
+  m3s:  TMatrix3s;
+  m4s:  TMatrix4s;
+  m2d:  TMatrix2d;
+  m3d:  TMatrix3d;
+  m4d:  TMatrix4d;
+  MFS:  TVMCLMatrixFormat;
+begin
+MFS := VMCL_DefaultMatrixFormat;
+MFS.CommonFormat.ValueFormat.DecimalPlaces := 4;
+WriteLn;
+WriteLn(LineText('Orthonormalize'));
+RandomMat(m2s); RandomMat(m3s); RandomMat(m4s);
+RandomMat(m2d); RandomMat(m3d); RandomMat(m4d);
+WriteLn;
+WriteLn('m2s:'); WriteLn; WriteLn(MatToStr(m2s)); Orthonormalize(m2s); WriteLn; WriteLn(MatToStr(m2s,MFS));
+WriteLn;
+WriteLn('m3s:'); WriteLn; WriteLn(MatToStr(m3s)); Orthonormalize(m3s); WriteLn; WriteLn(MatToStr(m3s,MFS));
+WriteLn;
+WriteLn('m4s:'); WriteLn; WriteLn(MatToStr(m4s)); Orthonormalize(m4s); WriteLn; WriteLn(MatToStr(m4s,MFS));
+WriteLn;
+WriteLn('m2d:'); WriteLn; WriteLn(MatToStr(m2d)); Orthonormalize(m2d); WriteLn; WriteLn(MatToStr(m2d,MFS));
+WriteLn;
+WriteLn('m3d:'); WriteLn; WriteLn(MatToStr(m3d)); Orthonormalize(m3d); WriteLn; WriteLn(MatToStr(m3d,MFS));
+WriteLn;
+WriteLn('m4d:'); WriteLn; WriteLn(MatToStr(m4d)); Orthonormalize(m4d); WriteLn; WriteLn(MatToStr(m4d,MFS));
+Result := 0;
+end;

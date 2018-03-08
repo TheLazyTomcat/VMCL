@@ -25,7 +25,18 @@ uses
 {$INCLUDE '.\test_routines_mat\Matrix_Exchanging.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_Conversions.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_OrderConversions.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_LoadZeroMatrix.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_IsZeroMatrix.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_LoadIdentityMatrix.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_IsIdentityMatrix.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_CopyMatrix.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_EqualMatrices.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_SameMatrices.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_Invertible.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_Transposition.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_Negative.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_Determinant.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_Orthonormalize.inc'}
 
 //==============================================================================
 
@@ -36,11 +47,15 @@ repeat
 
     [Matrix_Build,Matrix_EntriesAccess,Matrix_VectorExtract,Matrix_VectorReplace,Matrix_Filling,
      Matrix_Spreading,Matrix_SubmatrixRead,Matrix_SubmatrixWrite,Matrix_Exchanging,Matrix_Conversions,
-     Matrix_OrderConversions,Matrix_Transposition],
+     Matrix_OrderConversions,Matrix_LoadZeroMatrix,Matrix_IsZeroMatrix,Matrix_LoadIdentityMatrix,Matrix_IsIdentityMatrix,
+     Matrix_CopyMatrix,Matrix_EqualMatrices,Matrix_SameMatrices,Matrix_Invertible,Matrix_Transposition,Matrix_Negative,
+     Matrix_Determinant,Matrix_Orthonormalize],
 
     ['Matrix building','Matrix entries access','Matrix vector extract','Matrix vector replace','Matrix filling',
      'Matrix spreading','Submatrix read access','Submatrix write access','Matrix exchanges','Matrix conversions',
-     'Matrix order conversions','Matrix trasposition'],
+     'Matrix order conversions','LoadZeroMatrix','IsZeroMatrix','LoadIdentityMatrix','IsIdentityMatrix',
+     'CopyMatrix','EqualMatrices','SameMatrices','Invertible','Matrix trasposition','Negative',
+     'Determinant','Orthonormalize'],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);

@@ -39,9 +39,9 @@ uses
   VMCL_Tests_Common;
 
 // testing routines
-{$INCLUDE '.\test_routines_vec\Vector_build.inc'}
-{$INCLUDE '.\test_routines_vec\Vector_swizzle.inc'}
-{$INCLUDE '.\test_routines_vec\Vector_convert.inc'}
+{$INCLUDE '.\test_routines_vec\Vector_Build.inc'}
+{$INCLUDE '.\test_routines_vec\Vector_Swizzle.inc'}
+{$INCLUDE '.\test_routines_vec\Vector_Convert.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_LoadZeroVector.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_IsZeroVector.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_CopyVector.inc'}
