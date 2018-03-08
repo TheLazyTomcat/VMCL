@@ -1,0 +1,35 @@
+Function Matrix_MatricesAdd(AutoTest: Boolean = False): Integer;
+var
+  m2s1,m2s2:  TMatrix2s;
+  m3s1,m3s2:  TMatrix3s;
+  m4s1,m4s2:  TMatrix4s;
+  m2d1,m2d2:  TMatrix2d;
+  m3d1,m3d2:  TMatrix3d;
+  m4d1,m4d2:  TMatrix4d;
+begin
+WriteLn;
+WriteLn(LineText('MatricesAdd'));
+RandomMat(m2s1); RandomMat(m3s1); RandomMat(m4s1);
+RandomMat(m2s2); RandomMat(m3s2); RandomMat(m4s2);
+RandomMat(m2d1); RandomMat(m3d1); RandomMat(m4d1);
+RandomMat(m2d2); RandomMat(m3d2); RandomMat(m4d2);
+WriteLn;
+WriteLn('m2s:'); WriteLn; WriteLn(MatToStr(m2s1)); WriteLn; WriteLn(MatToStr(m2s2));
+WriteLn; WriteLn(MatToStr(MatricesAdd(m2s1,m2s2)));
+WriteLn;
+WriteLn('m3s:'); WriteLn; WriteLn(MatToStr(m3s1)); WriteLn; WriteLn(MatToStr(m3s2));
+WriteLn; WriteLn(MatToStr(MatricesAdd(m3s1,m3s2)));
+WriteLn;
+WriteLn('m4s:'); WriteLn; WriteLn(MatToStr(m4s1)); WriteLn; WriteLn(MatToStr(m4s2));
+WriteLn; WriteLn(MatToStr(MatricesAdd(m4s1,m4s2)));
+WriteLn;
+WriteLn('m2s:'); WriteLn; WriteLn(MatToStr(m2d1)); WriteLn; WriteLn(MatToStr(m2d2));
+WriteLn; WriteLn(MatToStr(MatricesAdd(m2d1,m2d2)));
+WriteLn;
+WriteLn('m3s:'); WriteLn; WriteLn(MatToStr(m3d1)); WriteLn; WriteLn(MatToStr(m3d2));
+WriteLn; WriteLn(MatToStr(MatricesAdd(m3d1,m3d2)));
+WriteLn;
+WriteLn('m4s:'); WriteLn; WriteLn(MatToStr(m4d1)); WriteLn; WriteLn(MatToStr(m4d2));
+WriteLn; WriteLn(MatToStr(MatricesAdd(m4d1,m4d2)));
+Result := 0;
+end;

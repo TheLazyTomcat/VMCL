@@ -117,12 +117,53 @@
 
 //- VMCL_Vectors ---------------------------------------------------------------
 
+{
+  VectorsDoubleIsDefault
+
+    When defined, default vector type (the one with no specified precision) is
+    set to be of double (64bit) precision. Otherwise it is set to be of single
+    (32bit) precision.
+
+  Not defined by default.
+}
 {.$DEFINE VectorsDoubleIsDefault}
 
 //- VMCL_Matrices --------------------------------------------------------------
 
+{
+  MatricesColumnMajorIsDefault
+
+    When defined, default matrix type (the one with no specified order) is
+    set to be of column-major order. Otherwise it is set to be of row-major
+    order.
+
+  Not defined by default.
+}
 {.$DEFINE MatricesColumnMajorIsDefault}
+
+{
+  MatricesDoubleIsDefault
+
+    When defined, default matrix type (the one with no specified precision) is
+    set to be of double (64bit) precision. Otherwise it is set to be of single
+    (32bit) precision.
+
+  Not defined by default.
+}
 {.$DEFINE MatricesDoubleIsDefault}
+
+{
+  MatricesUnwindLoops
+
+    When defined, some calculations on matrices are done by immediate code (all
+    matrix entries are accessed explicitly). Otherwise these calculations are
+    done using loop(s).
+    It might bring performance boost, but since some calculations are rather
+    complex and the immediate code is large and badly mantainable, there might
+    be some errors in the code.
+
+  Not defined by default.
+}
 {.$DEFINE MatricesUnwindLoops}
 
 //= Do not touch following =====================================================

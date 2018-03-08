@@ -41,7 +41,9 @@ uses
 {$INCLUDE '.\test_routines_mat\Matrix_Inversed.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_ScalarMultiply.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_VectorMultiply.inc'}
-
+{$INCLUDE '.\test_routines_mat\Matrix_MatricesAdd.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_MatricesSubtract.inc'}
+{$INCLUDE '.\test_routines_mat\Matrix_MatricesMultiply.inc'}
 
 //==============================================================================
 
@@ -54,13 +56,15 @@ repeat
      Matrix_Spreading,Matrix_SubmatrixRead,Matrix_SubmatrixWrite,Matrix_Exchanging,Matrix_Conversions,
      Matrix_OrderConversions,Matrix_LoadZeroMatrix,Matrix_IsZeroMatrix,Matrix_LoadIdentityMatrix,Matrix_IsIdentityMatrix,
      Matrix_CopyMatrix,Matrix_EqualMatrices,Matrix_SameMatrices,Matrix_Invertible,Matrix_Transposition,Matrix_Negative,
-     Matrix_Determinant,Matrix_Orthonormalize,Matrix_Inverse,Matrix_Inversed,Matrix_ScalarMultiply,Matrix_VectorMultiply],
+     Matrix_Determinant,Matrix_Orthonormalize,Matrix_Inverse,Matrix_Inversed,Matrix_ScalarMultiply,Matrix_VectorMultiply,
+     Matrix_MatricesAdd,Matrix_MatricesSubtract,Matrix_MatricesMultiply],
 
     ['Matrix building','Matrix entries access','Matrix vector extract','Matrix vector replace','Matrix filling',
      'Matrix spreading','Submatrix read access','Submatrix write access','Matrix exchanges','Matrix conversions',
      'Matrix order conversions','LoadZeroMatrix','IsZeroMatrix','LoadIdentityMatrix','IsIdentityMatrix',
      'CopyMatrix','EqualMatrices','SameMatrices','Invertible','Matrix trasposition','Negative',
-     'Determinant','Orthonormalize','Inverse','Inversed','ScalarMultiply','VectorMultiply'],
+     'Determinant','Orthonormalize','Inverse','Inversed','ScalarMultiply','VectorMultiply',
+     'MatricesAdd','MatricesSubtract','MatricesMultiply'],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);

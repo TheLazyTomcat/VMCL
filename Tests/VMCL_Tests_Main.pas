@@ -27,6 +27,8 @@ unit VMCL_Tests_Main;
 
 {$INCLUDE '..\VMCL_defs.inc'}
 
+{$DEFINE Testing}
+
 interface
 
 procedure Main;
@@ -45,8 +47,11 @@ var
   SelectResult: Integer;
 begin
 try
-  Randomize;
+{$IFDEF Testing}
   RandSeed := 0;
+{$ELSE}
+  Randomize;
+{$ENDIF}   
   WriteLn(Splitter('='));
   WriteLn(CenteredText('','='));
   WriteLn(CenteredText('VMCL - Vectors & Matrices calculation library','='));
@@ -54,6 +59,8 @@ try
   WriteLn(CenteredText('Test suite','='));
   WriteLn(CenteredText('','='));
   WriteLn(Splitter('='));
+  WriteLn;
+  WriteLn('RandSeed: ',Format('0x%.8x',[RandSeed]));
   WriteLn;
   WriteLn('Defines, switches, features: ');
   WriteLn;
@@ -81,7 +88,7 @@ try
   WriteLn;
     Write(Format('  %s MatricesColumnMajorIsDefault',[BoolToMark(infMatricesColumnMajorIsDefault in VMCL_InfoSet)]));
   WriteLn(Format('  %s MatricesDoubleIsDefault',     [BoolToMark(infMatricesDoubleIsDefault in VMCL_InfoSet)]));
-  WriteLn(Format('  %s MatricesUnwindLoops',         [BoolToMark(infMatricesUnwindLoops in VMCL_InfoSet)]));  
+  WriteLn(Format('  %s MatricesUnwindLoops',         [BoolToMark(infMatricesUnwindLoops in VMCL_InfoSet)]));
   repeat
     SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
       [Vectors_Main,Matrices_Main],['Vectors','Matrices']);

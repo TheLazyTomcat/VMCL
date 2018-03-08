@@ -997,25 +997,51 @@ Function VectorMultiply(const Matrix: TVMCLMatrix4CMd; const Vector: TVMCLVector
 {===============================================================================
     Calculations with multiple matrices - declaration
 ===============================================================================}
-(*
-Function MatrixAdd(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
-Function MatrixSubstract(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
-*)
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
+
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
+
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
 
 implementation
 
@@ -7739,7 +7765,247 @@ end;
     Calculations with multiple matrices - implementation
 ===============================================================================}
 {$message 'unwind'}
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] + TVMCLMatrix2so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] + TVMCLMatrix2do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] + TVMCLMatrix2so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] + TVMCLMatrix2do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] + TVMCLMatrix3so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] + TVMCLMatrix3do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] + TVMCLMatrix3so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] + TVMCLMatrix3do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] + TVMCLMatrix4so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] + TVMCLMatrix4do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] + TVMCLMatrix4so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+ 
+Function MatricesAdd(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] + TVMCLMatrix4do(bMatrix)[i];
+end;
+
+//==============================================================================
+{$message 'unwind'}
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] - TVMCLMatrix2so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] - TVMCLMatrix2do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(aMatrix)[i] - TVMCLMatrix2so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(aMatrix)[i] - TVMCLMatrix2do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] - TVMCLMatrix3so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] - TVMCLMatrix3do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(aMatrix)[i] - TVMCLMatrix3so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; 
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(aMatrix)[i] - TVMCLMatrix3do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] - TVMCLMatrix4so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] - TVMCLMatrix4do(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(aMatrix)[i] - TVMCLMatrix4so(bMatrix)[i];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(aMatrix)[i] - TVMCLMatrix4do(bMatrix)[i];
+end;
+
+//==============================================================================
+{$message 'unwind'}
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
 var
   Col,Row:  Integer;
 begin
@@ -7751,7 +8017,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
 var
   Col,Row:  Integer;
 begin
@@ -7763,7 +8029,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
 var
   Col,Row:  Integer;
 begin
@@ -7775,7 +8041,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; 
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; 
 var
   Col,Row:  Integer;
 begin
@@ -7787,7 +8053,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
 var
   Col,Row:  Integer;
 begin
@@ -7800,7 +8066,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
 var
   Col,Row:  Integer;
 begin
@@ -7813,7 +8079,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
 var
   Col,Row:  Integer;
 begin
@@ -7826,7 +8092,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
 var
   Col,Row:  Integer;
 begin
@@ -7839,7 +8105,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
 var
   Col,Row:  Integer;
 begin
@@ -7853,7 +8119,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
 var
   Col,Row:  Integer;
 begin
@@ -7867,7 +8133,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
 var
   Col,Row:  Integer;
 begin
@@ -7881,7 +8147,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
 var
   Col,Row:  Integer;
 begin
