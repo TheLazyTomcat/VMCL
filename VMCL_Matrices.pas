@@ -718,7 +718,7 @@ Function Matrix4(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4CMs; overload;
 Function Matrix4(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4CMd; overload;
 
 {===============================================================================
-    Basic matrix functions (zeroing, comparison, etc.)
+    Basic matrix functions (zeroing, comparison, etc.) - declaration
 ===============================================================================}
 
 procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMs); overload;
@@ -842,7 +842,7 @@ Function Invertible(const Matrix: TVMCLMatrix4CMs): Boolean; overload;
 Function Invertible(const Matrix: TVMCLMatrix4CMd): Boolean; overload;
 
 {===============================================================================
-    Basic Matrix calculations
+    Basic Matrix calculations - declaration
 ===============================================================================}
 
 procedure Transpose(var Matrix: TVMCLMatrix2RMs); overload;
@@ -919,7 +919,7 @@ procedure Orthonormalize(var Matrix: TVMCLMatrix4RMs); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4RMd); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMs); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMd); overload;
-(*
+
 procedure Inverse(var Matrix: TVMCLMatrix2RMs); overload;
 procedure Inverse(var Matrix: TVMCLMatrix2RMd); overload;
 procedure Inverse(var Matrix: TVMCLMatrix2CMs); overload;
@@ -939,10 +939,84 @@ procedure InverseAffine(var Matrix: TVMCLMatrix4RMs); overload;
 procedure InverseAffine(var Matrix: TVMCLMatrix4RMd); overload;
 procedure InverseAffine(var Matrix: TVMCLMatrix4CMs); overload;
 procedure InverseAffine(var Matrix: TVMCLMatrix4CMd); overload;
-(*
+
 Function Inversed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
-Function InversedAffine(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function Inversed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
+Function Inversed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
+Function Inversed(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
+
+Function Inversed(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
+Function Inversed(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
+Function Inversed(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
+Function Inversed(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
+
+Function Inversed(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function Inversed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function Inversed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function Inversed(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
+Function InversedAffine(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function InversedAffine(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function InversedAffine(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function InversedAffine(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
+{===============================================================================
+    Calculations with one matrix - declaration
+===============================================================================}
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix2RMs; Scalar: Single): TVMCLMatrix2RMs; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix2RMd; Scalar: Double): TVMCLMatrix2RMd; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix2CMs; Scalar: Single): TVMCLMatrix2CMs; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix2CMd; Scalar: Double): TVMCLMatrix2CMd; overload;
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix3RMs; Scalar: Single): TVMCLMatrix3RMs; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix3RMd; Scalar: Double): TVMCLMatrix3RMd; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix3CMs; Scalar: Single): TVMCLMatrix3CMs; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix3CMd; Scalar: Double): TVMCLMatrix3CMd; overload;
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix4RMs; Scalar: Single): TVMCLMatrix4RMs; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix4RMd; Scalar: Double): TVMCLMatrix4RMd; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix4CMs; Scalar: Single): TVMCLMatrix4CMs; overload;
+Function ScalarMultiply(const Matrix: TVMCLMatrix4CMd; Scalar: Double): TVMCLMatrix4CMd; overload;
+
+Function VectorMultiply(const Matrix: TVMCLMatrix2RMs; const Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix2RMd; const Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix2CMs; const Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix2CMd; const Vector: TVMCLVector2d): TVMCLVector2d; overload;
+
+Function VectorMultiply(const Matrix: TVMCLMatrix3RMs; const Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix3RMd; const Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix3CMs; const Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix3CMd; const Vector: TVMCLVector3d): TVMCLVector3d; overload;
+
+Function VectorMultiply(const Matrix: TVMCLMatrix4RMs; const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix4RMd; const Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix4CMs; const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorMultiply(const Matrix: TVMCLMatrix4CMd; const Vector: TVMCLVector4d): TVMCLVector4d; overload;
+
+{===============================================================================
+    Calculations with multiple matrices - declaration
+===============================================================================}
+(*
+Function MatrixAdd(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function MatrixSubstract(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 *)
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; overload;
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; overload;
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
 implementation
 
 uses
@@ -5258,7 +5332,7 @@ Result := TVMCLMatrix4CMd(Transposed(Matrix));
 end;
 
 {===============================================================================
-    Basic matrix functions (zeroing, comparison, etc.)
+    Basic matrix functions (zeroing, comparison, etc.) - implementation
 ===============================================================================}
 
 procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMs);
@@ -5861,7 +5935,7 @@ For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
 end;
 
 //==============================================================================
-
+{$message 'unwind'}
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs; Epsilon: Single = 0): Boolean;
 var
   i:  Integer;
@@ -6125,7 +6199,7 @@ Result := Determinant(Matrix) <> 0;
 end;
 
 {===============================================================================
-    Basic Matrix calculations
+    Basic Matrix calculations - implementation
 ===============================================================================}
 
 procedure Transpose(var Matrix: TVMCLMatrix2RMs);
@@ -7001,5 +7075,822 @@ end;
 
 //==============================================================================
 
+procedure Inverse(var Matrix: TVMCLMatrix2RMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix2RMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix2CMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix2CMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3RMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3RMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3CMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3CMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := InversedAffine(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := InversedAffine(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := InversedAffine(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := InversedAffine(Matrix);
+end;
+
+//==============================================================================
+{$message 'unwind'}
+Function Inversed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+var
+  Det:  Extended;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Result := ScalarMultiply(RMMatrixFromRows(
+                Vector2s(Matrix[1,1],-Matrix[0,1]),
+                Vector2s(-Matrix[1,0],Matrix[0,0])),
+              1/Det);
+  end
+else Result := VMCL_ZeroMatrix2RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+var
+  Det:  Extended;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Result := ScalarMultiply(RMMatrixFromRows(
+                Vector2d(Matrix[1,1],-Matrix[0,1]),
+                Vector2d(-Matrix[1,0],Matrix[0,0])),
+              1/Det);
+  end
+else Result := VMCL_ZeroMatrix2RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+var
+  Det:  Extended;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Result := ScalarMultiply(CMMatrixFromColumns(
+                Vector2s(Matrix[1,1],-Matrix[0,1]),
+                Vector2s(-Matrix[1,0],Matrix[0,0])),
+              1/Det);
+  end
+else Result := VMCL_ZeroMatrix2CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; 
+var
+  Det:  Extended;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Result := ScalarMultiply(CMMatrixFromColumns(
+                Vector2d(Matrix[1,1],-Matrix[0,1]),
+                Vector2d(-Matrix[1,0],Matrix[0,0])),
+              1/Det);
+  end
+else Result := VMCL_ZeroMatrix2CMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix) to High(Matrix) do
+      For Col := Low(Matrix[0]) to High(Matrix[0]) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Col,Row] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
+        else
+          Result[Col,Row] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix3RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix) to High(Matrix) do
+      For Col := Low(Matrix[0]) to High(Matrix[0]) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Col,Row] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
+        else
+          Result[Col,Row] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix3RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix[0]) to High(Matrix[0]) do
+      For Col := Low(Matrix) to High(Matrix) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Row,Col] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
+        else
+          Result[Row,Col] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix3CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix[0]) to High(Matrix[0]) do
+      For Col := Low(Matrix) to High(Matrix) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Row,Col] := Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det
+        else
+          Result[Row,Col] := -Determinant(ExtractSubmatrix2(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix3CMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix) to High(Matrix) do
+      For Col := Low(Matrix[0]) to High(Matrix[0]) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Col,Row] := Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det
+        else
+          Result[Col,Row] := -Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix4RMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix) to High(Matrix) do
+      For Col := Low(Matrix[0]) to High(Matrix[0]) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Col,Row] := Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det
+        else
+          Result[Col,Row] := -Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix4RMd;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix[0]) to High(Matrix[0]) do
+      For Col := Low(Matrix) to High(Matrix) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Row,Col] := Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det
+        else
+          Result[Row,Col] := -Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix4CMs;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function Inversed(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+var
+  Det:      Extended;
+  Col,Row:  Integer;
+begin
+Det := Determinant(Matrix);
+If Det <> 0.0 then
+  begin
+    Det := 1/Det;
+    For Row := Low(Matrix[0]) to High(Matrix[0]) do
+      For Col := Low(Matrix) to High(Matrix) do
+        If ((Row xor Col) and 1) = 0 then
+          Result[Row,Col] := Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det
+        else
+          Result[Row,Col] := -Determinant(ExtractSubmatrix3(Matrix,Row,Col)) * Det;
+  end
+else Result := VMCL_ZeroMatrix4CMd;
+end;
+
+//------------------------------------------------------------------------------
+
+Function InversedAffine(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+var
+  SubMat: TVMCLMatrix3RMs;
+  Vec:    TVMCLVector3s;
+begin
+If EqualVectors(MatrixGetRow(Matrix,3),Vector4s(0,0,0,1)) then
+  begin
+    SubMat := Inversed(Matrix3(Matrix));
+    Vec := VectorMultiply(Negative(SubMat),Vector3(MatrixGetColumn(Matrix,3)));
+    Result := Matrix4(SubMat,True);
+    MatrixSetColumn(Result,3,Vector4s(Vec,1));
+  end
+else Result := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function InversedAffine(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+var
+  SubMat: TVMCLMatrix3RMd;
+  Vec:    TVMCLVector3d;
+begin
+If EqualVectors(MatrixGetRow(Matrix,3),Vector4d(0,0,0,1)) then
+  begin
+    SubMat := Inversed(Matrix3(Matrix));
+    Vec := VectorMultiply(Negative(SubMat),Vector3(MatrixGetColumn(Matrix,3)));
+    Result := Matrix4(SubMat,True);
+    MatrixSetColumn(Result,3,Vector4d(Vec,1));
+  end
+else Result := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function InversedAffine(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+var
+  SubMat: TVMCLMatrix3CMs;
+  Vec:    TVMCLVector3s;
+begin
+If EqualVectors(MatrixGetRow(Matrix,3),Vector4s(0,0,0,1)) then
+  begin
+    SubMat := Inversed(Matrix3(Matrix));
+    Vec := VectorMultiply(Negative(SubMat),Vector3(MatrixGetColumn(Matrix,3)));
+    Result := Matrix4(SubMat,True);
+    MatrixSetColumn(Result,3,Vector4s(Vec,1));
+  end
+else Result := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function InversedAffine(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+var
+  SubMat: TVMCLMatrix3CMd;
+  Vec:    TVMCLVector3d;
+begin
+If EqualVectors(MatrixGetRow(Matrix,3),Vector4d(0,0,0,1)) then
+  begin
+    SubMat := Inversed(Matrix3(Matrix));
+    Vec := VectorMultiply(Negative(SubMat),Vector3(MatrixGetColumn(Matrix,3)));
+    Result := Matrix4(SubMat,True);
+    MatrixSetColumn(Result,3,Vector4d(Vec,1));
+  end
+else Result := Inversed(Matrix);
+end;
+
+{===============================================================================
+    Calculations with one matrix - implementation
+===============================================================================}
+{$message 'unwind'}
+Function ScalarMultiply(const Matrix: TVMCLMatrix2RMs; Scalar: Single): TVMCLMatrix2RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix2RMd; Scalar: Double): TVMCLMatrix2RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix2CMs; Scalar: Single): TVMCLMatrix2CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
+  TVMCLMatrix2so(Result)[i] := TVMCLMatrix2so(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix2CMd; Scalar: Double): TVMCLMatrix2CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
+  TVMCLMatrix2do(Result)[i] := TVMCLMatrix2do(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix3RMs; Scalar: Single): TVMCLMatrix3RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix3RMd; Scalar: Double): TVMCLMatrix3RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix3CMs; Scalar: Single): TVMCLMatrix3CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
+  TVMCLMatrix3so(Result)[i] := TVMCLMatrix3so(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix3CMd; Scalar: Double): TVMCLMatrix3CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
+  TVMCLMatrix3do(Result)[i] := TVMCLMatrix3do(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix4RMs; Scalar: Single): TVMCLMatrix4RMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix4RMd; Scalar: Double): TVMCLMatrix4RMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix4CMs; Scalar: Single): TVMCLMatrix4CMs;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
+  TVMCLMatrix4so(Result)[i] := TVMCLMatrix4so(Matrix)[i] * Scalar;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function ScalarMultiply(const Matrix: TVMCLMatrix4CMd; Scalar: Double): TVMCLMatrix4CMd;
+var
+  i:  Integer;
+begin
+For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
+  TVMCLMatrix4do(Result)[i] := TVMCLMatrix4do(Matrix)[i] * Scalar;
+end;
+
+//==============================================================================
+{$message 'unwind'}
+Function VectorMultiply(const Matrix: TVMCLMatrix2RMs; const Vector: TVMCLVector2s): TVMCLVector2s;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix2RMd; const Vector: TVMCLVector2d): TVMCLVector2d;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix2CMs; const Vector: TVMCLVector2s): TVMCLVector2s;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix2CMd; const Vector: TVMCLVector2d): TVMCLVector2d;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix3RMs; const Vector: TVMCLVector3s): TVMCLVector3s;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] + Matrix[i,2] * Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix3RMd; const Vector: TVMCLVector3d): TVMCLVector3d;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] + Matrix[i,2] * Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix3CMs; const Vector: TVMCLVector3s): TVMCLVector3s;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] + Matrix[2,i] * Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix3CMd; const Vector: TVMCLVector3d): TVMCLVector3d;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] + Matrix[2,i] * Vector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix4RMs; const Vector: TVMCLVector4s): TVMCLVector4s;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] +
+               Matrix[i,2] * Vector[2] + Matrix[i,3] * Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix4RMd; const Vector: TVMCLVector4d): TVMCLVector4d;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[i,0] * Vector[0] + Matrix[i,1] * Vector[1] +
+               Matrix[i,2] * Vector[2] + Matrix[i,3] * Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix4CMs; const Vector: TVMCLVector4s): TVMCLVector4s;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] +
+               Matrix[2,i] * Vector[2] + Matrix[3,i] * Vector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function VectorMultiply(const Matrix: TVMCLMatrix4CMd; const Vector: TVMCLVector4d): TVMCLVector4d;
+var
+  i:  Integer;
+begin
+For i := Low(Vector) to High(Vector) do
+  Result[i] := Matrix[0,i] * Vector[0] + Matrix[1,i] * Vector[1] +
+               Matrix[2,i] * Vector[2] + Matrix[3,i] * Vector[3];
+end;
+
+{===============================================================================
+    Calculations with multiple matrices - implementation
+===============================================================================}
+{$message 'unwind'}
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result) to High(Result) do
+  For Col := Low(Result[0]) to High(Result[0]) do
+    Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
+                       aMatrix[Row,1] * bMatrix[1,Col];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result) to High(Result) do
+  For Col := Low(Result[0]) to High(Result[0]) do
+    Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
+                       aMatrix[Row,1] * bMatrix[1,Col];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result[0]) to High(Result[0]) do
+  For Col := Low(Result) to High(Result) do
+    Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
+                       aMatrix[1,Row] * bMatrix[Col,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; 
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result[0]) to High(Result[0]) do
+  For Col := Low(Result) to High(Result) do
+    Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
+                       aMatrix[1,Row] * bMatrix[Col,1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result) to High(Result) do
+  For Col := Low(Result[0]) to High(Result[0]) do
+    Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
+                       aMatrix[Row,1] * bMatrix[1,Col] +
+                       aMatrix[Row,2] * bMatrix[2,Col];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result) to High(Result) do
+  For Col := Low(Result[0]) to High(Result[0]) do
+    Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
+                       aMatrix[Row,1] * bMatrix[1,Col] +
+                       aMatrix[Row,2] * bMatrix[2,Col];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result[0]) to High(Result[0]) do
+  For Col := Low(Result) to High(Result) do
+    Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
+                       aMatrix[1,Row] * bMatrix[Col,1] +
+                       aMatrix[2,Row] * bMatrix[Col,2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result[0]) to High(Result[0]) do
+  For Col := Low(Result) to High(Result) do
+    Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
+                       aMatrix[1,Row] * bMatrix[Col,1] +
+                       aMatrix[2,Row] * bMatrix[Col,2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result) to High(Result) do
+  For Col := Low(Result[0]) to High(Result[0]) do
+    Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
+                       aMatrix[Row,1] * bMatrix[1,Col] +
+                       aMatrix[Row,2] * bMatrix[2,Col] +
+                       aMatrix[Row,3] * bMatrix[3,Col];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result) to High(Result) do
+  For Col := Low(Result[0]) to High(Result[0]) do
+    Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
+                       aMatrix[Row,1] * bMatrix[1,Col] +
+                       aMatrix[Row,2] * bMatrix[2,Col] +
+                       aMatrix[Row,3] * bMatrix[3,Col];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result[0]) to High(Result[0]) do
+  For Col := Low(Result) to High(Result) do
+    Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
+                       aMatrix[1,Row] * bMatrix[Col,1] +
+                       aMatrix[2,Row] * bMatrix[Col,2] +
+                       aMatrix[3,Row] * bMatrix[Col,3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function MatrixMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+var
+  Col,Row:  Integer;
+begin
+For Row := Low(Result[0]) to High(Result[0]) do
+  For Col := Low(Result) to High(Result) do
+    Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
+                       aMatrix[1,Row] * bMatrix[Col,1] +
+                       aMatrix[2,Row] * bMatrix[Col,2] +
+                       aMatrix[3,Row] * bMatrix[Col,3];
+end;
 
 end.
