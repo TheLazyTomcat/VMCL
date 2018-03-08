@@ -8786,8 +8786,16 @@ end;
 {$ENDIF}
 
 //==============================================================================
-{$message 'unwind'}
+
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[0,1] * bMatrix[1,0];
+Result[0,1] := aMatrix[0,0] * bMatrix[0,1] + aMatrix[0,1] * bMatrix[1,1];
+Result[1,0] := aMatrix[1,0] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[1,0];
+Result[1,1] := aMatrix[1,0] * bMatrix[0,1] + aMatrix[1,1] * bMatrix[1,1];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8796,10 +8804,19 @@ For Row := Low(Result) to High(Result) do
     Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
                        aMatrix[Row,1] * bMatrix[1,Col];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[0,1] * bMatrix[1,0];
+Result[0,1] := aMatrix[0,0] * bMatrix[0,1] + aMatrix[0,1] * bMatrix[1,1];
+Result[1,0] := aMatrix[1,0] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[1,0];
+Result[1,1] := aMatrix[1,0] * bMatrix[0,1] + aMatrix[1,1] * bMatrix[1,1];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8808,10 +8825,19 @@ For Row := Low(Result) to High(Result) do
     Result[Row,Col] := aMatrix[Row,0] * bMatrix[0,Col] +
                        aMatrix[Row,1] * bMatrix[1,Col];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[1,0] * bMatrix[0,1];
+Result[0,1] := aMatrix[0,1] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[0,1];
+Result[1,0] := aMatrix[0,0] * bMatrix[1,0] + aMatrix[1,0] * bMatrix[1,1];
+Result[1,1] := aMatrix[0,1] * bMatrix[1,0] + aMatrix[1,1] * bMatrix[1,1];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8820,10 +8846,19 @@ For Row := Low(Result[0]) to High(Result[0]) do
     Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
                        aMatrix[1,Row] * bMatrix[Col,1];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd; 
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[1,0] * bMatrix[0,1];
+Result[0,1] := aMatrix[0,1] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[0,1];
+Result[1,0] := aMatrix[0,0] * bMatrix[1,0] + aMatrix[1,0] * bMatrix[1,1];
+Result[1,1] := aMatrix[0,1] * bMatrix[1,0] + aMatrix[1,1] * bMatrix[1,1];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8832,10 +8867,24 @@ For Row := Low(Result[0]) to High(Result[0]) do
     Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
                        aMatrix[1,Row] * bMatrix[Col,1];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[0,1] * bMatrix[1,0] + aMatrix[0,2] * bMatrix[2,0];
+Result[0,1] := aMatrix[0,0] * bMatrix[0,1] + aMatrix[0,1] * bMatrix[1,1] + aMatrix[0,2] * bMatrix[2,1];
+Result[0,2] := aMatrix[0,0] * bMatrix[0,2] + aMatrix[0,1] * bMatrix[1,2] + aMatrix[0,2] * bMatrix[2,2];
+Result[1,0] := aMatrix[1,0] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[1,0] + aMatrix[1,2] * bMatrix[2,0];
+Result[1,1] := aMatrix[1,0] * bMatrix[0,1] + aMatrix[1,1] * bMatrix[1,1] + aMatrix[1,2] * bMatrix[2,1];
+Result[1,2] := aMatrix[1,0] * bMatrix[0,2] + aMatrix[1,1] * bMatrix[1,2] + aMatrix[1,2] * bMatrix[2,2];
+Result[2,0] := aMatrix[2,0] * bMatrix[0,0] + aMatrix[2,1] * bMatrix[1,0] + aMatrix[2,2] * bMatrix[2,0];
+Result[2,1] := aMatrix[2,0] * bMatrix[0,1] + aMatrix[2,1] * bMatrix[1,1] + aMatrix[2,2] * bMatrix[2,1];
+Result[2,2] := aMatrix[2,0] * bMatrix[0,2] + aMatrix[2,1] * bMatrix[1,2] + aMatrix[2,2] * bMatrix[2,2];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8845,10 +8894,24 @@ For Row := Low(Result) to High(Result) do
                        aMatrix[Row,1] * bMatrix[1,Col] +
                        aMatrix[Row,2] * bMatrix[2,Col];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[0,1] * bMatrix[1,0] + aMatrix[0,2] * bMatrix[2,0];
+Result[0,1] := aMatrix[0,0] * bMatrix[0,1] + aMatrix[0,1] * bMatrix[1,1] + aMatrix[0,2] * bMatrix[2,1];
+Result[0,2] := aMatrix[0,0] * bMatrix[0,2] + aMatrix[0,1] * bMatrix[1,2] + aMatrix[0,2] * bMatrix[2,2];
+Result[1,0] := aMatrix[1,0] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[1,0] + aMatrix[1,2] * bMatrix[2,0];
+Result[1,1] := aMatrix[1,0] * bMatrix[0,1] + aMatrix[1,1] * bMatrix[1,1] + aMatrix[1,2] * bMatrix[2,1];
+Result[1,2] := aMatrix[1,0] * bMatrix[0,2] + aMatrix[1,1] * bMatrix[1,2] + aMatrix[1,2] * bMatrix[2,2];
+Result[2,0] := aMatrix[2,0] * bMatrix[0,0] + aMatrix[2,1] * bMatrix[1,0] + aMatrix[2,2] * bMatrix[2,0];
+Result[2,1] := aMatrix[2,0] * bMatrix[0,1] + aMatrix[2,1] * bMatrix[1,1] + aMatrix[2,2] * bMatrix[2,1];
+Result[2,2] := aMatrix[2,0] * bMatrix[0,2] + aMatrix[2,1] * bMatrix[1,2] + aMatrix[2,2] * bMatrix[2,2];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8858,10 +8921,24 @@ For Row := Low(Result) to High(Result) do
                        aMatrix[Row,1] * bMatrix[1,Col] +
                        aMatrix[Row,2] * bMatrix[2,Col];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[1,0] * bMatrix[0,1] + aMatrix[2,0] * bMatrix[0,2];
+Result[0,1] := aMatrix[0,1] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[0,1] + aMatrix[2,1] * bMatrix[0,2];
+Result[0,2] := aMatrix[0,2] * bMatrix[0,0] + aMatrix[1,2] * bMatrix[0,1] + aMatrix[2,2] * bMatrix[0,2];
+Result[1,0] := aMatrix[0,0] * bMatrix[1,0] + aMatrix[1,0] * bMatrix[1,1] + aMatrix[2,0] * bMatrix[1,2];
+Result[1,1] := aMatrix[0,1] * bMatrix[1,0] + aMatrix[1,1] * bMatrix[1,1] + aMatrix[2,1] * bMatrix[1,2];
+Result[1,2] := aMatrix[0,2] * bMatrix[1,0] + aMatrix[1,2] * bMatrix[1,1] + aMatrix[2,2] * bMatrix[1,2];
+Result[2,0] := aMatrix[0,0] * bMatrix[2,0] + aMatrix[1,0] * bMatrix[2,1] + aMatrix[2,0] * bMatrix[2,2];
+Result[2,1] := aMatrix[0,1] * bMatrix[2,0] + aMatrix[1,1] * bMatrix[2,1] + aMatrix[2,1] * bMatrix[2,2];
+Result[2,2] := aMatrix[0,2] * bMatrix[2,0] + aMatrix[1,2] * bMatrix[2,1] + aMatrix[2,2] * bMatrix[2,2];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8870,11 +8947,25 @@ For Row := Low(Result[0]) to High(Result[0]) do
     Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
                        aMatrix[1,Row] * bMatrix[Col,1] +
                        aMatrix[2,Row] * bMatrix[Col,2];
-end;
+end; 
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[1,0] * bMatrix[0,1] + aMatrix[2,0] * bMatrix[0,2];
+Result[0,1] := aMatrix[0,1] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[0,1] + aMatrix[2,1] * bMatrix[0,2];
+Result[0,2] := aMatrix[0,2] * bMatrix[0,0] + aMatrix[1,2] * bMatrix[0,1] + aMatrix[2,2] * bMatrix[0,2];
+Result[1,0] := aMatrix[0,0] * bMatrix[1,0] + aMatrix[1,0] * bMatrix[1,1] + aMatrix[2,0] * bMatrix[1,2];
+Result[1,1] := aMatrix[0,1] * bMatrix[1,0] + aMatrix[1,1] * bMatrix[1,1] + aMatrix[2,1] * bMatrix[1,2];
+Result[1,2] := aMatrix[0,2] * bMatrix[1,0] + aMatrix[1,2] * bMatrix[1,1] + aMatrix[2,2] * bMatrix[1,2];
+Result[2,0] := aMatrix[0,0] * bMatrix[2,0] + aMatrix[1,0] * bMatrix[2,1] + aMatrix[2,0] * bMatrix[2,2];
+Result[2,1] := aMatrix[0,1] * bMatrix[2,0] + aMatrix[1,1] * bMatrix[2,1] + aMatrix[2,1] * bMatrix[2,2];
+Result[2,2] := aMatrix[0,2] * bMatrix[2,0] + aMatrix[1,2] * bMatrix[2,1] + aMatrix[2,2] * bMatrix[2,2];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8883,11 +8974,48 @@ For Row := Low(Result[0]) to High(Result[0]) do
     Result[Col,Row] := aMatrix[0,Row] * bMatrix[Col,0] +
                        aMatrix[1,Row] * bMatrix[Col,1] +
                        aMatrix[2,Row] * bMatrix[Col,2];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[0,1] * bMatrix[1,0] +
+               aMatrix[0,2] * bMatrix[2,0] + aMatrix[0,3] * bMatrix[3,0];
+Result[0,1] := aMatrix[0,0] * bMatrix[0,1] + aMatrix[0,1] * bMatrix[1,1] +
+               aMatrix[0,2] * bMatrix[2,1] + aMatrix[0,3] * bMatrix[3,1];
+Result[0,2] := aMatrix[0,0] * bMatrix[0,2] + aMatrix[0,1] * bMatrix[1,2] +
+               aMatrix[0,2] * bMatrix[2,2] + aMatrix[0,3] * bMatrix[3,2];
+Result[0,3] := aMatrix[0,0] * bMatrix[0,3] + aMatrix[0,1] * bMatrix[1,3] +
+               aMatrix[0,2] * bMatrix[2,3] + aMatrix[0,3] * bMatrix[3,3];
+Result[1,0] := aMatrix[1,0] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[1,0] +
+               aMatrix[1,2] * bMatrix[2,0] + aMatrix[1,3] * bMatrix[3,0];
+Result[1,1] := aMatrix[1,0] * bMatrix[0,1] + aMatrix[1,1] * bMatrix[1,1] +
+               aMatrix[1,2] * bMatrix[2,1] + aMatrix[1,3] * bMatrix[3,1];
+Result[1,2] := aMatrix[1,0] * bMatrix[0,2] + aMatrix[1,1] * bMatrix[1,2] +
+               aMatrix[1,2] * bMatrix[2,2] + aMatrix[1,3] * bMatrix[3,2];
+Result[1,3] := aMatrix[1,0] * bMatrix[0,3] + aMatrix[1,1] * bMatrix[1,3] +
+               aMatrix[1,2] * bMatrix[2,3] + aMatrix[1,3] * bMatrix[3,3];
+Result[2,0] := aMatrix[2,0] * bMatrix[0,0] + aMatrix[2,1] * bMatrix[1,0] +
+               aMatrix[2,2] * bMatrix[2,0] + aMatrix[2,3] * bMatrix[3,0];
+Result[2,1] := aMatrix[2,0] * bMatrix[0,1] + aMatrix[2,1] * bMatrix[1,1] +
+               aMatrix[2,2] * bMatrix[2,1] + aMatrix[2,3] * bMatrix[3,1];
+Result[2,2] := aMatrix[2,0] * bMatrix[0,2] + aMatrix[2,1] * bMatrix[1,2] +
+               aMatrix[2,2] * bMatrix[2,2] + aMatrix[2,3] * bMatrix[3,2];
+Result[2,3] := aMatrix[2,0] * bMatrix[0,3] + aMatrix[2,1] * bMatrix[1,3] +
+               aMatrix[2,2] * bMatrix[2,3] + aMatrix[2,3] * bMatrix[3,3];
+Result[3,0] := aMatrix[3,0] * bMatrix[0,0] + aMatrix[3,1] * bMatrix[1,0] +
+               aMatrix[3,2] * bMatrix[2,0] + aMatrix[3,3] * bMatrix[3,0];
+Result[3,1] := aMatrix[3,0] * bMatrix[0,1] + aMatrix[3,1] * bMatrix[1,1] +
+               aMatrix[3,2] * bMatrix[2,1] + aMatrix[3,3] * bMatrix[3,1];
+Result[3,2] := aMatrix[3,0] * bMatrix[0,2] + aMatrix[3,1] * bMatrix[1,2] +
+               aMatrix[3,2] * bMatrix[2,2] + aMatrix[3,3] * bMatrix[3,2];
+Result[3,3] := aMatrix[3,0] * bMatrix[0,3] + aMatrix[3,1] * bMatrix[1,3] +
+               aMatrix[3,2] * bMatrix[2,3] + aMatrix[3,3] * bMatrix[3,3];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8897,11 +9025,48 @@ For Row := Low(Result) to High(Result) do
                        aMatrix[Row,1] * bMatrix[1,Col] +
                        aMatrix[Row,2] * bMatrix[2,Col] +
                        aMatrix[Row,3] * bMatrix[3,Col];
-end;
+end;  
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[0,1] * bMatrix[1,0] +
+               aMatrix[0,2] * bMatrix[2,0] + aMatrix[0,3] * bMatrix[3,0];
+Result[0,1] := aMatrix[0,0] * bMatrix[0,1] + aMatrix[0,1] * bMatrix[1,1] +
+               aMatrix[0,2] * bMatrix[2,1] + aMatrix[0,3] * bMatrix[3,1];
+Result[0,2] := aMatrix[0,0] * bMatrix[0,2] + aMatrix[0,1] * bMatrix[1,2] +
+               aMatrix[0,2] * bMatrix[2,2] + aMatrix[0,3] * bMatrix[3,2];
+Result[0,3] := aMatrix[0,0] * bMatrix[0,3] + aMatrix[0,1] * bMatrix[1,3] +
+               aMatrix[0,2] * bMatrix[2,3] + aMatrix[0,3] * bMatrix[3,3];
+Result[1,0] := aMatrix[1,0] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[1,0] +
+               aMatrix[1,2] * bMatrix[2,0] + aMatrix[1,3] * bMatrix[3,0];
+Result[1,1] := aMatrix[1,0] * bMatrix[0,1] + aMatrix[1,1] * bMatrix[1,1] +
+               aMatrix[1,2] * bMatrix[2,1] + aMatrix[1,3] * bMatrix[3,1];
+Result[1,2] := aMatrix[1,0] * bMatrix[0,2] + aMatrix[1,1] * bMatrix[1,2] +
+               aMatrix[1,2] * bMatrix[2,2] + aMatrix[1,3] * bMatrix[3,2];
+Result[1,3] := aMatrix[1,0] * bMatrix[0,3] + aMatrix[1,1] * bMatrix[1,3] +
+               aMatrix[1,2] * bMatrix[2,3] + aMatrix[1,3] * bMatrix[3,3];
+Result[2,0] := aMatrix[2,0] * bMatrix[0,0] + aMatrix[2,1] * bMatrix[1,0] +
+               aMatrix[2,2] * bMatrix[2,0] + aMatrix[2,3] * bMatrix[3,0];
+Result[2,1] := aMatrix[2,0] * bMatrix[0,1] + aMatrix[2,1] * bMatrix[1,1] +
+               aMatrix[2,2] * bMatrix[2,1] + aMatrix[2,3] * bMatrix[3,1];
+Result[2,2] := aMatrix[2,0] * bMatrix[0,2] + aMatrix[2,1] * bMatrix[1,2] +
+               aMatrix[2,2] * bMatrix[2,2] + aMatrix[2,3] * bMatrix[3,2];
+Result[2,3] := aMatrix[2,0] * bMatrix[0,3] + aMatrix[2,1] * bMatrix[1,3] +
+               aMatrix[2,2] * bMatrix[2,3] + aMatrix[2,3] * bMatrix[3,3];
+Result[3,0] := aMatrix[3,0] * bMatrix[0,0] + aMatrix[3,1] * bMatrix[1,0] +
+               aMatrix[3,2] * bMatrix[2,0] + aMatrix[3,3] * bMatrix[3,0];
+Result[3,1] := aMatrix[3,0] * bMatrix[0,1] + aMatrix[3,1] * bMatrix[1,1] +
+               aMatrix[3,2] * bMatrix[2,1] + aMatrix[3,3] * bMatrix[3,1];
+Result[3,2] := aMatrix[3,0] * bMatrix[0,2] + aMatrix[3,1] * bMatrix[1,2] +
+               aMatrix[3,2] * bMatrix[2,2] + aMatrix[3,3] * bMatrix[3,2];
+Result[3,3] := aMatrix[3,0] * bMatrix[0,3] + aMatrix[3,1] * bMatrix[1,3] +
+               aMatrix[3,2] * bMatrix[2,3] + aMatrix[3,3] * bMatrix[3,3];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8912,10 +9077,47 @@ For Row := Low(Result) to High(Result) do
                        aMatrix[Row,2] * bMatrix[2,Col] +
                        aMatrix[Row,3] * bMatrix[3,Col];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[1,0] * bMatrix[0,1] +
+               aMatrix[2,0] * bMatrix[0,2] + aMatrix[3,0] * bMatrix[0,3];
+Result[0,1] := aMatrix[0,1] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[0,1] +
+               aMatrix[2,1] * bMatrix[0,2] + aMatrix[3,1] * bMatrix[0,3];
+Result[0,2] := aMatrix[0,2] * bMatrix[0,0] + aMatrix[1,2] * bMatrix[0,1] +
+               aMatrix[2,2] * bMatrix[0,2] + aMatrix[3,2] * bMatrix[0,3];
+Result[0,3] := aMatrix[0,3] * bMatrix[0,0] + aMatrix[1,3] * bMatrix[0,1] +
+               aMatrix[2,3] * bMatrix[0,2] + aMatrix[3,3] * bMatrix[0,3];
+Result[1,0] := aMatrix[0,0] * bMatrix[1,0] + aMatrix[1,0] * bMatrix[1,1] +
+               aMatrix[2,0] * bMatrix[1,2] + aMatrix[3,0] * bMatrix[1,3];
+Result[1,1] := aMatrix[0,1] * bMatrix[1,0] + aMatrix[1,1] * bMatrix[1,1] +
+               aMatrix[2,1] * bMatrix[1,2] + aMatrix[3,1] * bMatrix[1,3];
+Result[1,2] := aMatrix[0,2] * bMatrix[1,0] + aMatrix[1,2] * bMatrix[1,1] +
+               aMatrix[2,2] * bMatrix[1,2] + aMatrix[3,2] * bMatrix[1,3];
+Result[1,3] := aMatrix[0,3] * bMatrix[1,0] + aMatrix[1,3] * bMatrix[1,1] +
+               aMatrix[2,3] * bMatrix[1,2] + aMatrix[3,3] * bMatrix[1,3];
+Result[2,0] := aMatrix[0,0] * bMatrix[2,0] + aMatrix[1,0] * bMatrix[2,1] +
+               aMatrix[2,0] * bMatrix[2,2] + aMatrix[3,0] * bMatrix[2,3];
+Result[2,1] := aMatrix[0,1] * bMatrix[2,0] + aMatrix[1,1] * bMatrix[2,1] +
+               aMatrix[2,1] * bMatrix[2,2] + aMatrix[3,1] * bMatrix[2,3];
+Result[2,2] := aMatrix[0,2] * bMatrix[2,0] + aMatrix[1,2] * bMatrix[2,1] +
+               aMatrix[2,2] * bMatrix[2,2] + aMatrix[3,2] * bMatrix[2,3];
+Result[2,3] := aMatrix[0,3] * bMatrix[2,0] + aMatrix[1,3] * bMatrix[2,1] +
+               aMatrix[2,3] * bMatrix[2,2] + aMatrix[3,3] * bMatrix[2,3];
+Result[3,0] := aMatrix[0,0] * bMatrix[3,0] + aMatrix[1,0] * bMatrix[3,1] +
+               aMatrix[2,0] * bMatrix[3,2] + aMatrix[3,0] * bMatrix[3,3];
+Result[3,1] := aMatrix[0,1] * bMatrix[3,0] + aMatrix[1,1] * bMatrix[3,1] +
+               aMatrix[2,1] * bMatrix[3,2] + aMatrix[3,1] * bMatrix[3,3];
+Result[3,2] := aMatrix[0,2] * bMatrix[3,0] + aMatrix[1,2] * bMatrix[3,1] +
+               aMatrix[2,2] * bMatrix[3,2] + aMatrix[3,2] * bMatrix[3,3];
+Result[3,3] := aMatrix[0,3] * bMatrix[3,0] + aMatrix[1,3] * bMatrix[3,1] +
+               aMatrix[2,3] * bMatrix[3,2] + aMatrix[3,3] * bMatrix[3,3];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8926,10 +9128,47 @@ For Row := Low(Result[0]) to High(Result[0]) do
                        aMatrix[2,Row] * bMatrix[Col,2] +
                        aMatrix[3,Row] * bMatrix[Col,3];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; 
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := aMatrix[0,0] * bMatrix[0,0] + aMatrix[1,0] * bMatrix[0,1] +
+               aMatrix[2,0] * bMatrix[0,2] + aMatrix[3,0] * bMatrix[0,3];
+Result[0,1] := aMatrix[0,1] * bMatrix[0,0] + aMatrix[1,1] * bMatrix[0,1] +
+               aMatrix[2,1] * bMatrix[0,2] + aMatrix[3,1] * bMatrix[0,3];
+Result[0,2] := aMatrix[0,2] * bMatrix[0,0] + aMatrix[1,2] * bMatrix[0,1] +
+               aMatrix[2,2] * bMatrix[0,2] + aMatrix[3,2] * bMatrix[0,3];
+Result[0,3] := aMatrix[0,3] * bMatrix[0,0] + aMatrix[1,3] * bMatrix[0,1] +
+               aMatrix[2,3] * bMatrix[0,2] + aMatrix[3,3] * bMatrix[0,3];
+Result[1,0] := aMatrix[0,0] * bMatrix[1,0] + aMatrix[1,0] * bMatrix[1,1] +
+               aMatrix[2,0] * bMatrix[1,2] + aMatrix[3,0] * bMatrix[1,3];
+Result[1,1] := aMatrix[0,1] * bMatrix[1,0] + aMatrix[1,1] * bMatrix[1,1] +
+               aMatrix[2,1] * bMatrix[1,2] + aMatrix[3,1] * bMatrix[1,3];
+Result[1,2] := aMatrix[0,2] * bMatrix[1,0] + aMatrix[1,2] * bMatrix[1,1] +
+               aMatrix[2,2] * bMatrix[1,2] + aMatrix[3,2] * bMatrix[1,3];
+Result[1,3] := aMatrix[0,3] * bMatrix[1,0] + aMatrix[1,3] * bMatrix[1,1] +
+               aMatrix[2,3] * bMatrix[1,2] + aMatrix[3,3] * bMatrix[1,3];
+Result[2,0] := aMatrix[0,0] * bMatrix[2,0] + aMatrix[1,0] * bMatrix[2,1] +
+               aMatrix[2,0] * bMatrix[2,2] + aMatrix[3,0] * bMatrix[2,3];
+Result[2,1] := aMatrix[0,1] * bMatrix[2,0] + aMatrix[1,1] * bMatrix[2,1] +
+               aMatrix[2,1] * bMatrix[2,2] + aMatrix[3,1] * bMatrix[2,3];
+Result[2,2] := aMatrix[0,2] * bMatrix[2,0] + aMatrix[1,2] * bMatrix[2,1] +
+               aMatrix[2,2] * bMatrix[2,2] + aMatrix[3,2] * bMatrix[2,3];
+Result[2,3] := aMatrix[0,3] * bMatrix[2,0] + aMatrix[1,3] * bMatrix[2,1] +
+               aMatrix[2,3] * bMatrix[2,2] + aMatrix[3,3] * bMatrix[2,3];
+Result[3,0] := aMatrix[0,0] * bMatrix[3,0] + aMatrix[1,0] * bMatrix[3,1] +
+               aMatrix[2,0] * bMatrix[3,2] + aMatrix[3,0] * bMatrix[3,3];
+Result[3,1] := aMatrix[0,1] * bMatrix[3,0] + aMatrix[1,1] * bMatrix[3,1] +
+               aMatrix[2,1] * bMatrix[3,2] + aMatrix[3,1] * bMatrix[3,3];
+Result[3,2] := aMatrix[0,2] * bMatrix[3,0] + aMatrix[1,2] * bMatrix[3,1] +
+               aMatrix[2,2] * bMatrix[3,2] + aMatrix[3,2] * bMatrix[3,3];
+Result[3,3] := aMatrix[0,3] * bMatrix[3,0] + aMatrix[1,3] * bMatrix[3,1] +
+               aMatrix[2,3] * bMatrix[3,2] + aMatrix[3,3] * bMatrix[3,3];
+end;
+{$ELSE}
 var
   Col,Row:  Integer;
 begin
@@ -8940,5 +9179,6 @@ For Row := Low(Result[0]) to High(Result[0]) do
                        aMatrix[2,Row] * bMatrix[Col,2] +
                        aMatrix[3,Row] * bMatrix[Col,3];
 end;
+{$ENDIF}
 
 end.
