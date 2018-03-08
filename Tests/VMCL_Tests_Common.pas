@@ -393,6 +393,7 @@ var
 begin
 For i := Low(TMatrix2so) to High(TMatrix2so) do
    TMatrix2so(Mat)[i] := Random(Max) + Offset;
+Mat := Transposed(Mat);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -403,6 +404,7 @@ var
 begin
 For i := Low(TMatrix3so) to High(TMatrix3so) do
    TMatrix3so(Mat)[i] := Random(Max) + Offset;
+Mat := Transposed(Mat);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -413,6 +415,7 @@ var
 begin
 For i := Low(TMatrix4so) to High(TMatrix4so) do
    TMatrix4so(Mat)[i] := Random(Max) + Offset;
+Mat := Transposed(Mat);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -423,6 +426,7 @@ var
 begin
 For i := Low(TMatrix2do) to High(TMatrix2do) do
    TMatrix2do(Mat)[i] := Random(Max) + Offset;
+Mat := Transposed(Mat);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -433,6 +437,7 @@ var
 begin
 For i := Low(TMatrix3do) to High(TMatrix3do) do
    TMatrix3do(Mat)[i] := Random(Max) + Offset;
+Mat := Transposed(Mat);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -443,6 +448,7 @@ var
 begin
 For i := Low(TMatrix4do) to High(TMatrix4do) do
    TMatrix4do(Mat)[i] := Random(Max) + Offset;
+Mat := Transposed(Mat);   
 end;
 
 //= Specialized functions ======================================================

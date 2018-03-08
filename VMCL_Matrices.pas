@@ -3762,7 +3762,7 @@ For InRow := Low(Matrix[0]) to High(Matrix[0]) do
       For InCol := Low(Matrix) to High(Matrix) do
         If not(InCol in [Column1,Column2]) then
           begin
-            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Result[OutCol,OutRow] := Matrix[InCol,InRow];
             Inc(OutCol);
             If OutCol > High(Result) then
               Break{For InCol};
@@ -3788,7 +3788,7 @@ For InRow := Low(Matrix[0]) to High(Matrix[0]) do
       For InCol := Low(Matrix) to High(Matrix) do
         If not(InCol in [Column1,Column2]) then
           begin
-            Result[OutRow,OutCol] := Matrix[InRow,InCol];
+            Result[OutCol,OutRow] := Matrix[InCol,InRow];
             Inc(OutCol);
             If OutCol > High(Result) then
               Break{For InCol};
@@ -5781,8 +5781,13 @@ end;
 
 //==============================================================================
 
-{$message 'unwind'}
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[0,1] = bMatrix[0,1]) and
+          (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[1,1] = bMatrix[1,1]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5794,10 +5799,17 @@ For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[0,1] = bMatrix[0,1]) and
+          (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[1,1] = bMatrix[1,1]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5809,10 +5821,17 @@ For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMs): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[1,0] = bMatrix[1,0]) and
+          (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[1,1] = bMatrix[1,1]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5824,10 +5843,17 @@ For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMd): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[1,0] = bMatrix[1,0]) and
+          (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[1,1] = bMatrix[1,1]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5839,10 +5865,18 @@ For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMs): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[0,2] = bMatrix[0,2]) and
+          (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[1,1] = bMatrix[1,1]) and (aMatrix[1,2] = bMatrix[1,2]) and
+          (aMatrix[2,0] = bMatrix[2,0]) and (aMatrix[2,1] = bMatrix[2,1]) and (aMatrix[2,2] = bMatrix[2,2]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5854,10 +5888,18 @@ For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMd): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[0,2] = bMatrix[0,2]) and
+          (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[1,1] = bMatrix[1,1]) and (aMatrix[1,2] = bMatrix[1,2]) and
+          (aMatrix[2,0] = bMatrix[2,0]) and (aMatrix[2,1] = bMatrix[2,1]) and (aMatrix[2,2] = bMatrix[2,2]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5869,10 +5911,18 @@ For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMs): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[2,0] = bMatrix[2,0]) and
+          (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[1,1] = bMatrix[1,1]) and (aMatrix[2,1] = bMatrix[2,1]) and
+          (aMatrix[0,2] = bMatrix[0,2]) and (aMatrix[1,2] = bMatrix[1,2]) and (aMatrix[2,2] = bMatrix[2,2]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5884,10 +5934,18 @@ For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMd): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[2,0] = bMatrix[2,0]) and
+          (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[1,1] = bMatrix[1,1]) and (aMatrix[2,1] = bMatrix[2,1]) and
+          (aMatrix[0,2] = bMatrix[0,2]) and (aMatrix[1,2] = bMatrix[1,2]) and (aMatrix[2,2] = bMatrix[2,2]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5899,10 +5957,23 @@ For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMs): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[0,1] = bMatrix[0,1]) and
+          (aMatrix[0,2] = bMatrix[0,2]) and (aMatrix[0,3] = bMatrix[0,3]) and
+          (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[1,1] = bMatrix[1,1]) and
+          (aMatrix[1,2] = bMatrix[1,2]) and (aMatrix[1,3] = bMatrix[1,3]) and
+          (aMatrix[2,0] = bMatrix[2,0]) and (aMatrix[2,1] = bMatrix[2,1]) and
+          (aMatrix[2,2] = bMatrix[2,2]) and (aMatrix[2,3] = bMatrix[2,3]) and
+          (aMatrix[3,0] = bMatrix[3,0]) and (aMatrix[3,1] = bMatrix[3,1]) and
+          (aMatrix[3,2] = bMatrix[3,2]) and (aMatrix[3,3] = bMatrix[3,3]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5914,10 +5985,23 @@ For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[0,1] = bMatrix[0,1]) and
+          (aMatrix[0,2] = bMatrix[0,2]) and (aMatrix[0,3] = bMatrix[0,3]) and
+          (aMatrix[1,0] = bMatrix[1,0]) and (aMatrix[1,1] = bMatrix[1,1]) and
+          (aMatrix[1,2] = bMatrix[1,2]) and (aMatrix[1,3] = bMatrix[1,3]) and
+          (aMatrix[2,0] = bMatrix[2,0]) and (aMatrix[2,1] = bMatrix[2,1]) and
+          (aMatrix[2,2] = bMatrix[2,2]) and (aMatrix[2,3] = bMatrix[2,3]) and
+          (aMatrix[3,0] = bMatrix[3,0]) and (aMatrix[3,1] = bMatrix[3,1]) and
+          (aMatrix[3,2] = bMatrix[3,2]) and (aMatrix[3,3] = bMatrix[3,3]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5929,10 +6013,23 @@ For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[1,0] = bMatrix[1,0]) and
+          (aMatrix[2,0] = bMatrix[2,0]) and (aMatrix[3,0] = bMatrix[3,0]) and
+          (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[1,1] = bMatrix[1,1]) and
+          (aMatrix[2,1] = bMatrix[2,1]) and (aMatrix[3,1] = bMatrix[3,1]) and
+          (aMatrix[0,2] = bMatrix[0,2]) and (aMatrix[1,2] = bMatrix[1,2]) and
+          (aMatrix[2,2] = bMatrix[2,2]) and (aMatrix[3,2] = bMatrix[3,2]) and
+          (aMatrix[0,3] = bMatrix[0,3]) and (aMatrix[1,3] = bMatrix[1,3]) and
+          (aMatrix[2,3] = bMatrix[2,3]) and (aMatrix[3,3] = bMatrix[3,3]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5944,10 +6041,23 @@ For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := (aMatrix[0,0] = bMatrix[0,0]) and (aMatrix[1,0] = bMatrix[1,0]) and
+          (aMatrix[2,0] = bMatrix[2,0]) and (aMatrix[3,0] = bMatrix[3,0]) and
+          (aMatrix[0,1] = bMatrix[0,1]) and (aMatrix[1,1] = bMatrix[1,1]) and
+          (aMatrix[2,1] = bMatrix[2,1]) and (aMatrix[3,1] = bMatrix[3,1]) and
+          (aMatrix[0,2] = bMatrix[0,2]) and (aMatrix[1,2] = bMatrix[1,2]) and
+          (aMatrix[2,2] = bMatrix[2,2]) and (aMatrix[3,2] = bMatrix[3,2]) and
+          (aMatrix[0,3] = bMatrix[0,3]) and (aMatrix[1,3] = bMatrix[1,3]) and
+          (aMatrix[2,3] = bMatrix[2,3]) and (aMatrix[3,3] = bMatrix[3,3]);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5959,10 +6069,19 @@ For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //==============================================================================
-{$message 'unwind'}
+
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs; Epsilon: Single = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5974,10 +6093,19 @@ For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd; Epsilon: Double = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -5989,10 +6117,19 @@ For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMs; Epsilon: Single = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6004,10 +6141,19 @@ For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix2CMd; Epsilon: Double = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6019,10 +6165,24 @@ For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMs; Epsilon: Single = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and
+          SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon) ;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6034,10 +6194,24 @@ For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3RMd; Epsilon: Double = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and
+          SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon) ;
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6049,10 +6223,24 @@ For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMs; Epsilon: Single = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and
+          SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6064,10 +6252,24 @@ For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix3CMd; Epsilon: Double = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and
+          SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6079,10 +6281,23 @@ For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMs; Epsilon: Single = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and SameValue(aMatrix[0,3],bMatrix[0,3],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and SameValue(aMatrix[1,3],bMatrix[1,3],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon) and SameValue(aMatrix[2,3],bMatrix[2,3],Epsilon) and
+          SameValue(aMatrix[3,0],bMatrix[3,0],Epsilon) and SameValue(aMatrix[3,1],bMatrix[3,1],Epsilon) and
+          SameValue(aMatrix[3,2],bMatrix[3,2],Epsilon) and SameValue(aMatrix[3,3],bMatrix[3,3],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6094,10 +6309,23 @@ For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd; Epsilon: Double = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and SameValue(aMatrix[0,3],bMatrix[0,3],Epsilon) and
+          SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and SameValue(aMatrix[1,3],bMatrix[1,3],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon) and SameValue(aMatrix[2,3],bMatrix[2,3],Epsilon) and
+          SameValue(aMatrix[3,0],bMatrix[3,0],Epsilon) and SameValue(aMatrix[3,1],bMatrix[3,1],Epsilon) and
+          SameValue(aMatrix[3,2],bMatrix[3,2],Epsilon) and SameValue(aMatrix[3,3],bMatrix[3,3],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6109,10 +6337,23 @@ For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs; Epsilon: Single = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and SameValue(aMatrix[3,0],bMatrix[3,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and SameValue(aMatrix[3,1],bMatrix[3,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon) and SameValue(aMatrix[3,2],bMatrix[3,2],Epsilon) and
+          SameValue(aMatrix[0,3],bMatrix[0,3],Epsilon) and SameValue(aMatrix[1,3],bMatrix[1,3],Epsilon) and
+          SameValue(aMatrix[2,3],bMatrix[2,3],Epsilon) and SameValue(aMatrix[3,3],bMatrix[3,3],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6124,10 +6365,23 @@ For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd; Epsilon: Double = 0): Boolean;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result := SameValue(aMatrix[0,0],bMatrix[0,0],Epsilon) and SameValue(aMatrix[1,0],bMatrix[1,0],Epsilon) and
+          SameValue(aMatrix[2,0],bMatrix[2,0],Epsilon) and SameValue(aMatrix[3,0],bMatrix[3,0],Epsilon) and
+          SameValue(aMatrix[0,1],bMatrix[0,1],Epsilon) and SameValue(aMatrix[1,1],bMatrix[1,1],Epsilon) and
+          SameValue(aMatrix[2,1],bMatrix[2,1],Epsilon) and SameValue(aMatrix[3,1],bMatrix[3,1],Epsilon) and
+          SameValue(aMatrix[0,2],bMatrix[0,2],Epsilon) and SameValue(aMatrix[1,2],bMatrix[1,2],Epsilon) and
+          SameValue(aMatrix[2,2],bMatrix[2,2],Epsilon) and SameValue(aMatrix[3,2],bMatrix[3,2],Epsilon) and
+          SameValue(aMatrix[0,3],bMatrix[0,3],Epsilon) and SameValue(aMatrix[1,3],bMatrix[1,3],Epsilon) and
+          SameValue(aMatrix[2,3],bMatrix[2,3],Epsilon) and SameValue(aMatrix[3,3],bMatrix[3,3],Epsilon);
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
@@ -6139,6 +6393,7 @@ For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
       Break {For i};
     end;
 end;
+{$ENDIF}
 
 //==============================================================================
 
@@ -6540,124 +6795,219 @@ end;
 
 //==============================================================================
 
-{$message 'unwind'}
 Function Negative(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[0,1] := -Matrix[0,1];
+Result[1,0] := -Matrix[1,0]; Result[1,1] := -Matrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := -TVMCLMatrix2so(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[0,1] := -Matrix[0,1];
+Result[1,0] := -Matrix[1,0]; Result[1,1] := -Matrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := -TVMCLMatrix2do(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[1,0] := -Matrix[1,0];
+Result[0,1] := -Matrix[0,1]; Result[1,1] := -Matrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2so) to High(TVMCLMatrix2so) do
   TVMCLMatrix2so(Result)[i] := -TVMCLMatrix2so(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[1,0] := -Matrix[1,0];
+Result[0,1] := -Matrix[0,1]; Result[1,1] := -Matrix[1,1];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix2do) to High(TVMCLMatrix2do) do
   TVMCLMatrix2do(Result)[i] := -TVMCLMatrix2do(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix3RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[0,1] := -Matrix[0,1]; Result[0,2] := -Matrix[0,2];
+Result[1,0] := -Matrix[1,0]; Result[1,1] := -Matrix[1,1]; Result[1,2] := -Matrix[1,2];
+Result[2,0] := -Matrix[2,0]; Result[2,1] := -Matrix[2,1]; Result[2,2] := -Matrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := -TVMCLMatrix3so(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix3RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[0,1] := -Matrix[0,1]; Result[0,2] := -Matrix[0,2];
+Result[1,0] := -Matrix[1,0]; Result[1,1] := -Matrix[1,1]; Result[1,2] := -Matrix[1,2];
+Result[2,0] := -Matrix[2,0]; Result[2,1] := -Matrix[2,1]; Result[2,2] := -Matrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := -TVMCLMatrix3do(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[1,0] := -Matrix[1,0]; Result[2,0] := -Matrix[2,0];
+Result[0,1] := -Matrix[0,1]; Result[1,1] := -Matrix[1,1]; Result[2,1] := -Matrix[2,1];
+Result[0,2] := -Matrix[0,2]; Result[1,2] := -Matrix[1,2]; Result[2,2] := -Matrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3so) to High(TVMCLMatrix3so) do
   TVMCLMatrix3so(Result)[i] := -TVMCLMatrix3so(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[1,0] := -Matrix[1,0]; Result[2,0] := -Matrix[2,0];
+Result[0,1] := -Matrix[0,1]; Result[1,1] := -Matrix[1,1]; Result[2,1] := -Matrix[2,1];
+Result[0,2] := -Matrix[0,2]; Result[1,2] := -Matrix[1,2]; Result[2,2] := -Matrix[2,2];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix3do) to High(TVMCLMatrix3do) do
   TVMCLMatrix3do(Result)[i] := -TVMCLMatrix3do(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[0,1] := -Matrix[0,1]; Result[0,2] := -Matrix[0,2]; Result[0,3] := -Matrix[0,3];
+Result[1,0] := -Matrix[1,0]; Result[1,1] := -Matrix[1,1]; Result[1,2] := -Matrix[1,2]; Result[1,3] := -Matrix[1,3];
+Result[2,0] := -Matrix[2,0]; Result[2,1] := -Matrix[2,1]; Result[2,2] := -Matrix[2,2]; Result[2,3] := -Matrix[2,3];
+Result[3,0] := -Matrix[3,0]; Result[3,1] := -Matrix[3,1]; Result[3,2] := -Matrix[3,2]; Result[3,3] := -Matrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := -TVMCLMatrix4so(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[0,1] := -Matrix[0,1]; Result[0,2] := -Matrix[0,2]; Result[0,3] := -Matrix[0,3];
+Result[1,0] := -Matrix[1,0]; Result[1,1] := -Matrix[1,1]; Result[1,2] := -Matrix[1,2]; Result[1,3] := -Matrix[1,3];
+Result[2,0] := -Matrix[2,0]; Result[2,1] := -Matrix[2,1]; Result[2,2] := -Matrix[2,2]; Result[2,3] := -Matrix[2,3];
+Result[3,0] := -Matrix[3,0]; Result[3,1] := -Matrix[3,1]; Result[3,2] := -Matrix[3,2]; Result[3,3] := -Matrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := -TVMCLMatrix4do(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[1,0] := -Matrix[1,0]; Result[2,0] := -Matrix[2,0]; Result[3,0] := -Matrix[3,0];
+Result[0,1] := -Matrix[0,1]; Result[1,1] := -Matrix[1,1]; Result[2,1] := -Matrix[2,1]; Result[3,1] := -Matrix[3,1];
+Result[0,2] := -Matrix[0,2]; Result[1,2] := -Matrix[1,2]; Result[2,2] := -Matrix[2,2]; Result[3,2] := -Matrix[3,2];
+Result[0,3] := -Matrix[0,3]; Result[1,3] := -Matrix[1,3]; Result[2,3] := -Matrix[2,3]; Result[3,3] := -Matrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4so) to High(TVMCLMatrix4so) do
   TVMCLMatrix4so(Result)[i] := -TVMCLMatrix4so(Matrix)[i];
 end;
+{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Negative(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+{$IFDEF MatricesUnwindLoops}
+begin
+Result[0,0] := -Matrix[0,0]; Result[1,0] := -Matrix[1,0]; Result[2,0] := -Matrix[2,0]; Result[3,0] := -Matrix[3,0];
+Result[0,1] := -Matrix[0,1]; Result[1,1] := -Matrix[1,1]; Result[2,1] := -Matrix[2,1]; Result[3,1] := -Matrix[3,1];
+Result[0,2] := -Matrix[0,2]; Result[1,2] := -Matrix[1,2]; Result[2,2] := -Matrix[2,2]; Result[3,2] := -Matrix[3,2];
+Result[0,3] := -Matrix[0,3]; Result[1,3] := -Matrix[1,3]; Result[2,3] := -Matrix[2,3]; Result[3,3] := -Matrix[3,3];
+end;
+{$ELSE}
 var
   i:  Integer;
 begin
 For i := Low(TVMCLMatrix4do) to High(TVMCLMatrix4do) do
   TVMCLMatrix4do(Result)[i] := -TVMCLMatrix4do(Matrix)[i];
 end;
+{$ENDIF}
 
 //==============================================================================
 
