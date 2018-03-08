@@ -1567,56 +1567,56 @@ end;
 
 procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector2s));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector2s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector3s));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector3s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector4s));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector4s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector4s) - SizeOf(Single));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector4s) - SizeOf(Single));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector2d));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector2d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector3d));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector3d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector4d));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector4d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
 begin
-Move(Src,Dest,SizeOf(TVMCLVector4d) - SizeOf(Double));
+Move(Src,Dest{%H-},SizeOf(TVMCLVector4d) - SizeOf(Double));
 end;
 
 //==============================================================================

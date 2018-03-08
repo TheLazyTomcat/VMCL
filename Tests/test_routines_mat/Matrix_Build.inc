@@ -1,4 +1,4 @@
-Function Matrix_Build(AutoTest: Boolean = False): Integer;
+Function Matrix_Build({%H-}AutoTest: Boolean = False): Integer;
 var
   m2s:  TMatrix2s;
   m3s:  TMatrix3s;

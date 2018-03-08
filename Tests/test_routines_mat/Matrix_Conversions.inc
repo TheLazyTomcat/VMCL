@@ -1,4 +1,4 @@
-Function Matrix_Conversions(AutoTest: Boolean = False): Integer;
+Function Matrix_Conversions({%H-}AutoTest: Boolean = False): Integer;
 var
   m2s:    TMatrix2s;
   m3s:    TMatrix3s;

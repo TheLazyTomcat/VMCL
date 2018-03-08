@@ -1,4 +1,4 @@
-Function Matrix_Exchanging(AutoTest: Boolean = False): Integer;
+Function Matrix_Exchanging({%H-}AutoTest: Boolean = False): Integer;
 var
   m2s:    TMatrix2s;
   m3s:    TMatrix3s;

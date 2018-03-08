@@ -1,4 +1,4 @@
-Function Matrix_MatricesSubtract(AutoTest: Boolean = False): Integer;
+Function Matrix_MatricesSubtract({%H-}AutoTest: Boolean = False): Integer;
 var
   m2s1,m2s2:  TMatrix2s;
   m3s1,m3s2:  TMatrix3s;

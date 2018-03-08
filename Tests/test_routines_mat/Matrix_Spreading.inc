@@ -1,4 +1,4 @@
-Function Matrix_Spreading(AutoTest: Boolean = False): Integer;
+Function Matrix_Spreading({%H-}AutoTest: Boolean = False): Integer;
 var
   m2s:  TMatrix2s;
   m3s:  TMatrix3s;
