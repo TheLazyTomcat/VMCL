@@ -257,24 +257,24 @@ Function Vector4d(const Vector: TVMCLVector3d; const W: Double): TVMCLVector4d; 
     Vector swizzling
 ===============================================================================}
 
-Function Swizzle(const Vector: TVMCLVector2s; f0: TVMCLVectorField): TVMCLVector2s; overload;
+Function Swizzle(const Vector: TVMCLVector2s; f0: TVMCLVectorField): TVMCLVector2s; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Swizzle(const Vector: TVMCLVector2s; f0,f1: TVMCLVectorField): TVMCLVector2s; overload;
-Function Swizzle(const Vector: TVMCLVector3s; f0: TVMCLVectorField): TVMCLVector3s; overload;
-Function Swizzle(const Vector: TVMCLVector3s; f0,f1: TVMCLVectorField): TVMCLVector3s; overload;
+Function Swizzle(const Vector: TVMCLVector3s; f0: TVMCLVectorField): TVMCLVector3s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Swizzle(const Vector: TVMCLVector3s; f0,f1: TVMCLVectorField): TVMCLVector3s; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Swizzle(const Vector: TVMCLVector3s; f0,f1,f2: TVMCLVectorField): TVMCLVector3s; overload;
-Function Swizzle(const Vector: TVMCLVector4s; f0: TVMCLVectorField): TVMCLVector4s; overload;
-Function Swizzle(const Vector: TVMCLVector4s; f0,f1: TVMCLVectorField): TVMCLVector4s; overload;
-Function Swizzle(const Vector: TVMCLVector4s; f0,f1,f2: TVMCLVectorField): TVMCLVector4s; overload;
+Function Swizzle(const Vector: TVMCLVector4s; f0: TVMCLVectorField): TVMCLVector4s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1: TVMCLVectorField): TVMCLVector4s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Swizzle(const Vector: TVMCLVector4s; f0,f1,f2: TVMCLVectorField): TVMCLVector4s; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Swizzle(const Vector: TVMCLVector4s; f0,f1,f2,f3: TVMCLVectorField): TVMCLVector4s; overload;
 
-Function Swizzle(const Vector: TVMCLVector2d; f0: TVMCLVectorField): TVMCLVector2d; overload;
+Function Swizzle(const Vector: TVMCLVector2d; f0: TVMCLVectorField): TVMCLVector2d; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Swizzle(const Vector: TVMCLVector2d; f0,f1: TVMCLVectorField): TVMCLVector2d; overload;
-Function Swizzle(const Vector: TVMCLVector3d; f0: TVMCLVectorField): TVMCLVector3d; overload;
-Function Swizzle(const Vector: TVMCLVector3d; f0,f1: TVMCLVectorField): TVMCLVector3d; overload;
+Function Swizzle(const Vector: TVMCLVector3d; f0: TVMCLVectorField): TVMCLVector3d; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Swizzle(const Vector: TVMCLVector3d; f0,f1: TVMCLVectorField): TVMCLVector3d; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Swizzle(const Vector: TVMCLVector3d; f0,f1,f2: TVMCLVectorField): TVMCLVector3d; overload;
-Function Swizzle(const Vector: TVMCLVector4d; f0: TVMCLVectorField): TVMCLVector4d; overload;
-Function Swizzle(const Vector: TVMCLVector4d; f0,f1: TVMCLVectorField): TVMCLVector4d; overload;
-Function Swizzle(const Vector: TVMCLVector4d; f0,f1,f2: TVMCLVectorField): TVMCLVector4d; overload;
+Function Swizzle(const Vector: TVMCLVector4d; f0: TVMCLVectorField): TVMCLVector4d; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1: TVMCLVectorField): TVMCLVector4d; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Swizzle(const Vector: TVMCLVector4d; f0,f1,f2: TVMCLVectorField): TVMCLVector4d; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Swizzle(const Vector: TVMCLVector4d; f0,f1,f2,f3: TVMCLVectorField): TVMCLVector4d; overload;
 
 {===============================================================================
@@ -333,32 +333,32 @@ Function Vector4d(const Vector: TVMCLVector4sr): TVMCLVector4dr; overload;
     Basic vector functions (zeroing, comparison, etc.)
 ===============================================================================}
 
-procedure LoadZeroVector(var Vector: TVMCLVector2s); overload;
-procedure LoadZeroVector(var Vector: TVMCLVector3s); overload;
+procedure LoadZeroVector(var Vector: TVMCLVector2s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroVector(var Vector: TVMCLVector3s); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure LoadZeroVectorXYZ(var Vector: TVMCLVector4s); overload;
 procedure LoadZeroVector(var Vector: TVMCLVector4s; PositionVector: Boolean = False); overload;
-procedure LoadZeroVector(var Vector: TVMCLVector2d); overload;
-procedure LoadZeroVector(var Vector: TVMCLVector3d); overload;
+procedure LoadZeroVector(var Vector: TVMCLVector2d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroVector(var Vector: TVMCLVector3d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure LoadZeroVectorXYZ(var Vector: TVMCLVector4d); overload;
 procedure LoadZeroVector(var Vector: TVMCLVector4d; PositionVector: Boolean = False); overload;
 
-Function IsZeroVector(const Vector: TVMCLVector2s): Boolean; overload;
-Function IsZeroVector(const Vector: TVMCLVector3s): Boolean; overload;
-Function IsZeroVector(const Vector: TVMCLVector4s): Boolean; overload;
-Function IsZeroVectorXYZ(const Vector: TVMCLVector4s): Boolean; overload;
-Function IsZeroVector(const Vector: TVMCLVector2d): Boolean; overload;
-Function IsZeroVector(const Vector: TVMCLVector3d): Boolean; overload;
-Function IsZeroVector(const Vector: TVMCLVector4d): Boolean; overload;
-Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;
+Function IsZeroVector(const Vector: TVMCLVector2s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroVector(const Vector: TVMCLVector3s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroVector(const Vector: TVMCLVector4s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroVectorXYZ(const Vector: TVMCLVector4s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroVector(const Vector: TVMCLVector2d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroVector(const Vector: TVMCLVector3d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroVector(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s); overload;
-procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s); overload;
-procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;
-procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;
-procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d); overload;
-procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d); overload;
-procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;
-procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;
+procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 Function EqualVectors(const aVector, bVector: TVMCLVector2s): Boolean; overload;
 Function EqualVectors(const aVector, bVector: TVMCLVector3s): Boolean; overload;
@@ -407,14 +407,14 @@ procedure Normalize(var X, Y: Double); overload;
 procedure Normalize(var X, Y, Z: Double); overload;
 procedure Normalize(var X, Y, Z, W: Double); overload;
 
-procedure Normalize(var Vector: TVMCLVector2s); overload;
-procedure Normalize(var Vector: TVMCLVector3s); overload;
-procedure Normalize(var Vector: TVMCLVector4s); overload;
-procedure NormalizeXYZ(var Vector: TVMCLVector4s); overload;
-procedure Normalize(var Vector: TVMCLVector2d); overload;
-procedure Normalize(var Vector: TVMCLVector3d); overload;
-procedure Normalize(var Vector: TVMCLVector4d); overload;
-procedure NormalizeXYZ(var Vector: TVMCLVector4d); overload;
+procedure Normalize(var Vector: TVMCLVector2s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Normalize(var Vector: TVMCLVector3s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Normalize(var Vector: TVMCLVector4s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure NormalizeXYZ(var Vector: TVMCLVector4s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Normalize(var Vector: TVMCLVector2d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Normalize(var Vector: TVMCLVector3d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Normalize(var Vector: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure NormalizeXYZ(var Vector: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s; overload;
 Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s; overload;
@@ -1567,56 +1567,56 @@ end;
 
 procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector2s));
+Move(Src,Dest,SizeOf(TVMCLVector2s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector3s));
+Move(Src,Dest,SizeOf(TVMCLVector3s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4s));
+Move(Src,Dest,SizeOf(TVMCLVector4s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4s) - SizeOf(Single));
+Move(Src,Dest,SizeOf(TVMCLVector4s) - SizeOf(Single));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector2d));
+Move(Src,Dest,SizeOf(TVMCLVector2d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector3d));
+Move(Src,Dest,SizeOf(TVMCLVector3d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4d));
+Move(Src,Dest,SizeOf(TVMCLVector4d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4d) - SizeOf(Double));
+Move(Src,Dest,SizeOf(TVMCLVector4d) - SizeOf(Double));
 end;
 
 //==============================================================================
@@ -1966,185 +1966,179 @@ end;
 //------------------------------------------------------------------------------
 
 procedure Normalize(var Vector: TVMCLVector2s);
-var
-  VectorMagnitudeRcp: Extended;
 begin
-If not IsZeroVector(Vector) then
-  begin
-    VectorMagnitudeRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-  end;
+Vector := Normalized(Vector);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure Normalize(var Vector: TVMCLVector3s);
-var
-  VectorMagnitudeRcp: Extended;
 begin
-If not IsZeroVector(Vector) then
-  begin
-    VectorMagnitudeRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-    Vector[2] := Vector[2] * VectorMagnitudeRcp;
-  end;
+Vector := Normalized(Vector);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure Normalize(var Vector: TVMCLVector4s);
-var
-  VectorMagnitudeRcp: Extended;
 begin
-If not IsZeroVector(Vector) then
-  begin
-    VectorMagnitudeRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-    Vector[2] := Vector[2] * VectorMagnitudeRcp;
-    Vector[3] := Vector[3] * VectorMagnitudeRcp;
-  end;
+Vector := Normalized(Vector);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure NormalizeXYZ(var Vector: TVMCLVector4s);
-var
-  VectorMagnitudeRcp: Extended;
 begin
-If not IsZeroVector(Vector) then
-  begin
-    VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-    Vector[2] := Vector[2] * VectorMagnitudeRcp;
-  end;
+Vector := NormalizedXYZ(Vector);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure Normalize(var Vector: TVMCLVector2d);
-var
-  VectorMagnitudeRcp: Extended;
 begin
-If not IsZeroVector(Vector) then
-  begin
-    VectorMagnitudeRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-  end;
+Vector := Normalized(Vector);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure Normalize(var Vector: TVMCLVector3d);
-var
-  VectorMagnitudeRcp: Extended;
 begin
-If not IsZeroVector(Vector) then
-  begin
-    VectorMagnitudeRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-    Vector[2] := Vector[2] * VectorMagnitudeRcp;
-  end;
+Vector := Normalized(Vector);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure Normalize(var Vector: TVMCLVector4d);
+begin
+Vector := Normalized(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure NormalizeXYZ(var Vector: TVMCLVector4d);
+begin
+Vector := NormalizedXYZ(Vector);
+end;
+
+//==============================================================================
+
+Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s;
 var
   VectorMagnitudeRcp: Extended;
 begin
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-    Vector[2] := Vector[2] * VectorMagnitudeRcp;
-    Vector[3] := Vector[3] * VectorMagnitudeRcp;
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
   end;
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure NormalizeXYZ(var Vector: TVMCLVector4d);
-var
-  VectorMagnitudeRcp: Extended;
-begin
-If not IsZeroVector(Vector) then
-  begin
-    VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);
-    Vector[0] := Vector[0] * VectorMagnitudeRcp;
-    Vector[1] := Vector[1] * VectorMagnitudeRcp;
-    Vector[2] := Vector[2] * VectorMagnitudeRcp;
-  end;
-end;
-
-//==============================================================================
-
-Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s;
-begin
-Result := Vector;
-Normalize(Result);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s;
+var
+  VectorMagnitudeRcp: Extended;
 begin
-Result := Vector;
-Normalize(Result);
+If not IsZeroVector(Vector) then
+  begin
+    VectorMagnitudeRcp := 1 / Magnitude(Vector);
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
+    Result[2] := Vector[2] * VectorMagnitudeRcp;
+  end;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Normalized(const Vector: TVMCLVector4s): TVMCLVector4s;
+var
+  VectorMagnitudeRcp: Extended;
 begin
-Result := Vector;
-Normalize(Result);
+If not IsZeroVector(Vector) then
+  begin
+    VectorMagnitudeRcp := 1 / Magnitude(Vector);
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
+    Result[2] := Vector[2] * VectorMagnitudeRcp;
+    Result[3] := Vector[3] * VectorMagnitudeRcp;
+  end;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function NormalizedXYZ(const Vector: TVMCLVector4s): TVMCLVector4s;
+var
+  VectorMagnitudeRcp: Extended;
 begin
-Result := Vector;
-NormalizeXYZ(Result);
+If not IsZeroVectorXYZ(Vector) then
+  begin
+    VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
+    Result[2] := Vector[2] * VectorMagnitudeRcp;
+    Result[3] := Vector[3];
+  end;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Normalized(const Vector: TVMCLVector2d): TVMCLVector2d;
+var
+  VectorMagnitudeRcp: Extended;
 begin
-Result := Vector;
-Normalize(Result);
+If not IsZeroVector(Vector) then
+  begin
+    VectorMagnitudeRcp := 1 / Magnitude(Vector);
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
+  end;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d;
+var
+  VectorMagnitudeRcp: Extended;
 begin
-Result := Vector;
-Normalize(Result);
+If not IsZeroVector(Vector) then
+  begin
+    VectorMagnitudeRcp := 1 / Magnitude(Vector);
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
+    Result[2] := Vector[2] * VectorMagnitudeRcp;
+  end;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d;
+var
+  VectorMagnitudeRcp: Extended;
 begin
-Result := Vector;
-Normalize(Result);
+If not IsZeroVector(Vector) then
+  begin
+    VectorMagnitudeRcp := 1 / Magnitude(Vector);
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
+    Result[2] := Vector[2] * VectorMagnitudeRcp;
+    Result[3] := Vector[3] * VectorMagnitudeRcp;
+  end;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d;
+var
+  VectorMagnitudeRcp: Extended;
 begin
-Result := Vector;
-NormalizeXYZ(Result);
+If not IsZeroVectorXYZ(Vector) then
+  begin
+    VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);
+    Result[0] := Vector[0] * VectorMagnitudeRcp;
+    Result[1] := Vector[1] * VectorMagnitudeRcp;
+    Result[2] := Vector[2] * VectorMagnitudeRcp;
+    Result[3] := Vector[3];
+  end;
 end;
 
 {===============================================================================

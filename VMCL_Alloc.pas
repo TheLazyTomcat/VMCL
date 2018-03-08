@@ -193,8 +193,6 @@ procedure VMCL_Dispose(Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;{$IFDEF
 procedure VMCL_Dispose(Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure VMCL_Dispose(Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-//------------------------------------------------------------------------------
-
 implementation
 
 uses

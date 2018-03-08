@@ -315,12 +315,12 @@ Function RMMatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4d): TVMCLMatrix
 Function CMMatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4s): TVMCLMatrix4CMs; overload;
 Function CMMatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4d): TVMCLMatrix4CMd; overload;
 
-Function MatrixFromRows(const Row1,Row2: TVMCLVector2s): TVMCLMatrix2s; overload;
-Function MatrixFromRows(const Row1,Row2: TVMCLVector2d): TVMCLMatrix2d; overload;
-Function MatrixFromRows(const Row1,Row2,Row3: TVMCLVector3s): TVMCLMatrix3s; overload;
-Function MatrixFromRows(const Row1,Row2,Row3: TVMCLVector3d): TVMCLMatrix3d; overload;
-Function MatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4s): TVMCLMatrix4s; overload;
-Function MatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4d): TVMCLMatrix4d; overload;
+Function MatrixFromRows(const Row1,Row2: TVMCLVector2s): TVMCLMatrix2s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromRows(const Row1,Row2: TVMCLVector2d): TVMCLMatrix2d; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromRows(const Row1,Row2,Row3: TVMCLVector3s): TVMCLMatrix3s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromRows(const Row1,Row2,Row3: TVMCLVector3d): TVMCLMatrix3d; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4s): TVMCLMatrix4s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4d): TVMCLMatrix4d; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 // buiding matrix from column vectors
 Function RMMatrixFromColumns(const Column1,Column2: TVMCLVector2s): TVMCLMatrix2RMs; overload;
@@ -338,12 +338,12 @@ Function RMMatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4
 Function CMMatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4s): TVMCLMatrix4CMs; overload;
 Function CMMatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4d): TVMCLMatrix4CMd; overload;
 
-Function MatrixFromColumns(const Column1,Column2: TVMCLVector2s): TVMCLMatrix2s; overload;
-Function MatrixFromColumns(const Column1,Column2: TVMCLVector2d): TVMCLMatrix2d; overload;
-Function MatrixFromColumns(const Column1,Column2,Column3: TVMCLVector3s): TVMCLMatrix3s; overload;
-Function MatrixFromColumns(const Column1,Column2,Column3: TVMCLVector3d): TVMCLMatrix3d; overload;
-Function MatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4s): TVMCLMatrix4s; overload;
-Function MatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4d): TVMCLMatrix4d; overload;
+Function MatrixFromColumns(const Column1,Column2: TVMCLVector2s): TVMCLMatrix2s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromColumns(const Column1,Column2: TVMCLVector2d): TVMCLMatrix2d; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromColumns(const Column1,Column2,Column3: TVMCLVector3s): TVMCLMatrix3s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromColumns(const Column1,Column2,Column3: TVMCLVector3d): TVMCLMatrix3d; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4s): TVMCLMatrix4s; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function MatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4d): TVMCLMatrix4d; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 {===============================================================================
     Matrix entries access - declaration
@@ -721,80 +721,80 @@ Function Matrix4(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4CMd; overload;
     Basic matrix functions (zeroing, comparison, etc.) - declaration
 ===============================================================================}
 
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMs); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMd); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMs); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMd); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMs); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMd); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMs); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMd); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMs); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMd); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMs); overload;
-procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMd); overload;
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadZeroMatrix(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMs): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMs): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMd): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix2CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMs): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMd): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMs): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMd): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix3CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMs): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMd): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMs): Boolean; overload;
-Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMd): Boolean; overload;
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsZeroMatrix(const Matrix: TVMCLMatrix4CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMs); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMd); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMs); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMd); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMs); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMd); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMs); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMd); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMs); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMd); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMs); overload;
-procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMd); overload;
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure LoadIdentityMatrix(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMs): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMs): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMd): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix2CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMs): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMd): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMs): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMd): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix3CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMs): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMd): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMs): Boolean; overload;
-Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMd): Boolean; overload;
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsIdentityMatrix(const Matrix: TVMCLMatrix4CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure CopyMatrix(const Src: TVMCLMatrix2RMs; var Dest: TVMCLMatrix2RMs); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix2RMd; var Dest: TVMCLMatrix2RMd); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix2CMs; var Dest: TVMCLMatrix2CMs); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix2CMd; var Dest: TVMCLMatrix2CMd); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix2RMs; var Dest: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix2RMd; var Dest: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix2CMs; var Dest: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix2CMd; var Dest: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure CopyMatrix(const Src: TVMCLMatrix3RMs; var Dest: TVMCLMatrix3RMs); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix3RMd; var Dest: TVMCLMatrix3RMd); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix3CMs; var Dest: TVMCLMatrix3CMs); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix3CMd; var Dest: TVMCLMatrix3CMd); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix3RMs; var Dest: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix3RMd; var Dest: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix3CMs; var Dest: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix3CMd; var Dest: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure CopyMatrix(const Src: TVMCLMatrix4RMs; var Dest: TVMCLMatrix4RMs); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix4RMd; var Dest: TVMCLMatrix4RMd); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix4CMs; var Dest: TVMCLMatrix4CMs); overload;
-procedure CopyMatrix(const Src: TVMCLMatrix4CMd; var Dest: TVMCLMatrix4CMd); overload;
+procedure CopyMatrix(const Src: TVMCLMatrix4RMs; var Dest: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix4RMd; var Dest: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix4CMs; var Dest: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyMatrix(const Src: TVMCLMatrix4CMd; var Dest: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMs): Boolean; overload;
 Function EqualMatrices(const aMatrix,bMatrix: TVMCLMatrix2RMd): Boolean; overload;
@@ -826,39 +826,39 @@ Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd; Epsilon: Double = 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs; Epsilon: Single = 0): Boolean; overload;
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd; Epsilon: Double = 0): Boolean; overload;
 
-Function Invertible(const Matrix: TVMCLMatrix2RMs): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix2RMd): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix2CMs): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix2CMd): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix2RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix2RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix2CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix2CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function Invertible(const Matrix: TVMCLMatrix3RMs): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix3RMd): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix3CMs): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix3CMd): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix3RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix3RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix3CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix3CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function Invertible(const Matrix: TVMCLMatrix4RMs): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix4RMd): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix4CMs): Boolean; overload;
-Function Invertible(const Matrix: TVMCLMatrix4CMd): Boolean; overload;
+Function Invertible(const Matrix: TVMCLMatrix4RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix4RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix4CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Invertible(const Matrix: TVMCLMatrix4CMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 {===============================================================================
     Basic Matrix calculations - declaration
 ===============================================================================}
 
-procedure Transpose(var Matrix: TVMCLMatrix2RMs); overload;
-procedure Transpose(var Matrix: TVMCLMatrix2RMd); overload;
-procedure Transpose(var Matrix: TVMCLMatrix2CMs); overload;
-procedure Transpose(var Matrix: TVMCLMatrix2CMd); overload;
+procedure Transpose(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure Transpose(var Matrix: TVMCLMatrix3RMs); overload;
-procedure Transpose(var Matrix: TVMCLMatrix3RMd); overload;
-procedure Transpose(var Matrix: TVMCLMatrix3CMs); overload;
-procedure Transpose(var Matrix: TVMCLMatrix3CMd); overload;
+procedure Transpose(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure Transpose(var Matrix: TVMCLMatrix4RMs); overload;
-procedure Transpose(var Matrix: TVMCLMatrix4RMd); overload;
-procedure Transpose(var Matrix: TVMCLMatrix4CMs); overload;
-procedure Transpose(var Matrix: TVMCLMatrix4CMd); overload;
+procedure Transpose(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 Function Transposed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 Function Transposed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
@@ -920,25 +920,25 @@ procedure Orthonormalize(var Matrix: TVMCLMatrix4RMd); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMs); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMd); overload;
 
-procedure Inverse(var Matrix: TVMCLMatrix2RMs); overload;
-procedure Inverse(var Matrix: TVMCLMatrix2RMd); overload;
-procedure Inverse(var Matrix: TVMCLMatrix2CMs); overload;
-procedure Inverse(var Matrix: TVMCLMatrix2CMd); overload;
+procedure Inverse(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure Inverse(var Matrix: TVMCLMatrix3RMs); overload;
-procedure Inverse(var Matrix: TVMCLMatrix3RMd); overload;
-procedure Inverse(var Matrix: TVMCLMatrix3CMs); overload;
-procedure Inverse(var Matrix: TVMCLMatrix3CMd); overload;
+procedure Inverse(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure Inverse(var Matrix: TVMCLMatrix4RMs); overload;
-procedure Inverse(var Matrix: TVMCLMatrix4RMd); overload;
-procedure Inverse(var Matrix: TVMCLMatrix4CMs); overload;
-procedure Inverse(var Matrix: TVMCLMatrix4CMd); overload;
+procedure Inverse(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-procedure InverseAffine(var Matrix: TVMCLMatrix4RMs); overload;
-procedure InverseAffine(var Matrix: TVMCLMatrix4RMd); overload;
-procedure InverseAffine(var Matrix: TVMCLMatrix4CMs); overload;
-procedure InverseAffine(var Matrix: TVMCLMatrix4CMd); overload;
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 Function Inversed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 Function Inversed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
