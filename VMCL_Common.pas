@@ -79,18 +79,15 @@ Function CheckMemAlign16(Ptrs: array of Pointer): Boolean; overload;
 //- Checking if value is in a given range --------------------------------------
 
 Function CheckRange(Value: Integer; Min,Max: Integer): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
-Function CheckRange(Value: Single; Min,Max: Single): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
-Function CheckRange(Value: Double; Min,Max: Double): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function CheckRange(Value: Extended; Min,Max: Extended): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 //- Clipping (also known as clamping) value to a range -------------------------
 
 procedure Clip(var Value: Integer; Min,Max: Integer); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Clip(var Value: Single; Min,Max: Single); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Clip(var Value: Double; Min,Max: Double); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Clip(var Value: Extended; Min,Max: Extended); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function Clipped(Value: Integer; Min,Max: Integer): Integer; overload;{$IFDEF CanInline} inline;{$ENDIF}
-Function Clipped(Value: Single; Min,Max: Single): Single; overload;{$IFDEF CanInline} inline;{$ENDIF}
-Function Clipped(Value: Double; Min,Max: Double): Double; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Clipped(Value: Integer; Min,Max: Integer): Integer; overload;//{$IFDEF CanInline} inline;{$ENDIF}
+Function Clipped(Value: Extended; Min,Max: Extended): Extended; overload;//{$IFDEF CanInline} inline;{$ENDIF}
 
 //- Formatting types, constants and functions ----------------------------------
 
@@ -181,14 +178,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function CheckRange(Value: Single; Min,Max: Single): Boolean;
-begin
-Result := (Value >= Min) and (Value <= Max);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-Function CheckRange(Value: Double; Min,Max: Double): Boolean;
+Function CheckRange(Value: Extended; Min,Max: Extended): Boolean;
 begin
 Result := (Value >= Min) and (Value <= Max);
 end;
@@ -203,15 +193,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure Clip(var Value: Single; Min,Max: Single);
-begin
-If Value < Min then Value := Min else
-  If Value > Max then Value := Max;
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Clip(var Value: Double; Min,Max: Double);
+procedure Clip(var Value: Extended; Min,Max: Extended);
 begin
 If Value < Min then Value := Min else
   If Value > Max then Value := Max;
@@ -228,16 +210,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function Clipped(Value: Single; Min,Max: Single): Single;
-begin
-If Value < Min then Result := Min else
-  If Value > Max then Result := Max
-    else Result := Value;
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-Function Clipped(Value: Double; Min,Max: Double): Double;
+Function Clipped(Value: Extended; Min,Max: Extended): Extended;
 begin
 If Value < Min then Result := Min else
   If Value > Max then Result := Max

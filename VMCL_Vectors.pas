@@ -41,25 +41,25 @@ type
   TVMCLVector2s = packed array[0..1] of Single;     PVMCLVector2s = ^TVMCLVector2s;
   TVMCLVector2d = packed array[0..1] of Double;     PVMCLVector2d = ^TVMCLVector2d;
 {$IFDEF VectorsDoubleIsDefault}
-  TVMCLVector2  = TVMCLVector2d;                    PVMCLVector2  = ^TVMCLVector2;
+  TVMCLVector2  = TVMCLVector2d;                    PVMCLVector2  = PVMCLVector2d;
 {$ELSE}
-  TVMCLVector2  = TVMCLVector2s;                    PVMCLVector2  = ^TVMCLVector2;
+  TVMCLVector2  = TVMCLVector2s;                    PVMCLVector2  = PVMCLVector2s;
 {$ENDIF}
 
   TVMCLVector3s = packed array[0..2] of Single;     PVMCLVector3s = ^TVMCLVector3s;
   TVMCLVector3d = packed array[0..2] of Double;     PVMCLVector3d = ^TVMCLVector3d;
 {$IFDEF VectorsDoubleIsDefault}
-  TVMCLVector3  = TVMCLVector3d;                    PVMCLVector3  = ^TVMCLVector3;
+  TVMCLVector3  = TVMCLVector3d;                    PVMCLVector3  = PVMCLVector3d;
 {$ELSE}
-  TVMCLVector3  = TVMCLVector3s;                    PVMCLVector3  = ^TVMCLVector3;
+  TVMCLVector3  = TVMCLVector3s;                    PVMCLVector3  = PVMCLVector3s;
 {$ENDIF}
 
   TVMCLVector4s = packed array[0..3] of Single;     PVMCLVector4s = ^TVMCLVector4s;
   TVMCLVector4d = packed array[0..3] of Double;     PVMCLVector4d = ^TVMCLVector4d;
 {$IFDEF VectorsDoubleIsDefault}
-  TVMCLVector4  = TVMCLVector4d;                    PVMCLVector4  = ^TVMCLVector4;
+  TVMCLVector4  = TVMCLVector4d;                    PVMCLVector4  = PVMCLVector4d;
 {$ELSE}
-  TVMCLVector4  = TVMCLVector4s;                    PVMCLVector4  = ^TVMCLVector4;
+  TVMCLVector4  = TVMCLVector4s;                    PVMCLVector4  = PVMCLVector4s;
 {$ENDIF}
 
   TVMCLVector2sr = packed record
@@ -73,9 +73,9 @@ type
   PVMCLVector2dr = ^TVMCLVector2dr;
 
 {$IFDEF VectorsDoubleIsDefault}
-  TVMCLVector2r = TVMCLVector2dr;   PVMCLVector2r = ^TVMCLVector2r;
+  TVMCLVector2r = TVMCLVector2dr;   PVMCLVector2r = PVMCLVector2dr;
 {$ELSE}
-  TVMCLVector2r = TVMCLVector2sr;   PVMCLVector2r = ^TVMCLVector2r;
+  TVMCLVector2r = TVMCLVector2sr;   PVMCLVector2r = PVMCLVector2sr;
 {$ENDIF}
 
   TVMCLVector3sr = packed record
@@ -89,9 +89,9 @@ type
   PVMCLVector3dr = ^TVMCLVector3dr;
 
 {$IFDEF VectorsDoubleIsDefault}
-  TVMCLVector3r = TVMCLVector3dr;   PVMCLVector3r = ^TVMCLVector3r;
+  TVMCLVector3r = TVMCLVector3dr;   PVMCLVector3r = PVMCLVector3dr;
 {$ELSE}
-  TVMCLVector3r = TVMCLVector3sr;   PVMCLVector3r = ^TVMCLVector3r;
+  TVMCLVector3r = TVMCLVector3sr;   PVMCLVector3r = PVMCLVector3sr;
 {$ENDIF}
 
   TVMCLVector4sr = packed record
@@ -105,9 +105,9 @@ type
   PVMCLVector4dr = ^TVMCLVector4dr;
 
 {$IFDEF VectorsDoubleIsDefault}
-  TVMCLVector4r = TVMCLVector4dr;   PVMCLVector4r = ^TVMCLVector4r;
+  TVMCLVector4r = TVMCLVector4dr;   PVMCLVector4r = PVMCLVector4dr;
 {$ELSE}
-  TVMCLVector4r = TVMCLVector4sr;   PVMCLVector4r = ^TVMCLVector4r;
+  TVMCLVector4r = TVMCLVector4sr;   PVMCLVector4r = PVMCLVector4sr;
 {$ENDIF}
 
 //- shortened-name types (aliasses for TVMCL* types) ---------------------------
@@ -400,12 +400,14 @@ Function Magnitude(const Vector: TVMCLVector3d): Double; overload;
 Function Magnitude(const Vector: TVMCLVector4d): Double; overload;
 Function MagnitudeXYZ(const Vector: TVMCLVector4d): Double; overload;
 
-procedure Normalize(var X, Y: Single); overload;
-procedure Normalize(var X, Y, Z: Single); overload;
-procedure Normalize(var X, Y, Z, W: Single); overload;
-procedure Normalize(var X, Y: Double); overload;
-procedure Normalize(var X, Y, Z: Double); overload;
-procedure Normalize(var X, Y, Z, W: Double); overload;
+Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function Normalized(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function NormalizedXYZ(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function Normalized(const Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
 
 procedure Normalize(var Vector: TVMCLVector2s); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure Normalize(var Vector: TVMCLVector3s); overload;{$IFDEF CanInline} inline;{$ENDIF}
@@ -416,14 +418,12 @@ procedure Normalize(var Vector: TVMCLVector3d); overload;{$IFDEF CanInline} inli
 procedure Normalize(var Vector: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure NormalizeXYZ(var Vector: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s; overload;
-Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s; overload;
-Function Normalized(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
-Function NormalizedXYZ(const Vector: TVMCLVector4s): TVMCLVector4s; overload;
-Function Normalized(const Vector: TVMCLVector2d): TVMCLVector2d; overload;
-Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d; overload;
-Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
-Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d; overload;
+procedure Normalize(var X, Y: Single); overload;
+procedure Normalize(var X, Y, Z: Single); overload;
+procedure Normalize(var X, Y, Z, W: Single); overload;
+procedure Normalize(var X, Y: Double); overload;
+procedure Normalize(var X, Y, Z: Double); overload;
+procedure Normalize(var X, Y, Z, W: Double); overload;
 
 {===============================================================================
     Calculations with one vector
@@ -1887,140 +1887,6 @@ end;
 
 //==============================================================================
 
-procedure Normalize(var X, Y: Single);
-var
-  TempVector: TVMCLVector2s;
-begin
-TempVector := Vector2s(X,Y);
-Normalize(TempVector);
-X := TempVector[0];
-Y := TempVector[1];
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var X, Y, Z: Single);
-var
-  TempVector: TVMCLVector3s;
-begin
-TempVector := Vector3s(X,Y,Z);
-Normalize(TempVector);
-X := TempVector[0];
-Y := TempVector[1];
-Z := TempVector[2];
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var X, Y, Z, W: Single);
-var
-  TempVector: TVMCLVector4s;
-begin
-TempVector := Vector4s(X,Y,Z,W);
-Normalize(TempVector);
-X := TempVector[0];
-Y := TempVector[1];
-Z := TempVector[2];
-W := TempVector[3];
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var X, Y: Double);
-var
-  TempVector: TVMCLVector2d;
-begin
-TempVector := Vector2d(X,Y);
-Normalize(TempVector);
-X := TempVector[0];
-Y := TempVector[1];
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var X, Y, Z: Double);
-var
-  TempVector: TVMCLVector3d;
-begin
-TempVector := Vector3d(X,Y,Z);
-Normalize(TempVector);
-X := TempVector[0];
-Y := TempVector[1];
-Z := TempVector[2];
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var X, Y, Z, W: Double);
-var
-  TempVector: TVMCLVector4d;
-begin
-TempVector := Vector4d(X,Y,Z,W);
-Normalize(TempVector);
-X := TempVector[0];
-Y := TempVector[1];
-Z := TempVector[2];
-W := TempVector[3];
-end;
-
-//------------------------------------------------------------------------------
-
-procedure Normalize(var Vector: TVMCLVector2s);
-begin
-Vector := Normalized(Vector);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var Vector: TVMCLVector3s);
-begin
-Vector := Normalized(Vector);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var Vector: TVMCLVector4s);
-begin
-Vector := Normalized(Vector);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure NormalizeXYZ(var Vector: TVMCLVector4s);
-begin
-Vector := NormalizedXYZ(Vector);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var Vector: TVMCLVector2d);
-begin
-Vector := Normalized(Vector);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var Vector: TVMCLVector3d);
-begin
-Vector := Normalized(Vector);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Normalize(var Vector: TVMCLVector4d);
-begin
-Vector := Normalized(Vector);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure NormalizeXYZ(var Vector: TVMCLVector4d);
-begin
-Vector := NormalizedXYZ(Vector);
-end;
-
-//==============================================================================
-
 Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s;
 var
   VectorMagnitudeRcp: Extended;
@@ -2139,6 +2005,134 @@ If not IsZeroVectorXYZ(Vector) then
     Result[2] := Vector[2] * VectorMagnitudeRcp;
     Result[3] := Vector[3];
   end;
+end;
+
+//==============================================================================
+
+procedure Normalize(var Vector: TVMCLVector2s);
+begin
+Vector := Normalized(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector3s);
+begin
+Vector := Normalized(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector4s);
+begin
+Vector := Normalized(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure NormalizeXYZ(var Vector: TVMCLVector4s);
+begin
+Vector := NormalizedXYZ(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector2d);
+begin
+Vector := Normalized(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector3d);
+begin
+Vector := Normalized(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var Vector: TVMCLVector4d);
+begin
+Vector := Normalized(Vector);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure NormalizeXYZ(var Vector: TVMCLVector4d);
+begin
+Vector := NormalizedXYZ(Vector);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Normalize(var X, Y: Single);
+var
+  TempVector: TVMCLVector2s;
+begin
+TempVector := Normalized(Vector2s(X,Y));
+X := TempVector[0];
+Y := TempVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z: Single);
+var
+  TempVector: TVMCLVector3s;
+begin
+TempVector := Normalized(Vector3s(X,Y,Z));
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z, W: Single);
+var
+  TempVector: TVMCLVector4s;
+begin
+TempVector := Normalized(Vector4s(X,Y,Z,W));
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+W := TempVector[3];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y: Double);
+var
+  TempVector: TVMCLVector2d;
+begin
+TempVector := Normalized(Vector2d(X,Y));
+X := TempVector[0];
+Y := TempVector[1];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z: Double);
+var
+  TempVector: TVMCLVector3d;
+begin
+TempVector := Normalized(Vector3d(X,Y,Z));
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Normalize(var X, Y, Z, W: Double);
+var
+  TempVector: TVMCLVector4d;
+begin
+TempVector := Normalized(Vector4d(X,Y,Z,W));
+X := TempVector[0];
+Y := TempVector[1];
+Z := TempVector[2];
+W := TempVector[3];
 end;
 
 {===============================================================================
@@ -2559,114 +2553,78 @@ end;
 
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector2s): Single;
 var
-  Ma,Mb,Cos:  Extended;
+  Mags: Extended;
 begin
-Ma := Magnitude(aVector);
-Mb := Magnitude(bVector);
-If (Ma <> 0.0) and (Mb <> 0.0) then
-  begin
-    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
-    If SameValue(Cos,1.0,1e-6) then
-      Result := 0.0
-    else
-      Result := ArcCos(Cos);
-  end
-else Result := 0.0;
+Mags := Magnitude(aVector) * Magnitude(bVector);
+If Mags <> 0.0 then
+  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector3s): Single;
 var
-  Ma,Mb,Cos:  Extended;
+  Mags: Extended;
 begin
-Ma := Magnitude(aVector);
-Mb := Magnitude(bVector);
-If (Ma <> 0.0) and (Mb <> 0.0) then
-  begin
-    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
-    If SameValue(Cos,1.0,1e-6) then
-      Result := 0.0
-    else
-      Result := ArcCos(Cos);
-  end
-else Result := 0.0;
+Mags := Magnitude(aVector) * Magnitude(bVector);
+If Mags <> 0.0 then
+  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector4s): Single;
 var
-  Ma,Mb,Cos:  Extended;
+  Mags: Extended;
 begin
-Ma := MagnitudeXYZ(aVector);
-Mb := MagnitudeXYZ(bVector);
-If (Ma <> 0.0) and (Mb <> 0.0) then
-  begin
-    Cos := VectorsDotProductXYZ(aVector,bVector) / (Ma * Mb);
-    If SameValue(Cos,1.0,1e-6) then
-      Result := 0.0
-    else
-      Result := ArcCos(Cos);
-  end
-else Result := 0.0;
+Mags := Magnitude(aVector) * Magnitude(bVector);
+If Mags <> 0.0 then
+  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector2d): Double;
 var
-  Ma,Mb,Cos:  Extended;
+  Mags: Extended;
 begin
-Ma := Magnitude(aVector);
-Mb := Magnitude(bVector);
-If (Ma <> 0.0) and (Mb <> 0.0) then
-  begin
-    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
-    If SameValue(Cos,1.0,1e-13) then
-      Result := 0.0
-    else
-      Result := ArcCos(Cos);
-  end
-else Result := 0.0;
+Mags := Magnitude(aVector) * Magnitude(bVector);
+If Mags <> 0.0 then
+  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector3d): Double;
 var
-  Ma,Mb,Cos:  Extended;
+  Mags: Extended;
 begin
-Ma := Magnitude(aVector);
-Mb := Magnitude(bVector);
-If (Ma <> 0.0) and (Mb <> 0.0) then
-  begin
-    Cos := VectorsDotProduct(aVector,bVector) / (Ma * Mb);
-    If SameValue(Cos,1.0,1e-13) then
-      Result := 0.0
-    else
-      Result := ArcCos(Cos);
-  end
-else Result := 0.0;
+Mags := Magnitude(aVector) * Magnitude(bVector);
+If Mags <> 0.0 then
+  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+else
+  Result := 0.0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector4d): Double;
 var
-  Ma,Mb,Cos:  Extended;
+  Mags: Extended;
 begin
-Ma := MagnitudeXYZ(aVector);
-Mb := MagnitudeXYZ(bVector);
-If (Ma <> 0.0) and (Mb <> 0.0) then
-  begin
-    Cos := VectorsDotProductXYZ(aVector,bVector) / (Ma * Mb);
-    If SameValue(Cos,1.0,1e-13) then
-      Result := 0.0
-    else
-      Result := ArcCos(Cos);
-  end
-else Result := 0.0;
+Mags := Magnitude(aVector) * Magnitude(bVector);
+If Mags <> 0.0 then
+  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+else
+  Result := 0.0;
 end;
 
 //==============================================================================

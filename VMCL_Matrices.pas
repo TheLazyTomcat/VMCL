@@ -11,73 +11,82 @@ uses
     Matrix types and constants
 ===============================================================================}
 
-//- matrices 2 x 2 -------------------------------------------------------------
+//- base matrix types (do not use them) ----------------------------------------
 type
-  TVMCLMatrix2RMs = packed array[0..1,0..1] of Single;    PVMCLMatrix2RMs = ^TVMCLMatrix2RMs;
-  TVMCLMatrix2RMd = packed array[0..1,0..1] of Double;    PVMCLMatrix2RMd = ^TVMCLMatrix2RMd;
-  TVMCLMatrix2CMs = packed array[0..1,0..1] of Single;    PVMCLMatrix2CMs = ^TVMCLMatrix2CMs;
-  TVMCLMatrix2CMd = packed array[0..1,0..1] of Double;    PVMCLMatrix2CMd = ^TVMCLMatrix2CMd;
+  TVMCLMatrix2s_base = packed array[0..1,0..1] of Single;
+  TVMCLMatrix2d_base = packed array[0..1,0..1] of Double;
+  TVMCLMatrix3s_base = packed array[0..2,0..2] of Single;
+  TVMCLMatrix3d_base = packed array[0..2,0..2] of Double;
+  TVMCLMatrix4s_base = packed array[0..3,0..3] of Single;
+  TVMCLMatrix4d_base = packed array[0..3,0..3] of Double;
+
+//- matrices 2 x 2 -------------------------------------------------------------
+
+  TVMCLMatrix2RMs = type TVMCLMatrix2s_base;    PVMCLMatrix2RMs = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix2RMs;
+  TVMCLMatrix2RMd = type TVMCLMatrix2d_base;    PVMCLMatrix2RMd = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix2RMd;
+  TVMCLMatrix2CMs = type TVMCLMatrix2s_base;    PVMCLMatrix2CMs = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix2CMs;
+  TVMCLMatrix2CMd = type TVMCLMatrix2d_base;    PVMCLMatrix2CMd = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix2CMd;
 {$IFDEF MatricesDoubleIsDefault}
-  TVMCLMatrix2RM = TVMCLMatrix2RMd;   PVMCLMatrix2RM = ^TVMCLMatrix2RM;
-  TVMCLMatrix2CM = TVMCLMatrix2CMd;   PVMCLMatrix2CM = ^TVMCLMatrix2CM;
+  TVMCLMatrix2RM = TVMCLMatrix2RMd;   PVMCLMatrix2RM = PVMCLMatrix2RMd;
+  TVMCLMatrix2CM = TVMCLMatrix2CMd;   PVMCLMatrix2CM = PVMCLMatrix2CMd;
 {$ELSE}
-  TVMCLMatrix2RM = TVMCLMatrix2RMs;   PVMCLMatrix2RM = ^TVMCLMatrix2RM;
-  TVMCLMatrix2CM = TVMCLMatrix2CMs;   PVMCLMatrix2CM = ^TVMCLMatrix2CM;
+  TVMCLMatrix2RM = TVMCLMatrix2RMs;   PVMCLMatrix2RM = PVMCLMatrix2RMs;
+  TVMCLMatrix2CM = TVMCLMatrix2CMs;   PVMCLMatrix2CM = PVMCLMatrix2CMs;
 {$ENDIF}
 {$IFDEF MatricesColumnMajorIsDefault}
-  TVMCLMatrix2s = TVMCLMatrix2CMs;    PVMCLMatrix2s = ^TVMCLMatrix2s;
-  TVMCLMatrix2d = TVMCLMatrix2CMd;    PVMCLMatrix2d = ^TVMCLMatrix2d;
-  TVMCLMatrix2  = TVMCLMatrix2CM;     PVMCLMatrix2  = ^TVMCLMatrix2;
+  TVMCLMatrix2s = TVMCLMatrix2CMs;    PVMCLMatrix2s = PVMCLMatrix2CMs;
+  TVMCLMatrix2d = TVMCLMatrix2CMd;    PVMCLMatrix2d = PVMCLMatrix2CMd;
+  TVMCLMatrix2  = TVMCLMatrix2CM;     PVMCLMatrix2  = PVMCLMatrix2CM;
 {$ELSE}
-  TVMCLMatrix2s = TVMCLMatrix2RMs;    PVMCLMatrix2s = ^TVMCLMatrix2s;
-  TVMCLMatrix2d = TVMCLMatrix2RMd;    PVMCLMatrix2d = ^TVMCLMatrix2d;
-  TVMCLMatrix2  = TVMCLMatrix2RM;     PVMCLMatrix2  = ^TVMCLMatrix2;
+  TVMCLMatrix2s = TVMCLMatrix2RMs;    PVMCLMatrix2s = PVMCLMatrix2RMs;
+  TVMCLMatrix2d = TVMCLMatrix2RMd;    PVMCLMatrix2d = PVMCLMatrix2RMd;
+  TVMCLMatrix2  = TVMCLMatrix2RM;     PVMCLMatrix2  = PVMCLMatrix2RM;
 {$ENDIF}
 
 //- matrices 3 x 3 -------------------------------------------------------------
 
-  TVMCLMatrix3RMs = packed array[0..2,0..2] of Single;    PVMCLMatrix3RMs = ^TVMCLMatrix3RMs;
-  TVMCLMatrix3RMd = packed array[0..2,0..2] of Double;    PVMCLMatrix3RMd = ^TVMCLMatrix3RMd;
-  TVMCLMatrix3CMs = packed array[0..2,0..2] of Single;    PVMCLMatrix3CMs = ^TVMCLMatrix3CMs;
-  TVMCLMatrix3CMd = packed array[0..2,0..2] of Double;    PVMCLMatrix3CMd = ^TVMCLMatrix3CMd;
+  TVMCLMatrix3RMs = type TVMCLMatrix3s_base;    PVMCLMatrix3RMs = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix3RMs;
+  TVMCLMatrix3RMd = type TVMCLMatrix3d_base;    PVMCLMatrix3RMd = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix3RMd;
+  TVMCLMatrix3CMs = type TVMCLMatrix3s_base;    PVMCLMatrix3CMs = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix3CMs;
+  TVMCLMatrix3CMd = type TVMCLMatrix3d_base;    PVMCLMatrix3CMd = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix3CMd;
 {$IFDEF MatricesDoubleIsDefault}
-  TVMCLMatrix3RM = TVMCLMatrix3RMd;   PVMCLMatrix3RM = ^TVMCLMatrix3RM;
-  TVMCLMatrix3CM = TVMCLMatrix3CMd;   PVMCLMatrix3CM = ^TVMCLMatrix3CM;
+  TVMCLMatrix3RM = TVMCLMatrix3RMd;   PVMCLMatrix3RM = PVMCLMatrix3RMd;
+  TVMCLMatrix3CM = TVMCLMatrix3CMd;   PVMCLMatrix3CM = PVMCLMatrix3CMd;
 {$ELSE}
-  TVMCLMatrix3RM = TVMCLMatrix3RMs;   PVMCLMatrix3RM = ^TVMCLMatrix3RM;
-  TVMCLMatrix3CM = TVMCLMatrix3CMs;   PVMCLMatrix3CM = ^TVMCLMatrix3CM;
+  TVMCLMatrix3RM = TVMCLMatrix3RMs;   PVMCLMatrix3RM = PVMCLMatrix3RMs;
+  TVMCLMatrix3CM = TVMCLMatrix3CMs;   PVMCLMatrix3CM = PVMCLMatrix3CMs;
 {$ENDIF}
 {$IFDEF MatricesColumnMajorIsDefault}
-  TVMCLMatrix3s = TVMCLMatrix3CMs;    PVMCLMatrix3s = ^TVMCLMatrix3s;
-  TVMCLMatrix3d = TVMCLMatrix3CMd;    PVMCLMatrix3d = ^TVMCLMatrix3d;
-  TVMCLMatrix3  = TVMCLMatrix3CM;     PVMCLMatrix3  = ^TVMCLMatrix3;
+  TVMCLMatrix3s = TVMCLMatrix3CMs;    PVMCLMatrix3s = PVMCLMatrix3CMs;
+  TVMCLMatrix3d = TVMCLMatrix3CMd;    PVMCLMatrix3d = PVMCLMatrix3CMd;
+  TVMCLMatrix3  = TVMCLMatrix3CM;     PVMCLMatrix3  = PVMCLMatrix3CM;
 {$ELSE}
-  TVMCLMatrix3s = TVMCLMatrix3RMs;    PVMCLMatrix3s = ^TVMCLMatrix3s;
-  TVMCLMatrix3d = TVMCLMatrix3RMd;    PVMCLMatrix3d = ^TVMCLMatrix3d;
-  TVMCLMatrix3  = TVMCLMatrix3RM;     PVMCLMatrix3  = ^TVMCLMatrix3;
+  TVMCLMatrix3s = TVMCLMatrix3RMs;    PVMCLMatrix3s = PVMCLMatrix3RMs;
+  TVMCLMatrix3d = TVMCLMatrix3RMd;    PVMCLMatrix3d = PVMCLMatrix3RMd;
+  TVMCLMatrix3  = TVMCLMatrix3RM;     PVMCLMatrix3  = PVMCLMatrix3RM;
 {$ENDIF}
 
 //- matrices 4 x 4 -------------------------------------------------------------
 
-  TVMCLMatrix4RMs = packed array[0..3,0..3] of Single;    PVMCLMatrix4RMs = ^TVMCLMatrix4RMs;
-  TVMCLMatrix4RMd = packed array[0..3,0..3] of Double;    PVMCLMatrix4RMd = ^TVMCLMatrix4RMd;
-  TVMCLMatrix4CMs = packed array[0..3,0..3] of Single;    PVMCLMatrix4CMs = ^TVMCLMatrix4CMs;
-  TVMCLMatrix4CMd = packed array[0..3,0..3] of Double;    PVMCLMatrix4CMd = ^TVMCLMatrix4CMd;
+  TVMCLMatrix4RMs = type TVMCLMatrix4s_base;    PVMCLMatrix4RMs = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix4RMs;
+  TVMCLMatrix4RMd = type TVMCLMatrix4d_base;    PVMCLMatrix4RMd = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix4RMd;
+  TVMCLMatrix4CMs = type TVMCLMatrix4s_base;    PVMCLMatrix4CMs = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix4CMs;
+  TVMCLMatrix4CMd = type TVMCLMatrix4d_base;    PVMCLMatrix4CMd = {$IFDEF FPC}type{$ENDIF} ^TVMCLMatrix4CMd;
 {$IFDEF MatricesDoubleIsDefault}
-  TVMCLMatrix4RM = TVMCLMatrix4RMd;   PVMCLMatrix4RM = ^TVMCLMatrix4RM;
-  TVMCLMatrix4CM = TVMCLMatrix4CMd;   PVMCLMatrix4CM = ^TVMCLMatrix4CM;
+  TVMCLMatrix4RM = TVMCLMatrix4RMd;   PVMCLMatrix4RM = PVMCLMatrix4RMd;
+  TVMCLMatrix4CM = TVMCLMatrix4CMd;   PVMCLMatrix4CM = PVMCLMatrix4CMd;
 {$ELSE}
-  TVMCLMatrix4RM = TVMCLMatrix4RMs;   PVMCLMatrix4RM = ^TVMCLMatrix4RM;
-  TVMCLMatrix4CM = TVMCLMatrix4CMs;   PVMCLMatrix4CM = ^TVMCLMatrix4CM;
+  TVMCLMatrix4RM = TVMCLMatrix4RMs;   PVMCLMatrix4RM = PVMCLMatrix4RMs;
+  TVMCLMatrix4CM = TVMCLMatrix4CMs;   PVMCLMatrix4CM = PVMCLMatrix4CMs;
 {$ENDIF}
 {$IFDEF MatricesColumnMajorIsDefault}
-  TVMCLMatrix4s = TVMCLMatrix4CMs;    PVMCLMatrix4s = ^TVMCLMatrix4s;
-  TVMCLMatrix4d = TVMCLMatrix4CMd;    PVMCLMatrix4d = ^TVMCLMatrix4d;
-  TVMCLMatrix4  = TVMCLMatrix4CM;     PVMCLMatrix4  = ^TVMCLMatrix4;
+  TVMCLMatrix4s = TVMCLMatrix4CMs;    PVMCLMatrix4s = PVMCLMatrix4CMs;
+  TVMCLMatrix4d = TVMCLMatrix4CMd;    PVMCLMatrix4d = PVMCLMatrix4CMd;
+  TVMCLMatrix4  = TVMCLMatrix4CM;     PVMCLMatrix4  = PVMCLMatrix4CM;
 {$ELSE}
-  TVMCLMatrix4s = TVMCLMatrix4RMs;    PVMCLMatrix4s = ^TVMCLMatrix4s;
-  TVMCLMatrix4d = TVMCLMatrix4RMd;    PVMCLMatrix4d = ^TVMCLMatrix4d;
-  TVMCLMatrix4  = TVMCLMatrix4RM;     PVMCLMatrix4  = ^TVMCLMatrix4;
+  TVMCLMatrix4s = TVMCLMatrix4RMs;    PVMCLMatrix4s = PVMCLMatrix4RMs;
+  TVMCLMatrix4d = TVMCLMatrix4RMd;    PVMCLMatrix4d = PVMCLMatrix4RMd;
+  TVMCLMatrix4  = TVMCLMatrix4RM;     PVMCLMatrix4  = PVMCLMatrix4RM;
 {$ENDIF}
 
 //- 1 dimensional (linear) overlays --------------------------------------------

@@ -39,7 +39,8 @@ interface
 
 uses
   SyncObjs, Contnrs,
-  BitVector, AuxTypes, VMCL_Vectors;
+  BitVector, AuxTypes,
+  VMCL_Vectors, VMCL_Matrices;
 
 {===============================================================================
 --------------------------------------------------------------------------------
@@ -157,8 +158,12 @@ procedure Finalize;
     Allocation functions - declaration
 ===============================================================================}
 
-procedure VMCL_GetMem(out Ptr: Pointer; Size: TMemSize);
-Function VMCL_AllocMem(Size: TMemSize): Pointer;
+Function VMCL_GetMem(Size: TMemSize): Pointer; overload;
+procedure VMCL_GetMem(out Ptr: Pointer; Size: TMemSize); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+Function VMCL_AllocMem(Size: TMemSize): Pointer; overload;
+procedure VMCL_AllocMem(out Ptr: Pointer; Size: TMemSize); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
 procedure VMCL_FreeMem(Ptr: Pointer; Size: TMemSize);
 
 //= Vectors allocation =========================================================
@@ -192,6 +197,40 @@ procedure VMCL_Dispose(Vec: PVMCLVector4sr; Count: UInt32 = 1); overload;{$IFDEF
 procedure VMCL_Dispose(Vec: PVMCLVector2dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure VMCL_Dispose(Vec: PVMCLVector3dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure VMCL_Dispose(Vec: PVMCLVector4dr; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+//= Matrices allocation ========================================================
+
+procedure VMCL_New(out Mat: PVMCLMatrix2RMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix2RMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix2CMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix2CMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure VMCL_New(out Mat: PVMCLMatrix3RMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix3RMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix3CMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix3CMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure VMCL_New(out Mat: PVMCLMatrix4RMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix4RMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix4CMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_New(out Mat: PVMCLMatrix4CMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix2RMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix2RMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix2CMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix2CMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix3RMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix3RMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix3CMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix3CMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix4RMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix4RMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix4CMs; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure VMCL_Dispose(Mat: PVMCLMatrix4CMd; Count: UInt32 = 1); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 implementation
 
@@ -715,12 +754,19 @@ end;
     Allocation functions - implementation
 ===============================================================================}
 
-procedure VMCL_GetMem(out Ptr: Pointer; Size: TMemSize);
+Function VMCL_GetMem(Size: TMemSize): Pointer;
 begin
 If Assigned(VMCL_MemoryManager) then
-  Ptr := VMCL_MemoryManager.AlignedAllocate(Size)
+  Result := VMCL_MemoryManager.AlignedAllocate(Size)
 else
   raise Exception.Create('VMCL_GetMem: Memory manager object not initialized.');
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_GetMem(out Ptr: Pointer; Size: TMemSize);
+begin
+Ptr := VMCL_GetMem(Size);
 end;
 
 //------------------------------------------------------------------------------
@@ -729,6 +775,13 @@ Function VMCL_AllocMem(Size: TMemSize): Pointer;
 begin
 VMCL_GetMem(Result,Size);
 FillChar(Result^,Size,0);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_AllocMem(out Ptr: Pointer; Size: TMemSize);
+begin
+Ptr := VMCL_AllocMem(Size);
 end;
 
 //------------------------------------------------------------------------------
@@ -907,6 +960,174 @@ end;
 procedure VMCL_Dispose(Vec: PVMCLVector4dr; Count: UInt32 = 1);
 begin
 VMCL_FreeMem(Vec,SizeOf(Vec^) * Count);
+end;
+
+//= Matrices allocation ========================================================
+
+procedure VMCL_New(out Mat: PVMCLMatrix2RMs; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix2RMd; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix2CMs; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix2CMd; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix3RMs; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix3RMd; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix3CMs; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix3CMd; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix4RMs; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix4RMd; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix4CMs; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_New(out Mat: PVMCLMatrix4CMd; Count: UInt32 = 1);
+begin
+Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix2RMs; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix2RMd; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix2CMs; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix2CMd; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix3RMs; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix3RMd; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix3CMs; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix3CMd; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix4RMs; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix4RMd; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix4CMs; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VMCL_Dispose(Mat: PVMCLMatrix4CMd; Count: UInt32 = 1);
+begin
+VMCL_FreeMem(Mat,SizeOf(Mat^) * Count);
 end;
 
 {===============================================================================
