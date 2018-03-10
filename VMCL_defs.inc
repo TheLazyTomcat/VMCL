@@ -168,4 +168,7 @@
 
 //= Do not touch following =====================================================
 
+{$IFDEF Debug}
+  {$DEFINE DevelMsgs}
+{$ENDIF}
 
