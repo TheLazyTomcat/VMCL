@@ -854,21 +854,6 @@ Function Invertible(const Matrix: TVMCLMatrix4CMd): Boolean; overload;{$IFDEF Ca
     Basic Matrix calculations - declaration
 ===============================================================================}
 
-procedure Transpose(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-
-procedure Transpose(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-
-procedure Transpose(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Transpose(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-
 Function Transposed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 Function Transposed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
 Function Transposed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
@@ -883,6 +868,21 @@ Function Transposed(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overload;
 Function Transposed(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
 Function Transposed(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
 Function Transposed(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
+procedure Transpose(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure Transpose(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure Transpose(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Transpose(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 Function Negative(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 Function Negative(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
@@ -929,26 +929,6 @@ procedure Orthonormalize(var Matrix: TVMCLMatrix4RMd); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMs); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMd); overload;
 
-procedure Inverse(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-
-procedure Inverse(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-
-procedure Inverse(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure Inverse(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-
-procedure InverseAffine(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure InverseAffine(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure InverseAffine(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure InverseAffine(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
-
 Function Inversed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 Function Inversed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
 Function Inversed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
@@ -968,6 +948,26 @@ Function InversedAffine(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix4RMs; overloa
 Function InversedAffine(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
 Function InversedAffine(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
 Function InversedAffine(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
+
+procedure Inverse(var Matrix: TVMCLMatrix2RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix2RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix2CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix2CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure Inverse(var Matrix: TVMCLMatrix3RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix3RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix3CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix3CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure Inverse(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Inverse(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMs); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMd); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 {===============================================================================
     Calculations with one matrix - declaration
@@ -3607,6 +3607,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix2RMs;
 OutRow := 0;
 For InRow := Low(Matrix) to High(Matrix) do
   If InRow <> Row then
@@ -3633,6 +3634,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix2RMd;
 OutRow := 0;
 For InRow := Low(Matrix) to High(Matrix) do
   If InRow <> Row then
@@ -3659,6 +3661,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix2CMs;
 OutRow := 0;
 For InRow := Low(Matrix[0]) to High(Matrix[0]) do
   If InRow <> Row then
@@ -3685,6 +3688,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix2CMd;
 OutRow := 0;
 For InRow := Low(Matrix[0]) to High(Matrix[0]) do
   If InRow <> Row then
@@ -3710,7 +3714,8 @@ Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4RMs; Row1,Row2,Column1,Colu
 var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
-begin
+begin 
+Result := VMCL_ZeroMatrix2RMs;
 OutRow := 0;
 For InRow := Low(Matrix) to High(Matrix) do
   If not(InRow in [Row1,Row2]) then
@@ -3736,7 +3741,8 @@ Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4RMd; Row1,Row2,Column1,Colu
 var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
-begin
+begin 
+Result := VMCL_ZeroMatrix2RMd;
 OutRow := 0;
 For InRow := Low(Matrix) to High(Matrix) do
   If not(InRow in [Row1,Row2]) then
@@ -3762,7 +3768,8 @@ Function ExtractSubmatrix2(const Matrix: TVMCLMatrix4CMs; Row1,Row2,Column1,Colu
 var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
-begin
+begin 
+Result := VMCL_ZeroMatrix2CMs;
 OutRow := 0;
 For InRow := Low(Matrix[0]) to High(Matrix[0]) do
   If not(InRow in [Row1,Row2]) then
@@ -3789,6 +3796,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix2CMd;
 OutRow := 0;
 For InRow := Low(Matrix[0]) to High(Matrix[0]) do
   If not(InRow in [Row1,Row2]) then
@@ -3814,7 +3822,8 @@ Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4RMs; Row,Column: Integer): 
 var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
-begin
+begin 
+Result := VMCL_ZeroMatrix3RMs;
 OutRow := 0;
 For InRow := Low(Matrix) to High(Matrix) do
   If InRow <> Row then
@@ -3841,6 +3850,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix3RMd;
 OutRow := 0;
 For InRow := Low(Matrix) to High(Matrix) do
   If InRow <> Row then
@@ -3867,6 +3877,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix3CMs;
 OutRow := 0;
 For InRow := Low(Matrix[0]) to High(Matrix[0]) do
   If InRow <> Row then
@@ -3893,6 +3904,7 @@ var
   InRow,InCol:    Integer;
   OutRow,OutCol:  Integer;
 begin
+Result := VMCL_ZeroMatrix3CMd;
 OutRow := 0;
 For InRow := Low(Matrix[0]) to High(Matrix[0]) do
   If InRow <> Row then
@@ -6492,90 +6504,6 @@ end;
     Basic Matrix calculations - implementation
 ===============================================================================}
 
-procedure Transpose(var Matrix: TVMCLMatrix2RMs);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix2RMd);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix2CMs);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix2CMd);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix3RMs);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix3RMd);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix3CMs);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix3CMd);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix4RMs);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix4RMd);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix4CMs);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Transpose(var Matrix: TVMCLMatrix4CMd);
-begin
-Matrix := Transposed(Matrix);
-end;
-
-//==============================================================================
-
 Function Transposed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs;
 {$IFDEF MatricesUnwindLoops}
 begin
@@ -6801,6 +6729,90 @@ For R := Low(Matrix[0]) to High(Matrix[0]) do
     Result[C,R] := Matrix[R,C];
 end;
 {$ENDIF}
+
+//==============================================================================
+
+procedure Transpose(var Matrix: TVMCLMatrix2RMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix2RMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix2CMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix2CMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3RMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3RMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3CMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix3CMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := Transposed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := Transposed(Matrix);
+end;
 
 //==============================================================================
 
@@ -7319,7 +7331,9 @@ end;
 {$ENDIF}
 
 //==============================================================================
-{$message 'check whether columns or rows should be really orthonormalized'}
+{$IFDEF DevelMsgs}
+  {$MESSAGE 'check whether columns or rows should be really orthonormalized'}
+{$ENDIF}
 procedure Orthonormalize(var Matrix: TVMCLMatrix2RMs);
 var
   Col1,Col2:  TVMCLVector2s;
@@ -7456,118 +7470,6 @@ Col1 := NormalizedXYZ(MatrixGetColumn(Matrix,0));
 Col2 := VectorsOrthonormalXYZ(Col1,MatrixGetColumn(Matrix,1));
 Col3 := VectorsOrthogonalXYZ(Col1,MatrixGetColumn(Matrix,2));
 Matrix := CMMatrixFromColumns(Col1,Col2,VectorsOrthonormalXYZ(Col2,Col3),MatrixGetColumn(Matrix,3));
-end;
-
-//==============================================================================
-
-procedure Inverse(var Matrix: TVMCLMatrix2RMs);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix2RMd);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix2CMs);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix2CMd);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix3RMs);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix3RMd);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix3CMs);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix3CMd);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix4RMs);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix4RMd);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix4CMs);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure Inverse(var Matrix: TVMCLMatrix4CMd);
-begin
-Matrix := Inversed(Matrix);
-end;
-
-//------------------------------------------------------------------------------
-
-procedure InverseAffine(var Matrix: TVMCLMatrix4RMs);
-begin
-Matrix := InversedAffine(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure InverseAffine(var Matrix: TVMCLMatrix4RMd);
-begin
-Matrix := InversedAffine(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure InverseAffine(var Matrix: TVMCLMatrix4CMs);
-begin
-Matrix := InversedAffine(Matrix);
-end;
-
-//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
-procedure InverseAffine(var Matrix: TVMCLMatrix4CMd);
-begin
-Matrix := InversedAffine(Matrix);
 end;
 
 //==============================================================================
@@ -7957,6 +7859,118 @@ If EqualVectors(MatrixGetRow(Matrix,3),Vector4d(0,0,0,1)) then
     MatrixSetColumn(Result,3,Vector4d(Vec,1));
   end
 else Result := Inversed(Matrix);
+end;
+
+//==============================================================================
+
+procedure Inverse(var Matrix: TVMCLMatrix2RMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix2RMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix2CMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix2CMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3RMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3RMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3CMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix3CMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Inverse(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := Inversed(Matrix);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMs);
+begin
+Matrix := InversedAffine(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4RMd);
+begin
+Matrix := InversedAffine(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMs);
+begin
+Matrix := InversedAffine(Matrix);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure InverseAffine(var Matrix: TVMCLMatrix4CMd);
+begin
+Matrix := InversedAffine(Matrix);
 end;
 
 {===============================================================================

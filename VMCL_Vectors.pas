@@ -1890,7 +1890,7 @@ end;
 Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -1904,7 +1904,7 @@ end;
 Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -1919,7 +1919,7 @@ end;
 Function Normalized(const Vector: TVMCLVector4s): TVMCLVector4s;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -1935,7 +1935,7 @@ end;
 Function NormalizedXYZ(const Vector: TVMCLVector4s): TVMCLVector4s;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVectorXYZ(Vector) then
   begin
     VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);
@@ -1951,7 +1951,7 @@ end;
 Function Normalized(const Vector: TVMCLVector2d): TVMCLVector2d;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -1965,7 +1965,7 @@ end;
 Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -1980,7 +1980,7 @@ end;
 Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -1996,7 +1996,7 @@ end;
 Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d;
 var
   VectorMagnitudeRcp: Extended;
-begin
+begin{%H-}
 If not IsZeroVectorXYZ(Vector) then
   begin
     VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);
