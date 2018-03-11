@@ -21,22 +21,22 @@ var
   EndCnt:   Int64;
   nSSECnt:  Int64;
   i:        Integer;
-  vec1:     TVector4d;
-  vec2:     TVector4d;
-  vec3:     TVector4d;
+  vec1:     TVector2s;
+  vec2:     TVector2s;
+  vec3:     TVector2s;
 begin
 // check validity
 RandomVec(vec1); RandomVec(vec2);
 WriteLn(VecToStr(vec1));
 WriteLn(VecToStr(vec2));
-WriteLn('nSSE: ',VecToStr(VectorsProjectionXYZ(vec1,vec2)));
-VectorsProjectionXYZ_SSE(vec1,vec2,vec3);
+WriteLn('nSSE: ',VecToStr(VectorsOrthogonal(vec1,vec2)));
+VectorsOrthogonal_SSE(vec1,vec2,vec3);
 WriteLn(' SSE: ',VecToStr(vec3));
 // non-sse call
 QueryPerformanceCounter({%H-}StartCnt);
 For i := 1 to RepCount do
   begin
-    vec3 := VectorsProjectionXYZ(vec1,vec2);
+    vec3 := VectorsOrthogonal(vec1,vec2);
   end;
 QueryPerformanceCounter({%H-}EndCnt);
 WriteLn('nSSE: ',EndCnt - StartCnt);
@@ -45,7 +45,7 @@ nSSECnt := EndCnt - StartCnt;
 QueryPerformanceCounter(StartCnt);
 For i := 1 to RepCount do
   begin
-    VectorsProjectionXYZ_SSE(vec1,vec2,vec3);
+    VectorsOrthogonal_SSE(vec1,vec2,vec3);
   end;
 QueryPerformanceCounter(EndCnt);
 Write(' SSE: ',EndCnt - StartCnt);

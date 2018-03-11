@@ -16,6 +16,12 @@
 {.$DEFINE ArcCosRad_1_x87}
 {.$DEFINE ArcCosDeg_1_x87}
 
+{.$DEFINE VectorsProjection_2s_SSE}
+{.$DEFINE VectorsProjection_4s_SSE}
+{.$DEFINE VectorsProjection_2d_SSE}
+{.$DEFINE VectorsProjection_3d_SSE}
+{.$DEFINE VectorsProjection_4d_SSE}
+
 {===============================================================================
                                   Cross product
 ===============================================================================}
@@ -55,8 +61,8 @@
     SHUFPS  XMM3, XMM3, $C9 {11001001}  //  XMM3: b3    b0    b2    b1
     MULPS   XMM2, XMM3                  //  XMM2: a3b3  a1b0  a0b2  a2b1
 
-    SUBPS   XMM0, XMM2                  //  XMM0: (a3b3 - a3b3) (a0b1 - a1b0) (a2b0 - a0b2) (a1b2 - a2b1)   <<<
-                                        //  XMM0:    R3 = 0           R2            R1            R0        <<<
+    SUBPS   XMM0, XMM2                  //  XMM0: (a3b3 - a3b3) (a0b1 - a1b0) (a2b0 - a0b2) (a1b2 - a2b1)
+                                        //  XMM0:    R3 = 0           R2            R1            R0
 {$ENDIF}
 
 {-------------------------------------------------------------------------------
@@ -104,10 +110,10 @@
     SUBPD     XMM1, XMM5            //  XMM1: (a3b3 - a3b3) (a2b0 - a0b2)
     MOVAPD    XMM2, XMM0            //  XMM2: (a1b2 - a2b1) (a0b1 - a1b0)
 
-    SHUFPD    XMM0, XMM1, $1 {01}   //  XMM0: (a2b0 - a0b2) (a1b2 - a2b1)   <<<
-    MOVSD     XMM1, XMM2            //  XMM1: (a3b3 - a3b3) (a0b1 - a1b0)   <<<
-                                    //  XMM0:       R1            R0        <<<
-                                    //  XMM1:     R3 = 0          R2        <<<
+    SHUFPD    XMM0, XMM1, $1 {01}   //  XMM0: (a2b0 - a0b2) (a1b2 - a2b1)
+    MOVSD     XMM1, XMM2            //  XMM1: (a3b3 - a3b3) (a0b1 - a1b0)
+                                    //  XMM0:       R1            R0
+                                    //  XMM1:     R3 = 0          R2
 {$ENDIF}
 
 {===============================================================================
@@ -119,9 +125,10 @@
   DotProduct_4s3_SSE
 
   Computes dot product of two single-precision 3-dimensional vectors.
-  Highest single of at least one input vector must be 0.
 
   Input:
+
+    Highest single of at least one input vector must be 0.
 
     XMM0: 00  a2  a1  a0  - first vector (3 single)
     XMM1: 00  b3  b1  b0  - second vector (3 single)
@@ -134,7 +141,7 @@
 
   Scratch registers:
 
-    XMM1
+    None - value of register XMM1 is preserved
 
 -------------------------------------------------------------------------------}
 
@@ -145,9 +152,9 @@
     DB  $F2, $0F, $7C, $C0  //  HADDPS XMM0, XMM0
   {$ELSE}
     HADDPS    XMM0, XMM0    //  XMM0: **   **   a2b2  (a0b0 + a1b1)
-    HADDPS    XMM0, XMM0    //  XMM0: **   **    **   (a0b0 + a1b1 + a2b2)  <<<
+    HADDPS    XMM0, XMM0    //  XMM0: **   **    **   (a0b0 + a1b1 + a2b2)
   {$ENDIF}
-                            //  XMM0: **   **    **    R                    <<<
+                            //  XMM0: **   **    **    R
 {$ENDIF}
 
 {-------------------------------------------------------------------------------
@@ -155,9 +162,10 @@
   DotProduct_4d3_SSE
 
   Computes dot product of two double-precision 3-dimensional vectors.
-  Highest double of at least one input vector must be 0.
 
   Input:
+
+    Highest double of at least one input vector must be 0.
 
     XMM0: a1  a0  - lower 128 bits of first vector (2 double)
     XMM1: 00  a2  - highest double of first vector
@@ -172,7 +180,7 @@
 
   Scratch registers:
 
-    XMM1, XMM2, XMM3
+    XMM1 - values in registers XMM2 and XMM3 are preserved
 
 -------------------------------------------------------------------------------}
 
@@ -184,8 +192,8 @@
   {$ELSE}
     HADDPD    XMM0, XMM0    //  XMM0:  **   (a0b0 + a1b1)
   {$ENDIF}
-    ADDSD     XMM0, XMM1    //  XMM0:  **   (a0b0 + a1b1 + a2b2)  <<<
-                            //  XMM0:  **    R                    <<<
+    ADDSD     XMM0, XMM1    //  XMM0:  **   (a0b0 + a1b1 + a2b2)
+                            //  XMM0:  **    R
 {$ENDIF}
 
 {===============================================================================
@@ -197,7 +205,6 @@
   Magnitude_4s_r2_SSE
 
   Computes magnitude (length) of one single-precision 4-dimensional vector.
-  Input vector is expected to be loaded in XMM2 register.
 
   Input:
 
@@ -205,9 +212,9 @@
 
   Output:
 
-    Result is returned in lowest single of XMM2 register.
+    Result is returned in all four singles of XMM2 register.
 
-    XMM2: **  **  **  M
+    XMM2: M   M   M   M
 
 -------------------------------------------------------------------------------}
 
@@ -229,7 +236,6 @@
   Magnitude_4d_r4_SSE
 
   Computes magnitude (length) of one double-precision 4-dimensional vector.
-  Input vector is expected to be loaded in XMM4 and XMM5 register.
 
   Input:
 
@@ -238,9 +244,9 @@
 
   Output:
 
-    Result is returned in lowest double of XMM4 register.
+    Result is returned in both doubles of XMM4 register.
 
-    XMM4: **  M
+    XMM4: M   M
 
   Scratch registers:
 
@@ -271,9 +277,10 @@
   Normalize_4s3_SSE
 
   Normalizes one single-precision 3-dimensional vector.
-  Highest single of input register must be 0.
 
   Input:
+
+    Highest single of input register must be 0.
 
     XMM0: 00  a2  a1  a0  - vector to be normalized (3 single)
 
@@ -325,9 +332,10 @@
   Normalize_4d3_SSE
 
   Normalizes one double-precision 3-dimensional vector.
-  Highest double of second input register must be 0.
 
   Input:
+
+    Highest double of second input register must be 0.
 
     XMM0: a1  a0  - lower 128 bits of input vector (2 double)
     XMM1: 00  a2  - highest double of input vector
@@ -396,7 +404,7 @@
 
   Input:
 
-    XMM0: a3  a2  a1  a0  - vector to be nageted (4 single)
+    XMM0: a3  a2  a1  a0  - vector to be negated (4 single)
 
   Output:
 
@@ -460,7 +468,6 @@
   ArcCosRad_1_x87
 
   Calculates arccosine of an input value passed on FPU stack.
-  Resulting value is in radians and is returned on top of FPU stack.
 
   Input:
 
@@ -468,7 +475,13 @@
 
   Output:
 
+    Resulting angle is returned on top of FPU stack, and is in radians.
+
     ST0: ArcCos(param)[Rad]
+
+  Scratch registers:
+
+    Up-to three positions on FPU stack are used during calculation.  
 
 -------------------------------------------------------------------------------}
 
@@ -502,7 +515,6 @@
   ArcCosDeg_1_x87
 
   Calculates arccosine of an input value passed on FPU stack.
-  Resulting value is in degrees and is returned on top of FPU stack.
 
   Input:
 
@@ -510,7 +522,13 @@
 
   Output:
 
+    Resulting angle is returned on top of FPU stack, and is in degrees.
+
     ST0: ArcCos(param)[Deg]
+
+  Scratch registers:
+
+    Up-to three positions on FPU stack are used during calculation.    
 
 -------------------------------------------------------------------------------}
 
@@ -544,4 +562,336 @@
   {$ELSE}
     FMUL    qword ptr [RadToDegCoef]        //  ST0:  RadToDegCoef * RadAngle (DegAngle)
   {$ENDIF}
+{$ENDIF}
+
+{===============================================================================
+                               Vectors projection                               
+===============================================================================}
+
+{-------------------------------------------------------------------------------
+
+  VectorsProjection_2s_SSE
+
+  Calculates projection of 2-dimensional single-precision input vector to base
+  vector.
+
+  Input:
+
+    Third and fourth single in both input registers must contain 0.
+
+    XMM0: 00  00  b1  b0  - base vector
+    XMM1: 00  00  v1  v0  - vector to be projected to base
+
+  Output:
+
+    Projected vector is returned in lower two singles of register XMM0.
+    Higher two singles are set 0.
+
+    XMM0: 00  00  P1  P0
+
+  Scratch registers:
+
+    XMM1, XMM2, XMM3
+
+-------------------------------------------------------------------------------}
+
+{$IFDEF VectorsProjection_2s_SSE}
+    MOVAPS    XMM2, XMM0                        //  XMM2: 00  00  b1  b0
+
+    MULPS     XMM1, XMM0                        //  XMM1: 00  00  v1b1  v0b0
+    MULPS     XMM2, XMM2                        //  XMM2: 00  00  b1b1  b0b0
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
+    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
+  {$ELSE}
+    HADDPS    XMM1, XMM1                        //  XMM1: **  **  **  (v1b1 + v0b0)(VB_DP)
+    HADDPS    XMM2, XMM2                        //  XMM2: **  **  **  (b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+
+    // check for zero BB dot product
+    XORPS     XMM3, XMM3                        //  XMM3: 00  00  00  00
+    COMISS    XMM2, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set result to zero vector
+    MOVAPS    XMM0, XMM3                        //  XMM0: 00  00  00  00
+    JMP       @StoreResult
+
+  @Continue:
+
+    DIVSS     XMM1, XMM2                        //  XMM1: **  **  **  (VB_DP / BB_DP)(D)
+    SHUFPS    XMM1, XMM1, $00 {00000000}        //  XMM1: D   D   D   D
+
+    MULPS     XMM0, XMM1                        //  XMM0: 00  00  b1D b0D
+                                                //  XMM0: 00  00  P1  P0
+{$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  VectorsProjection_4s_SSE
+
+  Calculates projection of 4-dimensional single-precision input vector to base
+  vector.
+
+  Input:
+
+    XMM0: b3  b2  b1  b0  - base vector
+    XMM1: v3  v2  v1  v0  - vector to be projected to base
+
+  Output:
+
+    Projected vector is returned in register XMM0.
+
+    XMM0: P3  P2  P1  P0
+
+  Scratch registers:
+
+    XMM1, XMM2, XMM3
+
+-------------------------------------------------------------------------------}
+
+{$IFDEF VectorsProjection_4s_SSE}
+    MOVAPS    XMM2, XMM0                        //  XMM2: b3  b2  b1  b0
+
+    MULPS     XMM1, XMM0                        //  XMM1: v3b3  v2b2  v1b1  v0b0
+    MULPS     XMM2, XMM2                        //  XMM2: b3b3  b2b2  b1b1  b0b0
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
+    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
+    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
+    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
+  {$ELSE}
+    HADDPS    XMM1, XMM1                        //  XMM1: --  --  (v3b3 + v2b2)  (v1b1 + v0b0)
+    HADDPS    XMM2, XMM2                        //  XMM2: --  --  (b3b3 + b2b2)  (b1b1 + b0b0)
+    HADDPS    XMM1, XMM1                        //  XMM1: --  --  -- (v3b3 + v2b2 + v1b1 + v0b0)(VB_DP)
+    HADDPS    XMM2, XMM2                        //  XMM2: --  --  -- (b3b3 + b2b2 + b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+
+    // check for zero BB dot product
+    XORPS     XMM3, XMM3                        //  XMM3: 00  00  00  00
+    COMISS    XMM2, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set result to zero vector
+    MOVAPS    XMM0, XMM3                        //  XMM0: 00  00  00  00
+  {$IFDEF FunctionVariantXYZ}
+    MOVAPS    XMM1, XMM3                        //  XMM1: 00  00  00  00
+  {$ENDIF}  
+    JMP       @StoreResult
+
+  @Continue:
+
+    // all four entries in XMM1 contains the same value
+    DIVPS     XMM1, XMM2                        //  XMM1: --  --  --  (VB_DP / BB_DP)(D)
+
+    MULPS     XMM0, XMM1                        //  XMM0: b3D   b2D   b1D   b0D
+
+  {$IFDEF FunctionVariantXYZ}
+    MOVSS     XMM1, dword ptr [Vector + 12]     //  XMM1: **  **  **  v3
+  {$ENDIF}
+                                                //  XMM0: P3    P2    P1    P0
+{$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  VectorsProjection_2d_SSE
+
+  Calculates projection of 2-dimensional double-precision input vector to base
+  vector.
+
+  Input:
+
+    XMM0: b1  b0  - base vector
+    XMM1: v1  v0  - vector to be projected to base
+
+  Output:
+
+    Projected vector is returned in register XMM0.
+
+    XMM0: P1  P0
+
+  Scratch registers:
+
+    XMM1, XMM2, XMM3
+
+-------------------------------------------------------------------------------}
+
+{$IFDEF VectorsProjection_2d_SSE}
+    MOVAPD    XMM2, XMM0                        //  XMM2: b1  b0
+
+    MULPD     XMM1, XMM0                        //  XMM1: v1b1  v0b0
+    MULPD     XMM2, XMM2                        //  XMM2: b1b1  b0b0
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $C9  //  HADDPD XMM1, XMM1
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+  {$ELSE}
+    HADDPD    XMM1, XMM1                        //  XMM1: --  (v1b1 + v0b0)(VB_DP)
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM2, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set result to zero vector
+    MOVAPD    XMM0, XMM3                        //  XMM0: 00  00
+    JMP       @StoreResult
+
+  @Continue:
+
+    // both entries in XMM1 contains the same value
+    DIVPD     XMM1, XMM2                        //  XMM1: --  (VB_DP / BB_DP)(D)
+
+    MULPD     XMM0, XMM1                        //  XMM0: b1D   b0D
+                                                //  XMM0: P1    P0
+{$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  VectorsProjection_3d_SSE
+
+  Calculates projection of 3-dimensional double-precision input vector to base
+  vector.
+
+  Input:
+
+    High doubles of registers XMM1 and XMM3 must be 0.
+
+    XMM0: b1  b0  - lower 128 bits of the base vector
+    XMM1: 00  b2  - highest double of base vector
+    XMM2: v1  v0  - lower 128 bits of the vector to be projected to base
+    XMM3: 00  v2  - highest double of vector to be projected to base
+
+  Output:
+
+    Projected vector is returned in registers XMM0 and XMM1.
+    High double of register XMM1 is to be ignored.
+
+    XMM0: P1  P0
+    XMM1: **  P2
+
+  Scratch registers:
+
+    XMM2, XMM3, XMM4, XMM5
+
+-------------------------------------------------------------------------------}
+
+{$IFDEF VectorsProjection_3d_SSE}
+    MOVAPD    XMM4, XMM0                        //  XMM4: b1  b0
+    MOVAPD    XMM5, XMM1                        //  XMM5: 00  b2
+
+    MULPD     XMM2, XMM0                        //  XMM2: v1b1  v0b0
+    MULSD     XMM3, XMM1                        //  XMM3:  00   v2b2
+    MULPD     XMM4, XMM4                        //  XMM4: b1b1  b0b0
+    MULSD     XMM5, XMM5                        //  XMM5:  00   b2b2
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+  {$ELSE}
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (v1b1 + v0b0)
+    HADDPD    XMM4, XMM4                        //  XMM4: --  (b1b1 + b0b0)
+  {$ENDIF}
+    ADDSD     XMM2, XMM3                        //  XMM2: **  (v2b2 + v1b1 + v0b0)(VB_DP)
+    ADDSD     XMM4, XMM5                        //  XMM4: **  (b2b2 + b1b1 + b0b0)(BB_DP)
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM4, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set result to zero vector
+    MOVAPD    XMM0, XMM3                        //  XMM0: 00  00
+    MOVAPD    XMM1, XMM3                        //  XMM1: 00  00
+  {$IFDEF FunctionVariantXYZ}
+    MOVAPD    XMM2, XMM3                        //  XMM2: 00  00
+  {$ENDIF}
+    JMP       @StoreResult
+
+  @Continue:
+
+    DIVSD     XMM2, XMM4                        //  XMM2: **  (VB_DP / BB_DP)(D)
+    // both entries of XMM2 contains the same value after this instruction
+    SHUFPD    XMM2, XMM2, $0 {00}               //  XMM2:  D     D
+
+    MULPD     XMM0, XMM2                        //  XMM0: b1D   b0D
+    MULSD     XMM1, XMM2                        //  XMM1: **    b2D
+  {$IFDEF FunctionVariantXYZ}
+    MOVSD     XMM2, qword ptr [Vector + 24]     //  XMM2: **  v3
+  {$ENDIF}
+                                                //  XMM0: P1  P0
+                                                //  XMM1: **  P2
+{$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  VectorsProjection_4d_SSE
+
+  Calculates projection of 4-dimensional double-precision input vector to base
+  vector.
+
+  Input:
+
+    XMM0: b1  b0  - lower 128 bits of the base vector
+    XMM1: b3  b2  - higher 128 bits of base vector
+    XMM2: v1  v0  - lower 128 bits of the vector to be projected to base
+    XMM3: v3  v2  - higher 128 bits of vector to be projected to base
+
+  Output:
+
+    Projected vector is returned in registers XMM0 and XMM1.
+
+    XMM0: P1  P0
+    XMM1: P3  P2
+
+  Scratch registers:
+
+    XMM2, XMM3, XMM4, XMM5
+
+-------------------------------------------------------------------------------}
+
+{$IFDEF VectorsProjection_4d_SSE}
+    MOVAPD    XMM4, XMM0                        //  XMM4: b1  b0
+    MOVAPD    XMM5, XMM1                        //  XMM5: b3  b2
+
+    MULPD     XMM2, XMM0                        //  XMM2: v1b1  v0b0
+    MULPD     XMM3, XMM1                        //  XMM3: v3b3  v2b2
+    MULPD     XMM4, XMM4                        //  XMM4: b1b1  b0b0
+    MULPD     XMM5, XMM5                        //  XMM5: b3b3  b2b2
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $D3  //  HADDPD XMM2, XMM3
+    DB  $66, $0F, $7C, $E5  //  HADDPD XMM4, XMM5
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+  {$ELSE}
+    HADDPD    XMM2, XMM3                        //  XMM2: (v3b3 + v2b2)  (v1b1 + v0b0)
+    HADDPD    XMM4, XMM5                        //  XMM4: (b3b3 + b2b2)  (b1b1 + b0b0)
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (v3b3 + v2b2 + v1b1 + v0b0)(VB_DP)
+    HADDPD    XMM4, XMM4                        //  XMM4: --  (b3b3 + b2b2 + b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM4, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set result to zero vector
+    MOVAPD    XMM0, XMM3                        //  XMM0: 00  00
+    MOVAPD    XMM1, XMM3                        //  XMM1: 00  00
+    JMP       @StoreResult
+
+  @Continue:
+
+    // both entries of XMM2 contains the same value after this instruction
+    DIVPD     XMM2, XMM4                        //  XMM2: --  (VB_DP / BB_DP)(D)
+
+    MULPD     XMM0, XMM2                        //  XMM0: b1D   b0D
+    MULPD     XMM1, XMM2                        //  XMM1: b3D   b2D
+                                                //  XMM0: P1    P0
+                                                //  XMM1: P3    P2
 {$ENDIF}
