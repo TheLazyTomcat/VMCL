@@ -63,6 +63,10 @@ procedure VectorsProjection_2d_SSEa(const Base,Vector: TVMCLVector2d; out Projec
 procedure VectorsProjection_2d_SSEu(const Base,Vector: TVMCLVector2d; out Projection: TVMCLVector2d); register; assembler;
 procedure VectorsProjection_3d_SSEa(const Base,Vector: TVMCLVector3d; out Projection: TVMCLVector3d); register; assembler;
 procedure VectorsProjection_3d_SSEu(const Base,Vector: TVMCLVector3d; out Projection: TVMCLVector3d); register; assembler;
+procedure VectorsProjection_4d_SSEu(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d); register; assembler;
+procedure VectorsProjection_4d_SSEa(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d); register; assembler;
+procedure VectorsProjectionXYZ_4d_SSEu(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d); register; assembler;
+procedure VectorsProjectionXYZ_4d_SSEa(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d); register; assembler;
 
 procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector2s; out Projection: TVMCLVector2s); overload; {$IFDEF CanInline} inline;{$ENDIF}
 procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector3s; out Projection: TVMCLVector3s); overload; {$IFDEF CanInline} inline;{$ENDIF}
@@ -70,6 +74,8 @@ procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector4s; out Projection
 procedure VectorsProjectionXYZ_SSE(const Base,Vector: TVMCLVector4s; out Projection: TVMCLVector4s); register; assembler; overload;
 procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector2d; out Projection: TVMCLVector2d); register; assembler; overload;
 procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector3d; out Projection: TVMCLVector3d); register; assembler; overload;
+procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d); register; assembler; overload;
+procedure VectorsProjectionXYZ_SSE(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d); register; assembler; overload;
 
 {$ENDIF PurePascal}
 
@@ -1506,6 +1512,52 @@ end;
 
 procedure VectorsProjection_3d_SSEa(const Base,Vector: TVMCLVector3d; out Projection: TVMCLVector3d);
 asm
+    MOVAPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVSD     XMM1, qword ptr [Base + 16]       //  XMM1: 00  b2
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    MOVAPD    XMM4, XMM0                        //  XMM4: b1  b0
+    MOVAPD    XMM5, XMM1                        //  XMM5: 00  b2
+
+    MULPD     XMM2, XMM0                        //  XMM2: b1v1  b0v0
+    MULPD     XMM4, XMM4                        //  XMM4: b1b1  b0b0
+    MULSD     XMM3, XMM1                        //  XMM3:  00   b2v2
+    MULSD     XMM5, XMM5                        //  XMM5:  00   b2b2
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+  {$ELSE}
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (b1v1 + b0v0)
+    HADDPD    XMM4, XMM4                        //  XMM4: --  (b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+    ADDSD     XMM2, XMM3                        //  XMM2: **  (b2v2 + b1v1 + b0v0)(BV_DP)
+    ADDSD     XMM4, XMM5                        //  XMM4: **  (b2b2 + b1b1 + b0b0)(BB_DP)
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM4, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set projection to zero vector
+    MOVAPD    dqword ptr [Projection],  XMM3
+    MOVSD     qword ptr [Projection + 16],  XMM3
+    JMP       @RoutineEnd
+
+  @Continue:
+
+    DIVSD     XMM2, XMM4                        //  XMM2: **  (BV_DP / BB_DP)(D)
+
+    SHUFPD    XMM2, XMM2, $0 {00}               //  XMM2: D   D
+    
+    MULPD     XMM0, XMM2                        //  XMM2: b1D   b0D
+    MULSD     XMM1, XMM2                        //  XMM1: 00    b2D
+
+    MOVAPD    dqword ptr [Projection], XMM0       //  [Projection]:  b0D   b1D
+    MOVSD     qword ptr [Projection + 16],  XMM1  //  [Projection]:  b0D   b1D    b2D
+
+  @RoutineEnd:
 end;
 
 //------------------------------------------------------------------------------
@@ -1550,7 +1602,7 @@ asm
     DIVSD     XMM2, XMM4                        //  XMM2: **  (BV_DP / BB_DP)(D)
 
     SHUFPD    XMM2, XMM2, $0 {00}               //  XMM2: D   D
-    
+
     MULPD     XMM0, XMM2                        //  XMM2: b1D   b0D
     MULSD     XMM1, XMM2                        //  XMM1: 00    b2D
 
@@ -1558,6 +1610,222 @@ asm
     MOVSD     qword ptr [Projection + 16],  XMM1  //  [Projection]:  b0D   b1D    b2D
 
   @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsProjection_4d_SSEu(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d);
+asm
+    MOVUPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVUPD    XMM1, dqword ptr [Base + 16]      //  XMM1: b3  b2
+    MOVUPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVUPD    XMM3, dqword ptr [Vector + 16]    //  XMM3: v3  v2
+
+    MOVAPD    XMM4, XMM0                        //  XMM4: b1  b0
+    MOVAPD    XMM5, XMM1                        //  XMM5: b3  b2
+
+    MULPD     XMM2, XMM0                        //  XMM2: b1v1  b0b0
+    MULPD     XMM3, XMM1                        //  XMM3: b3v3  b2v2
+    MULPD     XMM4, XMM4                        //  XMM4: b1b1  b0b0
+    MULPD     XMM5, XMM5                        //  XMM5: b3b3  b2b2
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $D3  //  HADDPD XMM2, XMM3
+    DB  $66, $0F, $7C, $E5  //  HADDPD XMM4, XMM5
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+  {$ELSE}
+    HADDPD    XMM2, XMM3                        //  XMM2: (b3v3 + b2v2)  (b1v1 + b0v2)
+    HADDPD    XMM4, XMM5                        //  XMM4: (b3b3 + b2b2)  (b1b1 + b0b0)
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (b3v3 + b2v2 + b1v1 + b0v2)(BV_DP)
+    HADDPD    XMM4, XMM4                        //  XMM4: --  (b3b3 + b2b2 + b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM4, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set projection to zero vector
+    MOVUPD    dqword ptr [Projection],  XMM3
+    MOVUPD    dqword ptr [Projection + 16],  XMM3
+    JMP       @RoutineEnd
+
+  @Continue:
+
+    // both entries of XMM2 contains the same value aftef this instruction
+    DIVPD     XMM2, XMM4                        //  XMM2: --  (BV_DP / BB_DP)(D)
+
+    MULPD     XMM0, XMM2                        //  XMM2: b1D   b0D
+    MULPD     XMM1, XMM2                        //  XMM1: b3D   b2D
+
+    MOVUPD    dqword ptr [Projection], XMM0         //  [Projection]:   b0D   b1D
+    MOVUPD    dqword ptr [Projection + 16],  XMM1   //  [Projection]:   b0D   b1D   b2D   b3D
+
+  @RoutineEnd:    
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsProjection_4d_SSEa(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d);
+asm
+    MOVAPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVAPD    XMM1, dqword ptr [Base + 16]      //  XMM1: b3  b2
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVAPD    XMM3, dqword ptr [Vector + 16]    //  XMM3: v3  v2
+
+    MOVAPD    XMM4, XMM0                        //  XMM4: b1  b0
+    MOVAPD    XMM5, XMM1                        //  XMM5: b3  b2
+
+    MULPD     XMM2, XMM0                        //  XMM2: b1v1  b0b0
+    MULPD     XMM3, XMM1                        //  XMM3: b3v3  b2v2
+    MULPD     XMM4, XMM4                        //  XMM4: b1b1  b0b0
+    MULPD     XMM5, XMM5                        //  XMM5: b3b3  b2b2
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $D3  //  HADDPD XMM2, XMM3
+    DB  $66, $0F, $7C, $E5  //  HADDPD XMM4, XMM5
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+  {$ELSE}
+    HADDPD    XMM2, XMM3                        //  XMM2: (b3v3 + b2v2)  (b1v1 + b0v0)
+    HADDPD    XMM4, XMM5                        //  XMM4: (b3b3 + b2b2)  (b1b1 + b0b0)
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (b3v3 + b2v2 + b1v1 + b0v2)(BV_DP)
+    HADDPD    XMM4, XMM4                        //  XMM4: --  (b3b3 + b2b2 + b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM4, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set projection to zero vector
+    MOVAPD    dqword ptr [Projection],  XMM3
+    MOVAPD    dqword ptr [Projection + 16],  XMM3
+    JMP       @RoutineEnd
+
+  @Continue:
+
+    // both entries of XMM2 contains the same value aftef this instruction
+    DIVPD     XMM2, XMM4                        //  XMM2: --  (BV_DP / BB_DP)(D)
+
+    MULPD     XMM0, XMM2                        //  XMM2: b1D   b0D
+    MULPD     XMM1, XMM2                        //  XMM1: b3D   b2D
+
+    MOVAPD    dqword ptr [Projection], XMM0         //  [Projection]:   b0D   b1D
+    MOVAPD    dqword ptr [Projection + 16],  XMM1   //  [Projection]:   b0D   b1D   b2D   b3D
+
+  @RoutineEnd:    
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsProjectionXYZ_4d_SSEu(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d);
+asm
+    // highest entries are ignored
+    MOVUPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVSD     XMM1, qword ptr [Base + 16]       //  XMM1: 00  b2
+    MOVUPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    MOVAPD    XMM4, XMM0                        //  XMM4: b1  b0
+    MOVAPD    XMM5, XMM1                        //  XMM5: 00  b2
+
+    MULPD     XMM2, XMM0                        //  XMM2: b1v1  b0b0
+    MULSD     XMM3, XMM1                        //  XMM3:  00   b2v2
+    MULPD     XMM4, XMM4                        //  XMM4: b1b1  b0b0
+    MULSD     XMM5, XMM5                        //  XMM5:  00   b2b2
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+  {$ELSE}
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (b1v1 + b0v0)(BV_DP)
+    HADDPD    XMM4, XMM4                        //  XMM4: --  (b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+    ADDSD     XMM2, XMM3                        //  XMM2: **  (b2v2 + b1v1 + b0v0)(BV_DP)
+    ADDSD     XMM4, XMM5                        //  XMM4: **  (b2b2 + b1b1 + b0b0)(BB_DP)
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM4, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set projection to zero vector
+    MOVUPD    dqword ptr [Projection],  XMM3
+    MOVUPD    dqword ptr [Projection + 16],  XMM3
+    JMP       @RoutineEnd
+
+  @Continue:
+
+    DIVPD     XMM2, XMM4                        //  XMM2: **  (BV_DP / BB_DP)(D)
+    // both entries of XMM2 contains the same value aftef this instruction
+    SHUFPD    XMM2, XMM2, $0 {00}               //  XMM2:  D     D
+
+    MULPD     XMM0, XMM2                        //  XMM2: b1D   b0D
+    MULSD     XMM1, XMM2                        //  XMM1: **    b2D
+
+    MOVUPD    dqword ptr [Projection], XMM0         //  [Projection]:   b0D   b1D
+    MOVSD     qword ptr [Projection + 16], XMM1     //  [Projection]:   b0D   b1D   b2D
+    MOVSD     XMM2, qword ptr [Vector + 24]         //  XMM2: **  v3
+    MOVSD     qword ptr [Projection + 24], XMM2     //  [Projection]:   b0D   b1D   b2D   v3
+
+  @RoutineEnd:    
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsProjectionXYZ_4d_SSEa(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d);
+asm
+    // highest entries are ignored
+    MOVAPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVSD     XMM1, qword ptr [Base + 16]       //  XMM1: 00  b2
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    MOVAPD    XMM4, XMM0                        //  XMM4: b1  b0
+    MOVAPD    XMM5, XMM1                        //  XMM5: 00  b2
+
+    MULPD     XMM2, XMM0                        //  XMM2: b1v1  b0b0
+    MULSD     XMM3, XMM1                        //  XMM3:  00   b2v2
+    MULPD     XMM4, XMM4                        //  XMM4: b1b1  b0b0
+    MULSD     XMM5, XMM5                        //  XMM5:  00   b2b2
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+  {$ELSE}
+    HADDPD    XMM2, XMM2                        //  XMM2: --  (b1v1 + b0v0)(BV_DP)
+    HADDPD    XMM4, XMM4                        //  XMM4: --  (b1b1 + b0b0)(BB_DP)
+  {$ENDIF}
+    ADDSD     XMM2, XMM3                        //  XMM2: **  (b2v2 + b1v1 + b0v0)(BV_DP)
+    ADDSD     XMM4, XMM5                        //  XMM4: **  (b2b2 + b1b1 + b0b0)(BB_DP)
+
+    // check for zero BB dot product
+    XORPD     XMM3, XMM3                        //  XMM3: 00  00
+    COMISD    XMM4, XMM3
+    JNE       @Continue
+
+    // BB dot product is zero, set projection to zero vector
+    MOVAPD    dqword ptr [Projection],  XMM3
+    MOVAPD    dqword ptr [Projection + 16],  XMM3
+    JMP       @RoutineEnd
+
+  @Continue:
+
+    DIVPD     XMM2, XMM4                        //  XMM2: **  (BV_DP / BB_DP)(D)
+    // both entries of XMM2 contains the same value aftef this instruction
+    SHUFPD    XMM2, XMM2, $0 {00}               //  XMM2:  D     D
+
+    MULPD     XMM0, XMM2                        //  XMM2: b1D   b0D
+    MULSD     XMM1, XMM2                        //  XMM1: **    b2D
+
+    MOVAPD    dqword ptr [Projection], XMM0         //  [Projection]:   b0D   b1D
+    MOVSD     qword ptr [Projection + 16], XMM1     //  [Projection]:   b0D   b1D   b2D
+    MOVSD     XMM2, qword ptr [Vector + 24]         //  XMM2: **  v3
+    MOVSD     qword ptr [Projection + 24], XMM2     //  [Projection]:   b0D   b1D   b2D   v3
+
+  @RoutineEnd:    
 end;
 
 //==============================================================================
@@ -1639,11 +1907,47 @@ asm
     JNZ   @Unaligned
 
   @Aligned:
-    CALL  VectorsProjection_3d_SSEu
+    CALL  VectorsProjection_3d_SSEa
     JMP   @RoutineEnd
 
   @Unaligned:
     CALL  VectorsProjection_3d_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsProjection_4d_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsProjection_4d_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsProjectionXYZ_SSE(const Base,Vector: TVMCLVector4d; out Projection: TVMCLVector4d);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsProjectionXYZ_4d_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsProjectionXYZ_4d_SSEu
 
   @RoutineEnd:
 end;

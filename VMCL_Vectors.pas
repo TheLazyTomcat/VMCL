@@ -2755,7 +2755,7 @@ end;
 
 //==============================================================================
 
-Function VectorsOrthogonal(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorsOrthogonal(const Base,Vector: TVMCLVector2s): TVMCLVector2s; 
 begin
 If not IsZeroVector(Base) then
   Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
