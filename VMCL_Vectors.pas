@@ -2787,7 +2787,7 @@ end;
 
 Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4s): TVMCLVector4s;
 begin
-If not IsZeroVector(Base) then
+If not IsZeroVectorXYZ(Base) then
   Result := VectorsSubtractXYZ(Vector,VectorsProjectionXYZ(Base,Vector))
 else
   Result := VMCL_ZeroVector4s;
@@ -2821,13 +2821,13 @@ If not IsZeroVector(Base) then
   Result := VectorsSubtract(Vector,VectorsProjection(Base,Vector))
 else
   Result := VMCL_ZeroVector4d;
-end;
+end;       
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d;
 begin
-If not IsZeroVector(Base) then
+If not IsZeroVectorXYZ(Base) then
   Result := VectorsSubtractXYZ(Vector,VectorsProjectionXYZ(Base,Vector))
 else
   Result := VMCL_ZeroVector4d;
