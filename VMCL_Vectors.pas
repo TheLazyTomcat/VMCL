@@ -2581,9 +2581,9 @@ Function VectorsAngleRad(const aVector,bVector: TVMCLVector4s): Single;
 var
   Mags: Extended;
 begin
-Mags := Magnitude(aVector) * Magnitude(bVector);
+Mags := MagnitudeXYZ(aVector) * MagnitudeXYZ(bVector);
 If Mags <> 0.0 then
-  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+  Result := ArcCos(Clipped(VectorsDotProductXYZ(aVector,bVector) / Mags,-1,1))
 else
   Result := 0.0;
 end;
@@ -2620,9 +2620,9 @@ Function VectorsAngleRad(const aVector,bVector: TVMCLVector4d): Double;
 var
   Mags: Extended;
 begin
-Mags := Magnitude(aVector) * Magnitude(bVector);
+Mags := MagnitudeXYZ(aVector) * MagnitudeXYZ(bVector);
 If Mags <> 0.0 then
-  Result := ArcCos(Clipped(VectorsDotProduct(aVector,bVector) / Mags,-1,1))
+  Result := ArcCos(Clipped(VectorsDotProductXYZ(aVector,bVector) / Mags,-1,1))
 else
   Result := 0.0;
 end;
