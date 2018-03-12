@@ -226,7 +226,7 @@
     DB  $F2, $0F, $7C, $D2    {HADDPS XMM2, XMM2}
     DB  $F2, $0F, $7C, $D2    {HADDPS XMM2, XMM2}
   {$ELSE}
-    HADDPS  XMM2, XMM2      //  XMM2:  --    --   (a3a3 + a2a2) (a1a1 + a0a0)
+    HADDPS  XMM2, XMM2      //  XMM2:  --    --   (a3a3 + a2a2)  (a1a1 + a0a0)
     HADDPS  XMM2, XMM2      //  XMM2:  --    --    --   (a3a3 + a2a2 + a1a1 + a0a0)
   {$ENDIF}
     SQRTPS  XMM2, XMM2      //  XMM2:  --    --    --   SQRT(a3a3 + a2a2 + a1a1 + a0a0)(M)
@@ -263,7 +263,7 @@
     DB  $66, $0F, $7C, $E5    {HADDPD XMM4, XMM5}
     DB  $66, $0F, $7C, $E4    {HADDPD XMM4, XMM4}
   {$ELSE}
-    HADDPD  XMM4, XMM5      //  XMM4: (a3a3 + a2a2) (a1a1 + a0a0)
+    HADDPD  XMM4, XMM5      //  XMM4: (a3a3 + a2a2)  (a1a1 + a0a0)
     HADDPD  XMM4, XMM4      //  XMM4:  --   (a3a3 + a2a2 + a1a1 + a0a0)
   {$ENDIF}
     SQRTPD  XMM4, XMM4      //  XMM4:  --   SQRT(a3a3 + a2a2 + a1a1 + a0a0)(M)

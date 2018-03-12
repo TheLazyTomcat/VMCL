@@ -93,7 +93,7 @@ try
   repeat
     SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
       [Vectors_Main,Matrices_Main,Vectors_SSE_Main],
-      ['Vectors','Matrices','Vectors (SSE)']);
+      ['Vectors','Matrices','Vectors SSE']);
   until (SelectResult = VMCL_RESULT_BACK) or (SelectResult = VMCL_RESULT_EXIT);
 except
   on E: Exception do

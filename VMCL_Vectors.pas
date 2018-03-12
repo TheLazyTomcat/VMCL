@@ -1896,7 +1896,8 @@ If not IsZeroVector(Vector) then
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
     Result[0] := Vector[0] * VectorMagnitudeRcp;
     Result[1] := Vector[1] * VectorMagnitudeRcp;
-  end;
+  end
+else Result := VMCL_ZeroVector2s;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -1911,7 +1912,8 @@ If not IsZeroVector(Vector) then
     Result[0] := Vector[0] * VectorMagnitudeRcp;
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
-  end;
+  end
+else Result := VMCL_ZeroVector3s;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -1927,7 +1929,8 @@ If not IsZeroVector(Vector) then
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
     Result[3] := Vector[3] * VectorMagnitudeRcp;
-  end;
+  end
+else Result := VMCL_ZeroVector4s;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -1943,7 +1946,8 @@ If not IsZeroVectorXYZ(Vector) then
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
     Result[3] := Vector[3];
-  end;
+  end
+else Result := VMCL_ZeroVector4s;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -1957,7 +1961,8 @@ If not IsZeroVector(Vector) then
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
     Result[0] := Vector[0] * VectorMagnitudeRcp;
     Result[1] := Vector[1] * VectorMagnitudeRcp;
-  end;
+  end
+else Result := VMCL_ZeroVector2d;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -1972,7 +1977,8 @@ If not IsZeroVector(Vector) then
     Result[0] := Vector[0] * VectorMagnitudeRcp;
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
-  end;
+  end
+else Result := VMCL_ZeroVector3d;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -1988,7 +1994,8 @@ If not IsZeroVector(Vector) then
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
     Result[3] := Vector[3] * VectorMagnitudeRcp;
-  end;
+  end
+else Result := VMCL_ZeroVector4d;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -2004,7 +2011,8 @@ If not IsZeroVectorXYZ(Vector) then
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
     Result[3] := Vector[3];
-  end;
+  end
+else Result := VMCL_ZeroVector4d;
 end;
 
 //==============================================================================

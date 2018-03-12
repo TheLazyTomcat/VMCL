@@ -9,7 +9,7 @@ uses
 
 {$IFNDEF PurePascal}
 
-procedure VectorsNormal_3s_SSEau(const aVector,bVector: TVector3s; out Normal: TVector3s); register; assembler;
+procedure VectorsNormal_3s_SSEua(const aVector,bVector: TVector3s; out Normal: TVector3s); register; assembler;
 procedure VectorsNormal_4s_SSEu(const aVector,bVector: TVector4s; out Normal: TVector4s); register; assembler;
 procedure VectorsNormal_4s_SSEa(const aVector,bVector: TVector4s; out Normal: TVector4s); register; assembler;
 procedure VectorsNormal_3d_SSEu(const aVector,bVector: TVector3d; out Normal: TVector3d); register; assembler;
@@ -26,7 +26,7 @@ procedure VectorsNormal_SSE(const aVector,bVector: TVector4d; out Normal: TVecto
 
 //------------------------------------------------------------------------------
 
-procedure VectorsAntinormal_3s_SSEau(const aVector,bVector: TVector3s; out Antinormal: TVector3s); register; assembler;
+procedure VectorsAntinormal_3s_SSEua(const aVector,bVector: TVector3s; out Antinormal: TVector3s); register; assembler;
 procedure VectorsAntinormal_4s_SSEu(const aVector,bVector: TVector4s; out Antinormal: TVector4s); register; assembler;
 procedure VectorsAntinormal_4s_SSEa(const aVector,bVector: TVector4s; out Antinormal: TVector4s); register; assembler;
 procedure VectorsAntinormal_3d_SSEu(const aVector,bVector: TVector3d; out Antinormal: TVector3d); register; assembler;
@@ -45,8 +45,8 @@ procedure VectorsAntinormal_SSE(const aVector,bVector: TVector4d; out Antinormal
 {$IFDEF DevelMsgs}
   {$MESSAGE 'Mark as platform in x64'}
 {$ENDIF}
-procedure VectorsAngleRad_2s_SSEau(const aVector,bVector: TVector2s; out Angle: Single); register; assembler; // <100% in x64
-procedure VectorsAngleRad_3s_SSEau(const aVector,bVector: TVector3s; out Angle: Single); register; assembler; // <100% in x64
+procedure VectorsAngleRad_2s_SSEua(const aVector,bVector: TVector2s; out Angle: Single); register; assembler; // <100% in x64
+procedure VectorsAngleRad_3s_SSEua(const aVector,bVector: TVector3s; out Angle: Single); register; assembler; // <100% in x64
 procedure VectorsAngleRad_4s_SSEu(const aVector,bVector: TVector4s; out Angle: Single); register; assembler;  // <100% in x64
 procedure VectorsAngleRad_4s_SSEa(const aVector,bVector: TVector4s; out Angle: Single); register; assembler;  // <100% in x64
 procedure VectorsAngleRad_2d_SSEu(const aVector,bVector: TVector2d; out Angle: Double); register; assembler;  // <100% in x64
@@ -69,8 +69,8 @@ procedure VectorsAngleRad_SSE(const aVector,bVector: TVector4d; out Angle: Doubl
 {$IFDEF DevelMsgs}
   {$MESSAGE 'Make zero-vector comparison sooner'}
 {$ENDIF}  
-procedure VectorsProjection_2s_SSEau(const Base,Vector: TVMCLVector2s; out Projection: TVMCLVector2s); register; assembler;
-procedure VectorsProjection_3s_SSEau(const Base,Vector: TVMCLVector3s; out Projection: TVMCLVector3s); register; assembler;
+procedure VectorsProjection_2s_SSEua(const Base,Vector: TVMCLVector2s; out Projection: TVMCLVector2s); register; assembler;
+procedure VectorsProjection_3s_SSEua(const Base,Vector: TVMCLVector3s; out Projection: TVMCLVector3s); register; assembler;
 procedure VectorsProjection_4s_SSEu(const Base,Vector: TVMCLVector4s; out Projection: TVMCLVector4s); register; assembler;
 procedure VectorsProjection_4s_SSEa(const Base,Vector: TVMCLVector4s; out Projection: TVMCLVector4s); register; assembler;
 procedure VectorsProjectionXYZ_4s_SSEu(const Base,Vector: TVMCLVector4s; out Projection: TVMCLVector4s); register; assembler;
@@ -97,8 +97,8 @@ procedure VectorsProjectionXYZ_SSE(const Base,Vector: TVMCLVector4d; out Project
 
 //------------------------------------------------------------------------------
 
-procedure VectorsOrthogonal_2s_SSEau(const Base,Vector: TVMCLVector2s; out Orthogonal: TVMCLVector2s); register; assembler;
-procedure VectorsOrthogonal_3s_SSEau(const Base,Vector: TVMCLVector3s; out Orthogonal: TVMCLVector3s); register; assembler;
+procedure VectorsOrthogonal_2s_SSEua(const Base,Vector: TVMCLVector2s; out Orthogonal: TVMCLVector2s); register; assembler;
+procedure VectorsOrthogonal_3s_SSEua(const Base,Vector: TVMCLVector3s; out Orthogonal: TVMCLVector3s); register; assembler;
 procedure VectorsOrthogonal_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthogonal: TVMCLVector4s); register; assembler;
 procedure VectorsOrthogonal_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthogonal: TVMCLVector4s); register; assembler;
 procedure VectorsOrthogonalXYZ_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthogonal: TVMCLVector4s); register; assembler;
@@ -125,8 +125,8 @@ procedure VectorsOrthogonalXYZ_SSE(const Base,Vector: TVMCLVector4d; out Orthogo
 
 //------------------------------------------------------------------------------
 
-procedure VectorsOrthonormal_2s_SSEau(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s); register; assembler;
-procedure VectorsOrthonormal_3s_SSEau(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s); register; assembler;
+procedure VectorsOrthonormal_2s_SSEua(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s); register; assembler;
+procedure VectorsOrthonormal_3s_SSEua(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s); register; assembler;
 procedure VectorsOrthonormal_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
 procedure VectorsOrthonormal_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
 procedure VectorsOrthonormalXYZ_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
@@ -166,7 +166,7 @@ implementation
 
 //==============================================================================
 
-procedure VectorsNormal_3s_SSEau(const aVector,bVector: TVector3s; out Normal: TVector3s);
+procedure VectorsNormal_3s_SSEua(const aVector,bVector: TVector3s; out Normal: TVector3s);
 asm
     MOVSS   XMM0, dword ptr [aVector]           //  XMM0: 00  00  00  a0
     MOVHPS  XMM0, qword ptr [aVector + 4]       //  XMM0: a2  a1  00  a0
@@ -309,7 +309,7 @@ end;
 procedure VectorsNormal_SSE(const aVector,bVector: TVector3s; out Normal: TVector3s);
 begin
 // aligned and unaligned code is the same
-VectorsNormal_3s_SSEau(aVector,bVector,Normal);
+VectorsNormal_3s_SSEua(aVector,bVector,Normal);
 end;
 
 //------------------------------------------------------------------------------
@@ -368,7 +368,7 @@ end;
 
 //==============================================================================
 
-procedure VectorsAntinormal_3s_SSEau(const aVector,bVector: TVector3s; out Antinormal: TVector3s);
+procedure VectorsAntinormal_3s_SSEua(const aVector,bVector: TVector3s; out Antinormal: TVector3s);
 asm
     MOVSS   XMM0, dword ptr [aVector]           //  XMM0: 00  00  00  a0
     MOVHPS  XMM0, qword ptr [aVector + 4]       //  XMM0: a2  a1  00  a0
@@ -536,7 +536,7 @@ end;
 procedure VectorsAntinormal_SSE(const aVector,bVector: TVector3s; out Antinormal: TVector3s);
 begin
 // aligned and unaligned code is the same
-VectorsAntinormal_3s_SSEau(aVector,bVector,Antinormal);
+VectorsAntinormal_3s_SSEua(aVector,bVector,Antinormal);
 end;
 
 //------------------------------------------------------------------------------
@@ -595,7 +595,7 @@ end;
 
 //==============================================================================
 
-procedure VectorsAngleRad_2s_SSEau(const aVector,bVector: TVector2s; out Angle: Single);
+procedure VectorsAngleRad_2s_SSEua(const aVector,bVector: TVector2s; out Angle: Single);
 asm
     MOVLPS    XMM1, qword ptr [aVector]         //  XMM1: **  **  a1  a0
     MOVHPS    XMM1, qword ptr [bVector]         //  XMM1: b1  b0  a1  a0
@@ -648,7 +648,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure VectorsAngleRad_3s_SSEau(const aVector,bVector: TVector3s; out Angle: Single);
+procedure VectorsAngleRad_3s_SSEua(const aVector,bVector: TVector3s; out Angle: Single);
 asm
     MOVSS     XMM0, dword ptr [aVector]         //  XMM0: 00  00  00  a0
     MOVHPS    XMM0, qword ptr [aVector + 4]     //  XMM0: a2  a1  00  a0
@@ -1134,7 +1134,7 @@ end;
 procedure VectorsAngleRad_SSE(const aVector,bVector: TVector2s; out Angle: Single);
 begin
 // aligned and unaligned code is the same
-VectorsAngleRad_2s_SSEau(aVector,bVector,Angle);
+VectorsAngleRad_2s_SSEua(aVector,bVector,Angle);
 end;
 
 //------------------------------------------------------------------------------
@@ -1142,7 +1142,7 @@ end;
 procedure VectorsAngleRad_SSE(const aVector,bVector: TVector3s; out Angle: Single);
 begin
 // aligned and unaligned code is the same
-VectorsAngleRad_3s_SSEau(aVector,bVector,Angle);
+VectorsAngleRad_3s_SSEua(aVector,bVector,Angle);
 end;
 
 //------------------------------------------------------------------------------
@@ -1219,7 +1219,7 @@ end;
 
 //==============================================================================
 
-procedure VectorsProjection_2s_SSEau(const Base,Vector: TVMCLVector2s; out Projection: TVMCLVector2s);
+procedure VectorsProjection_2s_SSEua(const Base,Vector: TVMCLVector2s; out Projection: TVMCLVector2s);
 asm
     // zero-out registers
     XORPS     XMM0, XMM0                        //  XMM0: 00  00  00  00
@@ -1238,7 +1238,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure VectorsProjection_3s_SSEau(const Base,Vector: TVMCLVector3s; out Projection: TVMCLVector3s);
+procedure VectorsProjection_3s_SSEua(const Base,Vector: TVMCLVector3s; out Projection: TVMCLVector3s);
 asm
     MOVSS     XMM0, dword ptr [Base]            //  XMM0: 00  00  00  b0
     MOVHPS    XMM0, qword ptr [Base + 4]        //  XMM0: b2  b1  00  b0
@@ -1497,7 +1497,7 @@ end;
 procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector2s; out Projection: TVMCLVector2s);
 begin
 // aligned and unaligned code is the same
-VectorsProjection_2s_SSEau(Base,Vector,Projection);
+VectorsProjection_2s_SSEua(Base,Vector,Projection);
 end;
 
 //------------------------------------------------------------------------------
@@ -1505,7 +1505,7 @@ end;
 procedure VectorsProjection_SSE(const Base,Vector: TVMCLVector3s; out Projection: TVMCLVector3s);
 begin
 // aligned and unaligned code is the same
-VectorsProjection_3s_SSEau(Base,Vector,Projection);
+VectorsProjection_3s_SSEua(Base,Vector,Projection);
 end;
 
 //------------------------------------------------------------------------------
@@ -1618,7 +1618,7 @@ end;
 
 //==============================================================================
 
-procedure VectorsOrthogonal_2s_SSEau(const Base,Vector: TVMCLVector2s; out Orthogonal: TVMCLVector2s);
+procedure VectorsOrthogonal_2s_SSEua(const Base,Vector: TVMCLVector2s; out Orthogonal: TVMCLVector2s);
 asm
     // zero-out registers
     XORPS     XMM0, XMM0                        //  XMM0: 00  00  00  00
@@ -1642,7 +1642,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure VectorsOrthogonal_3s_SSEau(const Base,Vector: TVMCLVector3s; out Orthogonal: TVMCLVector3s);
+procedure VectorsOrthogonal_3s_SSEua(const Base,Vector: TVMCLVector3s; out Orthogonal: TVMCLVector3s);
 asm
     MOVSS     XMM0, dword ptr [Base]            //  XMM0: 00  00  00  b0
     MOVHPS    XMM0, qword ptr [Base + 4]        //  XMM0: b2  b1  00  b0
@@ -1988,7 +1988,7 @@ end;
 procedure VectorsOrthogonal_SSE(const Base,Vector: TVMCLVector2s; out Orthogonal: TVMCLVector2s);
 begin
 // aligned and unaligned code is the same
-VectorsOrthogonal_2s_SSEau(Base,Vector,Orthogonal);
+VectorsOrthogonal_2s_SSEua(Base,Vector,Orthogonal);
 end;
 
 //------------------------------------------------------------------------------
@@ -1996,7 +1996,7 @@ end;
 procedure VectorsOrthogonal_SSE(const Base,Vector: TVMCLVector3s; out Orthogonal: TVMCLVector3s);
 begin
 // aligned and unaligned code is the same
-VectorsOrthogonal_3s_SSEau(Base,Vector,Orthogonal);
+VectorsOrthogonal_3s_SSEua(Base,Vector,Orthogonal);
 end;
 
 //------------------------------------------------------------------------------
@@ -2109,7 +2109,7 @@ end;
 
 //==============================================================================
 
-procedure VectorsOrthonormal_2s_SSEau(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s);
+procedure VectorsOrthonormal_2s_SSEua(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s);
 asm
     // zero-out registers
     XORPS     XMM0, XMM0                        //  XMM0: 00  00  00  00
@@ -2136,7 +2136,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure VectorsOrthonormal_3s_SSEau(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s);
+procedure VectorsOrthonormal_3s_SSEua(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s);
 asm
     MOVSS     XMM0, dword ptr [Base]            //  XMM0: 00  00  00  b0
     MOVHPS    XMM0, qword ptr [Base + 4]        //  XMM0: b2  b1  00  b0
@@ -2529,7 +2529,7 @@ end;
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s);
 begin
 // aligned and unaligned code is the same
-VectorsOrthonormal_2s_SSEau(Base,Vector,Orthonormal);
+VectorsOrthonormal_2s_SSEua(Base,Vector,Orthonormal);
 end;
 
 //------------------------------------------------------------------------------
@@ -2537,7 +2537,7 @@ end;
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s);
 begin
 // aligned and unaligned code is the same
-VectorsOrthonormal_3s_SSEau(Base,Vector,Orthonormal);
+VectorsOrthonormal_3s_SSEua(Base,Vector,Orthonormal);
 end;
 
 //------------------------------------------------------------------------------

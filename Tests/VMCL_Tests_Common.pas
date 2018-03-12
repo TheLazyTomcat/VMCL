@@ -50,7 +50,6 @@ const
 Function Prompt(Min,Max: Integer): Integer;
 Function Select(Caption, Text: String; Functions: array of TVMCLTestFunction; Tests: array of String; AutoTest: Boolean = False): Integer;
 
-
 //= Vectors randomization ======================================================
 
 procedure RandomVec(out Vec: TVMCLVector2s; Max: Integer = 100; Offset: Single = 0.0); overload;
