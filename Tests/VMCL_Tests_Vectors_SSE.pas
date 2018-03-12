@@ -30,14 +30,14 @@ RandomVec(vec1); RandomVec(vec2);
 WriteLn(VecToStr(vec1));
 WriteLn(VecToStr(vec2));
 //loadzerovector(vec1); 
-WriteLn('nSSE: ',VecToStr(VectorsOrthogonalXYZ(vec1,vec2)));
-VectorsOrthogonalXYZ_SSE(vec1,vec2,vec3);
+WriteLn('nSSE: ',VecToStr(VectorsOrthonormalXYZ(vec1,vec2)));
+VectorsOrthonormalXYZ_SSE(vec1,vec2,vec3);
 WriteLn(' SSE: ',VecToStr(vec3));
 // non-sse call
 QueryPerformanceCounter({%H-}StartCnt);
 For i := 1 to RepCount do
   begin
-    vec3 := VectorsOrthogonalXYZ(vec1,vec2);
+    vec3 := VectorsOrthonormalXYZ(vec1,vec2);
   end;
 QueryPerformanceCounter({%H-}EndCnt);
 WriteLn('nSSE: ',EndCnt - StartCnt);
@@ -46,7 +46,7 @@ nSSECnt := EndCnt - StartCnt;
 QueryPerformanceCounter(StartCnt);
 For i := 1 to RepCount do
   begin
-    VectorsOrthogonalXYZ_SSE(vec1,vec2,vec3);
+    VectorsOrthonormalXYZ_SSE(vec1,vec2,vec3);
   end;
 QueryPerformanceCounter(EndCnt);
 Write(' SSE: ',EndCnt - StartCnt);

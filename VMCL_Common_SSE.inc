@@ -153,7 +153,7 @@
   {$IFDEF x64}
     // 8 is there to maintain stack word alignment 
     SUB       RSP, 8
-    MOVSS     dword ptr [RSP], XMM0   // [ESP]: p0
+    MOVSS     dword ptr [RSP], XMM0   // [RSP]: p0
     FLD       dword ptr [RSP]         //   ST0: p0
     ADD       RSP, 8
   {$ELSE}
@@ -183,7 +183,7 @@
 {$IFDEF Load_XMM0_to_ST0_1d}
   {$IFDEF x64}
     SUB       RSP, 8
-    MOVSD     qword ptr [RSP], XMM0   // [ESP]: p0
+    MOVSD     qword ptr [RSP], XMM0   // [RSP]: p0
     FLD       qword ptr [RSP]         //   ST0: p0
     ADD       RSP, 8
   {$ELSE}

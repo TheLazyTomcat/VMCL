@@ -7,8 +7,10 @@
 {.$DEFINE Magnitude_4s_r2_SSE}
 {.$DEFINE Magnitude_4d_r4_SSE}
 
-{.$DEFINE Normalize_4s3_SSE}
-{.$DEFINE Normalize_4d3_SSE}
+{.$DEFINE Normalize_2s_SSE}
+{.$DEFINE Normalize_4s_SSE}
+{.$DEFINE Normalize_2d_SSE}
+{.$DEFINE Normalize_4d_SSE}
 
 {.$DEFINE Negate_4s_SSE}
 {.$DEFINE Negate_4d_SSE}
@@ -148,8 +150,8 @@
 {$IFDEF DotProduct_4s3_SSE}
     MULPS     XMM0, XMM1    //  XMM0: 00  a2b2  a1b1  a0b0
   {$IFDEF ASMDirectOPCodes}
-    DB  $F2, $0F, $7C, $C0  //  HADDPS XMM0, XMM0
-    DB  $F2, $0F, $7C, $C0  //  HADDPS XMM0, XMM0
+    DB  $F2, $0F, $7C, $C0    {HADDPS XMM0, XMM0}
+    DB  $F2, $0F, $7C, $C0    {HADDPS XMM0, XMM0}
   {$ELSE}
     HADDPS    XMM0, XMM0    //  XMM0: **   **   a2b2  (a0b0 + a1b1)
     HADDPS    XMM0, XMM0    //  XMM0: **   **    **   (a0b0 + a1b1 + a2b2)
@@ -188,7 +190,7 @@
     MULPD     XMM0, XMM2    //  XMM0: a1b1  a0b0
     MULPD     XMM1, XMM3    //  XMM1:  00   a2b2
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $C0  //  HADDPD XMM0, XMM0
+    DB  $66, $0F, $7C, $C0    {HADDPD XMM0, XMM0}
   {$ELSE}
     HADDPD    XMM0, XMM0    //  XMM0:  **   (a0b0 + a1b1)
   {$ENDIF}
@@ -221,8 +223,8 @@
 {$IFDEF Magnitude_4s_r2_SSE}
     MULPS   XMM2, XMM2      //  XMM2: a3a3  a2a2  a1a1  a0a0
   {$IFDEF ASMDirectOPCodes}
-    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
-    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
+    DB  $F2, $0F, $7C, $D2    {HADDPS XMM2, XMM2}
+    DB  $F2, $0F, $7C, $D2    {HADDPS XMM2, XMM2}
   {$ELSE}
     HADDPS  XMM2, XMM2      //  XMM2:  --    --   (a3a3 + a2a2) (a1a1 + a0a0)
     HADDPS  XMM2, XMM2      //  XMM2:  --    --    --   (a3a3 + a2a2 + a1a1 + a0a0)
@@ -258,8 +260,8 @@
     MULPD   XMM4, XMM4      //  XMM4: a1a1  a0a0
     MULPD   XMM5, XMM5      //  XMM5: a3a3  a2a2
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $E5  //  HADDPD XMM4, XMM5
-    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+    DB  $66, $0F, $7C, $E5    {HADDPD XMM4, XMM5}
+    DB  $66, $0F, $7C, $E4    {HADDPD XMM4, XMM4}
   {$ELSE}
     HADDPD  XMM4, XMM5      //  XMM4: (a3a3 + a2a2) (a1a1 + a0a0)
     HADDPD  XMM4, XMM4      //  XMM4:  --   (a3a3 + a2a2 + a1a1 + a0a0)
@@ -274,20 +276,73 @@
 
 {-------------------------------------------------------------------------------
 
-  Normalize_4s3_SSE
+  Normalize_2s_SSE
 
-  Normalizes one single-precision 3-dimensional vector.
+  Normalizes one single-precision 2-dimensional vector.
 
   Input:
 
-    Highest single of input register must be 0.
+    Higher two singles of input register should be 0 (not mandatory, but better
+    for performance).
 
-    XMM0: 00  a2  a1  a0  - vector to be normalized (3 single)
+    XMM0: **  **  a1  a0  - vector to be normalized (2 single)
+
+  Output:
+
+    Normalized vector is returned in lower two singles of XMM0 register.
+    If higher two singles in input were set to 0, higher two singles in output
+    will be 0 too.
+
+    XMM0: **  **  R1  R0
+
+  Scratch registers:
+
+    XMM1, XMM2
+
+-------------------------------------------------------------------------------}
+{$IFDEF Normalize_2s_SSE}
+    MOVAPS  XMM1, XMM0                  //  XMM1: **    **    a1    a0
+    MULPS   XMM1, XMM1                  //  XMM1: **    **   a1a1  a0a0
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $F2, $0F, $7C, $C9    {HADDPS XMM1, XMM1}
+  {$ELSE}
+    HADDPS  XMM1, XMM1                  //  XMM1:  **    **    **  (a1a1 + a0a0)
+  {$ENDIF}
+    SQRTSS  XMM1, XMM1                  //  XMM1:  **    **    **  SQRT(a1a1 + a0a0)(M)
+
+    // check for zero-magnitude vector
+    XORPS   XMM2, XMM2                  //  XMM2: 00  00  00  00
+    COMISS  XMM1, XMM2
+    JNE     @iDivision
+
+    // magnitude is zero, set result to zero vector
+    XORPS   XMM0, XMM0
+    JMP     @iRoutineEnd
+
+  @iDivision:
+    SHUFPS  XMM1, XMM1, $00 {00000000}  //  XMM1:  M     M     M     M
+    DIVPS   XMM0, XMM1                  //  XMM0: **    **   a1/M  a0/M
+
+  @iRoutineEnd:
+                                        //  XMM0: **  **  R1  R0
+{$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  Normalize_4s_SSE
+
+  Normalizes one single-precision 4-dimensional vector.
+  Vectors of lower dimensions can be normalized by filling unused entries
+  with 0.
+
+  Input:
+
+    XMM0: a3  a2  a1  a0  - vector to be normalized (3 single)
 
   Output:
 
     Normalized vector is returned in XMM0 register.
-    Highest returned component (R3) is always 0.
 
     XMM0: R3  R2  R1  R0
 
@@ -296,19 +351,19 @@
     XMM1, XMM2
 
 -------------------------------------------------------------------------------}
-{$IFDEF Normalize_4s3_SSE}
-    MOVAPS  XMM1, XMM0      //  XMM1:  00    a2    a1    a0
-    MULPS   XMM1, XMM1      //  XMM1:  00   a2a2  a1a1  a0a0
+{$IFDEF Normalize_4s_SSE}
+    MOVAPS  XMM1, XMM0      //  XMM1:  a3    a2    a1    a0
+    MULPS   XMM1, XMM1      //  XMM1: a3a3  a2a2  a1a1  a0a0
 
   {$IFDEF ASMDirectOPCodes}
-    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
-    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
+    DB  $F2, $0F, $7C, $C9    {HADDPS XMM1, XMM1}
+    DB  $F2, $0F, $7C, $C9    {HADDPS XMM1, XMM1}
   {$ELSE}
-    HADDPS  XMM1, XMM1      //  XMM1:  **    **   a2a2  (a1a1 + a0a0)
-    HADDPS  XMM1, XMM1      //  XMM1:  --    --    --   (a2a2 + a1a1 + a0a0)
+    HADDPS  XMM1, XMM1      //  XMM1:  --    --   (a3a3 + a2a2)  (a1a1 + a0a0)
+    HADDPS  XMM1, XMM1      //  XMM1:  --    --    --   (a3a3 + a2a2 + a1a1 + a0a0)
   {$ENDIF}
     // at this point, all components in XMM1 are the same
-    SQRTPS  XMM1, XMM1      //  XMM1:  --    --    --   SQRT(a2a2 + a1a1 + a0a0)(M)
+    SQRTPS  XMM1, XMM1      //  XMM1:  --    --    --   SQRT(a3a3 + a2a2 + a1a1 + a0a0)(M)
                             //  XMM1:   M     M     M     M
 
     // check for zero-magnitude vector
@@ -321,29 +376,80 @@
     JMP     @iRoutineEnd
 
   @iDivision:
-    DIVPS   XMM0, XMM1      //  XMM0:   00    a2/M    a1/M    a0/M
+    DIVPS   XMM0, XMM1      //  XMM0:  a3/M   a2/M    a1/M    a0/M
 
   @iRoutineEnd:
-                            //  XMM0: R3 = 0   R2      R1       R0
+                            //  XMM0:   R3     R2      R1      R0
 {$ENDIF}
 
 {-------------------------------------------------------------------------------
 
-  Normalize_4d3_SSE
+  Normalize_2d_SSE
 
-  Normalizes one double-precision 3-dimensional vector.
+  Normalizes one double-precision 2-dimensional vector.
 
   Input:
 
-    Highest double of second input register must be 0.
+    XMM0: a1  a0  - input vector
+
+  Output:
+
+    Normalized vector is returned in register XMM0.
+
+    XMM0: R1  R0
+
+  Scratch registers:
+
+    XMM1, XMM2
+
+-------------------------------------------------------------------------------}
+
+{$IFDEF Normalize_2d_SSE}
+    MOVAPD  XMM1, XMM0      //  XMM1: a1  a0
+
+    MULPD   XMM1, XMM1      //  XMM1: a1a1  a0a0
+
+  {$IFDEF ASMDirectOPCodes}
+    DB  $66, $0F, $7C, $C9    {HADDPD XMM1, XMM1}
+  {$ELSE}
+    HADDPD  XMM1, XMM1      //  XMM1:  --   (a1a1 + a0a0)
+  {$ENDIF}
+    // at this point, all components in XMM2 are the same
+    SQRTPD  XMM1, XMM1      //  XMM1:  --   SQRT(a1a1 + a0a0)(M)
+                            //  XMM1:  M     M
+
+    // check for zero-magnitude vector
+    XORPD   XMM2, XMM2       //  XMM2: 00  00
+    COMISD  XMM1, XMM2
+    JNE     @iDivision
+
+    // magnitude is zero, set result to zero vector
+    XORPD   XMM0, XMM0
+    JMP     @iRoutineEnd
+
+  @iDivision:
+    DIVPD   XMM0, XMM1      //  XMM0:   a1/M    a0/M
+
+  @iRoutineEnd:
+                            //  XMM0:    R1      R0
+{$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  Normalize_4d_SSE
+
+  Normalizes one double-precision 4-dimensional vector.
+  Vectors of lower dimensions can be normalized by filling unused entries
+  with 0.
+
+  Input:
 
     XMM0: a1  a0  - lower 128 bits of input vector (2 double)
-    XMM1: 00  a2  - highest double of input vector
+    XMM1: a3  a2  - higher 128 bits of input vector (2 double)
 
   Output:
 
     Normalized vector is returned in XMM0 and XMM1 registers.
-    Highest returned component (R3) is always 0.
 
     XMM0: R1  R0
     XMM1: R3  R2
@@ -354,26 +460,26 @@
 
 -------------------------------------------------------------------------------}
 
-{$IFDEF Normalize_4d3_SSE}
+{$IFDEF Normalize_4d_SSE}
     MOVAPD  XMM2, XMM0      //  XMM2: a1  a0
-    MOVAPD  XMM3, XMM1      //  XMM3: 00  a2
+    MOVAPD  XMM3, XMM1      //  XMM3: a3  a2
 
     MULPD   XMM2, XMM2      //  XMM2: a1a1  a0a0
-    MULPD   XMM3, XMM3      //  XMM3:  00   a2a2
+    MULPD   XMM3, XMM3      //  XMM3: a3a3  a2a2
 
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $D3  //  HADDPD XMM2, XMM3
-    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $D3    {HADDPD XMM2, XMM3}
+    DB  $66, $0F, $7C, $D2    {HADDPD XMM2, XMM2}
   {$ELSE}
-    HADDPD  XMM2, XMM3      //  XMM2: a2a2  (a1a1 + a0a0)
-    HADDPD  XMM2, XMM2      //  XMM2:  --   (a2a2 + a1a1 + a0a0)
+    HADDPD  XMM2, XMM3      //  XMM2: (a3a3 + a2a2)  (a1a1 + a0a0)
+    HADDPD  XMM2, XMM2      //  XMM2:  --   (a3a3 + a2a2 + a1a1 + a0a0)
   {$ENDIF}
     // at this point, all components in XMM2 are the same
-    SQRTPD  XMM2, XMM2      //  XMM2:  --   SQRT(a2a2 + a1a1 + a0a0)(M)
+    SQRTPD  XMM2, XMM2      //  XMM2:  --   SQRT(a3a3 + a2a2 + a1a1 + a0a0)(M)
                             //  XMM2:  M     M
 
     // check for zero-magnitude vector
-    XORPD   XMM3, XMM3       //  XMM3: 00  00
+    XORPD   XMM3, XMM3      //  XMM3: 00  00
     COMISD  XMM2, XMM3
     JNE     @iDivision
 
@@ -384,11 +490,11 @@
 
   @iDivision:
     DIVPD   XMM0, XMM2      //  XMM0:   a1/M    a0/M
-    DIVPD   XMM1, XMM2      //  XMM1:    00     a2/M
+    DIVPD   XMM1, XMM2      //  XMM1:   a3/M    a2/M
 
   @iRoutineEnd:
                             //  XMM0:    R1      R0
-                            //  XMM1:  R3 = 0    R2
+                            //  XMM1:    R3      R2
 {$ENDIF}
 
 {===============================================================================
@@ -602,8 +708,8 @@
     MULPS     XMM2, XMM2                        //  XMM2: 00  00  b1b1  b0b0
 
   {$IFDEF ASMDirectOPCodes}
-    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
-    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
+    DB  $F2, $0F, $7C, $C9    {HADDPS XMM1, XMM1}
+    DB  $F2, $0F, $7C, $D2    {HADDPS XMM2, XMM2}
   {$ELSE}
     HADDPS    XMM1, XMM1                        //  XMM1: **  **  **  (v1b1 + v0b0)(VB_DP)
     HADDPS    XMM2, XMM2                        //  XMM2: **  **  **  (b1b1 + b0b0)(BB_DP)
@@ -639,11 +745,19 @@
     XMM0: b3  b2  b1  b0  - base vector
     XMM1: v3  v2  v1  v0  - vector to be projected to base
 
+    When symbol FunctionVariantXYZ is defined, parameter Vector is required to
+    be placed in register and contain pointer to Vector.
+
   Output:
 
     Projected vector is returned in register XMM0.
 
     XMM0: P3  P2  P1  P0
+
+    When symbol FunctionVariantXYZ is defined, lovest single of XMM5 contains
+    v3 for valid input (non-zero Base vector), 0 for invalid input.
+
+    XMM5: **  **  **  v3
 
   Scratch registers:
 
@@ -658,10 +772,10 @@
     MULPS     XMM2, XMM2                        //  XMM2: b3b3  b2b2  b1b1  b0b0
 
   {$IFDEF ASMDirectOPCodes}
-    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
-    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
-    DB  $F2, $0F, $7C, $C9  //  HADDPS XMM1, XMM1
-    DB  $F2, $0F, $7C, $D2  //  HADDPS XMM2, XMM2
+    DB  $F2, $0F, $7C, $C9    {HADDPS XMM1, XMM1}
+    DB  $F2, $0F, $7C, $D2    {HADDPS XMM2, XMM2}
+    DB  $F2, $0F, $7C, $C9    {HADDPS XMM1, XMM1}
+    DB  $F2, $0F, $7C, $D2    {HADDPS XMM2, XMM2}
   {$ELSE}
     HADDPS    XMM1, XMM1                        //  XMM1: --  --  (v3b3 + v2b2)  (v1b1 + v0b0)
     HADDPS    XMM2, XMM2                        //  XMM2: --  --  (b3b3 + b2b2)  (b1b1 + b0b0)
@@ -677,8 +791,8 @@
     // BB dot product is zero, set result to zero vector
     MOVAPS    XMM0, XMM3                        //  XMM0: 00  00  00  00
   {$IFDEF FunctionVariantXYZ}
-    MOVAPS    XMM1, XMM3                        //  XMM1: 00  00  00  00
-  {$ENDIF}  
+    MOVAPS    XMM5, XMM3                        //  XMM5: 00  00  00  00
+  {$ENDIF}
     JMP       @StoreResult
 
   @Continue:
@@ -689,7 +803,7 @@
     MULPS     XMM0, XMM1                        //  XMM0: b3D   b2D   b1D   b0D
 
   {$IFDEF FunctionVariantXYZ}
-    MOVSS     XMM1, dword ptr [Vector + 12]     //  XMM1: **  **  **  v3
+    MOVSS     XMM5, dword ptr [Vector + 12]     //  XMM5: **  **  **  v3
   {$ENDIF}
                                                 //  XMM0: P3    P2    P1    P0
 {$ENDIF}
@@ -725,8 +839,8 @@
     MULPD     XMM2, XMM2                        //  XMM2: b1b1  b0b0
 
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $C9  //  HADDPD XMM1, XMM1
-    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $C9    {HADDPD XMM1, XMM1}
+    DB  $66, $0F, $7C, $D2    {HADDPD XMM2, XMM2}
   {$ELSE}
     HADDPD    XMM1, XMM1                        //  XMM1: --  (v1b1 + v0b0)(VB_DP)
     HADDPD    XMM2, XMM2                        //  XMM2: --  (b1b1 + b0b0)(BB_DP)
@@ -766,6 +880,9 @@
     XMM2: v1  v0  - lower 128 bits of the vector to be projected to base
     XMM3: 00  v2  - highest double of vector to be projected to base
 
+    When symbol FunctionVariantXYZ is defined, parameter Vector is required to
+    be placed in register and contain pointer to Vector.    
+
   Output:
 
     Projected vector is returned in registers XMM0 and XMM1.
@@ -773,6 +890,11 @@
 
     XMM0: P1  P0
     XMM1: **  P2
+
+    When symbol FunctionVariantXYZ is defined, low double of XMM5 contains v3
+    for valid input (non-zero Base vector), 0 for invalid input.
+
+    XMM5: **  v3
 
   Scratch registers:
 
@@ -790,8 +912,8 @@
     MULSD     XMM5, XMM5                        //  XMM5:  00   b2b2
 
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
-    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+    DB  $66, $0F, $7C, $D2    {HADDPD XMM2, XMM2}
+    DB  $66, $0F, $7C, $E4    {HADDPD XMM4, XMM4}
   {$ELSE}
     HADDPD    XMM2, XMM2                        //  XMM2: --  (v1b1 + v0b0)
     HADDPD    XMM4, XMM4                        //  XMM4: --  (b1b1 + b0b0)
@@ -808,7 +930,7 @@
     MOVAPD    XMM0, XMM3                        //  XMM0: 00  00
     MOVAPD    XMM1, XMM3                        //  XMM1: 00  00
   {$IFDEF FunctionVariantXYZ}
-    MOVAPD    XMM2, XMM3                        //  XMM2: 00  00
+    MOVAPD    XMM5, XMM3                        //  XMM2: 00  00
   {$ENDIF}
     JMP       @StoreResult
 
@@ -821,7 +943,7 @@
     MULPD     XMM0, XMM2                        //  XMM0: b1D   b0D
     MULSD     XMM1, XMM2                        //  XMM1: **    b2D
   {$IFDEF FunctionVariantXYZ}
-    MOVSD     XMM2, qword ptr [Vector + 24]     //  XMM2: **  v3
+    MOVSD     XMM5, qword ptr [Vector + 24]     //  XMM2: **  v3
   {$ENDIF}
                                                 //  XMM0: P1  P0
                                                 //  XMM1: **  P2
@@ -864,10 +986,10 @@
     MULPD     XMM5, XMM5                        //  XMM5: b3b3  b2b2
 
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $D3  //  HADDPD XMM2, XMM3
-    DB  $66, $0F, $7C, $E5  //  HADDPD XMM4, XMM5
-    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
-    DB  $66, $0F, $7C, $E4  //  HADDPD XMM4, XMM4
+    DB  $66, $0F, $7C, $D3    {HADDPD XMM2, XMM3}
+    DB  $66, $0F, $7C, $E5    {HADDPD XMM4, XMM5}
+    DB  $66, $0F, $7C, $D2    {HADDPD XMM2, XMM2}
+    DB  $66, $0F, $7C, $E4    {HADDPD XMM4, XMM4}
   {$ELSE}
     HADDPD    XMM2, XMM3                        //  XMM2: (v3b3 + v2b2)  (v1b1 + v0b0)
     HADDPD    XMM4, XMM5                        //  XMM4: (b3b3 + b2b2)  (b1b1 + b0b0)

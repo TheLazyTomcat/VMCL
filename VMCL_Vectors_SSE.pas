@@ -42,7 +42,9 @@ procedure VectorsAntinormal_SSE(const aVector,bVector: TVector3d; out Antinormal
 procedure VectorsAntinormal_SSE(const aVector,bVector: TVector4d; out Antinormal: TVector4d); register; assembler; overload;
 
 //------------------------------------------------------------------------------
-
+{$IFDEF DevelMsgs}
+  {$MESSAGE 'Mark as platform in x64'}
+{$ENDIF}
 procedure VectorsAngleRad_2s_SSEau(const aVector,bVector: TVector2s; out Angle: Single); register; assembler; // <100% in x64
 procedure VectorsAngleRad_3s_SSEau(const aVector,bVector: TVector3s; out Angle: Single); register; assembler; // <100% in x64
 procedure VectorsAngleRad_4s_SSEu(const aVector,bVector: TVector4s; out Angle: Single); register; assembler;  // <100% in x64
@@ -121,6 +123,34 @@ procedure VectorsOrthogonal_SSE(const Base,Vector: TVMCLVector3d; out Orthogonal
 procedure VectorsOrthogonal_SSE(const Base,Vector: TVMCLVector4d; out Orthogonal: TVMCLVector4d); register; assembler; overload;
 procedure VectorsOrthogonalXYZ_SSE(const Base,Vector: TVMCLVector4d; out Orthogonal: TVMCLVector4d); register; assembler; overload;
 
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_2s_SSEau(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s); register; assembler;
+procedure VectorsOrthonormal_3s_SSEau(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s); register; assembler;
+procedure VectorsOrthonormal_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+procedure VectorsOrthonormal_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+procedure VectorsOrthonormalXYZ_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+procedure VectorsOrthonormalXYZ_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+procedure VectorsOrthonormal_2d_SSEu(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d); register; assembler;
+procedure VectorsOrthonormal_2d_SSEa(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d); register; assembler;
+procedure VectorsOrthonormal_3d_SSEu(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d); register; assembler;
+procedure VectorsOrthonormal_3d_SSEa(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d); register; assembler;
+procedure VectorsOrthonormal_4d_SSEu(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+procedure VectorsOrthonormal_4d_SSEa(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+procedure VectorsOrthonormalXYZ_4d_SSEu(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+procedure VectorsOrthonormalXYZ_4d_SSEa(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s); overload; {$IFDEF CanInline} inline;{$ENDIF}
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s); overload; {$IFDEF CanInline} inline;{$ENDIF}
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler; overload;
+procedure VectorsOrthonormalXYZ_SSE(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler; overload;
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d); register; assembler; overload;
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d); register; assembler; overload;
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler; overload;
+procedure VectorsOrthonormalXYZ_SSE(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler; overload;
+
 {$ENDIF PurePascal}
 
 implementation
@@ -131,6 +161,7 @@ implementation
   {$WARN 2087 OFF}  //  Supresses warnings on following two $WARN (FPC 2.X)
   {$WARN 7121 OFF}  //  Warning: Check size of memory operand "op: memory-operand-size is X bits, but expected [Y bits]"
   {$WARN 7122 OFF}  //  Warning: Check size of memory operand "op: memory-operand-size is X bits, but expected [Y bits + Z byte offset]"
+  {$WARN 2087 ON}
 {$ENDIF}
 
 //==============================================================================
@@ -149,7 +180,7 @@ asm
   {$DEFINE CrossProduct_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF CrossProduct_4s_SSE}
 
     // normalize                                //  XMM0: 00  n2  n1  n0
-  {$DEFINE Normalize_4s3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s3_SSE}
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
 
     SHUFPS  XMM0, XMM0, $9C {10011100}          //  XMM0: n2  n1  **  n0
 
@@ -168,7 +199,7 @@ asm
   {$DEFINE CrossProduct_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF CrossProduct_4s_SSE}
 
     // normalize                                //  XMM0: 00  n2  n1  n0
-  {$DEFINE Normalize_4s3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s3_SSE}
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
 
     MOVUPS  dqword ptr [Normal], XMM0           //  [Normal]: n0  n1  n2  00
 end;
@@ -184,7 +215,7 @@ asm
   {$DEFINE CrossProduct_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF CrossProduct_4s_SSE}
 
     // normalize                                //  XMM0: 00  n2  n1  n0
-  {$DEFINE Normalize_4s3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s3_SSE}
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
 
     MOVAPS  dqword ptr [Normal], XMM0           //  [Normal]: n0  n1  n2  00
 end;
@@ -204,7 +235,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     MOVUPD  dqword ptr [Normal], XMM0           //  [Normal]: n0  n1
     MOVSD   qword ptr [Normal + 16], XMM1       //  [Normal]: n0  n1  n2
@@ -225,7 +256,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     MOVAPD  dqword ptr [Normal], XMM0           //  [Normal]: n0  n1
     MOVSD   qword ptr [Normal + 16], XMM1       //  [Normal]: n0  n1  n2  
@@ -246,7 +277,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     MOVUPD  dqword ptr [Normal], XMM0           //  [Normal]: n0  n1
     MOVUPD  dqword ptr [Normal + 16], XMM1      //  [Normal]: n0  n1  n2  00
@@ -267,7 +298,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     MOVAPD  dqword ptr [Normal], XMM0           //  [Normal]: n0  n1
     MOVAPD  dqword ptr [Normal + 16], XMM1      //  [Normal]: n0  n1  n2  00
@@ -351,7 +382,7 @@ asm
   {$DEFINE CrossProduct_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF CrossProduct_4s_SSE}
 
     // normalize                                //  XMM0: 00  n2  n1  n0
-  {$DEFINE Normalize_4s3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s3_SSE}
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
 
     // negate                                   //  XMM0: 00 -n2 -n1 -n0
   {$DEFINE Negate_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Negate_4s_SSE}
@@ -373,7 +404,7 @@ asm
   {$DEFINE CrossProduct_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF CrossProduct_4s_SSE}
 
     // normalize                                //  XMM0: 00  n2  n1  n0
-  {$DEFINE Normalize_4s3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s3_SSE}
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
 
     // negate                                   //  XMM0: 00 -n2 -n1 -n0
   {$DEFINE Negate_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Negate_4s_SSE}
@@ -392,7 +423,7 @@ asm
   {$DEFINE CrossProduct_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF CrossProduct_4s_SSE}
 
     // normalize                                //  XMM0: 00  n2  n1  n0
-  {$DEFINE Normalize_4s3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s3_SSE}
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
 
     // negate                                   //  XMM0: 00 -n2 -n1 -n0
   {$DEFINE Negate_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Negate_4s_SSE}
@@ -415,7 +446,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     // negate                                   //  XMM0: -n1 -n0
                                                 //  XMM1:  00 -n2
@@ -440,7 +471,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     // negate                                   //  XMM0: -n1 -n0
                                                 //  XMM1:  00 -n2
@@ -465,7 +496,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     // negate                                   //  XMM0: -n1 -n0
                                                 //  XMM1:  00 -n2
@@ -490,7 +521,7 @@ asm
 
     // normalize                                //  XMM0: n1  n0
                                                 //  XMM1: 00  n2
-  {$DEFINE Normalize_4d3_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d3_SSE}
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
 
     // negate                                   //  XMM0: -n1 -n0
                                                 //  XMM1:  00 -n2
@@ -573,7 +604,7 @@ asm
     MOVHLPS   XMM0, XMM1                        //  XMM0: **  **   b1    b0
     MULPS     XMM0, XMM1                        //  XMM0: **  **  a1b1  a0b0
   {$IFDEF ASMDirectOPCodes}
-    DB  $F2, $0F, $7C, $C0                      //  HADDPS XMM0, XMM0
+    DB  $F2, $0F, $7C, $C0  {HADDPS XMM0, XMM0}
   {$ELSE}
     HADDPS    XMM0, XMM0                        //  XMM0: **  **   **   (a0b0 + a1b1)(DP)
   {$ENDIF}
@@ -581,7 +612,7 @@ asm
     // magnitudes
     MULPS     XMM1, XMM1                        //  XMM1: b1b1  b0b0  a1a1  a0a0
   {$IFDEF ASMDirectOPCodes}
-    DB  $F2, $0F, $7C, $C9                      //  HADDPS XMM1, XMM1
+    DB  $F2, $0F, $7C, $C9  {HADDPS XMM1, XMM1}
   {$ELSE}
     HADDPS    XMM1, XMM1                        //  XMM1:  --    --   (b1b1 + b0b0) (a1a1 + a0a0)
   {$ENDIF}
@@ -785,7 +816,7 @@ asm
     // dot product
     MULPD     XMM0, XMM1                        //  XMM0: a1b1  a0b0
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $C0  //  HADDPD XMM0, XMM0
+    DB  $66, $0F, $7C, $C0  {HADDPD XMM0, XMM0}
   {$ELSE}
     HADDPD    XMM0, XMM0                        //  XMM0:  --   (a1b1 + a0b0)(DP)
   {$ENDIF}
@@ -794,8 +825,8 @@ asm
     MULPD     XMM1, XMM1                        //  XMM1: b1b1  b0b0
     MULPD     XMM2, XMM2                        //  XMM2: a1a1  a0a0
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $C9  //  HADDPD XMM1, XMM1
-    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $C9  {HADDPD XMM1, XMM1}
+    DB  $66, $0F, $7C, $D2  {HADDPD XMM2, XMM2}
   {$ELSE}
     HADDPD    XMM1, XMM1                        //  XMM1:  --   (b1b1 + b0b0)
     HADDPD    XMM2, XMM2                        //  XMM2:  --   (a1a1 + a0a0)
@@ -841,7 +872,7 @@ asm
     // dot product
     MULPD     XMM0, XMM1                        //  XMM0: a1b1  a0b0
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $C0  //  HADDPD XMM0, XMM0
+    DB  $66, $0F, $7C, $C0  {HADDPD XMM0, XMM0}
   {$ELSE}
     HADDPD    XMM0, XMM0                        //  XMM0:  --   (a1b1 + a0b0)(DP)
   {$ENDIF}
@@ -850,8 +881,8 @@ asm
     MULPD     XMM1, XMM1                        //  XMM1: b1b1  b0b0
     MULPD     XMM2, XMM2                        //  XMM2: a1a1  a0a0
   {$IFDEF ASMDirectOPCodes}
-    DB  $66, $0F, $7C, $C9  //  HADDPD XMM1, XMM1
-    DB  $66, $0F, $7C, $D2  //  HADDPD XMM2, XMM2
+    DB  $66, $0F, $7C, $C9  {HADDPD XMM1, XMM1}
+    DB  $66, $0F, $7C, $D2  {HADDPD XMM2, XMM2}
   {$ELSE}
     HADDPD    XMM1, XMM1                        //  XMM1:  --   (b1b1 + b0b0)
     HADDPD    XMM2, XMM2                        //  XMM2:  --   (a1a1 + a0a0)
@@ -1276,7 +1307,7 @@ asm
   @StoreResult:
 
     MOVUPS    dqword ptr [Projection], XMM0     //  [Projection]:   P0  P1  P2  00
-    MOVSS     dword ptr [Projection + 12], XMM1 //  [Projection]:   P0  P1  P2  v3
+    MOVSS     dword ptr [Projection + 12], XMM5 //  [Projection]:   P0  P1  P2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -1300,7 +1331,7 @@ asm
   @StoreResult:
 
     MOVAPS    dqword ptr [Projection], XMM0     //  [Projection]:   P0  P1  P2  00
-    MOVSS     dword ptr [Projection + 12], XMM1 //  [Projection]:   P0  P1  P2  v3
+    MOVSS     dword ptr [Projection + 12], XMM5 //  [Projection]:   P0  P1  P2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -1431,7 +1462,7 @@ asm
 
     MOVUPD    dqword ptr [Projection], XMM0         //  [Projection]:   P0  P1
     MOVSD     qword ptr [Projection + 16], XMM1     //  [Projection]:   P0  P1  P2
-    MOVSD     qword ptr [Projection + 24], XMM2     //  [Projection]:   P0  P1  P2  v3
+    MOVSD     qword ptr [Projection + 24], XMM5     //  [Projection]:   P0  P1  P2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -1456,7 +1487,7 @@ asm
 
     MOVAPD    dqword ptr [Projection], XMM0         //  [Projection]:   P0  P1
     MOVSD     qword ptr [Projection + 16], XMM1     //  [Projection]:   P0  P1  P2
-    MOVSD     qword ptr [Projection + 24], XMM2     //  [Projection]:   P0  P1  P2  v3
+    MOVSD     qword ptr [Projection + 24], XMM5     //  [Projection]:   P0  P1  P2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -1698,7 +1729,7 @@ asm
   @StoreResult:
 
     MOVUPS    dqword ptr [Orthogonal], XMM0     //  [Orthogonal]:   O0  O1  O2  00
-    MOVSS     dword ptr [Orthogonal + 12], XMM1 //  [Orthogonal]:   O0  O1  O2  v3
+    MOVSS     dword ptr [Orthogonal + 12], XMM5 //  [Orthogonal]:   O0  O1  O2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -1727,7 +1758,7 @@ asm
   @StoreResult:
 
     MOVAPS    dqword ptr [Orthogonal], XMM0     //  [Orthogonal]:   O0  O1  O2  00
-    MOVSS     dword ptr [Orthogonal + 12], XMM1 //  [Orthogonal]:   O0  O1  O2  v3
+    MOVSS     dword ptr [Orthogonal + 12], XMM5 //  [Orthogonal]:   O0  O1  O2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -1792,7 +1823,7 @@ asm
     SUBSD     XMM3, XMM1                        //  XMM3: **  (v2 - P2)(O2)
 
     MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
-    MOVAPD    XMM1, XMM3                        //  XMM0: **  O2
+    MOVAPD    XMM1, XMM3                        //  XMM1: **  O2
 
   @StoreResult:
 
@@ -1820,7 +1851,7 @@ asm
     SUBSD     XMM3, XMM1                        //  XMM3: **  (v2 - P2)(O2)
 
     MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
-    MOVAPD    XMM1, XMM3                        //  XMM0: **  O2
+    MOVAPD    XMM1, XMM3                        //  XMM1: **  O2
 
   @StoreResult:
 
@@ -1848,12 +1879,12 @@ asm
     SUBSD     XMM3, XMM1                        //  XMM3: (v3 - P3)(O3)  (v2 - P2)(O2)
 
     MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
-    MOVAPD    XMM1, XMM3                        //  XMM0: O3  O2
+    MOVAPD    XMM1, XMM3                        //  XMM1: O3  O2
 
   @StoreResult:
 
-    MOVUPD    dqword ptr [Orthogonal], XMM0         //  [Orthogonal]:   O0  O1
-    MOVUPD    dqword ptr [Orthogonal + 16],  XMM1   //  [Orthogonal]:   O0  O1  O2  O3
+    MOVUPD    dqword ptr [Orthogonal], XMM0       //  [Orthogonal]:   O0  O1
+    MOVUPD    dqword ptr [Orthogonal + 16],  XMM1 //  [Orthogonal]:   O0  O1  O2  O3
 end;
 
 //------------------------------------------------------------------------------
@@ -1876,12 +1907,12 @@ asm
     SUBPD     XMM3, XMM1                        //  XMM3: (v3 - P3)(O3)  (v2 - P2)(O2)
 
     MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
-    MOVAPD    XMM1, XMM3                        //  XMM0: O3  O2
+    MOVAPD    XMM1, XMM3                        //  XMM1: O3  O2
 
   @StoreResult:
 
-    MOVAPD    dqword ptr [Orthogonal], XMM0         //  [Orthogonal]:   O0  O1
-    MOVAPD    dqword ptr [Orthogonal + 16],  XMM1   //  [Orthogonal]:   O0  O1  O2  O3
+    MOVAPD    dqword ptr [Orthogonal], XMM0       //  [Orthogonal]:   O0  O1
+    MOVAPD    dqword ptr [Orthogonal + 16],  XMM1 //  [Orthogonal]:   O0  O1  O2  O3
 end;
 
 //------------------------------------------------------------------------------
@@ -1907,13 +1938,13 @@ asm
     SUBSD     XMM4, XMM1                        //  XMM4: **  (v2 - P2)(O2)
 
     MOVAPD    XMM0, XMM3                        //  XMM0: O1  O0
-    MOVAPD    XMM1, XMM4                        //  XMM0: **  O2
+    MOVAPD    XMM1, XMM4                        //  XMM1: **  O2
 
   @StoreResult:
 
     MOVUPD    dqword ptr [Orthogonal], XMM0         //  [Orthogonal]:   O0  O1
     MOVSD     qword ptr [Orthogonal + 16], XMM1     //  [Orthogonal]:   O0  O1  O2
-    MOVSD     qword ptr [Orthogonal + 24], XMM2     //  [Orthogonal]:   O0  o1  O2  v3
+    MOVSD     qword ptr [Orthogonal + 24], XMM5     //  [Orthogonal]:   O0  O1  O2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -1941,13 +1972,13 @@ asm
     SUBSD     XMM4, XMM1                        //  XMM4: **  (v2 - P2)(O2)
 
     MOVAPD    XMM0, XMM3                        //  XMM0: O1  O0
-    MOVAPD    XMM1, XMM4                        //  XMM0: **  O2
+    MOVAPD    XMM1, XMM4                        //  XMM1: **  O2
 
   @StoreResult:
 
     MOVAPD    dqword ptr [Orthogonal], XMM0         //  [Orthogonal]:   O0  O1
     MOVSD     qword ptr [Orthogonal + 16], XMM1     //  [Orthogonal]:   O0  O1  O2
-    MOVSD     qword ptr [Orthogonal + 24], XMM2     //  [Orthogonal]:   O0  o1  O2  v3
+    MOVSD     qword ptr [Orthogonal + 24], XMM5     //  [Orthogonal]:   O0  O1  O2  v3
 
 {$UNDEF FunctionVariantXYZ}
 end;
@@ -2078,7 +2109,549 @@ end;
 
 //==============================================================================
 
+procedure VectorsOrthonormal_2s_SSEau(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s);
+asm
+    // zero-out registers
+    XORPS     XMM0, XMM0                        //  XMM0: 00  00  00  00
+    XORPS     XMM1, XMM1                        //  XMM1: 00  00  00  00
+
+    MOVLPS    XMM0, qword ptr [Base]            //  XMM0: 00  00  b1  b0
+    MOVLPS    XMM1, qword ptr [Vector]          //  XMM1: 00  00  v1  v0
+
+    MOVAPS    XMM4, XMM1                        //  XMM4: 00  00  v1  v0
+
+    // projection                               //  XMM0: 00  00  P1  P0
+  {$DEFINE VectorsProjection_2s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_2s_SSE}
+
+    SUBPS     XMM4, XMM0                        //  XMM4: 00  00  (v1 - P1)(O1) (v0 - P0)(O0)
+    MOVAPS    XMM0, XMM4                        //  XMM0: 00  00  O1  O0
+
+    // normalize                                //  XMM0: 00  00  N1  N0
+  {$DEFINE Normalize_2s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_2s_SSE}
+
+  @StoreResult:
+
+    MOVLPS    qword ptr [Orthonormal], XMM0     //  [Orthonormal]:    N0  N1
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_3s_SSEau(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s);
+asm
+    MOVSS     XMM0, dword ptr [Base]            //  XMM0: 00  00  00  b0
+    MOVHPS    XMM0, qword ptr [Base + 4]        //  XMM0: b2  b1  00  b0
+    MOVSS     XMM1, dword ptr [Vector]          //  XMM1: 00  00  00  v0
+    MOVHPS    XMM1, qword ptr [Vector + 4]      //  XMM1: v2  v1  00  v0
+
+    MOVAPS    XMM4, XMM1                        //  XMM4: v2  v1  00  v0
+
+    // projection                               //  XMM0: P2  P1  00  P0
+  {$DEFINE VectorsProjection_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_4s_SSE}
+
+    SUBPS     XMM4, XMM0                        //  XMM4: (v2 - P2)(O2) (v1 - P1)(O1) 00 (v0 - P0)(O0)
+    MOVAPS    XMM0, XMM4                        //  XMM0: O2  O1  00  O0
+
+    // normalize                                //  XMM0: N2  N1  00  N0
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
+
+  @StoreResult:
+
+    MOVSS     dword ptr [Orthonormal], XMM0     //  [Orthonormal]:    N0
+    MOVHPS    qword ptr [Orthonormal + 4], XMM0 //  [Orthonormal]:    N0  N1  N2
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s);
+asm
+    MOVUPS    XMM0, dqword ptr [Base]           //  XMM0: b3  b2  b1  b0
+    MOVUPS    XMM1, dqword ptr [Vector]         //  XMM1: v3  v2  v1  v0
+
+    MOVAPS    XMM4, XMM1                        //  XMM4: v3  v2  v1  v0
+
+    // projection                               //  XMM0: P3  P2  P1  P0
+  {$DEFINE VectorsProjection_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_4s_SSE}
+
+    SUBPS     XMM4, XMM0                        //  XMM4: (v3 - P3)(O3) (v2 - P2)(O2) (v1 - P1)(O1) (v0 - P0)(O0)
+    MOVAPS    XMM0, XMM4                        //  XMM0: O3  O2  O1  O0
+
+    // normalize                                //  XMM0: N3  N2  N1  N0
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
+
+  @StoreResult:
+
+    MOVUPS    dqword ptr [Orthonormal], XMM0     //  [Orthonormal]:   N0  N1  N2  N3
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s);
+asm
+    MOVAPS    XMM0, dqword ptr [Base]           //  XMM0: b3  b2  b1  b0
+    MOVAPS    XMM1, dqword ptr [Vector]         //  XMM1: v3  v2  v1  v0
+
+    MOVAPS    XMM4, XMM1                        //  XMM4: v3  v2  v1  v0
+
+    // projection                               //  XMM0: P3  P2  P1  P0
+  {$DEFINE VectorsProjection_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_4s_SSE}
+
+    SUBPS     XMM4, XMM0                        //  XMM4: (v3 - P3)(O3) (v2 - P2)(O2) (v1 - P1)(O1) (v0 - P0)(O0)
+    MOVAPS    XMM0, XMM4                        //  XMM0: O3  O2  O1  O0
+
+    // normalize                                //  XMM0: N3  N2  N1  N0
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
+
+  @StoreResult:
+
+    MOVAPS    dqword ptr [Orthonormal], XMM0     //  [Orthonormal]:   N0  N1  N2  N3
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormalXYZ_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s);
+asm
+{$DEFINE FunctionVariantXYZ}
+
+    MOVUPS    XMM0, dqword ptr [Base]           //  XMM0: b3  b2  b1  b0
+    MOVUPS    XMM1, dqword ptr [Vector]         //  XMM1: v3  v2  v1  v0
+
+    // discard highest single of both input vectors
+    PCMPEQD   XMM2, XMM2                        //  register XMM2 set to all ones
+    PSRLDQ    XMM2, 4                           //  XMM2: 00  11  11  11
+    ANDPS     XMM0, XMM2                        //  XMM0: 00  b2  b1  b0
+    ANDPS     XMM1, XMM2                        //  XMM1: 00  v2  v1  v0
+
+    MOVAPS    XMM4, XMM1                        //  XMM4: 00  v2  v1  v0
+
+    // projection                               //  XMM0: 00  P2  P1  P0
+  {$DEFINE VectorsProjection_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_4s_SSE}
+
+    SUBPS     XMM4, XMM0                        //  XMM4: 00 (v2 - P2)(O2) (v1 - P1)(O1) (v0 - P0)(O0)
+    MOVAPS    XMM0, XMM4                        //  XMM0: 00  O2  O1  O0
+
+    // normalize                                //  XMM0: 00  N2  N1  N0
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
+
+  @StoreResult:
+
+    MOVUPS    dqword ptr [Orthonormal], XMM0     //  [Orthonormal]:   N0  N1  N2  00
+    MOVSS     dword ptr [Orthonormal + 12], XMM5 //  [Orthonormal]:   N0  N1  N2  v3
+
+{$UNDEF FunctionVariantXYZ}
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormalXYZ_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s);
+asm
+{$DEFINE FunctionVariantXYZ}
+
+    // load vectors and discard highest single
+    PCMPEQD   XMM0, XMM0                        //  register XMM0 set to all ones
+    PSRLDQ    XMM0, 4                           //  XMM0: 00  11  11  11
+    MOVAPS    XMM1, XMM0                        //  XMM1: 00  11  11  11
+    ANDPS     XMM0, dqword ptr [Base]           //  XMM0: 00  b2  b1  b0
+    ANDPS     XMM1, dqword ptr [Vector]         //  XMM1: 00  v2  v1  v0
+
+    MOVAPS    XMM4, XMM1                        //  XMM4: 00  v2  v1  v0
+
+    // projection                               //  XMM0: 00  P2  P1  P0
+  {$DEFINE VectorsProjection_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_4s_SSE}
+
+    SUBPS     XMM4, XMM0                        //  XMM4: 00 (v2 - P2)(O2) (v1 - P1)(O1) (v0 - P0)(O0)
+    MOVAPS    XMM0, XMM4                        //  XMM0: 00  O2  O1  O0
+
+    // normalize                                //  XMM0: 00  N2  N1  N0
+  {$DEFINE Normalize_4s_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4s_SSE}
+
+  @StoreResult:
+
+    MOVAPS    dqword ptr [Orthonormal], XMM0     //  [Orthonormal]:   N0  N1  N2  00
+    MOVSS     dword ptr [Orthonormal + 12], XMM5 //  [Orthonormal]:   N0  N1  N2  v3
+
+{$UNDEF FunctionVariantXYZ}
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_2d_SSEu(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d);
+asm
+    MOVUPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVUPD    XMM1, dqword ptr [Vector]         //  XMM1: v1  v0
+
+    MOVAPD    XMM4, XMM1                        //  XMM4: v1  v0
+
+    // projection                               //  XMM0: P1  P0
+  {$DEFINE VectorsProjection_2d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_2d_SSE}
+
+    SUBPD     XMM4, XMM0                        //  XMM4: (v1 - P1)(O1) (v0 - P0)(O0)
+    MOVAPD    XMM0, XMM4                        //  XMM0: O1  O0
+
+    // normalize                                //  XMM0: N1  N0
+  {$DEFINE Normalize_2d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_2d_SSE}
+
+  @StoreResult:
+
+    MOVUPD    dqword ptr [Orthonormal], XMM0     //  [Orthonormal]:   N0  N1
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_2d_SSEa(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d);
+asm
+    MOVAPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVAPD    XMM1, dqword ptr [Vector]         //  XMM1: v1  v0
+
+    MOVAPD    XMM4, XMM1                        //  XMM4: v1  v0
+
+    // projection                               //  XMM0: P1  P0
+  {$DEFINE VectorsProjection_2d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_2d_SSE}
+
+    SUBPD     XMM4, XMM0                        //  XMM4: (v1 - P1)(O1) (v0 - P0)(O0)
+    MOVAPD    XMM0, XMM4                        //  XMM0: O1  O0
+
+    // normalize                                //  XMM0: N1  N0
+  {$DEFINE Normalize_2d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_2d_SSE}
+
+  @StoreResult:
+
+    MOVAPD    dqword ptr [Orthonormal], XMM0    //  [Orthonormal]:   N0  N1
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_3d_SSEu(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d);
+asm
+    MOVUPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVSD     XMM1, qword ptr [Base + 16]       //  XMM1: 00  b2
+    MOVUPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    // projection                               //  XMM0: P1  P0
+                                                //  XMM1: **  P2
+  {$DEFINE VectorsProjection_3d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_3d_SSE}
+
+    MOVUPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    SUBPD     XMM2, XMM0                        //  XMM4: (v1 - P1)(O1) (v0 - P0)(O0)
+    SUBSD     XMM3, XMM1                        //  XMM3: **  (v2 - P2)(O2)
+
+    MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
+    XORPD     XMM1, XMM1                        //  XMM1: 00  00
+    MOVSD    XMM1, XMM3                         //  XMM1: 00  O2
+
+    // normalize                                //  XMM0: N1  N0
+                                                //  XMM1: **  N2
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
+
+  @StoreResult:
+
+    MOVUPD    dqword ptr [Orthonormal], XMM0        //  [Orthonormal]:  N0  N1
+    MOVSD     qword ptr [Orthonormal + 16],  XMM1   //  [Orthonormal]:  N0  N1  N2
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_3d_SSEa(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d);
+asm
+    MOVAPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVSD     XMM1, qword ptr [Base + 16]       //  XMM1: 00  b2
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    // projection                               //  XMM0: P1  P0
+                                                //  XMM1: **  P2
+  {$DEFINE VectorsProjection_3d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_3d_SSE}
+
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    SUBPD     XMM2, XMM0                        //  XMM4: (v1 - P1)(O1) (v0 - P0)(O0)
+    SUBSD     XMM3, XMM1                        //  XMM3: **  (v2 - P2)(O2)
+
+    MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
+    XORPD     XMM1, XMM1                        //  XMM1: 00  00
+    MOVSD     XMM1, XMM3                        //  XMM1: 00  O2
+
+    // normalize                                //  XMM0: N1  N0
+                                                //  XMM1: **  N2
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
+
+  @StoreResult:
+
+    MOVAPD    dqword ptr [Orthonormal], XMM0        //  [Orthonormal]:  N0  N1
+    MOVSD     qword ptr [Orthonormal + 16],  XMM1   //  [Orthonormal]:  N0  N1  N2
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_4d_SSEu(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d);
+asm
+    MOVUPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVUPD    XMM1, dqword ptr [Base + 16]      //  XMM1: b3  b2
+    MOVUPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVUPD    XMM3, dqword ptr [Vector + 16]    //  XMM3: v3  v2
+
+    // projection                               //  XMM0: P1  P0
+                                                //  XMM1: P3  P2
+  {$DEFINE VectorsProjection_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_4d_SSE}
+
+    MOVUPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVUPD    XMM3, dqword ptr [Vector + 16]    //  XMM3: v3  v2
+
+    SUBPD     XMM2, XMM0                        //  XMM4: (v1 - P1)(O1)  (v0 - P0)(O0)
+    SUBPD     XMM3, XMM1                        //  XMM3: (v3 - P3)(O3)  (v2 - P2)(O2)
+
+    MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
+    MOVAPD    XMM1, XMM3                        //  XMM1: O3  O2
+
+    // normalize                                //  XMM0: N1  N0
+                                                //  XMM1: N3  N2
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
+
+  @StoreResult:
+
+    MOVUPD    dqword ptr [Orthonormal], XMM0        //  [Orthonormal]:  N0  N1
+    MOVUPD    dqword ptr [Orthonormal + 16],  XMM1  //  [Orthonormal]:  N0  N1  N2  N3
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_4d_SSEa(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d);
+asm
+    MOVAPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVAPD    XMM1, dqword ptr [Base + 16]      //  XMM1: b3  b2
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVAPD    XMM3, dqword ptr [Vector + 16]    //  XMM3: v3  v2
+
+    // projection                               //  XMM0: P1  P0
+                                                //  XMM1: P3  P2
+  {$DEFINE VectorsProjection_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_4d_SSE}
+
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVAPD    XMM3, dqword ptr [Vector + 16]    //  XMM3: v3  v2
+
+    SUBPD     XMM2, XMM0                        //  XMM4: (v1 - P1)(O1)  (v0 - P0)(O0)
+    SUBPD     XMM3, XMM1                        //  XMM3: (v3 - P3)(O3)  (v2 - P2)(O2)
+
+    MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
+    MOVAPD    XMM1, XMM3                        //  XMM1: O3  O2
+
+    // normalize                                //  XMM0: N1  N0
+                                                //  XMM1: N3  N2
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}
+
+  @StoreResult:
+
+    MOVAPD    dqword ptr [Orthonormal], XMM0        //  [Orthonormal]:  N0  N1
+    MOVAPD    dqword ptr [Orthonormal + 16],  XMM1  //  [Orthonormal]:  N0  N1  N2  N3
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormalXYZ_4d_SSEu(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d);
+asm
+{$DEFINE FunctionVariantXYZ}
+
+    // highest entries are ignored
+    MOVUPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVSD     XMM1, qword ptr [Base + 16]       //  XMM1: 00  b2
+    MOVUPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    // projection                               //  XMM0: P1  P0
+                                                //  XMM1: **  P2
+  {$DEFINE VectorsProjection_3d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_3d_SSE}
+
+    MOVUPD    XMM3, dqword ptr [Vector]         //  XMM3: v1  v0
+    MOVSD     XMM4, qword ptr [Vector + 16]     //  XMM4: 00  v2
+
+    SUBPD     XMM3, XMM0                        //  XMM3: (v1 - P1)(O1) (v0 - P0)(O0)
+    SUBSD     XMM4, XMM1                        //  XMM4: 00  (v2 - P2)(O2)
+
+    MOVAPD    XMM0, XMM3                        //  XMM0: O1  O0
+    MOVAPD    XMM1, XMM4                        //  XMM1: 00  O2
+
+    // normalize                                //  XMM0: N1  N0
+                                                //  XMM1: **  N2
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}    
+
+  @StoreResult:
+
+    MOVUPD    dqword ptr [Orthonormal], XMM0        //  [Orthonormal]:  N0  N1
+    MOVSD     qword ptr [Orthonormal + 16], XMM1    //  [Orthonormal]:  N0  N1  N2
+    MOVSD     qword ptr [Orthonormal + 24], XMM5    //  [Orthonormal]:  N0  N1  N2  v3
+
+{$UNDEF FunctionVariantXYZ}
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormalXYZ_4d_SSEa(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d);
+asm
+{$DEFINE FunctionVariantXYZ}
+
+    // highest entries are ignored
+    MOVAPD    XMM0, dqword ptr [Base]           //  XMM0: b1  b0
+    MOVSD     XMM1, qword ptr [Base + 16]       //  XMM1: 00  b2
+    MOVAPD    XMM2, dqword ptr [Vector]         //  XMM2: v1  v0
+    MOVSD     XMM3, qword ptr [Vector + 16]     //  XMM3: 00  v2
+
+    // projection                               //  XMM0: P1  P0
+                                                //  XMM1: **  P2
+  {$DEFINE VectorsProjection_3d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF VectorsProjection_3d_SSE}
+
+    MOVAPD    XMM3, dqword ptr [Vector]         //  XMM3: v1  v0
+    MOVSD     XMM4, qword ptr [Vector + 16]     //  XMM4: 00  v2
+
+    SUBPD     XMM3, XMM0                        //  XMM3: (v1 - P1)(O1) (v0 - P0)(O0)
+    SUBSD     XMM4, XMM1                        //  XMM4: 00  (v2 - P2)(O2)
+
+    MOVAPD    XMM0, XMM3                        //  XMM0: O1  O0
+    MOVAPD    XMM1, XMM4                        //  XMM1: 00  O2
+
+    // normalize                                //  XMM0: N1  N0
+                                                //  XMM1: **  N2
+  {$DEFINE Normalize_4d_SSE}{$INCLUDE 'VMCL_Vectors_SSE.inc'}{$UNDEF Normalize_4d_SSE}    
+
+  @StoreResult:
+
+    MOVAPD    dqword ptr [Orthonormal], XMM0        //  [Orthonormal]:  N0  N1
+    MOVSD     qword ptr [Orthonormal + 16], XMM1    //  [Orthonormal]:  N0  N1  N2
+    MOVSD     qword ptr [Orthonormal + 24], XMM5    //  [Orthonormal]:  N0  N1  N2  v3
+
+{$UNDEF FunctionVariantXYZ}
+end;
+
+//==============================================================================
+
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s);
+begin
+// aligned and unaligned code is the same
+VectorsOrthonormal_2s_SSEau(Base,Vector,Orthonormal);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s);
+begin
+// aligned and unaligned code is the same
+VectorsOrthonormal_3s_SSEau(Base,Vector,Orthonormal);
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsOrthonormal_4s_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsOrthonormal_4s_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormalXYZ_SSE(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsOrthonormalXYZ_4s_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsOrthonormalXYZ_4s_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsOrthonormal_2d_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsOrthonormal_2d_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsOrthonormal_3d_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsOrthonormal_3d_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsOrthonormal_4d_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsOrthonormal_4d_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure VectorsOrthonormalXYZ_SSE(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d);
+asm
+  {$DEFINE CheckMemAlign16_3}{$INCLUDE 'VMCL_Common_SSE.inc'}{$UNDEF CheckMemAlign16_3}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  VectorsOrthonormalXYZ_4d_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  VectorsOrthonormalXYZ_4d_SSEu
+
+  @RoutineEnd:
+end;
+
+//==============================================================================
+
 {$IFDEF ASMSuppressSizeWarnings}
+  {$WARN 2087 OFF}
   {$WARN 7121 ON}
   {$WARN 7122 ON}
   {$WARN 2087 ON}
