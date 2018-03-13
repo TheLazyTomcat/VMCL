@@ -10,12 +10,13 @@ var
   Freq:           Int64;
   StartCnt:       Int64;
   StopCnt:        Int64;
+  nSSECnt:        Int64;
 begin
 QueryPerformanceFrequency(Freq);
 WriteLn;
 WriteLn(LineText('VectorsNormal_SSE - Speed tests'));
 WriteLn;
-WriteLn('  ',RepeatCount,' cycles');
+WriteLn(RepeatCount,' cycles');
 VMCL_New(v3s1); VMCL_New(v3s2); VMCL_New(v3s3);
 VMCL_New(v4s1); VMCL_New(v4s2); VMCL_New(v4s3);
 VMCL_New(v3d1); VMCL_New(v3d2); VMCL_New(v3d3);
@@ -32,18 +33,24 @@ try
     v3s3^ := VectorsNormal(v3s1^,v3s2^);
   QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  nSSECnt := StopCnt - StartCnt;
   Write(Format('v3s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(v3s1,v3s2,v3s3),'a','u')]));
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_SSE(v3s1^,v3s2^,v3s3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
   Write('v3s @ SSEua:  ');
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_3s_SSEua(v3s1^,v3s2^,v3s3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   WriteLn;
   Write('v4s @ nonSSE: ');
@@ -52,24 +59,31 @@ try
     v4s3^ := VectorsNormal(v4s1^,v4s2^);
   QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  nSSECnt := StopCnt - StartCnt;
   Write(Format('v4s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(v4s1,v4s2,v4s3),'a','u')]));
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_SSE(v4s1^,v4s2^,v4s3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
   Write('v4s @ SSEu:   ');
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_4s_SSEu(v4s1^,v4s2^,v4s3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
   Write('v4s @ SSEa:   ');
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_4s_SSEa(v4s1^,v4s2^,v4s3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   WriteLn;
   Write('v3d @ nonSSE: ');
@@ -78,24 +92,31 @@ try
     v3d3^ := VectorsNormal(v3d1^,v3d2^);
   QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  nSSECnt := StopCnt - StartCnt;
   Write(Format('v3d @ SSE(%s): ',[BoolToMark(CheckMemAlign16(v3d1,v3d2,v3d3),'a','u')]));
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_SSE(v3d1^,v3d2^,v3d3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
   Write('v3d @ SSEu:   ');
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_3d_SSEu(v3d1^,v3d2^,v3d3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
   Write('v3d @ SSEa:   ');
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_3d_SSEa(v3d1^,v3d2^,v3d3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   WriteLn;
   Write('v4d @ nonSSE: ');
@@ -104,24 +125,31 @@ try
     v4d3^ := VectorsNormal(v4d1^,v4d2^);
   QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  nSSECnt := StopCnt - StartCnt;
   Write(Format('v4d @ SSE(%s): ',[BoolToMark(CheckMemAlign16(v4d1,v4d2,v4d3),'a','u')]));
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_SSE(v4d1^,v4d2^,v4d3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
   Write('v4d @ SSEu:   ');
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_4d_SSEu(v4d1^,v4d2^,v4d3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
   Write('v4d @ SSEa:   ');
   QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     VectorsNormal_4d_SSEa(v4d1^,v4d2^,v4d3^);
   QueryPerformanceCounter(StopCnt);
-  WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
+  WriteLn(Format('%-30s  t: %.2f  s: %.0f%%',[
+    Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]),
+    (StopCnt - StartCnt) / nSSECnt,1 / ((StopCnt - StartCnt) / nSSECnt) * 100]));
 finally
   VMCL_Dispose(v3s1); VMCL_Dispose(v3s2); VMCL_Dispose(v3s3);
   VMCL_Dispose(v4s1); VMCL_Dispose(v4s2); VMCL_Dispose(v4s3);

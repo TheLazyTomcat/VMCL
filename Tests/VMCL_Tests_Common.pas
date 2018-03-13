@@ -30,12 +30,25 @@ unit VMCL_Tests_Common;
 interface
 
 uses
+  AuxTypes,
   VMCL_Vectors, VMCL_Matrices;
 
 type
   TVMCLTestFunction = Function(AutoTest: Boolean = False): Integer;
 
+  TVMCLCounters = packed record
+    StartLo,StartHi:  UInt32;
+    StopLo,StopHi:    UInt32;
+  end;
+  PVMCLCounters = ^TVMCLCounters;
+
+  TVMCLPrecisionTests = record
+    Counters:     TVMCLCounters;
+    FunctionAddr: Pointer;
+  end;
+
 Function BoolToMark(Value: Boolean; MarkTrue: String = '+'; MarkFalse: String = '-'): String;
+Function PrecisionTestsTicks(Data: TVMCLPrecisionTests): UInt64;
 
 Function Splitter(SplitterChar: Char = '-'; Count: Integer = 64): String;
 Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 64): String;
@@ -100,6 +113,14 @@ If Value then
   Result := MarkTrue
 else
   Result := MarkFalse;
+end;
+
+//------------------------------------------------------------------------------
+
+Function PrecisionTestsTicks(Data: TVMCLPrecisionTests): UInt64;
+begin
+Result := ((UInt64(Data.Counters.StopHi) shl 32) or Data.Counters.StopLo) -
+          ((UInt64(Data.Counters.StartHi) shl 32) or Data.Counters.StartLo);
 end;
 
 //------------------------------------------------------------------------------
