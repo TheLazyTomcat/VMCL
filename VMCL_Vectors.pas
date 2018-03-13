@@ -529,14 +529,14 @@ Function VectorsOrthogonal(const Base,Vector: TVMCLVector4d): TVMCLVector4d; ove
 Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
 
 // returns orthogonalized and normalized Vector to Base
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector2s): TVMCLVector2s; overload;
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector3s): TVMCLVector3s; overload;
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector4s): TVMCLVector4s; overload;
-Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4s): TVMCLVector4s; overload;
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector2d): TVMCLVector2d; overload;
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector3d): TVMCLVector3d; overload;
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector4d): TVMCLVector4d; overload;
-Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector3s): TVMCLVector3s; overload;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsOrthonormalXYZ(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector2d): TVMCLVector2d; overload;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector3d): TVMCLVector3d; overload;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
+Function VectorsOrthonormalXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
 
 implementation
 
@@ -1945,9 +1945,9 @@ If not IsZeroVectorXYZ(Vector) then
     Result[0] := Vector[0] * VectorMagnitudeRcp;
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
-    Result[3] := Vector[3];
   end
 else Result := VMCL_ZeroVector4s;
+Result[3] := Vector[3];
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -2010,9 +2010,9 @@ If not IsZeroVectorXYZ(Vector) then
     Result[0] := Vector[0] * VectorMagnitudeRcp;
     Result[1] := Vector[1] * VectorMagnitudeRcp;
     Result[2] := Vector[2] * VectorMagnitudeRcp;
-    Result[3] := Vector[3];
   end
 else Result := VMCL_ZeroVector4d;
+Result[3] := Vector[3];
 end;
 
 //==============================================================================
@@ -2843,56 +2843,56 @@ end;
 
 //==============================================================================
 
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector2s): TVMCLVector2s;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector2s): TVMCLVector2s;
 begin
 Result := Normalized(VectorsOrthogonal(Base,Vector));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector3s): TVMCLVector3s;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector3s): TVMCLVector3s;
 begin
 Result := Normalized(VectorsOrthogonal(Base,Vector));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector4s): TVMCLVector4s;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector4s): TVMCLVector4s;
 begin
 Result := Normalized(VectorsOrthogonal(Base,Vector));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4s): TVMCLVector4s;
+Function VectorsOrthonormalXYZ(const Base,Vector: TVMCLVector4s): TVMCLVector4s;
 begin
 Result := NormalizedXYZ(VectorsOrthogonalXYZ(Base,Vector));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector2d): TVMCLVector2d;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector2d): TVMCLVector2d;
 begin
 Result := Normalized(VectorsOrthogonal(Base,Vector));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector3d): TVMCLVector3d;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector3d): TVMCLVector3d;
 begin
 Result := Normalized(VectorsOrthogonal(Base,Vector));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorsOrthonormal(const Base, Vector: TVMCLVector4d): TVMCLVector4d;
+Function VectorsOrthonormal(const Base,Vector: TVMCLVector4d): TVMCLVector4d;
 begin
 Result := Normalized(VectorsOrthogonal(Base,Vector));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-Function VectorsOrthonormalXYZ(const Base, Vector: TVMCLVector4d): TVMCLVector4d;
+Function VectorsOrthonormalXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d;
 begin
 Result := NormalizedXYZ(VectorsOrthogonalXYZ(Base,Vector));
 end;

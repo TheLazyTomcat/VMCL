@@ -1,0 +1,128 @@
+Function Vector_VectorsProjection_SSE_Man({%H-}AutoTest: Boolean = False): Integer;
+var
+  v2s1,v2s2,v2s3: PVector2s;
+  v3s1,v3s2,v3s3: PVector3s;
+  v4s1,v4s2,v4s3: PVector4s;
+  v2d1,v2d2,v2d3: PVector2d;
+  v3d1,v3d2,v3d3: PVector3d;
+  v4d1,v4d2,v4d3: PVector4d;
+  VF:             TVMCLVectorFormat;
+begin
+VF := VMCL_DefaultVectorFormat;
+VF.CommonFormat.ValueFormat.DecimalPlaces := 6;
+WriteLn;
+WriteLn(LineText('VectorsProjection_SSE - Manual value checks'));
+VMCL_New(v2s1); VMCL_New(v2s2); VMCL_New(v2s3);
+VMCL_New(v3s1); VMCL_New(v3s2); VMCL_New(v3s3);
+VMCL_New(v4s1); VMCL_New(v4s2); VMCL_New(v4s3);
+VMCL_New(v2d1); VMCL_New(v2d2); VMCL_New(v2d3);
+VMCL_New(v3d1); VMCL_New(v3d2); VMCL_New(v3d3);
+VMCL_New(v4d1); VMCL_New(v4d2); VMCL_New(v4d3);
+try
+  RandomVec(v2s1^); RandomVec(v2s2^); RandomVec(v2s3^);
+  RandomVec(v3s1^); RandomVec(v3s2^); RandomVec(v3s3^);
+  RandomVec(v4s1^); RandomVec(v4s2^); RandomVec(v4s3^);
+  RandomVec(v2d1^); RandomVec(v2d2^); RandomVec(v2d3^);
+  RandomVec(v3d1^); RandomVec(v3d2^); RandomVec(v3d3^);
+  RandomVec(v4d1^); RandomVec(v4d2^); RandomVec(v4d3^);
+  WriteLn;
+  WriteLn('v2s: ' + VecToStr(v2s1^) + ' -> ' + VecToStr(v2s2^));
+  WriteLn;
+  v2s3^ := VectorsProjection(v2s1^,v2s2^);
+  WriteLn('v2s @ nSSE:  ' + ' -> ' + VecToStr(v2s3^,VF));
+  VectorsProjection_SSE(v2s1^,v2s2^,v2s3^);
+  WriteLn('v2s @ SSE:   ' + ' -> ' + VecToStr(v2s3^,VF));
+  VectorsProjection_2s_SSEua(v2s1^,v2s2^,v2s3^);
+  WriteLn('v2s @ SSEua: ' + ' -> ' + VecToStr(v2s3^,VF));
+
+  WriteLn;
+  WriteLn('v3s: ' + VecToStr(v3s1^) + ' -> ' + VecToStr(v3s2^));
+  WriteLn;
+  v3s3^ := VectorsProjection(v3s1^,v3s2^);
+  WriteLn('v3s @ nSSE:  ' + ' -> ' + VecToStr(v3s3^,VF));
+  VectorsProjection_SSE(v3s1^,v3s2^,v3s3^);
+  WriteLn('v3s @ SSE:   ' + ' -> ' + VecToStr(v3s3^,VF));
+  VectorsProjection_3s_SSEua(v3s1^,v3s2^,v3s3^);
+  WriteLn('v3s @ SSEua: ' + ' -> ' + VecToStr(v3s3^,VF));
+
+  WriteLn;
+  WriteLn('v4s: ' + VecToStr(v4s1^) + ' -> ' + VecToStr(v4s2^));
+  WriteLn;
+  v4s3^ := VectorsProjection(v4s1^,v4s2^);
+  WriteLn('v4s @ nSSE:  ' + ' -> ' + VecToStr(v4s3^,VF));
+  VectorsProjection_SSE(v4s1^,v4s2^,v4s3^);
+  WriteLn('v4s @ SSE:   ' + ' -> ' + VecToStr(v4s3^,VF));
+  VectorsProjection_4s_SSEu(v4s1^,v4s2^,v4s3^);
+  WriteLn('v4s @ SSEu:  ' + ' -> ' + VecToStr(v4s3^,VF));
+  VectorsProjection_4s_SSEa(v4s1^,v4s2^,v4s3^);
+  WriteLn('v4s @ SSEa:  ' + ' -> ' + VecToStr(v4s3^,VF));
+
+  WriteLn;
+  WriteLn('v4s: ' + VecToStr(v4s1^) + ' -> ' + VecToStr(v4s2^));
+  WriteLn;
+  v4s3^ := VectorsProjectionXYZ(v4s1^,v4s2^);
+  WriteLn('v4s3 @ nSSE: ' + ' -> ' + VecToStr(v4s3^,VF));
+  VectorsProjectionXYZ_SSE(v4s1^,v4s2^,v4s3^);
+  WriteLn('v4s3 @ SSE:  ' + ' -> ' + VecToStr(v4s3^,VF));
+  VectorsProjectionXYZ_4s_SSEu(v4s1^,v4s2^,v4s3^);
+  WriteLn('v4s3 @ SSEu: ' + ' -> ' + VecToStr(v4s3^,VF));
+  VectorsProjectionXYZ_4s_SSEa(v4s1^,v4s2^,v4s3^);
+  WriteLn('v4s3 @ SSEa: ' + ' -> ' + VecToStr(v4s3^,VF));
+
+  WriteLn;
+  WriteLn('v2d: ' + VecToStr(v2d1^) + ' -> ' + VecToStr(v2d2^));
+  WriteLn;
+  v2d3^ := VectorsProjection(v2d1^,v2d2^);
+  WriteLn('v2d @ nSSE:  ' + ' -> ' + VecToStr(v2d3^,VF));
+  VectorsProjection_SSE(v2d1^,v2d2^,v2d3^);
+  WriteLn('v2d @ SSE:   ' + ' -> ' + VecToStr(v2d3^,VF));
+  VectorsProjection_2d_SSEu(v2d1^,v2d2^,v2d3^);
+  WriteLn('v2d @ SSEu:  ' + ' -> ' + VecToStr(v2d3^,VF));
+  VectorsProjection_2d_SSEa(v2d1^,v2d2^,v2d3^);
+  WriteLn('v2d @ SSEa:  ' + ' -> ' + VecToStr(v2d3^,VF));
+
+  WriteLn;
+  WriteLn('v3d: ' + VecToStr(v3d1^) + ' -> ' + VecToStr(v3d2^));
+  WriteLn;
+  v3d3^ := VectorsProjection(v3d1^,v3d2^);
+  WriteLn('v3d @ nSSE:  ' + ' -> ' + VecToStr(v3d3^,VF));
+  VectorsProjection_SSE(v3d1^,v3d2^,v3d3^);
+  WriteLn('v3d @ SSE:   ' + ' -> ' + VecToStr(v3d3^,VF));
+  VectorsProjection_3d_SSEu(v3d1^,v3d2^,v3d3^);
+  WriteLn('v3d @ SSEu:  ' + ' -> ' + VecToStr(v3d3^,VF));
+  VectorsProjection_3d_SSEa(v3d1^,v3d2^,v3d3^);
+  WriteLn('v3d @ SSEa:  ' + ' -> ' + VecToStr(v3d3^,VF));
+
+  WriteLn;
+  WriteLn('v4d: ' + VecToStr(v4d1^) + ' -> ' + VecToStr(v4d2^));
+  WriteLn;
+  v4d3^ := VectorsProjection(v4d1^,v4d2^);
+  WriteLn('v4d @ nSSE:  ' + ' -> ' + VecToStr(v4d3^,VF));
+  VectorsProjection_SSE(v4d1^,v4d2^,v4d3^);
+  WriteLn('v4d @ SSE:   ' + ' -> ' + VecToStr(v4d3^,VF));
+  VectorsProjection_4d_SSEu(v4d1^,v4d2^,v4d3^);
+  WriteLn('v4d @ SSEu:  ' + ' -> ' + VecToStr(v4d3^,VF));
+  VectorsProjection_4d_SSEa(v4d1^,v4d2^,v4d3^);
+  WriteLn('v4d @ SSEa:  ' + ' -> ' + VecToStr(v4d3^,VF));
+
+  WriteLn;
+  WriteLn('v4d: ' + VecToStr(v4d1^) + ' -> ' + VecToStr(v4d2^));
+  WriteLn;
+  v4d3^ := VectorsProjectionXYZ(v4d1^,v4d2^);
+  WriteLn('v4d3 @ nSSE: ' + ' -> ' + VecToStr(v4d3^,VF));
+  VectorsProjectionXYZ_SSE(v4d1^,v4d2^,v4d3^);
+  WriteLn('v4d3 @ SSE:  ' + ' -> ' + VecToStr(v4d3^,VF));
+  VectorsProjectionXYZ_4d_SSEu(v4d1^,v4d2^,v4d3^);
+  WriteLn('v4d3 @ SSEu: ' + ' -> ' + VecToStr(v4d3^,VF));
+  VectorsProjectionXYZ_4d_SSEa(v4d1^,v4d2^,v4d3^);
+  WriteLn('v4d3 @ SSEa: ' + ' -> ' + VecToStr(v4d3^,VF));
+finally
+  VMCL_Dispose(v2s1); VMCL_Dispose(v2s2); VMCL_Dispose(v2s3);
+  VMCL_Dispose(v3s1); VMCL_Dispose(v3s2); VMCL_Dispose(v3s3);
+  VMCL_Dispose(v4s1); VMCL_Dispose(v4s2); VMCL_Dispose(v4s3);
+  VMCL_Dispose(v2d1); VMCL_Dispose(v2d2); VMCL_Dispose(v2d3);
+  VMCL_Dispose(v3d1); VMCL_Dispose(v3d2); VMCL_Dispose(v3d3);
+  VMCL_Dispose(v4d1); VMCL_Dispose(v4d2); VMCL_Dispose(v4d3);
+end;
+Result := 0;
+end;

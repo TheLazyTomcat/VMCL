@@ -7,17 +7,21 @@ interface
 uses
   VMCL_Vectors;
 
+{$IFDEF DevelMsgs}
+  {$MESSAGE 'Normalization is too slow'}
+{$ENDIF}
+
 {$IFNDEF PurePascal}
 {$IFDEF DevelMsgs}
   {$MESSAGE 'Mark as platform in x64'}
 {$ENDIF}
-procedure VectorsNormal_3s_SSEua(const aVector,bVector: TVMCLVector3s; out Normal: TVMCLVector3s); register; assembler;// slow againts x64
-procedure VectorsNormal_4s_SSEu(const aVector,bVector: TVMCLVector4s; out Normal: TVMCLVector4s); register; assembler;// slow againts x64
-procedure VectorsNormal_4s_SSEa(const aVector,bVector: TVMCLVector4s; out Normal: TVMCLVector4s); register; assembler;// slow againts x64
-procedure VectorsNormal_3d_SSEu(const aVector,bVector: TVMCLVector3d; out Normal: TVMCLVector3d); register; assembler;// slow againts x64
-procedure VectorsNormal_3d_SSEa(const aVector,bVector: TVMCLVector3d; out Normal: TVMCLVector3d); register; assembler;// slow againts x64
-procedure VectorsNormal_4d_SSEu(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler;// slow againts x64
-procedure VectorsNormal_4d_SSEa(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler;// slow againts x64
+procedure VectorsNormal_3s_SSEua(const aVector,bVector: TVMCLVector3s; out Normal: TVMCLVector3s); register; assembler;
+procedure VectorsNormal_4s_SSEu(const aVector,bVector: TVMCLVector4s; out Normal: TVMCLVector4s); register; assembler;
+procedure VectorsNormal_4s_SSEa(const aVector,bVector: TVMCLVector4s; out Normal: TVMCLVector4s); register; assembler;
+procedure VectorsNormal_3d_SSEu(const aVector,bVector: TVMCLVector3d; out Normal: TVMCLVector3d); register; assembler;
+procedure VectorsNormal_3d_SSEa(const aVector,bVector: TVMCLVector3d; out Normal: TVMCLVector3d); register; assembler;
+procedure VectorsNormal_4d_SSEu(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler;
+procedure VectorsNormal_4d_SSEa(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
@@ -27,7 +31,9 @@ procedure VectorsNormal_SSE(const aVector,bVector: TVMCLVector3d; out Normal: TV
 procedure VectorsNormal_SSE(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler; overload;
 
 //------------------------------------------------------------------------------
-
+{$IFDEF DevelMsgs}
+  {$MESSAGE 'Mark as platform in x64'}
+{$ENDIF}
 procedure VectorsAntinormal_3s_SSEua(const aVector,bVector: TVMCLVector3s; out Antinormal: TVMCLVector3s); register; assembler;
 procedure VectorsAntinormal_4s_SSEu(const aVector,bVector: TVMCLVector4s; out Antinormal: TVMCLVector4s); register; assembler;
 procedure VectorsAntinormal_4s_SSEa(const aVector,bVector: TVMCLVector4s; out Antinormal: TVMCLVector4s); register; assembler;
@@ -44,19 +50,17 @@ procedure VectorsAntinormal_SSE(const aVector,bVector: TVMCLVector3d; out Antino
 procedure VectorsAntinormal_SSE(const aVector,bVector: TVMCLVector4d; out Antinormal: TVMCLVector4d); register; assembler; overload;
 
 //------------------------------------------------------------------------------
-{$IFDEF DevelMsgs}
-  {$MESSAGE 'Mark as platform in x64'}
-{$ENDIF}
-procedure VectorsAngleRad_2s_SSEua(const aVector,bVector: TVMCLVector2s; out Angle: Single); register; assembler; // slow againts x64
-procedure VectorsAngleRad_3s_SSEua(const aVector,bVector: TVMCLVector3s; out Angle: Single); register; assembler; // slow againts x64
-procedure VectorsAngleRad_4s_SSEu(const aVector,bVector: TVMCLVector4s; out Angle: Single); register; assembler;  // slow againts x64
-procedure VectorsAngleRad_4s_SSEa(const aVector,bVector: TVMCLVector4s; out Angle: Single); register; assembler;  // slow againts x64
-procedure VectorsAngleRad_2d_SSEu(const aVector,bVector: TVMCLVector2d; out Angle: Double); register; assembler;  // slow againts x64
-procedure VectorsAngleRad_2d_SSEa(const aVector,bVector: TVMCLVector2d; out Angle: Double); register; assembler;  // slow againts x64
-procedure VectorsAngleRad_3d_SSEu(const aVector,bVector: TVMCLVector3d; out Angle: Double); register; assembler;  // slow againts x64
-procedure VectorsAngleRad_3d_SSEa(const aVector,bVector: TVMCLVector3d; out Angle: Double); register; assembler;  // slow againts x64
-procedure VectorsAngleRad_4d_SSEu(const aVector,bVector: TVMCLVector4d; out Angle: Double); register; assembler;  // slow againts x64
-procedure VectorsAngleRad_4d_SSEa(const aVector,bVector: TVMCLVector4d; out Angle: Double); register; assembler;  // slow againts x64
+
+procedure VectorsAngleRad_2s_SSEua(const aVector,bVector: TVMCLVector2s; out Angle: Single); register; assembler;
+procedure VectorsAngleRad_3s_SSEua(const aVector,bVector: TVMCLVector3s; out Angle: Single); register; assembler;
+procedure VectorsAngleRad_4s_SSEu(const aVector,bVector: TVMCLVector4s; out Angle: Single); register; assembler;
+procedure VectorsAngleRad_4s_SSEa(const aVector,bVector: TVMCLVector4s; out Angle: Single); register; assembler;
+procedure VectorsAngleRad_2d_SSEu(const aVector,bVector: TVMCLVector2d; out Angle: Double); register; assembler;
+procedure VectorsAngleRad_2d_SSEa(const aVector,bVector: TVMCLVector2d; out Angle: Double); register; assembler;
+procedure VectorsAngleRad_3d_SSEu(const aVector,bVector: TVMCLVector3d; out Angle: Double); register; assembler;
+procedure VectorsAngleRad_3d_SSEa(const aVector,bVector: TVMCLVector3d; out Angle: Double); register; assembler;
+procedure VectorsAngleRad_4d_SSEu(const aVector,bVector: TVMCLVector4d; out Angle: Double); register; assembler;
+procedure VectorsAngleRad_4d_SSEa(const aVector,bVector: TVMCLVector4d; out Angle: Double); register; assembler;  
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
@@ -1878,7 +1882,7 @@ asm
     MOVUPD    XMM3, dqword ptr [Vector + 16]    //  XMM3: v3  v2
 
     SUBPD     XMM2, XMM0                        //  XMM4: (v1 - P1)(O1) (v0 - P0)(O0)
-    SUBSD     XMM3, XMM1                        //  XMM3: (v3 - P3)(O3)  (v2 - P2)(O2)
+    SUBPD     XMM3, XMM1                        //  XMM3: (v3 - P3)(O3)  (v2 - P2)(O2)
 
     MOVAPD    XMM0, XMM2                        //  XMM0: O1  O0
     MOVAPD    XMM1, XMM3                        //  XMM1: O3  O2

@@ -314,17 +314,17 @@
     // check for zero-magnitude vector
     XORPS   XMM2, XMM2                  //  XMM2: 00  00  00  00
     COMISS  XMM1, XMM2
-    JNE     @iDivision
+    JNE     @Normalize_2s_SSE_Division
 
     // magnitude is zero, set result to zero vector
     XORPS   XMM0, XMM0
-    JMP     @iRoutineEnd
+    JMP     @Normalize_2s_SSE_RoutineEnd
 
-  @iDivision:
+  @Normalize_2s_SSE_Division:
     SHUFPS  XMM1, XMM1, $00 {00000000}  //  XMM1:  M     M     M     M
     DIVPS   XMM0, XMM1                  //  XMM0: **    **   a1/M  a0/M
 
-  @iRoutineEnd:
+  @Normalize_2s_SSE_RoutineEnd:
                                         //  XMM0: **  **  R1  R0
 {$ENDIF}
 
@@ -369,16 +369,16 @@
     // check for zero-magnitude vector
     XORPS   XMM2, XMM2      //  XMM2: 00  00  00  00
     COMISS  XMM1, XMM2
-    JNE     @iDivision
+    JNE     @Normalize_4s_SSE_Division
 
     // magnitude is zero, set result to zero vector
     XORPS   XMM0, XMM0
-    JMP     @iRoutineEnd
+    JMP     @Normalize_4s_SSE_RoutineEnd
 
-  @iDivision:
+  @Normalize_4s_SSE_Division:
     DIVPS   XMM0, XMM1      //  XMM0:  a3/M   a2/M    a1/M    a0/M
 
-  @iRoutineEnd:
+  @Normalize_4s_SSE_RoutineEnd:
                             //  XMM0:   R3     R2      R1      R0
 {$ENDIF}
 
@@ -421,16 +421,16 @@
     // check for zero-magnitude vector
     XORPD   XMM2, XMM2       //  XMM2: 00  00
     COMISD  XMM1, XMM2
-    JNE     @iDivision
+    JNE     @Normalize_2d_SSE_Division
 
     // magnitude is zero, set result to zero vector
     XORPD   XMM0, XMM0
-    JMP     @iRoutineEnd
+    JMP     @Normalize_2d_SSE_RoutineEnd
 
-  @iDivision:
+  @Normalize_2d_SSE_Division:
     DIVPD   XMM0, XMM1      //  XMM0:   a1/M    a0/M
 
-  @iRoutineEnd:
+  @Normalize_2d_SSE_RoutineEnd:
                             //  XMM0:    R1      R0
 {$ENDIF}
 
@@ -481,18 +481,18 @@
     // check for zero-magnitude vector
     XORPD   XMM3, XMM3      //  XMM3: 00  00
     COMISD  XMM2, XMM3
-    JNE     @iDivision
+    JNE     @Normalize_4d_SSE_Division
 
     // magnitude is zero, set result to zero vector
     XORPD   XMM0, XMM0
     XORPD   XMM1, XMM1
-    JMP     @iRoutineEnd
+    JMP     @Normalize_4d_SSE_RoutineEnd
 
-  @iDivision:
+  @Normalize_4d_SSE_Division:
     DIVPD   XMM0, XMM2      //  XMM0:   a1/M    a0/M
     DIVPD   XMM1, XMM2      //  XMM1:   a3/M    a2/M
 
-  @iRoutineEnd:
+  @Normalize_4d_SSE_RoutineEnd:
                             //  XMM0:    R1      R0
                             //  XMM1:    R3      R2
 {$ENDIF}
@@ -595,17 +595,17 @@
     // clip value to <-1,1>
     FLD1                    //  ST0: 1.0      ST1:  param
     FCOMI   ST(0), ST(1)
-    JB      @ClipParam
+    JB      @ArcCosRad_1_x87_ClipParam
     FCHS                    //  ST0: -1.0     ST1:  param
     FCOMI   ST(0), ST(1)
-    JA      @ClipParam
-    JMP     @Calculation
+    JA      @ArcCosRad_1_x87_ClipParam
+    JMP     @ArcCosRad_1_x87_Calculation
 
-  @ClipParam:
+  @ArcCosRad_1_x87_ClipParam:
     FXCH                    //  ST0: **       ST1:  +/-1.0
 
     // ArcCos calculation
-  @Calculation:
+  @ArcCosRad_1_x87_Calculation:
     FSTP    ST(0)           //  ST0:  param
     FLD     ST(0)           //  ST0:  param                     ST1:  param
     FMUL    ST(0), ST(0)    //  ST0:  (param * param)           ST1:  param
@@ -642,17 +642,17 @@
     // clip value to <-1,1>
     FLD1                    //  ST0: 1.0      ST1:  param
     FCOMI   ST(0), ST(1)
-    JB      @ClipParam
+    JB      @ArcCosDeg_1_x87_ClipParam
     FCHS                    //  ST0: -1.0     ST1:  param
     FCOMI   ST(0), ST(1)
-    JA      @ClipParam
-    JMP     @Calculation
+    JA      @ArcCosDeg_1_x87_ClipParam
+    JMP     @ArcCosDeg_1_x87_Calculation
 
-  @ClipParam:
+  @ArcCosDeg_1_x87_ClipParam:
     FXCH                    //  ST0: **       ST1:  +/-1.0
 
     // ArcCos calculation
-  @Calculation:
+  @ArcCosDeg_1_x87_Calculation:
     FSTP    ST(0)           //  ST0:  param
     FLD     ST(0)           //  ST0:  param                     ST1:  param
     FMUL    ST(0), ST(0)    //  ST0:  (param * param)           ST1:  param
@@ -718,13 +718,13 @@
     // check for zero BB dot product
     XORPS     XMM3, XMM3                        //  XMM3: 00  00  00  00
     COMISS    XMM2, XMM3
-    JNE       @Continue
+    JNE       @VectorsProjection_2s_SSE_Continue
 
     // BB dot product is zero, set result to zero vector
     MOVAPS    XMM0, XMM3                        //  XMM0: 00  00  00  00
     JMP       @StoreResult
 
-  @Continue:
+  @VectorsProjection_2s_SSE_Continue:
 
     DIVSS     XMM1, XMM2                        //  XMM1: **  **  **  (VB_DP / BB_DP)(D)
     SHUFPS    XMM1, XMM1, $00 {00000000}        //  XMM1: D   D   D   D
@@ -786,7 +786,7 @@
     // check for zero BB dot product
     XORPS     XMM3, XMM3                        //  XMM3: 00  00  00  00
     COMISS    XMM2, XMM3
-    JNE       @Continue
+    JNE       @VectorsProjection_4s_SSE_Continue
 
     // BB dot product is zero, set result to zero vector
     MOVAPS    XMM0, XMM3                        //  XMM0: 00  00  00  00
@@ -795,8 +795,7 @@
   {$ENDIF}
     JMP       @StoreResult
 
-  @Continue:
-
+  @VectorsProjection_4s_SSE_Continue:
     // all four entries in XMM1 contains the same value
     DIVPS     XMM1, XMM2                        //  XMM1: --  --  --  (VB_DP / BB_DP)(D)
 
@@ -849,13 +848,13 @@
     // check for zero BB dot product
     XORPD     XMM3, XMM3                        //  XMM3: 00  00
     COMISD    XMM2, XMM3
-    JNE       @Continue
+    JNE       @VectorsProjection_2d_SSE_Continue
 
     // BB dot product is zero, set result to zero vector
     MOVAPD    XMM0, XMM3                        //  XMM0: 00  00
     JMP       @StoreResult
 
-  @Continue:
+  @VectorsProjection_2d_SSE_Continue:
 
     // both entries in XMM1 contains the same value
     DIVPD     XMM1, XMM2                        //  XMM1: --  (VB_DP / BB_DP)(D)
@@ -924,17 +923,17 @@
     // check for zero BB dot product
     XORPD     XMM3, XMM3                        //  XMM3: 00  00
     COMISD    XMM4, XMM3
-    JNE       @Continue
+    JNE       @VectorsProjection_4d_SSE_Continue
 
     // BB dot product is zero, set result to zero vector
     MOVAPD    XMM0, XMM3                        //  XMM0: 00  00
     MOVAPD    XMM1, XMM3                        //  XMM1: 00  00
   {$IFDEF FunctionVariantXYZ}
-    MOVAPD    XMM5, XMM3                        //  XMM2: 00  00
+    MOVAPD    XMM5, XMM3                        //  XMM5: 00  00
   {$ENDIF}
     JMP       @StoreResult
 
-  @Continue:
+  @VectorsProjection_4d_SSE_Continue:
 
     DIVSD     XMM2, XMM4                        //  XMM2: **  (VB_DP / BB_DP)(D)
     // both entries of XMM2 contains the same value after this instruction
