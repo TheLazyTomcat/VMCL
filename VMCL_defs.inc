@@ -186,7 +186,7 @@
 
   Not defined by default.
 }
-{.$DEFINE MatricesUnwindLoops}
+{$DEFINE MatricesUnwindLoops}
 
 //= Do not touch following =====================================================
 

@@ -39,7 +39,7 @@ uses
   SysUtils,
   VMCL_Common,
   VMCL_Tests_Common, VMCL_Tests_Vectors, VMCL_Tests_Matrices,
-  VMCL_Tests_Vectors_SSE;
+  VMCL_Tests_Vectors_SSE, VMCL_Tests_Matrices_SSE;
 
 //= Main procedure implemntation ===============================================
 
@@ -92,8 +92,8 @@ try
   WriteLn(Format('  %s MatricesUnwindLoops',         [BoolToMark(infMatricesUnwindLoops in VMCL_InfoSet)]));
   repeat
     SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
-      [Vectors_Main,Matrices_Main,Vectors_SSE_Main],
-      ['Vectors','Matrices','Vectors SSE']);
+      [Vectors_Main,Matrices_Main,Vectors_SSE_Main,Matrices_SSE_Main],
+      ['Vectors','Matrices','Vectors SSE','Matrices SSE']);
   until (SelectResult = VMCL_RESULT_BACK) or (SelectResult = VMCL_RESULT_EXIT);
 except
   on E: Exception do
