@@ -14,7 +14,7 @@ var
   StopCnt:        Int64;
   nSSECnt:        Int64;
 begin
-QueryPerformanceFrequency(Freq);
+QueryPerformanceFrequency({%H-}Freq);
 WriteLn;
 WriteLn(LineText('VectorsOrthogonal_SSE - Speed tests'));
 WriteLn;
@@ -34,10 +34,10 @@ try
   RandomVec(v4d1^); RandomVec(v4d2^); LoadZeroVector(v4d3^);
   WriteLn;
   Write('v2s @ nonSSE:  ');
-  QueryPerformanceCounter(StartCnt);
+  QueryPerformanceCounter({%H-}StartCnt);
   For i := 1 to RepeatCount do
     v2s3^ := VectorsOrthogonal(v2s1^,v2s2^);
-  QueryPerformanceCounter(StopCnt);
+  QueryPerformanceCounter({%H-}StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
   Write(Format('v2s @ SSE(%s):  ',[BoolToMark(CheckMemAlign16(v2s1,v2s2,v2s3),'a','u')]));

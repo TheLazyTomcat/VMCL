@@ -67,6 +67,28 @@
   {$IFEND}
 {$ENDIF}
 
+//- User defined ---------------------------------------------------------------
+
+{
+  EnablePerformanceWarnings
+
+    When defined, functions that may perform badly in currently compiled mode
+    and/or platform will be marked by a hint messages.
+
+  Defined by default.
+}
+{$DEFINE EnablePerformanceWarnings}
+
+{
+  EnableDevelopmentMessages
+
+    When defined, development messages will be shown for all build modes.
+    When not defined, these messages are shown only when compiling Debug builds.
+
+  Not defined by default.
+}
+{.$DEFINE EnableDevelopmentMessages}
+
 //= Individual VMCL units defines ==============================================
 
 //- VMCL_Common ----------------------------------------------------------------
@@ -168,7 +190,11 @@
 
 //= Do not touch following =====================================================
 
-{$IFDEF Debug}
+{$IF Defined(Debug) or Defined(EnableDevelopmentMessages)}
   {$DEFINE DevelMsgs}
-{$ENDIF}
+{$IFEND}
+
+{$IF Defined(EnablePerformanceWarnings) and Defined(x64)}
+  {$DEFINE PerfWarn_x64}
+{$IFEND}
 

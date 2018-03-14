@@ -376,10 +376,10 @@
     JMP     @Normalize_4s_SSE_RoutineEnd
 
   @Normalize_4s_SSE_Division:
-    DIVPS   XMM0, XMM1      //  XMM0:  a3/M   a2/M    a1/M    a0/M
+    DIVPS   XMM0, XMM1      //  XMM0: a3/M    a2/M    a1/M    a0/M
 
   @Normalize_4s_SSE_RoutineEnd:
-                            //  XMM0:   R3     R2      R1      R0
+                            //  XMM0:  R3      R2      R1      R0
 {$ENDIF}
 
 {-------------------------------------------------------------------------------

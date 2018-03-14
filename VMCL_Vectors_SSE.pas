@@ -7,47 +7,61 @@ interface
 uses
   VMCL_Vectors;
 
-{$IFDEF DevelMsgs}
-  {$MESSAGE 'Normalization is too slow'}
-{$ENDIF}
-
 {$IFNDEF PurePascal}
-{$IFDEF DevelMsgs}
-  {$MESSAGE 'Mark as platform in x64'}
-{$ENDIF}
+
 procedure VectorsNormal_3s_SSEua(const aVector,bVector: TVMCLVector3s; out Normal: TVMCLVector3s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_3s_SSEua is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_4s_SSEu(const aVector,bVector: TVMCLVector4s; out Normal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_4s_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_4s_SSEa(const aVector,bVector: TVMCLVector4s; out Normal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_4s_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_3d_SSEu(const aVector,bVector: TVMCLVector3d; out Normal: TVMCLVector3d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_3d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_3d_SSEa(const aVector,bVector: TVMCLVector3d; out Normal: TVMCLVector3d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_3d_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_4d_SSEu(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_4d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_4d_SSEa(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_4d_SSEa is slower than pascal implementation.'}{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VectorsNormal_SSE(const aVector,bVector: TVMCLVector3s; out Normal: TVMCLVector3s); overload; {$IFDEF CanInline} inline;{$ENDIF}
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_SSE(const aVector,bVector: TVMCLVector4s; out Normal: TVMCLVector4s); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_SSE(const aVector,bVector: TVMCLVector3d; out Normal: TVMCLVector3d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsNormal_SSE(const aVector,bVector: TVMCLVector4d; out Normal: TVMCLVector4d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsNormal_SSE is slower than pascal implementation.'}{$ENDIF}
 
 //------------------------------------------------------------------------------
-{$IFDEF DevelMsgs}
-  {$MESSAGE 'Mark as platform in x64'}
-{$ENDIF}
+
 procedure VectorsAntinormal_3s_SSEua(const aVector,bVector: TVMCLVector3s; out Antinormal: TVMCLVector3s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_3s_SSEua is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_4s_SSEu(const aVector,bVector: TVMCLVector4s; out Antinormal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_4s_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_4s_SSEa(const aVector,bVector: TVMCLVector4s; out Antinormal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_4s_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_3d_SSEu(const aVector,bVector: TVMCLVector3d; out Antinormal: TVMCLVector3d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_3d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_3d_SSEa(const aVector,bVector: TVMCLVector3d; out Antinormal: TVMCLVector3d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_3d_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_4d_SSEu(const aVector,bVector: TVMCLVector4d; out Antinormal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_4d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_4d_SSEa(const aVector,bVector: TVMCLVector4d; out Antinormal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_4d_SSEa is slower than pascal implementation.'}{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VectorsAntinormal_SSE(const aVector,bVector: TVMCLVector3s; out Antinormal: TVMCLVector3s); overload; {$IFDEF CanInline} inline;{$ENDIF}
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_SSE(const aVector,bVector: TVMCLVector4s; out Antinormal: TVMCLVector4s); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_SSE(const aVector,bVector: TVMCLVector3d; out Antinormal: TVMCLVector3d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsAntinormal_SSE(const aVector,bVector: TVMCLVector4d; out Antinormal: TVMCLVector4d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsAntinormal_SSE is slower than pascal implementation.'}{$ENDIF}
 
 //------------------------------------------------------------------------------
 
@@ -72,9 +86,7 @@ procedure VectorsAngleRad_SSE(const aVector,bVector: TVMCLVector3d; out Angle: D
 procedure VectorsAngleRad_SSE(const aVector,bVector: TVMCLVector4d; out Angle: Double); register; assembler; overload;
 
 //------------------------------------------------------------------------------
-{$IFDEF DevelMsgs}
-  {$MESSAGE 'Make zero-vector comparison sooner'}
-{$ENDIF}  
+ 
 procedure VectorsProjection_2s_SSEua(const Base,Vector: TVMCLVector2s; out Projection: TVMCLVector2s); register; assembler;
 procedure VectorsProjection_3s_SSEua(const Base,Vector: TVMCLVector3s; out Projection: TVMCLVector3s); register; assembler;
 procedure VectorsProjection_4s_SSEu(const Base,Vector: TVMCLVector4s; out Projection: TVMCLVector4s); register; assembler;
@@ -132,30 +144,52 @@ procedure VectorsOrthogonalXYZ_SSE(const Base,Vector: TVMCLVector4d; out Orthogo
 //------------------------------------------------------------------------------
 
 procedure VectorsOrthonormal_2s_SSEua(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_2s_SSEua is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_3s_SSEua(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_3s_SSEua is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_4s_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_4s_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormalXYZ_4s_SSEu(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormalXYZ_4s_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormalXYZ_4s_SSEa(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormalXYZ_4s_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_2d_SSEu(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_2d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_2d_SSEa(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_2d_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_3d_SSEu(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_3d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_3d_SSEa(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_3d_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_4d_SSEu(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_4d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_4d_SSEa(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_4d_SSEa is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormalXYZ_4d_SSEu(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormalXYZ_4d_SSEu is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormalXYZ_4d_SSEa(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormalXYZ_4d_SSEa is slower than pascal implementation.'}{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector2s; out Orthonormal: TVMCLVector2s); overload; {$IFDEF CanInline} inline;{$ENDIF}
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector3s; out Orthonormal: TVMCLVector3s); overload; {$IFDEF CanInline} inline;{$ENDIF}
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormalXYZ_SSE(const Base,Vector: TVMCLVector4s; out Orthonormal: TVMCLVector4s); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormalXYZ_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector2d; out Orthonormal: TVMCLVector2d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector3d; out Orthonormal: TVMCLVector3d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormal_SSE(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormal_SSE is slower than pascal implementation.'}{$ENDIF}
 procedure VectorsOrthonormalXYZ_SSE(const Base,Vector: TVMCLVector4d; out Orthonormal: TVMCLVector4d); register; assembler; overload;
+  {$IFDEF PerfWarn_x64}{$MESSAGE HINT 'Function VectorsOrthonormalXYZ_SSE is slower than pascal implementation.'}{$ENDIF}
 
 {$ENDIF PurePascal}
 
