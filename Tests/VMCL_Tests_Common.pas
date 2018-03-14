@@ -30,12 +30,25 @@ unit VMCL_Tests_Common;
 interface
 
 uses
+  AuxTypes,
   VMCL_Vectors, VMCL_Matrices;
 
 type
   TVMCLTestFunction = Function(AutoTest: Boolean = False): Integer;
 
+  TVMCLCounters = packed record
+    StartLo,StartHi:  UInt32;
+    StopLo,StopHi:    UInt32;
+  end;
+  PVMCLCounters = ^TVMCLCounters;
+
+  TVMCLPrecisionTests = record
+    Counters:     TVMCLCounters;
+    FunctionAddr: Pointer;
+  end;
+
 Function BoolToMark(Value: Boolean; MarkTrue: String = '+'; MarkFalse: String = '-'): String;
+Function PrecisionTestsTicks(Data: TVMCLPrecisionTests): UInt64;
 
 Function Splitter(SplitterChar: Char = '-'; Count: Integer = 64): String;
 Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 64): String;
@@ -49,7 +62,6 @@ const
 
 Function Prompt(Min,Max: Integer): Integer;
 Function Select(Caption, Text: String; Functions: array of TVMCLTestFunction; Tests: array of String; AutoTest: Boolean = False): Integer;
-
 
 //= Vectors randomization ======================================================
 
@@ -101,6 +113,14 @@ If Value then
   Result := MarkTrue
 else
   Result := MarkFalse;
+end;
+
+//------------------------------------------------------------------------------
+
+Function PrecisionTestsTicks(Data: TVMCLPrecisionTests): UInt64;
+begin
+Result := ((UInt64(Data.Counters.StopHi) shl 32) or Data.Counters.StopLo) -
+          ((UInt64(Data.Counters.StartHi) shl 32) or Data.Counters.StartLo);
 end;
 
 //------------------------------------------------------------------------------
@@ -484,23 +504,23 @@ asm
 {$ENDIF}  
 end;
 WriteLn;
-WriteLn('XMM0  ' + VecToStr(Buff[0]));
-WriteLn('XMM1  ' + VecToStr(Buff[1]));
-WriteLn('XMM2  ' + VecToStr(Buff[2]));
-WriteLn('XMM3  ' + VecToStr(Buff[3]));
-WriteLn('XMM4  ' + VecToStr(Buff[4]));
-WriteLn('XMM5  ' + VecToStr(Buff[5]));
-WriteLn('XMM6  ' + VecToStr(Buff[6]));
-WriteLn('XMM7  ' + VecToStr(Buff[7]));
+WriteLn('XMM0:  ' + VecToStr(Buff[0]));
+WriteLn('XMM1:  ' + VecToStr(Buff[1]));
+WriteLn('XMM2:  ' + VecToStr(Buff[2]));
+WriteLn('XMM3:  ' + VecToStr(Buff[3]));
+WriteLn('XMM4:  ' + VecToStr(Buff[4]));
+WriteLn('XMM5:  ' + VecToStr(Buff[5]));
+WriteLn('XMM6:  ' + VecToStr(Buff[6]));
+WriteLn('XMM7:  ' + VecToStr(Buff[7]));
 {$IFDEF x64}
-WriteLn('XMM8  ' + VecToStr(Buff[8]));
-WriteLn('XMM9  ' + VecToStr(Buff[9]));
-WriteLn('XMM10 ' + VecToStr(Buff[10]));
-WriteLn('XMM11 ' + VecToStr(Buff[11]));
-WriteLn('XMM12 ' + VecToStr(Buff[12]));
-WriteLn('XMM13 ' + VecToStr(Buff[13]));
-WriteLn('XMM14 ' + VecToStr(Buff[14]));
-WriteLn('XMM15 ' + VecToStr(Buff[15]));
+WriteLn('XMM8:  ' + VecToStr(Buff[8]));
+WriteLn('XMM9:  ' + VecToStr(Buff[9]));
+WriteLn('XMM10: ' + VecToStr(Buff[10]));
+WriteLn('XMM11: ' + VecToStr(Buff[11]));
+WriteLn('XMM12: ' + VecToStr(Buff[12]));
+WriteLn('XMM13: ' + VecToStr(Buff[13]));
+WriteLn('XMM14: ' + VecToStr(Buff[14]));
+WriteLn('XMM15: ' + VecToStr(Buff[15]));
 {$ENDIF}
 asm
   MOVUPD  XMM0, dqword ptr [Buff]
@@ -555,23 +575,23 @@ asm
 {$ENDIF}
 end;
 WriteLn;
-WriteLn('XMM0  ' + VecToStr(Buff[0]));
-WriteLn('XMM1  ' + VecToStr(Buff[1]));
-WriteLn('XMM2  ' + VecToStr(Buff[2]));
-WriteLn('XMM3  ' + VecToStr(Buff[3]));
-WriteLn('XMM4  ' + VecToStr(Buff[4]));
-WriteLn('XMM5  ' + VecToStr(Buff[5]));
-WriteLn('XMM6  ' + VecToStr(Buff[6]));
-WriteLn('XMM7  ' + VecToStr(Buff[7]));
+WriteLn('XMM0:  ' + VecToStr(Buff[0]));
+WriteLn('XMM1:  ' + VecToStr(Buff[1]));
+WriteLn('XMM2:  ' + VecToStr(Buff[2]));
+WriteLn('XMM3:  ' + VecToStr(Buff[3]));
+WriteLn('XMM4:  ' + VecToStr(Buff[4]));
+WriteLn('XMM5:  ' + VecToStr(Buff[5]));
+WriteLn('XMM6:  ' + VecToStr(Buff[6]));
+WriteLn('XMM7:  ' + VecToStr(Buff[7]));
 {$IFDEF x64}
-WriteLn('XMM8  ' + VecToStr(Buff[8]));
-WriteLn('XMM9  ' + VecToStr(Buff[9]));
-WriteLn('XMM10 ' + VecToStr(Buff[10]));
-WriteLn('XMM11 ' + VecToStr(Buff[11]));
-WriteLn('XMM12 ' + VecToStr(Buff[12]));
-WriteLn('XMM13 ' + VecToStr(Buff[13]));
-WriteLn('XMM14 ' + VecToStr(Buff[14]));
-WriteLn('XMM15 ' + VecToStr(Buff[15]));
+WriteLn('XMM8:  ' + VecToStr(Buff[8]));
+WriteLn('XMM9: ' + VecToStr(Buff[9]));
+WriteLn('XMM10: ' + VecToStr(Buff[10]));
+WriteLn('XMM11: ' + VecToStr(Buff[11]));
+WriteLn('XMM12: ' + VecToStr(Buff[12]));
+WriteLn('XMM13: ' + VecToStr(Buff[13]));
+WriteLn('XMM14: ' + VecToStr(Buff[14]));
+WriteLn('XMM15: ' + VecToStr(Buff[15]));
 {$ENDIF}
 asm
   MOVUPD  XMM0, dqword ptr [Buff]

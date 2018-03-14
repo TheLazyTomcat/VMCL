@@ -27,7 +27,7 @@ unit VMCL_Tests_Main;
 
 {$INCLUDE '..\VMCL_defs.inc'}
 
-{$DEFINE Testing}
+{.$DEFINE DeterministicRnd}
 
 interface
 
@@ -38,7 +38,8 @@ implementation
 uses
   SysUtils,
   VMCL_Common,
-  VMCL_Tests_Common, VMCL_Tests_Vectors, VMCL_Tests_Matrices;
+  VMCL_Tests_Common, VMCL_Tests_Vectors, VMCL_Tests_Matrices,
+  VMCL_Tests_Vectors_SSE;
 
 //= Main procedure implemntation ===============================================
 
@@ -47,7 +48,7 @@ var
   SelectResult: Integer;
 begin
 try
-{$IFDEF Testing}
+{$IFDEF DeterministicRnd}
   RandSeed := 0;
 {$ELSE}
   Randomize;
@@ -91,7 +92,8 @@ try
   WriteLn(Format('  %s MatricesUnwindLoops',         [BoolToMark(infMatricesUnwindLoops in VMCL_InfoSet)]));
   repeat
     SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
-      [Vectors_Main,Matrices_Main],['Vectors','Matrices']);
+      [Vectors_Main,Matrices_Main,Vectors_SSE_Main],
+      ['Vectors','Matrices','Vectors SSE']);
   until (SelectResult = VMCL_RESULT_BACK) or (SelectResult = VMCL_RESULT_EXIT);
 except
   on E: Exception do

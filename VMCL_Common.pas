@@ -84,10 +84,14 @@ Function CheckRange(Value: Extended; Min,Max: Extended): Boolean; overload;{$IFD
 //- Clipping (also known as clamping) value to a range -------------------------
 
 procedure Clip(var Value: Integer; Min,Max: Integer); overload;{$IFDEF CanInline} inline;{$ENDIF}
+{$IFNDEF x64}
 procedure Clip(var Value: Extended; Min,Max: Extended); overload;{$IFDEF CanInline} inline;{$ENDIF}
+{$ENDIF}
+procedure Clip(var Value: Double; Min,Max: Double); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure Clip(var Value: Single; Min,Max: Single); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-Function Clipped(Value: Integer; Min,Max: Integer): Integer; overload;//{$IFDEF CanInline} inline;{$ENDIF}
-Function Clipped(Value: Extended; Min,Max: Extended): Extended; overload;//{$IFDEF CanInline} inline;{$ENDIF}
+Function Clipped(Value: Integer; Min,Max: Integer): Integer; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function Clipped(Value: Extended; Min,Max: Extended): Extended; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 //- Formatting types, constants and functions ----------------------------------
 
@@ -192,8 +196,24 @@ If Value < Min then Value := Min else
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
-
+{$IFNDEF x64}
 procedure Clip(var Value: Extended; Min,Max: Extended);
+begin
+If Value < Min then Value := Min else
+  If Value > Max then Value := Max;
+end;
+{$ENDIF}
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Clip(var Value: Double; Min,Max: Double);
+begin
+If Value < Min then Value := Min else
+  If Value > Max then Value := Max;
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Clip(var Value: Single; Min,Max: Single);
 begin
 If Value < Min then Value := Min else
   If Value > Max then Value := Max;

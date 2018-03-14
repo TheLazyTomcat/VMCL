@@ -38,7 +38,7 @@ unit VMCL_Alloc;
 interface
 
 uses
-  SyncObjs, Contnrs,
+  SyncObjs, Contnrs, {$IFNDEF FPC}Types, Classes,{$ENDIF}
   BitVector, AuxTypes,
   VMCL_Vectors, VMCL_Matrices;
 
@@ -86,7 +86,6 @@ type
     property Memory: Pointer read fMemory;
     property Allocated[Index: Integer]: Boolean read GetAllocated;
     property Blocks[Index: Integer]: Pointer read GetBlock; default;
-  published
     property BlockSize: TMemSize read fBlockSize;
     property Alignment: TVMCLMemoryAlignment read fAlignment;
     property Size: TMemSize read fSize;
@@ -132,7 +131,6 @@ type
     Function AlignedAllocate(Size: TMemSize): Pointer; virtual;
     procedure AlignedFree(Ptr: Pointer; Size: TMemSize); virtual;
     property Segments[Index: Integer]: TVMCLMemorySegment read GetSegment;
-  published
     property GrowMode: TVMCLMemoryManagerGrowMode read fGrowMode;
     property MinSegmentSize: TMemSize read fMinSegmentSize;
     property Alignment: TVMCLMemoryAlignment read fAlignment;
