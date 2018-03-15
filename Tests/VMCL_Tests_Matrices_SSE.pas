@@ -10,12 +10,50 @@ implementation
 
 uses
   SysUtils, Windows,
-  VMCL_Alloc, VMCL_Matrices, VMCL_Matrices_SSE,
+  VMCL_Common, VMCL_Alloc, VMCL_Matrices, VMCL_Matrices_SSE,
   VMCL_Tests_Common;
+
+//- Helpers for high-precision speed tests -------------------------------------
+var
+  PrecisionTest:  TVMCLPrecisionTests;
+
+procedure Vector_SpeedTestCaller_Empty; register; assembler;
+asm
+{$DEFINE EmptyCall}
+{$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
+{$UNDEF EmptyCall}
+end;
+
+//--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
+
+procedure Vector_SpeedTestCaller_2P(A,B: Pointer); register; assembler;
+asm
+{$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
+end;
+
+//--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
+
+procedure Vector_SpeedTestCaller_2P_R(A,B: Pointer); register; assembler;
+asm
+{$IFDEF x64}
+    XCHG  A, B    // A = orig B   B = orig A
+{$ENDIF}
+{$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
+end;
+
+//------------------------------------------------------------------------------
 
 // testing routines
 {$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Man.inc'}
 {$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Man.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Auto.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Auto.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Spd.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Spd.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Prec.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Prec.inc'}
+
+{$INCLUDE '.\test_routines_mat_sse\Matrix_TransposeRM_SSE_Prec.inc'}
 
 //==============================================================================
 
@@ -28,19 +66,19 @@ var
   nSSECnt:  Int64;
   i:        Integer;
   mat1:     TMatrix4RMs;
-  mat2:     TMatrix4RMd;
+  mat2:     TMatrix4RMs;
 begin
 // check validity
 RandomMat(mat1); RandomMat(mat2);
 WriteLn(MatToStr(mat1));
-WriteLn('nSSE: '); WriteLn(MatToStr(Matrix4d(mat1)));
-PrecisionConversion_SSE(mat1,mat2);
+WriteLn('nSSE: '); WriteLn(MatToStr(Transposed(mat1)));
+Transpose_SSE(mat1,mat2);
 WriteLn(' SSE: '); WriteLn(MatToStr(mat2));
 // non-sse call
 QueryPerformanceCounter({%H-}StartCnt);
 For i := 1 to RepCount do
   begin
-    mat2 := Matrix4d(mat1);
+    mat2 := Transposed(mat1);
   end;
 QueryPerformanceCounter({%H-}EndCnt);
 WriteLn('nSSE: ',EndCnt - StartCnt);
@@ -49,7 +87,7 @@ nSSECnt := EndCnt - StartCnt;
 QueryPerformanceCounter(StartCnt);
 For i := 1 to RepCount do
   begin
-    PrecisionConversion_SSE(mat1,mat2);
+    Transpose_SSE(mat1,mat2);
   end;
 QueryPerformanceCounter(EndCnt);
 Write(' SSE: ',EndCnt - StartCnt);
@@ -63,9 +101,17 @@ begin
 repeat
   Result := Select('Matrices SSE test group','Select test (X - Exit; 0 - Back; A - Autotest):',
 
-    [Matrix_PrecisionConversionRM_SSE_Man,Matrix_PrecisionConversionCM_SSE_Man],
+    [Matrix_PrecisionConversionRM_SSE_Man,Matrix_PrecisionConversionCM_SSE_Man,
+     Matrix_PrecisionConversionRM_SSE_Auto,Matrix_PrecisionConversionCM_SSE_Auto,
+     Matrix_PrecisionConversionRM_SSE_Spd,Matrix_PrecisionConversionCM_SSE_Spd,
+     Matrix_PrecisionConversionRM_SSE_Prec,Matrix_PrecisionConversionCM_SSE_Prec,
 
-    ['PrecConversion (RM) - Man','PrecConversion (CM) - Man'],
+     Matrix_TransposeRM_SSE_Prec],
+
+    ['PrecConversion (RM) - Man','PrecConversion (CM) - Man','PrecConversion (RM) - Auto','PrecConversion (CM) - Auto',
+     'PrecConversion (RM) - Spd','PrecConversion (CM) - Spd','PrecConversion (RM) - Prec','PrecConversion (CM) - Prec',
+
+     'Transpose (CM) - Prec'],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);

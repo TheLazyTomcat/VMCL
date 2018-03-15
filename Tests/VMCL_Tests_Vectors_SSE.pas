@@ -13,7 +13,7 @@ uses
   VMCL_Tests_Common,
   VMCL_Common, VMCL_Alloc, VMCL_Vectors, VMCL_Vectors_SSE;
 
-//- Helpers gor high-precision speed tests -------------------------------------
+//- Helpers for high-precision speed tests -------------------------------------
 var
   PrecisionTest:  TVMCLPrecisionTests;
 
@@ -28,6 +28,17 @@ end;
 
 procedure Vector_SpeedTestCaller_3P(A,B,C: Pointer); register; assembler;
 asm
+{$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
+end;
+
+//--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
+
+procedure Vector_SpeedTestCaller_3P_R(A,B,C: Pointer); register; assembler;
+asm
+{$IFDEF x64}
+    XCHG  A, C    // A = orig C   C = orig A
+    XCHG  B, C    // B = orig A   C = orig B
+{$ENDIF}
 {$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
 end;
 

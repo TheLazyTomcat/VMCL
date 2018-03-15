@@ -1,55 +1,48 @@
-Function Vector_VectorsAngleRad_SSE_Prec({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_PrecisionConversionCM_SSE_Prec({%H-}AutoTest: Boolean = False): Integer;
 const
-  TestCount = 1000000;
+  TestCount = 2000000;
 var
-  v2s1,v2s2:  PVector2s;
-  v3s1,v3s2:  PVector3s;
-  v4s1,v4s2:  PVector4s;
-  v2d1,v2d2:  PVector2d;
-  v3d1,v3d2:  PVector3d;
-  v4d1,v4d2:  PVector4d;
-  sRes:       Single;
-  dRes:       Double;
-  FuncPAS_2s: Function(const aVector,bVector: TVMCLVector2s): Single;
-  FuncPAS_3s: Function(const aVector,bVector: TVMCLVector3s): Single;
-  FuncPAS_4s: Function(const aVector,bVector: TVMCLVector4s): Single;
-  FuncPAS_2d: Function(const aVector,bVector: TVMCLVector2d): Double;
-  FuncPAS_3d: Function(const aVector,bVector: TVMCLVector3d): Double;
-  FuncPAS_4d: Function(const aVector,bVector: TVMCLVector4d): Double;
-  FuncASM_2s: procedure(const aVector,bVector: TVMCLVector2s; out Angle: Single);
-  FuncASM_3s: procedure(const aVector,bVector: TVMCLVector3s; out Angle: Single);
-  FuncASM_4s: procedure(const aVector,bVector: TVMCLVector4s; out Angle: Single);
-  FuncASM_2d: procedure(const aVector,bVector: TVMCLVector2d; out Angle: Double);
-  FuncASM_3d: procedure(const aVector,bVector: TVMCLVector3d; out Angle: Double);
-  FuncASM_4d: procedure(const aVector,bVector: TVMCLVector4d; out Angle: Double);
+  m2s:  PMatrix2CMs;
+  m3s:  PMatrix3CMs;
+  m4s:  PMatrix4CMs;
+  m2d:  PMatrix2CMd;
+  m3d:  PMatrix3CMd;
+  m4d:  PMatrix4CMd;
+  FuncPAS_2s: Function(const Matrix: TVMCLMatrix2CMd): TVMCLMatrix2CMs;
+  FuncPAS_3s: Function(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix3CMs;
+  FuncPAS_4s: Function(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMs;
+  FuncPAS_2d: Function(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMd;
+  FuncPAS_3d: Function(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix3CMd;
+  FuncPAS_4d: Function(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMd;
+  FuncASM_2s: procedure(const InMat: TVMCLMatrix2CMd; out OutMat: TVMCLMatrix2CMs);
+  FuncASM_3s: procedure(const InMat: TVMCLMatrix3CMd; out OutMat: TVMCLMatrix3CMs);
+  FuncASM_4s: procedure(const InMat: TVMCLMatrix4CMd; out OutMat: TVMCLMatrix4CMs);
+  FuncASM_2d: procedure(const InMat: TVMCLMatrix2CMs; out OutMat: TVMCLMatrix2CMd);
+  FuncASM_3d: procedure(const InMat: TVMCLMatrix3CMs; out OutMat: TVMCLMatrix3CMd);
+  FuncASM_4d: procedure(const InMat: TVMCLMatrix4CMs; out OutMat: TVMCLMatrix4CMd);
   i:          Integer;
   EmptyTicks: Int64;
   Ticks:      Int64;
   nSSETicks:  Int64;
 begin
-// obtain addresses of proper version of overloaded functions
-FuncPAS_2s := VMCL_Vectors.VectorsAngleRad;
-FuncPAS_3s := VMCL_Vectors.VectorsAngleRad;
-FuncPAS_4s := VMCL_Vectors.VectorsAngleRad;
-FuncPAS_2d := VMCL_Vectors.VectorsAngleRad;
-FuncPAS_3d := VMCL_Vectors.VectorsAngleRad;
-FuncPAS_4d := VMCL_Vectors.VectorsAngleRad;
-FuncASM_2s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncASM_3s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncASM_4s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncASM_2d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncASM_3d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncASM_4d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
+FuncPAS_2s := VMCL_Matrices.Matrix2s;
+FuncPAS_3s := VMCL_Matrices.Matrix3s;
+FuncPAS_4s := VMCL_Matrices.Matrix4s;
+FuncPAS_2d := VMCL_Matrices.Matrix2d;
+FuncPAS_3d := VMCL_Matrices.Matrix3d;
+FuncPAS_4d := VMCL_Matrices.Matrix4d;
+FuncASM_2s := VMCL_Matrices_SSE.PrecisionConversion_SSE;
+FuncASM_3s := VMCL_Matrices_SSE.PrecisionConversion_SSE;
+FuncASM_4s := VMCL_Matrices_SSE.PrecisionConversion_SSE;
+FuncASM_2d := VMCL_Matrices_SSE.PrecisionConversion_SSE;
+FuncASM_3d := VMCL_Matrices_SSE.PrecisionConversion_SSE;
+FuncASM_4d := VMCL_Matrices_SSE.PrecisionConversion_SSE;
 WriteLn;
-WriteLn(LineText('VectorsAngleRad_SSE - High precision speed tests'));
+WriteLn(LineText('PrecisionConversion_SSE (CM) - High precision speed tests'));
 WriteLn;
 WriteLn(TestCount,' cycles');
-VMCL_New(v2s1); VMCL_New(v2s2);
-VMCL_New(v3s1); VMCL_New(v3s2);
-VMCL_New(v4s1); VMCL_New(v4s2);
-VMCL_New(v2d1); VMCL_New(v2d2);
-VMCL_New(v3d1); VMCL_New(v3d2);
-VMCL_New(v4d1); VMCL_New(v4d2);
+VMCL_New(m2s); VMCL_New(m3s); VMCL_New(m4s);
+VMCL_New(m2d); VMCL_New(m3d); VMCL_New(m4d);
 try
   // get average empty call ticks
   WriteLn;
@@ -62,16 +55,18 @@ try
     end;
   EmptyTicks := EmptyTicks div TestCount;
   WriteLn('Empty call ticks: ',EmptyTicks);
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   WriteLn;
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncPAS_2s);
-  Write('v2s VectorsNormal:          ');
+  Write('m2d -> m2s @ nSSE:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v2s1^); RandomVec(v2s2^);
-      sRes := Vector_SpeedTestCaller_2P_S(v2s1,v2s2);
-      If not SameValue(sRes,VectorsAngleRad(v2s1^,v2s2^),1e-3) then
+      RandomMat(m2d^); RandomMat(m2s^);
+      Vector_SpeedTestCaller_2P_R(m2d,m2s);
+      If not SameMatrices(m2s^,Matrix2s(m2d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -88,12 +83,12 @@ try
 
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncASM_2s);
-  Write(Format('v2s VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v2s1,v2s2),'a','u')]));
+  Write(Format('m2d -> m2s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m2d,m2s),'a','u')]));
   For i := 1 to TestCount do
     begin
-      RandomVec(v2s1^); RandomVec(v2s2^);
-      Vector_SpeedTestCaller_3P(v2s1,v2s2,@sRes);
-      If not SameValue(sRes,VectorsAngleRad(v2s1^,v2s2^),1e-3) then
+      RandomMat(m2d^); RandomMat(m2s^);
+      Vector_SpeedTestCaller_2P(m2d,m2s);
+      If not SameMatrices(m2s^,Matrix2s(m2d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -109,13 +104,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_2s_SSEua);
-  Write('v2s VectorsNormal_2s_SSEua: ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_2CMs_SSEu);
+  Write('m2d -> m2s @ SSEu:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v2s1^); RandomVec(v2s2^);
-      Vector_SpeedTestCaller_3P(v2s1,v2s2,@sRes);
-      If not SameValue(sRes,VectorsAngleRad(v2s1^,v2s2^),1e-3) then
+      RandomMat(m2d^); RandomMat(m2s^);
+      Vector_SpeedTestCaller_2P(m2d,m2s);
+      If not SameMatrices(m2s^,Matrix2s(m2d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -129,16 +124,40 @@ try
       WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
         (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
     end;
+
+  Ticks := 0;
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_2CMs_SSEa);
+  Write('m2d -> m2s @ SSEa:   ');
+  For i := 1 to TestCount do
+    begin
+      RandomMat(m2d^); RandomMat(m2s^);
+      Vector_SpeedTestCaller_2P(m2d,m2s);
+      If not SameMatrices(m2s^,Matrix2s(m2d^),1e-6) then
+        begin
+          WriteLn('Error');
+          Ticks := 0;
+          Break{For i};
+        end
+      else Ticks := Ticks + PrecisionTestsTicks(PrecisionTest)
+    end;
+  If Ticks > 0 then
+    begin
+      Ticks := Ticks div TestCount;
+      WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
+        (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
+    end;
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   WriteLn;
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncPAS_3s);
-  Write('v3s VectorsNormal:          ');
+  Write('m3d -> m3s @ nSSE:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v3s1^); RandomVec(v3s2^);
-      sRes := Vector_SpeedTestCaller_2P_S(v3s1,v3s2);
-      If not SameValue(sRes,VectorsAngleRad(v3s1^,v3s2^),1e-3) then
+      RandomMat(m3d^); RandomMat(m3s^);
+      Vector_SpeedTestCaller_2P_R(m3d,m3s);
+      If not SameMatrices(m3s^,Matrix3s(m3d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -155,12 +174,12 @@ try
 
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncASM_3s);
-  Write(Format('v3s VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v3s1,v3s2),'a','u')]));
+  Write(Format('m3d -> m3s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m3d,m3s),'a','u')]));
   For i := 1 to TestCount do
     begin
-      RandomVec(v3s1^); RandomVec(v3s2^);
-      Vector_SpeedTestCaller_3P(v3s1,v3s2,@sRes);
-      If not SameValue(sRes,VectorsAngleRad(v3s1^,v3s2^),1e-3) then
+      RandomMat(m3d^); RandomMat(m3s^);
+      Vector_SpeedTestCaller_2P(m3d,m3s);
+      If not SameMatrices(m3s^,Matrix3s(m3d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -176,13 +195,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_3s_SSEua);
-  Write('v3s VectorsNormal_3s_SSEua: ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_3CMs_SSEu);
+  Write('m3d -> m3s @ SSEu:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v3s1^); RandomVec(v3s2^);
-      Vector_SpeedTestCaller_3P(v3s1,v3s2,@sRes);
-      If not SameValue(sRes,VectorsAngleRad(v3s1^,v3s2^),1e-3) then
+      RandomMat(m3d^); RandomMat(m3s^);
+      Vector_SpeedTestCaller_2P(m3d,m3s);
+      If not SameMatrices(m3s^,Matrix3s(m3d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -196,16 +215,40 @@ try
       WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
         (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
     end;
+
+  Ticks := 0;
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_3CMs_SSEa);
+  Write('m3d -> m3s @ SSEa:   ');
+  For i := 1 to TestCount do
+    begin
+      RandomMat(m3d^); RandomMat(m3s^);
+      Vector_SpeedTestCaller_2P(m3d,m3s);
+      If not SameMatrices(m3s^,Matrix3s(m3d^),1e-6) then
+        begin
+          WriteLn('Error');
+          Ticks := 0;
+          Break{For i};
+        end
+      else Ticks := Ticks + PrecisionTestsTicks(PrecisionTest)
+    end;
+  If Ticks > 0 then
+    begin
+      Ticks := Ticks div TestCount;
+      WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
+        (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
+    end;
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   WriteLn;
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncPAS_4s);
-  Write('v4s VectorsNormal:          ');
+  Write('m4d -> m4s @ nSSE:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v4s1^); RandomVec(v4s2^);
-      sRes := Vector_SpeedTestCaller_2P_S(v4s1,v4s2);
-      If not SameValue(sRes,VectorsAngleRad(v4s1^,v4s2^),1e-3) then
+      RandomMat(m4d^); RandomMat(m4s^);
+      Vector_SpeedTestCaller_2P_R(m4d,m4s);
+      If not SameMatrices(m4s^,Matrix4s(m4d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -222,12 +265,12 @@ try
 
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncASM_4s);
-  Write(Format('v4s VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v4s1,v4s2),'a','u')]));
+  Write(Format('m4d -> m4s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m4d,m4s),'a','u')]));
   For i := 1 to TestCount do
     begin
-      RandomVec(v4s1^); RandomVec(v4s2^);
-      Vector_SpeedTestCaller_3P(v4s1,v4s2,@sRes);
-      If not SameValue(sRes,VectorsAngleRad(v4s1^,v4s2^),1e-3) then
+      RandomMat(m4d^); RandomMat(m4s^);
+      Vector_SpeedTestCaller_2P(m4d,m4s);
+      If not SameMatrices(m4s^,Matrix4s(m4d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -243,13 +286,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_4s_SSEu);
-  Write('v4s VectorsNormal_4s_SSEu:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_4CMs_SSEu);
+  Write('m4d -> m4s @ SSEu:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v4s1^); RandomVec(v4s2^);
-      Vector_SpeedTestCaller_3P(v4s1,v4s2,@sRes);
-      If not SameValue(sRes,VectorsAngleRad(v4s1^,v4s2^),1e-3) then
+      RandomMat(m4d^); RandomMat(m4s^);
+      Vector_SpeedTestCaller_2P(m4d,m4s);
+      If not SameMatrices(m4s^,Matrix4s(m4d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -265,13 +308,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_4s_SSEa);
-  Write('v4s VectorsNormal_4s_SSEa:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_4CMs_SSEa);
+  Write('m4d -> m4s @ SSEa:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v4s1^); RandomVec(v4s2^);
-      Vector_SpeedTestCaller_3P(v4s1,v4s2,@sRes);
-      If not SameValue(sRes,VectorsAngleRad(v4s1^,v4s2^),1e-3) then
+      RandomMat(m4d^); RandomMat(m4s^);
+      Vector_SpeedTestCaller_2P(m4d,m4s);
+      If not SameMatrices(m4s^,Matrix4s(m4d^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -285,16 +328,18 @@ try
       WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
         (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
     end;
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   WriteLn;
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncPAS_2d);
-  Write('v2d VectorsNormal:          ');
+  Write('m2s -> m2d @ nSSE:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v2d1^); RandomVec(v2d2^);
-      dRes := Vector_SpeedTestCaller_2P_D(v2d1,v2d2);
-      If not SameValue(dRes,VectorsAngleRad(v2d1^,v2d2^),1e-3) then
+      RandomMat(m2s^); RandomMat(m2d^);
+      Vector_SpeedTestCaller_2P_R(m2s,m2d);
+      If not SameMatrices(m2d^,Matrix2d(m2s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -311,12 +356,12 @@ try
 
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncASM_2d);
-  Write(Format('v2d VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v2d1,v2d2),'a','u')]));
+  Write(Format('m2s -> m2d @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m2s,m2d),'a','u')]));
   For i := 1 to TestCount do
     begin
-      RandomVec(v2d1^); RandomVec(v2d2^);
-      Vector_SpeedTestCaller_3P(v2d1,v2d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v2d1^,v2d2^),1e-3) then
+      RandomMat(m2s^); RandomMat(m2d^);
+      Vector_SpeedTestCaller_2P(m2s,m2d);
+      If not SameMatrices(m2d^,Matrix2d(m2s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -332,13 +377,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_2d_SSEu);
-  Write('v2d VectorsNormal_2d_SSEu:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_2CMd_SSEu);
+  Write('m2s -> m2d @ SSEu:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v2d1^); RandomVec(v2d2^);
-      Vector_SpeedTestCaller_3P(v2d1,v2d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v2d1^,v2d2^),1e-3) then
+      RandomMat(m2s^); RandomMat(m2d^);
+      Vector_SpeedTestCaller_2P(m2s,m2d);
+      If not SameMatrices(m2d^,Matrix2d(m2s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -354,13 +399,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_2d_SSEa);
-  Write('v2d VectorsNormal_2d_SSEa:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_2CMd_SSEa);
+  Write('m2s -> m2d @ SSEa:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v2d1^); RandomVec(v2d2^);
-      Vector_SpeedTestCaller_3P(v2d1,v2d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v2d1^,v2d2^),1e-3) then
+      RandomMat(m2s^); RandomMat(m2d^);
+      Vector_SpeedTestCaller_2P(m2s,m2d);
+      If not SameMatrices(m2d^,Matrix2d(m2s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -374,16 +419,18 @@ try
       WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
         (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
     end;
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   WriteLn;
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncPAS_3d);
-  Write('v3d VectorsNormal:          ');
+  Write('m3s -> m3d @ nSSE:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v3d1^); RandomVec(v3d2^);
-      dRes := Vector_SpeedTestCaller_2P_D(v3d1,v3d2);
-      If not SameValue(dRes,VectorsAngleRad(v3d1^,v3d2^),1e-3) then
+      RandomMat(m3s^); RandomMat(m3d^);
+      Vector_SpeedTestCaller_2P_R(m3s,m3d);
+      If not SameMatrices(m3d^,Matrix3d(m3s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -400,12 +447,12 @@ try
 
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncASM_3d);
-  Write(Format('v3d VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v3d1,v3d2),'a','u')]));
+  Write(Format('m3s -> m3d @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m3s,m3d),'a','u')]));
   For i := 1 to TestCount do
     begin
-      RandomVec(v3d1^); RandomVec(v3d2^);
-      Vector_SpeedTestCaller_3P(v3d1,v3d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v3d1^,v3d2^),1e-3) then
+      RandomMat(m3s^); RandomMat(m3d^);
+      Vector_SpeedTestCaller_2P(m3s,m3d);
+      If not SameMatrices(m3d^,Matrix3d(m3s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -421,13 +468,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_3d_SSEu);
-  Write('v3d VectorsNormal_3d_SSEu:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_3CMd_SSEu);
+  Write('m3s -> m3d @ SSEu:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v3d1^); RandomVec(v3d2^);
-      Vector_SpeedTestCaller_3P(v3d1,v3d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v3d1^,v3d2^),1e-3) then
+      RandomMat(m3s^); RandomMat(m3d^);
+      Vector_SpeedTestCaller_2P(m3s,m3d);
+      If not SameMatrices(m3d^,Matrix3d(m3s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -443,13 +490,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_3d_SSEa);
-  Write('v3d VectorsNormal_3d_SSEa:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_3CMd_SSEa);
+  Write('m3s -> m3d @ SSEa:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v3d1^); RandomVec(v3d2^);
-      Vector_SpeedTestCaller_3P(v3d1,v3d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v3d1^,v3d2^),1e-3) then
+      RandomMat(m3s^); RandomMat(m3d^);
+      Vector_SpeedTestCaller_2P(m3s,m3d);
+      If not SameMatrices(m3d^,Matrix3d(m3s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -463,16 +510,18 @@ try
       WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
         (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
     end;
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   WriteLn;
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncPAS_4d);
-  Write('v4d VectorsNormal:          ');
+  Write('m4s -> m4d @ nSSE:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v4d1^); RandomVec(v4d2^);
-      dRes := Vector_SpeedTestCaller_2P_D(v4d1,v4d2);
-      If not SameValue(dRes,VectorsAngleRad(v4d1^,v4d2^),1e-3) then
+      RandomMat(m4s^); RandomMat(m4d^);
+      Vector_SpeedTestCaller_2P_R(m4s,m4d);
+      If not SameMatrices(m4d^,Matrix4d(m4s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -489,12 +538,12 @@ try
 
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncASM_4d);
-  Write(Format('v4d VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v4d1,v4d2),'a','u')]));
+  Write(Format('m4s -> m4d @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m4s,m4d),'a','u')]));
   For i := 1 to TestCount do
     begin
-      RandomVec(v4d1^); RandomVec(v4d2^);
-      Vector_SpeedTestCaller_3P(v4d1,v4d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v4d1^,v4d2^),1e-3) then
+      RandomMat(m4s^); RandomMat(m4d^);
+      Vector_SpeedTestCaller_2P(m4s,m4d);
+      If not SameMatrices(m4d^,Matrix4d(m4s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -510,13 +559,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_4d_SSEu);
-  Write('v4d VectorsNormal_4d_SSEu:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_4CMd_SSEu);
+  Write('m4s -> m4d @ SSEu:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v4d1^); RandomVec(v4d2^);
-      Vector_SpeedTestCaller_3P(v4d1,v4d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v4d1^,v4d2^),1e-3) then
+      RandomMat(m4s^); RandomMat(m4d^);
+      Vector_SpeedTestCaller_2P(m4s,m4d);
+      If not SameMatrices(m4d^,Matrix4d(m4s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -532,13 +581,13 @@ try
     end;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(VectorsAngleRad_4d_SSEa);
-  Write('v4d VectorsNormal_4d_SSEa:  ');
+  PrecisionTest.FunctionAddr := Addr(PrecisionConversion_4CMd_SSEa);
+  Write('m4s -> m4d @ SSEa:   ');
   For i := 1 to TestCount do
     begin
-      RandomVec(v4d1^); RandomVec(v4d2^);
-      Vector_SpeedTestCaller_3P(v4d1,v4d2,@dRes);
-      If not SameValue(dRes,VectorsAngleRad(v4d1^,v4d2^),1e-3) then
+      RandomMat(m4s^); RandomMat(m4d^);
+      Vector_SpeedTestCaller_2P(m4s,m4d);
+      If not SameMatrices(m4d^,Matrix4d(m4s^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -552,13 +601,10 @@ try
       WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
         (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
     end;
+
 finally
-  VMCL_Dispose(v2s1); VMCL_Dispose(v2s2);
-  VMCL_Dispose(v3s1); VMCL_Dispose(v3s2);
-  VMCL_Dispose(v4s1); VMCL_Dispose(v4s2);
-  VMCL_Dispose(v2d1); VMCL_Dispose(v2d2);
-  VMCL_Dispose(v3d1); VMCL_Dispose(v3d2);
-  VMCL_Dispose(v4d1); VMCL_Dispose(v4d2);
+  VMCL_Dispose(m2s); VMCL_Dispose(m3s); VMCL_Dispose(m4s);
+  VMCL_Dispose(m2d); VMCL_Dispose(m3d); VMCL_Dispose(m4d);
 end;
 Result := 0;
 end;

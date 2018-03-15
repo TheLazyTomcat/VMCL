@@ -8,11 +8,13 @@ uses
   VMCL_Matrices;
 
 {$IFNDEF PurePascal}
-
-procedure PrecisionConversion_2RMs_SSEu(const InMat: TVMCLMatrix2RMd; out OutMat: TVMCLMatrix2RMs); register; assembler; // slow in d32
-procedure PrecisionConversion_2RMs_SSEa(const InMat: TVMCLMatrix2RMd; out OutMat: TVMCLMatrix2RMs); register; assembler; // slow in d32
-procedure PrecisionConversion_2CMs_SSEu(const InMat: TVMCLMatrix2CMd; out OutMat: TVMCLMatrix2CMs); register; assembler; // slow in d32
-procedure PrecisionConversion_2CMs_SSEa(const InMat: TVMCLMatrix2CMd; out OutMat: TVMCLMatrix2CMs); register; assembler; // slow in d32
+{$IFDEF DevelMsgs}
+  {$MESSAGE 'PrecisionConversion is too slow, remove.'}
+{$ENDIF}
+procedure PrecisionConversion_2RMs_SSEu(const InMat: TVMCLMatrix2RMd; out OutMat: TVMCLMatrix2RMs); register; assembler;
+procedure PrecisionConversion_2RMs_SSEa(const InMat: TVMCLMatrix2RMd; out OutMat: TVMCLMatrix2RMs); register; assembler;
+procedure PrecisionConversion_2CMs_SSEu(const InMat: TVMCLMatrix2CMd; out OutMat: TVMCLMatrix2CMs); register; assembler;
+procedure PrecisionConversion_2CMs_SSEa(const InMat: TVMCLMatrix2CMd; out OutMat: TVMCLMatrix2CMs); register; assembler;
 
 procedure PrecisionConversion_3RMs_SSEu(const InMat: TVMCLMatrix3RMd; out OutMat: TVMCLMatrix3RMs); register; assembler;
 procedure PrecisionConversion_3RMs_SSEa(const InMat: TVMCLMatrix3RMd; out OutMat: TVMCLMatrix3RMs); register; assembler;
@@ -54,6 +56,57 @@ procedure PrecisionConversion_SSE(const InMat: TVMCLMatrix3RMs; out OutMat: TVMC
 procedure PrecisionConversion_SSE(const InMat: TVMCLMatrix3CMs; out OutMat: TVMCLMatrix3CMd); register; assembler; overload;
 procedure PrecisionConversion_SSE(const InMat: TVMCLMatrix4RMs; out OutMat: TVMCLMatrix4RMd); register; assembler; overload;
 procedure PrecisionConversion_SSE(const InMat: TVMCLMatrix4CMs; out OutMat: TVMCLMatrix4CMd); register; assembler; overload;
+
+//------------------------------------------------------------------------------
+{$IFDEF DevelMsgs}
+  {$MESSAGE 'Transpose is too slow, remove.'}
+{$ENDIF}
+procedure Transpose_2RMs_SSEu(const Matrix: TVMCLMatrix2RMs; out Transposed: TVMCLMatrix2RMs); register; assembler;
+procedure Transpose_2RMs_SSEa(const Matrix: TVMCLMatrix2RMs; out Transposed: TVMCLMatrix2RMs); register; assembler;
+procedure Transpose_2CMs_SSEu(const Matrix: TVMCLMatrix2CMs; out Transposed: TVMCLMatrix2CMs); register; assembler;
+procedure Transpose_2CMs_SSEa(const Matrix: TVMCLMatrix2CMs; out Transposed: TVMCLMatrix2CMs); register; assembler;
+
+procedure Transpose_3RMs_SSEu(const Matrix: TVMCLMatrix3RMs; out Transposed: TVMCLMatrix3RMs); register; assembler;
+procedure Transpose_3RMs_SSEa(const Matrix: TVMCLMatrix3RMs; out Transposed: TVMCLMatrix3RMs); register; assembler;
+procedure Transpose_3CMs_SSEu(const Matrix: TVMCLMatrix3CMs; out Transposed: TVMCLMatrix3CMs); register; assembler;
+procedure Transpose_3CMs_SSEa(const Matrix: TVMCLMatrix3CMs; out Transposed: TVMCLMatrix3CMs); register; assembler;
+
+procedure Transpose_4RMs_SSEu(const Matrix: TVMCLMatrix4RMs; out Transposed: TVMCLMatrix4RMs); register; assembler;
+procedure Transpose_4RMs_SSEa(const Matrix: TVMCLMatrix4RMs; out Transposed: TVMCLMatrix4RMs); register; assembler;
+procedure Transpose_4CMs_SSEu(const Matrix: TVMCLMatrix4CMs; out Transposed: TVMCLMatrix4CMs); register; assembler;
+procedure Transpose_4CMs_SSEa(const Matrix: TVMCLMatrix4CMs; out Transposed: TVMCLMatrix4CMs); register; assembler;
+(*
+procedure Transpose_2RMd_SSEu(const Matrix: TVMCLMatrix2RMd; out Transposed: TVMCLMatrix2RMd); register; assembler;
+procedure Transpose_2RMd_SSEa(const Matrix: TVMCLMatrix2RMd; out Transposed: TVMCLMatrix2RMd); register; assembler;
+procedure Transpose_2CMd_SSEu(const Matrix: TVMCLMatrix2CMd; out Transposed: TVMCLMatrix2CMd); register; assembler;
+procedure Transpose_2CMd_SSEa(const Matrix: TVMCLMatrix2CMd; out Transposed: TVMCLMatrix2CMd); register; assembler;
+
+procedure Transpose_3RMd_SSEu(const Matrix: TVMCLMatrix3RMd; out Transposed: TVMCLMatrix3RMd); register; assembler;
+procedure Transpose_3RMd_SSEa(const Matrix: TVMCLMatrix3RMd; out Transposed: TVMCLMatrix3RMd); register; assembler;
+procedure Transpose_3CMd_SSEu(const Matrix: TVMCLMatrix3CMd; out Transposed: TVMCLMatrix3CMd); register; assembler;
+procedure Transpose_3CMd_SSEa(const Matrix: TVMCLMatrix3CMd; out Transposed: TVMCLMatrix3CMd); register; assembler;
+
+procedure Transpose_4RMd_SSEu(const Matrix: TVMCLMatrix4RMd; out Transposed: TVMCLMatrix4RMd); register; assembler;
+procedure Transpose_4RMd_SSEa(const Matrix: TVMCLMatrix4RMd; out Transposed: TVMCLMatrix4RMd); register; assembler;
+procedure Transpose_4CMd_SSEu(const Matrix: TVMCLMatrix4CMd; out Transposed: TVMCLMatrix4CMd); register; assembler;
+procedure Transpose_4CMd_SSEa(const Matrix: TVMCLMatrix4CMd; out Transposed: TVMCLMatrix4CMd); register; assembler;
+*)
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+procedure Transpose_SSE(const Matrix: TVMCLMatrix2RMs; out Transposed: TVMCLMatrix2RMs); register; assembler; overload;
+procedure Transpose_SSE(const Matrix: TVMCLMatrix2CMs; out Transposed: TVMCLMatrix2CMs); register; assembler; overload;
+procedure Transpose_SSE(const Matrix: TVMCLMatrix3RMs; out Transposed: TVMCLMatrix3RMs); register; assembler; overload;
+procedure Transpose_SSE(const Matrix: TVMCLMatrix3CMs; out Transposed: TVMCLMatrix3CMs); register; assembler; overload;
+procedure Transpose_SSE(const Matrix: TVMCLMatrix4RMs; out Transposed: TVMCLMatrix4RMs); register; assembler; overload;
+procedure Transpose_SSE(const Matrix: TVMCLMatrix4CMs; out Transposed: TVMCLMatrix4CMs); register; assembler; overload;
+
+//procedure Transpose_SSE(const Matrix: TVMCLMatrix2RMd; out Transposed: TVMCLMatrix2RMd); register; assembler; overload;
+//procedure Transpose_SSE(const Matrix: TVMCLMatrix2CMd; out Transposed: TVMCLMatrix2CMd); register; assembler; overload;
+//procedure Transpose_SSE(const Matrix: TVMCLMatrix3RMd; out Transposed: TVMCLMatrix3RMd); register; assembler; overload;
+//procedure Transpose_SSE(const Matrix: TVMCLMatrix3CMd; out Transposed: TVMCLMatrix3CMd); register; assembler; overload;
+//procedure Transpose_SSE(const Matrix: TVMCLMatrix4RMd; out Transposed: TVMCLMatrix4RMd); register; assembler; overload;
+//procedure Transpose_SSE(const Matrix: TVMCLMatrix4CMd; out Transposed: TVMCLMatrix4CMd); register; assembler; overload;
+
 
 {$ENDIF}
 
@@ -274,8 +327,8 @@ asm
     MOVLHPS   XMM0, XMM1                        //  XMM0: s23   s22   s21   s20
     MOVLHPS   XMM2, XMM3                        //  XMM2: s33   s32   s31   s30
 
-    MOVUPS    dqword ptr [OutMat + 32], XMM0    //  [OutMatrix + 32]: s20   s21   s22   s23
-    MOVUPS    dqword ptr [OutMat + 48], XMM2    //  [OutMatrix + 48]: s30   s31   s32   s33
+    MOVAPS    dqword ptr [OutMat + 32], XMM0    //  [OutMatrix + 32]: s20   s21   s22   s23
+    MOVAPS    dqword ptr [OutMat + 48], XMM2    //  [OutMatrix + 48]: s30   s31   s32   s33
 end;
 
 //------------------------------------------------------------------------------
@@ -327,8 +380,8 @@ asm
     MOVLHPS   XMM0, XMM1                        //  XMM0: s30   s20   s10   s00
     MOVLHPS   XMM2, XMM3                        //  XMM2: s31   s21   s11   s01
 
-    MOVUPS    dqword ptr [OutMat], XMM0         //  [OutMatrix]:      s00   s10   s20   s30
-    MOVUPS    dqword ptr [OutMat + 16], XMM2    //  [OutMatrix + 16]: s01   s11   s21   s31
+    MOVAPS    dqword ptr [OutMat], XMM0         //  [OutMatrix]:      s00   s10   s20   s30
+    MOVAPS    dqword ptr [OutMat + 16], XMM2    //  [OutMatrix + 16]: s01   s11   s21   s31
 
     CVTPD2PS  XMM0, dqword ptr [InMat + 64]     //  XMM0: 00    00    s12   s02
     CVTPD2PS  XMM1, dqword ptr [InMat + 80]     //  XMM1: 00    00    s32   s22
@@ -338,8 +391,8 @@ asm
     MOVLHPS   XMM0, XMM1                        //  XMM0: s32   s22   s12   s02
     MOVLHPS   XMM2, XMM3                        //  XMM2: s33   s23   s13   s03
 
-    MOVUPS    dqword ptr [OutMat + 32], XMM0    //  [OutMatrix + 32]: s02   s12   s22   s32
-    MOVUPS    dqword ptr [OutMat + 48], XMM2    //  [OutMatrix + 48]: s03   s13   s23   s33
+    MOVAPS    dqword ptr [OutMat + 32], XMM0    //  [OutMatrix + 32]: s02   s12   s22   s32
+    MOVAPS    dqword ptr [OutMat + 48], XMM2    //  [OutMatrix + 48]: s03   s13   s23   s33
 end;
 
 //------------------------------------------------------------------------------
@@ -858,6 +911,375 @@ asm
 
   @Unaligned:
     CALL  PrecisionConversion_4CMd_SSEu
+
+  @RoutineEnd:
+end;
+
+//==============================================================================
+
+procedure Transpose_2RMs_SSEu(const Matrix: TVMCLMatrix2RMs; out Transposed: TVMCLMatrix2RMs);
+asm
+    MOVUPS  XMM0, dqword ptr [Matrix]           //  XMM0: a11   a10   a01   a00
+
+    SHUFPS  XMM0, XMM0, $D8 {11011000}          //  XMM0: a11   a01   a10   a00
+
+    MOVUPS  dqword ptr [Transposed], XMM0       //  [Transposed]: a00   a10   a01   a11
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_2RMs_SSEa(const Matrix: TVMCLMatrix2RMs; out Transposed: TVMCLMatrix2RMs);
+asm
+    MOVAPS  XMM0, dqword ptr [Matrix]           //  XMM0: a11   a10   a01   a00
+
+    SHUFPS  XMM0, XMM0, $D8 {11011000}          //  XMM0: a11   a01   a10   a00
+
+    MOVAPS  dqword ptr [Transposed], XMM0       //  [Transposed]: a00   a10   a01   a11
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_2CMs_SSEu(const Matrix: TVMCLMatrix2CMs; out Transposed: TVMCLMatrix2CMs);
+asm
+    MOVUPS  XMM0, dqword ptr [Matrix]           //  XMM0: a11   a01   a10   a00
+
+    SHUFPS  XMM0, XMM0, $D8 {11011000}          //  XMM0: a11   a10   a01   a00
+
+    MOVUPS  dqword ptr [Transposed], XMM0       //  [Transposed]: a00   a01  a10   a11
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_2CMs_SSEa(const Matrix: TVMCLMatrix2CMs; out Transposed: TVMCLMatrix2CMs);
+asm
+    MOVAPS  XMM0, dqword ptr [Matrix]           //  XMM0: a11   a01   a10   a00
+
+    SHUFPS  XMM0, XMM0, $D8 {11011000}          //  XMM0: a11   a10   a01   a00
+
+    MOVAPS  dqword ptr [Transposed], XMM0       //  [Transposed]: a00   a01  a10   a11
+end;
+
+//------------------------------------------------------------------------------
+
+// Last matrix entry (a22) does not change position in transposition, it is only copied.
+procedure Transpose_3RMs_SSEu(const Matrix: TVMCLMatrix3RMs; out Transposed: TVMCLMatrix3RMs);
+asm
+    MOVUPS  XMM0, dqword ptr [Matrix]           //  XMM0: a10   a02   a01   a00
+    MOVUPS  XMM1, dqword ptr [Matrix + 16]      //  XMM1: a21   a20   a12   a11
+    MOVSS   XMM5, dword ptr [Matrix + 32]       //  XMM5: 00    00    00    a22
+
+    SHUFPS  XMM0, XMM0, $4E {01001110}          //  XMM0: a01   a00   a10   a02
+    SHUFPS  XMM1, XMM1, $4E {01001110}          //  XMM1: a12   a11   a21   a20
+
+    MOVSS   XMM3, XMM0                          //  XMM3: **    **    **    a02
+    MOVSS   XMM0, XMM1                          //  XMM0: a01   a00   a10   a20
+    MOVSS   XMM1, XMM3                          //  XMM1: a12   a11   a21   a02
+
+    SHUFPS  XMM0, XMM0, $C6 {11000110}          //  XMM0: a01   a20   a10   a00
+    SHUFPS  XMM1, XMM1, $C6 {11000110}          //  XMM1: a12   a02   a21   a11
+
+    MOVUPS  dqword ptr [Transposed], XMM0       //  [Transposed]:       a00   a10   a20   a01
+    MOVUPS  dqword ptr [Transposed + 16], XMM1  //  [Transposed + 16]:  a11   a21   a02   a12
+    MOVSS   dword ptr [Transposed + 32], XMM5   //  [Transposed + 32]:  a22
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_3RMs_SSEa(const Matrix: TVMCLMatrix3RMs; out Transposed: TVMCLMatrix3RMs);
+asm
+    MOVAPS  XMM0, dqword ptr [Matrix]           //  XMM0: a10   a02   a01   a00
+    MOVAPS  XMM1, dqword ptr [Matrix + 16]      //  XMM1: a21   a20   a12   a11
+    MOVSS   XMM5, dword ptr [Matrix + 32]       //  XMM5: 00    00    00    a22
+
+    SHUFPS  XMM0, XMM0, $4E {01001110}          //  XMM0: a01   a00   a10   a02
+    SHUFPS  XMM1, XMM1, $4E {01001110}          //  XMM1: a12   a11   a21   a20
+
+    MOVSS   XMM3, XMM0                          //  XMM3: **    **    **    a02
+    MOVSS   XMM0, XMM1                          //  XMM0: a01   a00   a10   a20
+    MOVSS   XMM1, XMM3                          //  XMM1: a12   a11   a21   a02
+
+    SHUFPS  XMM0, XMM0, $C6 {11000110}          //  XMM0: a01   a20   a10   a00
+    SHUFPS  XMM1, XMM1, $C6 {11000110}          //  XMM1: a12   a02   a21   a11
+
+    MOVAPS  dqword ptr [Transposed], XMM0       //  [Transposed]:       a00   a10   a20   a01
+    MOVAPS  dqword ptr [Transposed + 16], XMM1  //  [Transposed + 16]:  a11   a21   a02   a12
+    MOVSS   dword ptr [Transposed + 32], XMM5   //  [Transposed + 32]:  a22
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_3CMs_SSEu(const Matrix: TVMCLMatrix3CMs; out Transposed: TVMCLMatrix3CMs);
+asm
+    MOVUPS  XMM0, dqword ptr [Matrix]           //  XMM0: a01   a20   a10   a00
+    MOVUPS  XMM1, dqword ptr [Matrix + 16]      //  XMM1: a12   a02   a21   a11
+    MOVSS   XMM5, dword ptr [Matrix + 32]       //  XMM5: 00    00    00    a22
+
+    SHUFPS  XMM0, XMM0, $4E {01001110}          //  XMM0: a10   a00   a02   a20
+    SHUFPS  XMM1, XMM1, $4E {01001110}          //  XMM1: a21   a11   a12   a02
+
+    MOVSS   XMM3, XMM0                          //  XMM3: **    **    **    a20
+    MOVSS   XMM0, XMM1                          //  XMM0: a10   a00   a01   a02
+    MOVSS   XMM1, XMM3                          //  XMM1: a21   a11   a12   a20
+
+    SHUFPS  XMM0, XMM0, $C6 {11000110}          //  XMM0: a10   a02   a01   a00
+    SHUFPS  XMM1, XMM1, $C6 {11000110}          //  XMM1: a21   a20   a12   a11
+
+    MOVUPS  dqword ptr [Transposed], XMM0       //  [Transposed]:       a00   a01   a02   a10
+    MOVUPS  dqword ptr [Transposed + 16], XMM1  //  [Transposed + 16]:  a11   a12   a20   a21
+    MOVSS   dword ptr [Transposed + 32], XMM5   //  [Transposed + 32]:  a22
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_3CMs_SSEa(const Matrix: TVMCLMatrix3CMs; out Transposed: TVMCLMatrix3CMs);
+asm
+    MOVAPS  XMM0, dqword ptr [Matrix]           //  XMM0: a01   a20   a10   a00
+    MOVAPS  XMM1, dqword ptr [Matrix + 16]      //  XMM1: a12   a02   a21   a11
+    MOVSS   XMM5, dword ptr [Matrix + 32]       //  XMM5: 00    00    00    a22
+
+    SHUFPS  XMM0, XMM0, $4E {01001110}          //  XMM0: a10   a00   a02   a20
+    SHUFPS  XMM1, XMM1, $4E {01001110}          //  XMM1: a21   a11   a12   a02
+
+    MOVSS   XMM3, XMM0                          //  XMM3: **    **    **    a20
+    MOVSS   XMM0, XMM1                          //  XMM0: a10   a00   a01   a02
+    MOVSS   XMM1, XMM3                          //  XMM1: a21   a11   a12   a20
+
+    SHUFPS  XMM0, XMM0, $C6 {11000110}          //  XMM0: a10   a02   a01   a00
+    SHUFPS  XMM1, XMM1, $C6 {11000110}          //  XMM1: a21   a20   a12   a11
+
+    MOVAPS  dqword ptr [Transposed], XMM0       //  [Transposed]:       a00   a01   a02   a10
+    MOVAPS  dqword ptr [Transposed + 16], XMM1  //  [Transposed + 16]:  a11   a12   a20   a21
+    MOVSS   dword ptr [Transposed + 32], XMM5   //  [Transposed + 32]:  a22
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_4RMs_SSEu(const Matrix: TVMCLMatrix4RMs; out Transposed: TVMCLMatrix4RMs);
+asm
+    MOVUPS    XMM0, dqword ptr [Matrix]         //  XMM0: a03   a02   a01   a00
+    MOVUPS    XMM1, dqword ptr [Matrix + 16]    //  XMM1: a13   a12   a11   a10
+    MOVUPS    XMM2, dqword ptr [Matrix + 32]    //  XMM2: a23   a22   a21   a20
+    MOVUPS    XMM3, dqword ptr [Matrix + 48]    //  XMM3: a33   a32   a31   a30
+
+    MOVAPS    XMM4, XMM0                        //  XMM4: a03   a02   a01   a00
+    MOVAPS    XMM5, XMM1                        //  XMM5: a13   a12   a11   a10
+
+    UNPCKLPS  XMM4, XMM2                        //  XMM4: a21   a01   a20   a00
+    UNPCKLPS  XMM5, XMM3                        //  XMM5: a31   a11   a30   a10
+    UNPCKHPS  XMM0, XMM2                        //  XMM0: a23   a03   a22   a02
+    UNPCKHPS  XMM1, XMM3                        //  XMM1: a33   a13   a32   a12
+
+    MOVAPS    XMM2, XMM4                        //  XMM2: a21   a01   a20   a00
+    UNPCKLPS  XMM2, XMM5                        //  XMM2: a30   a20   a10   a00
+    UNPCKHPS  XMM4, XMM5                        //  XMM4: a31   a21   a11   a01
+
+    MOVAPS    XMM3, XMM0                        //  XMM3: a23   a03   a22   a02
+    UNPCKLPS  XMM3, XMM1                        //  XMM3: a32   a22   a12   a02
+    UNPCKHPS  XMM0, XMM1                        //  XMM0: a33   a23   a13   a03 
+
+    MOVUPS    dqword ptr [Transposed], XMM2       //  [Transposed]:       a00   a10   a20   a30
+    MOVUPS    dqword ptr [Transposed + 16], XMM4  //  [Transposed + 16]:  a01   a11   a21   a31
+    MOVUPS    dqword ptr [Transposed + 32], XMM3  //  [Transposed + 32]:  a02   a12   a22   a32
+    MOVUPS    dqword ptr [Transposed + 48], XMM0  //  [Transposed + 48]:  a03   a13   a23   a33
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_4RMs_SSEa(const Matrix: TVMCLMatrix4RMs; out Transposed: TVMCLMatrix4RMs);
+asm
+    MOVAPS    XMM0, dqword ptr [Matrix]         //  XMM0: a03   a02   a01   a00
+    MOVAPS    XMM1, dqword ptr [Matrix + 16]    //  XMM1: a13   a12   a11   a10
+    MOVAPS    XMM2, dqword ptr [Matrix + 32]    //  XMM2: a23   a22   a21   a20
+    MOVAPS    XMM3, dqword ptr [Matrix + 48]    //  XMM3: a33   a32   a31   a30
+
+    MOVAPS    XMM4, XMM0                        //  XMM4: a03   a02   a01   a00
+    MOVAPS    XMM5, XMM1                        //  XMM5: a13   a12   a11   a10
+
+    UNPCKLPS  XMM4, XMM2                        //  XMM4: a21   a01   a20   a00
+    UNPCKLPS  XMM5, XMM3                        //  XMM5: a31   a11   a30   a10
+    UNPCKHPS  XMM0, XMM2                        //  XMM0: a23   a03   a22   a02
+    UNPCKHPS  XMM1, XMM3                        //  XMM1: a33   a13   a32   a12
+
+    MOVAPS    XMM2, XMM4                        //  XMM2: a21   a01   a20   a00
+    UNPCKLPS  XMM2, XMM5                        //  XMM2: a30   a20   a10   a00
+    UNPCKHPS  XMM4, XMM5                        //  XMM4: a31   a21   a11   a01
+
+    MOVAPS    XMM3, XMM0                        //  XMM3: a23   a03   a22   a02
+    UNPCKLPS  XMM3, XMM1                        //  XMM3: a32   a22   a12   a02
+    UNPCKHPS  XMM0, XMM1                        //  XMM0: a33   a23   a13   a03 
+
+    MOVAPS    dqword ptr [Transposed], XMM2       //  [Transposed]:       a00   a10   a20   a30
+    MOVAPS    dqword ptr [Transposed + 16], XMM4  //  [Transposed + 16]:  a01   a11   a21   a31
+    MOVAPS    dqword ptr [Transposed + 32], XMM3  //  [Transposed + 32]:  a02   a12   a22   a32
+    MOVAPS    dqword ptr [Transposed + 48], XMM0  //  [Transposed + 48]:  a03   a13   a23   a33
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_4CMs_SSEu(const Matrix: TVMCLMatrix4CMs; out Transposed: TVMCLMatrix4CMs);
+asm
+    MOVUPS    XMM0, dqword ptr [Matrix]         //  XMM0: a30   a20   a10   a00
+    MOVUPS    XMM1, dqword ptr [Matrix + 16]    //  XMM1: a31   a21   a11   a01
+    MOVUPS    XMM2, dqword ptr [Matrix + 32]    //  XMM2: a32   a22   a12   a02
+    MOVUPS    XMM3, dqword ptr [Matrix + 48]    //  XMM3: a33   a23   a13   a03
+
+    MOVAPS    XMM4, XMM0                        //  XMM4: a30   a20   a10   a00
+    MOVAPS    XMM5, XMM1                        //  XMM5: a31   a21   a11   a01
+
+    UNPCKLPS  XMM4, XMM2                        //  XMM4: a12   a01   a02   a00
+    UNPCKLPS  XMM5, XMM3                        //  XMM5: a13   a11   a03   a01
+    UNPCKHPS  XMM0, XMM2                        //  XMM0: a32   a30   a22   a20
+    UNPCKHPS  XMM1, XMM3                        //  XMM1: a33   a31   a23   a21
+
+    MOVAPS    XMM2, XMM4                        //  XMM2: a12   a10   a02   a00
+    UNPCKLPS  XMM2, XMM5                        //  XMM2: a03   a02   a01   a00
+    UNPCKHPS  XMM4, XMM5                        //  XMM4: a13   a12   a11   a10
+
+    MOVAPS    XMM3, XMM0                        //  XMM3: a32   a30   a22   a20
+    UNPCKLPS  XMM3, XMM1                        //  XMM3: a23   a22   a21   a20
+    UNPCKHPS  XMM0, XMM1                        //  XMM0: a33   a32   a31   a30
+
+    MOVUPS    dqword ptr [Transposed], XMM2       //  [Transposed]:       a00   a01   a02   a03
+    MOVUPS    dqword ptr [Transposed + 16], XMM4  //  [Transposed + 16]:  a10   a11   a12   a13
+    MOVUPS    dqword ptr [Transposed + 32], XMM3  //  [Transposed + 32]:  a20   a21   a22   a23
+    MOVUPS    dqword ptr [Transposed + 48], XMM0  //  [Transposed + 48]:  a30   a31   a32   a33
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_4CMs_SSEa(const Matrix: TVMCLMatrix4CMs; out Transposed: TVMCLMatrix4CMs);
+asm
+    MOVAPS    XMM0, dqword ptr [Matrix]         //  XMM0: a30   a20   a10   a00
+    MOVAPS    XMM1, dqword ptr [Matrix + 16]    //  XMM1: a31   a21   a11   a01
+    MOVAPS    XMM2, dqword ptr [Matrix + 32]    //  XMM2: a32   a22   a12   a02
+    MOVAPS    XMM3, dqword ptr [Matrix + 48]    //  XMM3: a33   a23   a13   a03
+
+    MOVAPS    XMM4, XMM0                        //  XMM4: a30   a20   a10   a00
+    MOVAPS    XMM5, XMM1                        //  XMM5: a31   a21   a11   a01
+
+    UNPCKLPS  XMM4, XMM2                        //  XMM4: a12   a01   a02   a00
+    UNPCKLPS  XMM5, XMM3                        //  XMM5: a13   a11   a03   a01
+    UNPCKHPS  XMM0, XMM2                        //  XMM0: a32   a30   a22   a20
+    UNPCKHPS  XMM1, XMM3                        //  XMM1: a33   a31   a23   a21
+
+    MOVAPS    XMM2, XMM4                        //  XMM2: a12   a10   a02   a00
+    UNPCKLPS  XMM2, XMM5                        //  XMM2: a03   a02   a01   a00
+    UNPCKHPS  XMM4, XMM5                        //  XMM4: a13   a12   a11   a10
+
+    MOVAPS    XMM3, XMM0                        //  XMM3: a32   a30   a22   a20
+    UNPCKLPS  XMM3, XMM1                        //  XMM3: a23   a22   a21   a20
+    UNPCKHPS  XMM0, XMM1                        //  XMM0: a33   a32   a31   a30
+
+    MOVAPS    dqword ptr [Transposed], XMM2       //  [Transposed]:       a00   a01   a02   a03
+    MOVAPS    dqword ptr [Transposed + 16], XMM4  //  [Transposed + 16]:  a10   a11   a12   a13
+    MOVAPS    dqword ptr [Transposed + 32], XMM3  //  [Transposed + 32]:  a20   a21   a22   a23
+    MOVAPS    dqword ptr [Transposed + 48], XMM0  //  [Transposed + 48]:  a30   a31   a32   a33
+end;
+
+//==============================================================================
+
+procedure Transpose_SSE(const Matrix: TVMCLMatrix2RMs; out Transposed: TVMCLMatrix2RMs);
+asm
+  {$DEFINE CheckMemAlign16_2}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF CheckMemAlign16_2}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  Transpose_2RMs_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  Transpose_2RMs_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_SSE(const Matrix: TVMCLMatrix2CMs; out Transposed: TVMCLMatrix2CMs);
+asm
+  {$DEFINE CheckMemAlign16_2}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF CheckMemAlign16_2}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  Transpose_2CMs_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  Transpose_2CMs_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_SSE(const Matrix: TVMCLMatrix3RMs; out Transposed: TVMCLMatrix3RMs);
+asm
+  {$DEFINE CheckMemAlign16_2}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF CheckMemAlign16_2}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  Transpose_3RMs_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  Transpose_3RMs_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_SSE(const Matrix: TVMCLMatrix3CMs; out Transposed: TVMCLMatrix3CMs);
+asm
+  {$DEFINE CheckMemAlign16_2}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF CheckMemAlign16_2}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  Transpose_3CMs_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  Transpose_3CMs_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_SSE(const Matrix: TVMCLMatrix4RMs; out Transposed: TVMCLMatrix4RMs);
+asm
+  {$DEFINE CheckMemAlign16_2}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF CheckMemAlign16_2}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  Transpose_4RMs_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  Transpose_4RMs_SSEu
+
+  @RoutineEnd:
+end;
+
+//------------------------------------------------------------------------------
+
+procedure Transpose_SSE(const Matrix: TVMCLMatrix4CMs; out Transposed: TVMCLMatrix4CMs);
+asm
+  {$DEFINE CheckMemAlign16_2}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF CheckMemAlign16_2}
+
+    JNZ   @Unaligned
+
+  @Aligned:
+    CALL  Transpose_4CMs_SSEa
+    JMP   @RoutineEnd
+
+  @Unaligned:
+    CALL  Transpose_4CMs_SSEu
 
   @RoutineEnd:
 end;
