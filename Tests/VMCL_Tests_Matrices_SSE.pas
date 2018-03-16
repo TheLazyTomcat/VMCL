@@ -44,22 +44,14 @@ end;
 //------------------------------------------------------------------------------
 
 // testing routines
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Man.inc'}
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Man.inc'}
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Auto.inc'}
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Auto.inc'}
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Spd.inc'}
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Spd.inc'}
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionRM_SSE_Prec.inc'}
-{$INCLUDE '.\test_routines_mat_sse\Matrix_PrecisionConversionCM_SSE_Prec.inc'}
-
-{$INCLUDE '.\test_routines_mat_sse\Matrix_TransposeRM_SSE_Prec.inc'}
 
 //==============================================================================
 
 procedure QuickTest;
 const
   RepCount = 100000000;
+  TestCount = 2000000;
+(*  
 var
   StartCnt: Int64;
   EndCnt:   Int64;
@@ -67,8 +59,19 @@ var
   i:        Integer;
   mat1:     TMatrix4RMs;
   mat2:     TMatrix4RMs;
+
+  m4s1, m4s2: PMatrix4RMs;
+  i:          Integer;
+  EmptyTicks: Int64;
+  Ticks:      Int64;
+  nSSETicks:  Int64;
+  sVal:       Single;
+  FuncPAS_2s: Function(const Matrix: TMatrix4RMs; Scalar: Single): TMatrix4RMs;
+  FuncASM_2s: procedure(const Matrix: TMatrix4RMs; Scalar: Single; out Product: TMatrix4RMs);
+*)  
 begin
 // check validity
+(*
 RandomMat(mat1); RandomMat(mat2);
 WriteLn(MatToStr(mat1));
 WriteLn('nSSE: '); WriteLn(MatToStr(Transposed(mat1)));
@@ -93,25 +96,87 @@ QueryPerformanceCounter(EndCnt);
 Write(' SSE: ',EndCnt - StartCnt);
 WriteLn(' (t: ',Format('%.2f',[(EndCnt - StartCnt) / nSSECnt]),
         ', s: ',Format('%.0f',[(1/((EndCnt - StartCnt) / nSSECnt)) * 100]),'%)');
+*)
+(*
+FuncPAS_2s := VMCL_Matrices.ScalarMultiply;
+FuncASM_2s := VMCL_Matrices_SSE.ScalarMultiply_SSE;
+VMCL_New(m4s1); VMCL_New(m4s2);
+try
+  sVal := Random(100);
+  RandomMat(m4s1^); RandomMat(m4s2^);
+  // get average empty call ticks
+  WriteLn;
+  EmptyTicks := 0;
+  PrecisionTest.FunctionAddr := nil;
+  For i := 1 to TestCount do
+    begin
+      Vector_SpeedTestCaller_Empty;
+      EmptyTicks := EmptyTicks + PrecisionTestsTicks(PrecisionTest);
+    end;
+  EmptyTicks := EmptyTicks div TestCount;
+  WriteLn('Empty call ticks: ',EmptyTicks);
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  WriteLn;
+  Ticks := 0;
+  PrecisionTest.FunctionAddr := Addr(FuncPAS_2s);
+  Write('m4d -> m4s @ nSSE:   ');
+  For i := 1 to TestCount do
+    begin
+      RandomMat(m4s1^); RandomMat(m4s2^);
+      Vector_SpeedTestCaller_1P1S1P_R(m4s1,sVal,m4s2);
+      If not SameMatrices(m4s2^,ScalarMultiply(m4s1^,sVal),1e-6) then
+        begin
+          WriteLn('Error');
+          Ticks := 0;
+          Break{For i};
+        end
+      else Ticks := Ticks + PrecisionTestsTicks(PrecisionTest)
+    end;
+  If Ticks > 0 then
+    begin
+      Ticks := Ticks div TestCount;
+      WriteLn(Format('%d (%d)',[Ticks - EmptyTicks,Ticks]));
+    end;
+  nSSETicks := Ticks - EmptyTicks;
+
+  Ticks := 0;
+  PrecisionTest.FunctionAddr := Addr(FuncASM_2s);
+  Write(Format('m4d -> m4s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m4s1,m4s2),'a','u')]));
+  For i := 1 to TestCount do
+    begin
+      RandomMat(m4s1^); RandomMat(m4s2^);
+      Vector_SpeedTestCaller_1P1S1P(m4s1,sVal,m4s2);
+      If not SameMatrices(m4s2^,ScalarMultiply(m4s1^,sVal),1e-6) then
+        begin
+          WriteLn('Error');
+          Ticks := 0;
+          Break{For i};
+        end
+      else Ticks := Ticks + PrecisionTestsTicks(PrecisionTest)
+    end;
+  If Ticks > 0 then
+    begin
+      Ticks := Ticks div TestCount;
+      WriteLn(Format('%-15s  t: %.2f  s: %.0f%%',[Format('%d (%d)',[Ticks - EmptyTicks,Ticks]),
+        (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
+    end;
+finally
+  VMCL_Dispose(m4s1); VMCL_Dispose(m4s2);
+end;
+*)
 end;
 
 Function Matrices_SSE_Main(AutoTest: Boolean = False): Integer;
 begin
-//QuickTest;
+QuickTest;
 repeat
   Result := Select('Matrices SSE test group','Select test (X - Exit; 0 - Back; A - Autotest):',
 
-    [Matrix_PrecisionConversionRM_SSE_Man,Matrix_PrecisionConversionCM_SSE_Man,
-     Matrix_PrecisionConversionRM_SSE_Auto,Matrix_PrecisionConversionCM_SSE_Auto,
-     Matrix_PrecisionConversionRM_SSE_Spd,Matrix_PrecisionConversionCM_SSE_Spd,
-     Matrix_PrecisionConversionRM_SSE_Prec,Matrix_PrecisionConversionCM_SSE_Prec,
+    [],
 
-     Matrix_TransposeRM_SSE_Prec],
-
-    ['PrecConversion (RM) - Man','PrecConversion (CM) - Man','PrecConversion (RM) - Auto','PrecConversion (CM) - Auto',
-     'PrecConversion (RM) - Spd','PrecConversion (CM) - Spd','PrecConversion (RM) - Prec','PrecConversion (CM) - Prec',
-
-     'Transpose (CM) - Prec'],
+    [],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);
