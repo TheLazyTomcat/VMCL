@@ -1,9 +1,9 @@
 Function Vector_VectorsCrossProduct({%H-}AutoTest: Boolean = False): Integer;
 var
-  v3s1,v3s2:  TVector3s;
-  v4s1,v4s2:  TVector4s;
-  v3d1,v3d2:  TVector3d;
-  v4d1,v4d2:  TVector4d;
+  v3s1,v3s2:  TVMCLVector3s;
+  v4s1,v4s2:  TVMCLVector4s;
+  v3d1,v3d2:  TVMCLVector3d;
+  v4d1,v4d2:  TVMCLVector4d;
 begin
 WriteLn;
 WriteLn(LineText('VectorsCrossProduct'));

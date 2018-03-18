@@ -12,15 +12,26 @@ uses
 
 procedure MatricesMultiply_2RMs_SSEu(const aMatrix, bMatrix: TVMCLMatrix2RMs; out Product: TVMCLMatrix2RMs); register; assembler;
 procedure MatricesMultiply_2RMs_SSEa(const aMatrix, bMatrix: TVMCLMatrix2RMs; out Product: TVMCLMatrix2RMs); register; assembler;
+procedure MatricesMultiply_2CMs_SSEu(const aMatrix, bMatrix: TVMCLMatrix2CMs; out Product: TVMCLMatrix2CMs); {$IFDEF CanInline} inline;{$ENDIF}
+procedure MatricesMultiply_2CMs_SSEa(const aMatrix, bMatrix: TVMCLMatrix2CMs; out Product: TVMCLMatrix2CMs); {$IFDEF CanInline} inline;{$ENDIF}
 procedure MatricesMultiply_3RMs_SSEua(const aMatrix, bMatrix: TVMCLMatrix3RMs; out Product: TVMCLMatrix3RMs); register; assembler;
+procedure MatricesMultiply_3CMs_SSEua(const aMatrix, bMatrix: TVMCLMatrix3CMs; out Product: TVMCLMatrix3CMs); {$IFDEF CanInline} inline;{$ENDIF}
 procedure MatricesMultiply_4RMs_SSEu(const aMatrix, bMatrix: TVMCLMatrix4RMs; out Product: TVMCLMatrix4RMs); register; assembler;
 procedure MatricesMultiply_4RMs_SSEa(const aMatrix, bMatrix: TVMCLMatrix4RMs; out Product: TVMCLMatrix4RMs); register; assembler;
+procedure MatricesMultiply_4CMs_SSEu(const aMatrix, bMatrix: TVMCLMatrix4CMs; out Product: TVMCLMatrix4CMs); {$IFDEF CanInline} inline;{$ENDIF}
+procedure MatricesMultiply_4CMs_SSEa(const aMatrix, bMatrix: TVMCLMatrix4CMs; out Product: TVMCLMatrix4CMs); {$IFDEF CanInline} inline;{$ENDIF}
 procedure MatricesMultiply_2RMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix2RMd; out Product: TVMCLMatrix2RMd); register; assembler;
 procedure MatricesMultiply_2RMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix2RMd; out Product: TVMCLMatrix2RMd); register; assembler;
+procedure MatricesMultiply_2CMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix2CMd; out Product: TVMCLMatrix2CMd); {$IFDEF CanInline} inline;{$ENDIF}
+procedure MatricesMultiply_2CMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix2CMd; out Product: TVMCLMatrix2CMd); {$IFDEF CanInline} inline;{$ENDIF}
 procedure MatricesMultiply_3RMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix3RMd; out Product: TVMCLMatrix3RMd); register; assembler;
 procedure MatricesMultiply_3RMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix3RMd; out Product: TVMCLMatrix3RMd); register; assembler;
+procedure MatricesMultiply_3CMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix3CMd; out Product: TVMCLMatrix3CMd); {$IFDEF CanInline} inline;{$ENDIF}
+procedure MatricesMultiply_3CMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix3CMd; out Product: TVMCLMatrix3CMd); {$IFDEF CanInline} inline;{$ENDIF}
 procedure MatricesMultiply_4RMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix4RMd; out Product: TVMCLMatrix4RMd); register; assembler;
 procedure MatricesMultiply_4RMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix4RMd; out Product: TVMCLMatrix4RMd); register; assembler;
+procedure MatricesMultiply_4CMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix4CMd; out Product: TVMCLMatrix4CMd); {$IFDEF CanInline} inline;{$ENDIF}
+procedure MatricesMultiply_4CMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix4CMd; out Product: TVMCLMatrix4CMd); {$IFDEF CanInline} inline;{$ENDIF}
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
@@ -36,6 +47,7 @@ procedure MatricesMultiply_SSE(const aMatrix, bMatrix: TVMCLMatrix3RMd; out Prod
 procedure MatricesMultiply_SSE(const aMatrix, bMatrix: TVMCLMatrix3CMd; out Product: TVMCLMatrix3CMd); register; assembler; overload;
 procedure MatricesMultiply_SSE(const aMatrix, bMatrix: TVMCLMatrix4RMd; out Product: TVMCLMatrix4RMd); register; assembler; overload;
 procedure MatricesMultiply_SSE(const aMatrix, bMatrix: TVMCLMatrix4CMd; out Product: TVMCLMatrix4CMd); register; assembler; overload;
+
 {$ENDIF}
 
 implementation
@@ -75,6 +87,19 @@ end;
 
 //------------------------------------------------------------------------------
 
+procedure MatricesMultiply_2CMs_SSEu(const aMatrix, bMatrix: TVMCLMatrix2CMs; out Product: TVMCLMatrix2CMs);
+begin
+MatricesMultiply_2RMs_SSEu(TVMCLMatrix2RMs(bMatrix),TVMCLMatrix2RMs(aMatrix),TVMCLMatrix2RMs(Product));
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_2CMs_SSEa(const aMatrix, bMatrix: TVMCLMatrix2CMs; out Product: TVMCLMatrix2CMs);
+begin
+MatricesMultiply_2RMs_SSEa(TVMCLMatrix2RMs(bMatrix),TVMCLMatrix2RMs(aMatrix),TVMCLMatrix2RMs(Product));
+end;
+
+//------------------------------------------------------------------------------
 
 procedure MatricesMultiply_3RMs_SSEua(const aMatrix, bMatrix: TVMCLMatrix3RMs; out Product: TVMCLMatrix3RMs);
 asm
@@ -113,6 +138,13 @@ asm
 
     // remove stack alignment
   {$DEFINE AlignStack_16B_Leave}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF AlignStack_16B_Leave}
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_3CMs_SSEua(const aMatrix, bMatrix: TVMCLMatrix3CMs; out Product: TVMCLMatrix3CMs);
+begin
+MatricesMultiply_3RMs_SSEua(TVMCLMatrix3RMs(bMatrix),TVMCLMatrix3RMs(aMatrix),TVMCLMatrix3RMs(Product));
 end;
 
 //------------------------------------------------------------------------------
@@ -217,6 +249,20 @@ end;
 
 //------------------------------------------------------------------------------
 
+procedure MatricesMultiply_4CMs_SSEu(const aMatrix, bMatrix: TVMCLMatrix4CMs; out Product: TVMCLMatrix4CMs);
+begin
+MatricesMultiply_4RMs_SSEu(TVMCLMatrix4RMs(bMatrix),TVMCLMatrix4RMs(aMatrix),TVMCLMatrix4RMs(Product));
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_4CMs_SSEa(const aMatrix, bMatrix: TVMCLMatrix4CMs; out Product: TVMCLMatrix4CMs);
+begin
+MatricesMultiply_4RMs_SSEa(TVMCLMatrix4RMs(bMatrix),TVMCLMatrix4RMs(aMatrix),TVMCLMatrix4RMs(Product));
+end;
+
+//------------------------------------------------------------------------------
+
 procedure MatricesMultiply_2RMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix2RMd; out Product: TVMCLMatrix2RMd);
 asm
     // first round                              //  XMM0: r01   r00
@@ -253,6 +299,20 @@ asm
     MOVAPD    dqword ptr [Product + 16], XMM1   //  [Product + 16]: p10   p11
 
 {$UNDEF AlignedMemoryAccess}
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_2CMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix2CMd; out Product: TVMCLMatrix2CMd);
+begin
+MatricesMultiply_2RMd_SSEu(TVMCLMatrix2RMd(bMatrix),TVMCLMatrix2RMd(aMatrix),TVMCLMatrix2RMd(Product));
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_2CMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix2CMd; out Product: TVMCLMatrix2CMd);
+begin
+MatricesMultiply_2RMd_SSEa(TVMCLMatrix2RMd(bMatrix),TVMCLMatrix2RMd(aMatrix),TVMCLMatrix2RMd(Product));
 end;
 
 //------------------------------------------------------------------------------
@@ -296,7 +356,7 @@ asm
 
     // restore non-volatile registers
   {$DEFINE Restore_XMM6_to_XMM9_SSE}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF Restore_XMM6_to_XMM9_SSE}
-  
+
     // remove stack alignment
   {$DEFINE AlignStack_16B_Leave}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF AlignStack_16B_Leave}
 end;
@@ -315,7 +375,7 @@ asm
 
   {$IFDEF x86}
     SUB       ESP, 32   // allocate temporary storage on stack
-  {$ENDIF}  
+  {$ENDIF}
 
     // calculation rounds
   {$DEFINE FirstRound}
@@ -346,11 +406,25 @@ asm
 
     // restore non-volatile registers
   {$DEFINE Restore_XMM6_to_XMM9_SSE}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF Restore_XMM6_to_XMM9_SSE}
-  
+
     // remove stack alignment
   {$DEFINE AlignStack_16B_Leave}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF AlignStack_16B_Leave}
 
 {$UNDEF AlignedMemoryAccess}
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_3CMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix3CMd; out Product: TVMCLMatrix3CMd);
+begin
+MatricesMultiply_3RMd_SSEu(TVMCLMatrix3RMd(bMatrix),TVMCLMatrix3RMd(aMatrix),TVMCLMatrix3RMd(Product));
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_3CMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix3CMd; out Product: TVMCLMatrix3CMd);
+begin
+MatricesMultiply_3RMd_SSEa(TVMCLMatrix3RMd(bMatrix),TVMCLMatrix3RMd(aMatrix),TVMCLMatrix3RMd(Product));
 end;
 
 //------------------------------------------------------------------------------
@@ -455,6 +529,20 @@ asm
   {$DEFINE AlignStack_16B_Leave}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF AlignStack_16B_Leave}
 
 {$UNDEF AlignedMemoryAccess}
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_4CMd_SSEu(const aMatrix, bMatrix: TVMCLMatrix4CMd; out Product: TVMCLMatrix4CMd);
+begin
+MatricesMultiply_4RMd_SSEu(TVMCLMatrix4RMd(bMatrix),TVMCLMatrix4RMd(aMatrix),TVMCLMatrix4RMd(Product));
+end;
+
+//------------------------------------------------------------------------------
+
+procedure MatricesMultiply_4CMd_SSEa(const aMatrix, bMatrix: TVMCLMatrix4CMd; out Product: TVMCLMatrix4CMd);
+begin
+MatricesMultiply_4RMd_SSEa(TVMCLMatrix4RMd(bMatrix),TVMCLMatrix4RMd(aMatrix),TVMCLMatrix4RMd(Product));
 end;
 
 //==============================================================================

@@ -1,9 +1,9 @@
 Function Vector_VectorsBoxProduct({%H-}AutoTest: Boolean = False): Integer;
 var
-  v3s1,v3s2,v3s3:  TVector3s;
-  v4s1,v4s2,v4s3:  TVector4s;
-  v3d1,v3d2,v3d3:  TVector3d;
-  v4d1,v4d2,v4d3:  TVector4d;
+  v3s1,v3s2,v3s3:  TVMCLVector3s;
+  v4s1,v4s2,v4s3:  TVMCLVector4s;
+  v3d1,v3d2,v3d3:  TVMCLVector3d;
+  v4d1,v4d2,v4d3:  TVMCLVector4d;
 begin
 WriteLn;
 WriteLn(LineText('VectorsBoxProduct'));

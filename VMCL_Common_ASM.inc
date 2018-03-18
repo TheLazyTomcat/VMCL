@@ -208,13 +208,13 @@
                            SSE registers save/restore                                                       
 ===============================================================================}
 
-{$IFDEF Save_XMM6_SSE}
 {
   XMM registers does not need to be saved in any system except Windows 64bit.
 }
+{$IFDEF Save_XMM6_SSE}
   {$IFDEF Win64}
     SUB     RSP,  16
-    MOVAPS  dqword ptr [RSP], XMM6
+    MOVAPS  dqword ptr [RSP + 16], XMM6
   {$ENDIF}
 {$ENDIF}
 

@@ -1,9 +1,9 @@
 Function Matrix_SubmatrixRead({%H-}AutoTest: Boolean = False): Integer;
 var
-  m3s:    TMatrix3s;
-  m4s:    TMatrix4s;
-  m3d:    TMatrix3d;
-  m4d:    TMatrix4d;
+  m3s:    TVMCLMatrix3s;
+  m4s:    TVMCLMatrix4s;
+  m3d:    TVMCLMatrix3d;
+  m4d:    TVMCLMatrix4d;
   C1,R1:  Integer;
   C2,R2:  Integer;
   Ident:  Boolean;

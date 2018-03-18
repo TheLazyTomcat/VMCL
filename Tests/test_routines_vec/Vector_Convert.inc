@@ -1,11 +1,11 @@
 Function Vector_Convert({%H-}AutoTest: Boolean = False): Integer;
 var
-  v2s:  TVector2s;  v2sr: TVector2sr;
-  v3s:  TVector3s;  v3sr: TVector3sr;
-  v4s:  TVector4s;  v4sr: TVector4sr;
-  v2d:  TVector2d;  v2dr: TVector2dr;
-  v3d:  TVector3d;  v3dr: TVector3dr;
-  v4d:  TVector4d;  v4dr: TVector4dr;
+  v2s:  TVMCLVector2s;  v2sr: TVMCLVector2sr;
+  v3s:  TVMCLVector3s;  v3sr: TVMCLVector3sr;
+  v4s:  TVMCLVector4s;  v4sr: TVMCLVector4sr;
+  v2d:  TVMCLVector2d;  v2dr: TVMCLVector2dr;
+  v3d:  TVMCLVector3d;  v3dr: TVMCLVector3dr;
+  v4d:  TVMCLVector4d;  v4dr: TVMCLVector4dr;
   PosV: Boolean;
 begin
 WriteLn;

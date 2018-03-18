@@ -1,11 +1,11 @@
 Function Vector_VectorsAdd({%H-}AutoTest: Boolean = False): Integer;
 var
-  v2s1,v2s2:  TVector2s;
-  v3s1,v3s2:  TVector3s;
-  v4s1,v4s2:  TVector4s;
-  v2d1,v2d2:  TVector2d;
-  v3d1,v3d2:  TVector3d;
-  v4d1,v4d2:  TVector4d;
+  v2s1,v2s2:  TVMCLVector2s;
+  v3s1,v3s2:  TVMCLVector3s;
+  v4s1,v4s2:  TVMCLVector4s;
+  v2d1,v2d2:  TVMCLVector2d;
+  v3d1,v3d2:  TVMCLVector3d;
+  v4d1,v4d2:  TVMCLVector4d;
 begin
 WriteLn;
 WriteLn(LineText('VectorsAdd'));

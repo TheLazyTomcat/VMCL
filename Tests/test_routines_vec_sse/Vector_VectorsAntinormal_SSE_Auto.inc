@@ -3,10 +3,10 @@ const
   ValueCount = 1000000;
   Epsilon    = 1e-6;
 var
-  v3s1,v3s2,v3s3: PVector3s;
-  v4s1,v4s2,v4s3: PVector4s;
-  v3d1,v3d2,v3d3: PVector3d;
-  v4d1,v4d2,v4d3: PVector4d;
+  v3s1,v3s2,v3s3: PVMCLVector3s;
+  v4s1,v4s2,v4s3: PVMCLVector4s;
+  v3d1,v3d2,v3d3: PVMCLVector3d;
+  v4d1,v4d2,v4d3: PVMCLVector4d;
   i:              Integer;
   Status:         Boolean;
 

@@ -17,7 +17,7 @@ uses
 var
   PrecisionTest:  TVMCLPrecisionTests;
 
-procedure Vector_SpeedTestCaller_Empty; register; assembler;
+procedure Matrix_SpeedTestCaller_Empty; register; assembler;
 asm
 {$DEFINE EmptyCall}
 {$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
@@ -26,14 +26,14 @@ end;
 
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
 
-procedure Vector_SpeedTestCaller_3P(A,B,C: Pointer); register; assembler;
+procedure Matrix_SpeedTestCaller_3P(A,B,C: Pointer); register; assembler;
 asm
 {$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
 end;
 
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
 
-procedure Vector_SpeedTestCaller_3P_R(A,B,C: Pointer); register; assembler;
+procedure Matrix_SpeedTestCaller_3P_R(A,B,C: Pointer); register; assembler;
 asm
 {$IFDEF x64}
     XCHG  A, C    // A = orig C   C = orig A
@@ -45,6 +45,14 @@ end;
 //------------------------------------------------------------------------------
 
 // testing routines
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyRM_SSE_Man.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyCM_SSE_Man.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyRM_SSE_Auto.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyCM_SSE_Auto.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyRM_SSE_Spd.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyCM_SSE_Spd.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyRM_SSE_Prec.inc'}
+{$INCLUDE '.\test_routines_mat_sse\Matrix_MatricesMultiplyCM_SSE_Prec.inc'}
 
 //==============================================================================
 
@@ -99,7 +107,7 @@ try
   PrecisionTest.FunctionAddr := nil;
   For i := 1 to TestCount do
     begin
-      Vector_SpeedTestCaller_Empty;
+      Matrix_SpeedTestCaller_Empty;
       EmptyTicks := EmptyTicks + PrecisionTestsTicks(PrecisionTest);
     end;
   EmptyTicks := EmptyTicks div TestCount;
@@ -114,7 +122,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomMat(m4s1^); RandomMat(m4s2^); RandomMat(m4s3^);
-      Vector_SpeedTestCaller_3P_R(m4s1,m4s2,m4s3);
+      Matrix_SpeedTestCaller_3P_R(m4s1,m4s2,m4s3);
       If not SameMatrices(m4s3^,MatricesMultiply(m4s1^,m4s2^),1e-6) then
         begin
           WriteLn('Error');
@@ -136,7 +144,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomMat(m4s1^); RandomMat(m4s2^); RandomMat(m4s3^);
-      Vector_SpeedTestCaller_3P(m4s1,m4s2,m4s3);
+      Matrix_SpeedTestCaller_3P(m4s1,m4s2,m4s3);
       If not SameMatrices(m4s3^,MatricesMultiply(m4s1^,m4s2^),1e-6) then
         begin
           WriteLn('Error');
@@ -164,13 +172,15 @@ end;
 
 Function Matrices_SSE_Main(AutoTest: Boolean = False): Integer;
 begin
-QuickTest;
+//QuickTest;
 repeat
   Result := Select('Matrices SSE test group','Select test (X - Exit; 0 - Back; A - Autotest):',
 
-    [],
+    [Matrix_MatricesMultiplyRM_SSE_Man,Matrix_MatricesMultiplyCM_SSE_Man,Matrix_MatricesMultiplyRM_SSE_Auto,Matrix_MatricesMultiplyCM_SSE_Auto,
+     Matrix_MatricesMultiplyRM_SSE_Spd,Matrix_MatricesMultiplyCM_SSE_Spd,Matrix_MatricesMultiplyRM_SSE_Prec,Matrix_MatricesMultiplyCM_SSE_Prec],
 
-    [],
+    ['MatricesMultiply (RM) - Man','MatricesMultiply (CM) - Man','MatricesMultiply (RM) - Auto','MatricesMultiply (CM) - Auto',
+     'MatricesMultiply (RM) - Spd','MatricesMultiply (CM) - Spd','MatricesMultiply (RM) - Prec','MatricesMultiply (CM) - Prec'],
 
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);

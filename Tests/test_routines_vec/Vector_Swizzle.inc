@@ -1,12 +1,12 @@
 Function Vector_Swizzle({%H-}AutoTest: Boolean = False): Integer;
 var
-  v2s:          TVector2s;
-  v3s:          TVector3s;
-  v4s:          TVector4s;
-  v2d:          TVector2d;
-  v3d:          TVector3d;
-  v4d:          TVector4d;
-  f0,f1,f2,f3:  TVectorField;
+  v2s:          TVMCLVector2s;
+  v3s:          TVMCLVector3s;
+  v4s:          TVMCLVector4s;
+  v2d:          TVMCLVector2d;
+  v3d:          TVMCLVector3d;
+  v4d:          TVMCLVector4d;
+  f0,f1,f2,f3:  TVMCLVectorField;
 begin
 WriteLn;
 WriteLn(LineText('Vector swizzling'));

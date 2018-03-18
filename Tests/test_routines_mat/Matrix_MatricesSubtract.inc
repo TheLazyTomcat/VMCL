@@ -1,11 +1,11 @@
 Function Matrix_MatricesSubtract({%H-}AutoTest: Boolean = False): Integer;
 var
-  m2s1,m2s2:  TMatrix2s;
-  m3s1,m3s2:  TMatrix3s;
-  m4s1,m4s2:  TMatrix4s;
-  m2d1,m2d2:  TMatrix2d;
-  m3d1,m3d2:  TMatrix3d;
-  m4d1,m4d2:  TMatrix4d;
+  m2s1,m2s2:  TVMCLMatrix2s;
+  m3s1,m3s2:  TVMCLMatrix3s;
+  m4s1,m4s2:  TVMCLMatrix4s;
+  m2d1,m2d2:  TVMCLMatrix2d;
+  m3d1,m3d2:  TVMCLMatrix3d;
+  m4d1,m4d2:  TVMCLMatrix4d;
 begin
 WriteLn;
 WriteLn(LineText('MatricesSubstract'));
