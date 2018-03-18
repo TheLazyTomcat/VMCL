@@ -597,7 +597,7 @@ WriteLn('XMM6:  ' + VecToStr(Buff[6]));
 WriteLn('XMM7:  ' + VecToStr(Buff[7]));
 {$IFDEF x64}
 WriteLn('XMM8:  ' + VecToStr(Buff[8]));
-WriteLn('XMM9: ' + VecToStr(Buff[9]));
+WriteLn('XMM9:  ' + VecToStr(Buff[9]));
 WriteLn('XMM10: ' + VecToStr(Buff[10]));
 WriteLn('XMM11: ' + VecToStr(Buff[11]));
 WriteLn('XMM12: ' + VecToStr(Buff[12]));

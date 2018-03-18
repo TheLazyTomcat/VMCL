@@ -26,17 +26,18 @@ end;
 
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
 
-procedure Vector_SpeedTestCaller_2P(A,B: Pointer); register; assembler;
+procedure Vector_SpeedTestCaller_3P(A,B,C: Pointer); register; assembler;
 asm
 {$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
 end;
 
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
 
-procedure Vector_SpeedTestCaller_2P_R(A,B: Pointer); register; assembler;
+procedure Vector_SpeedTestCaller_3P_R(A,B,C: Pointer); register; assembler;
 asm
 {$IFDEF x64}
-    XCHG  A, B    // A = orig B   B = orig A
+    XCHG  A, C    // A = orig C   C = orig A
+    XCHG  B, C    // B = orig A   C = orig B
 {$ENDIF}
 {$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
 end;
@@ -49,26 +50,16 @@ end;
 
 procedure QuickTest;
 const
-  RepCount = 100000000;
-  TestCount = 2000000;
-(*  
+  TestCount = 1000000;
 var
-  StartCnt: Int64;
-  EndCnt:   Int64;
-  nSSECnt:  Int64;
-  i:        Integer;
-  mat1:     TMatrix4RMs;
-  mat2:     TMatrix4RMs;
-
-  m4s1, m4s2: PMatrix4RMs;
+  m4s1,m4s2,m4s3: PMatrix4CMd;
   i:          Integer;
   EmptyTicks: Int64;
   Ticks:      Int64;
   nSSETicks:  Int64;
-  sVal:       Single;
-  FuncPAS_2s: Function(const Matrix: TMatrix4RMs; Scalar: Single): TMatrix4RMs;
-  FuncASM_2s: procedure(const Matrix: TMatrix4RMs; Scalar: Single; out Product: TMatrix4RMs);
-*)  
+  FuncPAS_2s: Function(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd;
+  FuncASM_2s: procedure(const aMatrix,bMatrix: TVMCLMatrix4CMd; out Product: TVMCLMatrix4CMd);
+
 begin
 // check validity
 (*
@@ -97,13 +88,11 @@ Write(' SSE: ',EndCnt - StartCnt);
 WriteLn(' (t: ',Format('%.2f',[(EndCnt - StartCnt) / nSSECnt]),
         ', s: ',Format('%.0f',[(1/((EndCnt - StartCnt) / nSSECnt)) * 100]),'%)');
 *)
-(*
-FuncPAS_2s := VMCL_Matrices.ScalarMultiply;
-FuncASM_2s := VMCL_Matrices_SSE.ScalarMultiply_SSE;
-VMCL_New(m4s1); VMCL_New(m4s2);
+
+FuncPAS_2s := VMCL_Matrices.MatricesMultiply;
+FuncASM_2s := VMCL_Matrices_SSE.MatricesMultiply_SSE;
+VMCL_New(m4s1); VMCL_New(m4s2); VMCL_New(m4s3);
 try
-  sVal := Random(100);
-  RandomMat(m4s1^); RandomMat(m4s2^);
   // get average empty call ticks
   WriteLn;
   EmptyTicks := 0;
@@ -121,12 +110,12 @@ try
   WriteLn;
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncPAS_2s);
-  Write('m4d -> m4s @ nSSE:   ');
+  Write('m4s @ nSSE:   ');
   For i := 1 to TestCount do
     begin
-      RandomMat(m4s1^); RandomMat(m4s2^);
-      Vector_SpeedTestCaller_1P1S1P_R(m4s1,sVal,m4s2);
-      If not SameMatrices(m4s2^,ScalarMultiply(m4s1^,sVal),1e-6) then
+      RandomMat(m4s1^); RandomMat(m4s2^); RandomMat(m4s3^);
+      Vector_SpeedTestCaller_3P_R(m4s1,m4s2,m4s3);
+      If not SameMatrices(m4s3^,MatricesMultiply(m4s1^,m4s2^),1e-6) then
         begin
           WriteLn('Error');
           Ticks := 0;
@@ -143,14 +132,19 @@ try
 
   Ticks := 0;
   PrecisionTest.FunctionAddr := Addr(FuncASM_2s);
-  Write(Format('m4d -> m4s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m4s1,m4s2),'a','u')]));
+  Write(Format('m4s @ SSE(%s): ',[BoolToMark(CheckMemAlign16(m4s1,m4s2,m4s2),'a','u')]));
   For i := 1 to TestCount do
     begin
-      RandomMat(m4s1^); RandomMat(m4s2^);
-      Vector_SpeedTestCaller_1P1S1P(m4s1,sVal,m4s2);
-      If not SameMatrices(m4s2^,ScalarMultiply(m4s1^,sVal),1e-6) then
+      RandomMat(m4s1^); RandomMat(m4s2^); RandomMat(m4s3^);
+      Vector_SpeedTestCaller_3P(m4s1,m4s2,m4s3);
+      If not SameMatrices(m4s3^,MatricesMultiply(m4s1^,m4s2^),1e-6) then
         begin
           WriteLn('Error');
+          WriteLn(MatToStr(m4s1^)); WriteLn;
+          WriteLn(MatToStr(m4s2^)); WriteLn;
+          WriteLn(MatToStr(m4s3^)); WriteLn;
+          WriteLn(MatToStr(MatricesMultiply(m4s1^,m4s2^)));
+          PrintSSERegisters_Double;
           Ticks := 0;
           Break{For i};
         end
@@ -163,9 +157,9 @@ try
         (Ticks - EmptyTicks) / nSSETicks,1 / ((Ticks - EmptyTicks) / nSSETicks) * 100]));
     end;
 finally
-  VMCL_Dispose(m4s1); VMCL_Dispose(m4s2);
+  VMCL_Dispose(m4s1); VMCL_Dispose(m4s2); VMCL_Dispose(m4s3);
 end;
-*)
+
 end;
 
 Function Matrices_SSE_Main(AutoTest: Boolean = False): Integer;

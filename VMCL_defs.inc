@@ -75,9 +75,9 @@
     When defined, functions that may perform badly in currently compiled mode
     and/or platform will be marked by a hint messages.
 
-  Defined by default.
+  Not defined by default.
 }
-{$DEFINE EnablePerformanceWarnings}
+{.$DEFINE EnablePerformanceWarnings}
 
 {
   EnableDevelopmentMessages
@@ -189,6 +189,20 @@
 {$DEFINE MatricesUnwindLoops}
 
 //= Do not touch following =====================================================
+
+{$IFDEF Windows}
+  {$IFDEF x64}
+    {$DEFINE Win64}
+  {$ELSE}
+    {$DEFINE Win32}
+  {$ENDIF}
+{$ELSE}
+  {$IFDEF x64}
+    {$DEFINE Lin64}
+  {$ELSE}
+    {$DEFINE Lin32}
+  {$ENDIF}
+{$ENDIF}
 
 {$IF Defined(Debug) or Defined(EnableDevelopmentMessages)}
   {$DEFINE DevelMsgs}

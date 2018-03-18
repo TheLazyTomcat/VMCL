@@ -614,6 +614,7 @@
     FSQRT                   //  ST0   SQRT(1 - p^2)             ST1:  param
     FXCH                    //  ST0:  param                     ST1:  SQRT(ABS(1 - p^2))
     FPATAN                  //  ST0:  PATAN(ST1 / ST0)
+                            //  ST0:  ArcCosRad (angle in radians)
 {$ENDIF}
 
 {-------------------------------------------------------------------------------
@@ -668,6 +669,8 @@
   {$ELSE}
     FMUL    qword ptr [RadToDegCoef]        //  ST0:  RadToDegCoef * RadAngle (DegAngle)
   {$ENDIF}
+
+                            //  ST0:  ArcCosDeg (angle in degrees)
 {$ENDIF}
 
 {===============================================================================
