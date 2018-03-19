@@ -272,4 +272,6 @@
 {$UNDEF LastRound}
 {$UNDEF OddRound}
 
+{$UNDEF SpeedTestCaller}
+
 

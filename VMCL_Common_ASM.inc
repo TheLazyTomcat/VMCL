@@ -362,8 +362,8 @@
 
   Note:
 
-    ESP regiter is decreased (amount depends on current value, but is always at
-    least 8).
+    RSP/ESP regiter is decreased (amount depends on current value, but is
+    always at least 8).
 
 -------------------------------------------------------------------------------}
 
@@ -387,7 +387,7 @@
 
   Note:
 
-    ESP regiter is restored to a value it had before AlignStack_16B_Entry.
+    RSP/ESP regiter is restored to a value it had before AlignStack_16B_Entry.
 
 -------------------------------------------------------------------------------}
 

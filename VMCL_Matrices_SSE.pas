@@ -437,13 +437,6 @@ asm
     // save non-volatile registers
   {$DEFINE Save_XMM6_to_XMM13_SSE}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF Save_XMM6_to_XMM13_SSE}
 
-  {$IFDEF x86}
-    MOVUPD    XMM7, dqword ptr [bMatrix + 96]   //  XMM7: b31   b30
-    MOVUPD    XMM6, dqword ptr [bMatrix + 64]   //  XMM6: b21   b20
-    MOVUPD    XMM4, dqword ptr [bMatrix]        //  XMM4: b01   b00
-    MOVUPD    XMM5, dqword ptr [bMatrix + 32]   //  XMM5: b11   b10
-  {$ENDIF}
-
     // calculation rounds
   {$DEFINE FirstRound}{$DEFINE OddRound}
   {$DEFINE MatricesMultiply_4d_Round_SSE}{$INCLUDE 'VMCL_Matrices_ASM.inc'}{$UNDEF MatricesMultiply_4d_Round_SSE}
@@ -488,13 +481,6 @@ asm
 
     // save non-volatile registers
   {$DEFINE Save_XMM6_to_XMM13_SSE}{$INCLUDE 'VMCL_Common_ASM.inc'}{$UNDEF Save_XMM6_to_XMM13_SSE}
-
-  {$IFDEF x86}
-    MOVAPD    XMM7, dqword ptr [bMatrix + 96]   //  XMM7: b31   b30
-    MOVAPD    XMM6, dqword ptr [bMatrix + 64]   //  XMM6: b21   b20
-    MOVAPD    XMM4, dqword ptr [bMatrix]        //  XMM4: b01   b00
-    MOVAPD    XMM5, dqword ptr [bMatrix + 32]   //  XMM5: b11   b10
-  {$ENDIF}
 
     // calculation rounds
   {$DEFINE FirstRound}{$DEFINE OddRound}

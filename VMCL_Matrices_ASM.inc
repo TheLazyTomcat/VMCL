@@ -5,6 +5,30 @@
 {.$DEFINE MatricesMultiply_3d_Round_SSE}
 {.$DEFINE MatricesMultiply_4d_Round_SSE}
 
+{-------------------------------------------------------------------------------
+
+  MatricesMultiply_2s_Round_SSE
+
+  Performs multiplication of two 2x2 single-precision matrices.
+  Calculation is constructed for row-major matrices, but can be used for
+  column-major matrices if the input matrices switch places.
+
+  Input:
+
+    XMM0: a11   a10   a01   a00   - first matrix
+    XMM1: b11   b10   b01   a00   - second matrix
+
+  Output:
+
+    Multiplication product (entire matrix) is returned in XMM0 register.
+
+    XMM0: p11   p10   p01   p00
+
+  Scratch registers:
+
+    XMM1, XMM2, XMM3
+
+-------------------------------------------------------------------------------}
 {$IFDEF MatricesMultiply_2s_Round_SSE}
     MOVAPS    XMM2, XMM0                        //  XMM2: a11   a10   a01   a00
     MOVAPS    XMM3, XMM1                        //  XMM3: b11   b10   b01   b00
@@ -20,6 +44,33 @@
                                                 //  XMM0: p11   p10   p01   p00
 {$ENDIF}
 
+{-------------------------------------------------------------------------------
+
+  MatricesMultiply_3s_Round_SSE
+
+  Performs one round of multiplication of two 3x3 single-precision matrices.
+  To complete entire multiplication, three rounds must be done consecutively.
+  First round must be included with symbol FirstRound defined - this ensures
+  that the accumulator is properly set up.
+  Calculation is constructed for row-major matrices, but can be used for
+  column-major matrices if the input matrices switch places.
+
+  Input:
+
+    Pointer to the first matrix must be in paramter aMatrix, pointer to the
+    second matrix must be in parameter bMatrix.
+    Accumulator is expected to be in registers XMM0, XMM1 and XMM2.
+
+  Output:
+
+    Accumulator is set up in registers XMM0, XMM1 and XMM2.
+    Parameter aMatrix is increased by 4, parameter bMatrix is increased by 12.
+
+  Scratch registers:
+
+    XMM3, XMM4, XMM5, XMM6
+
+-------------------------------------------------------------------------------}
 {$IFDEF MatricesMultiply_3s_Round_SSE}
     MOVSS     XMM3, dword ptr [aMatrix]         //  XMM3: 00    00    00    a0i
     MOVSS     XMM4, dword ptr [aMatrix + 12]    //  XMM4: 00    00    00    a1i
@@ -49,6 +100,33 @@
     ADD       bMatrix, 12
 {$ENDIF}
 
+{-------------------------------------------------------------------------------
+
+  MatricesMultiply_4s_Round_SSE
+
+  Performs one round of multiplication of two 4x4 single-precision matrices.
+  To complete entire multiplication, four rounds must be done consecutively.
+  First round must be included with symbol FirstRound defined - this ensures
+  that the accumulator is properly set up.
+  Calculation is constructed for row-major matrices, but can be used for
+  column-major matrices if the input matrices switch places.
+
+  Input:
+
+    Pointer to the first matrix must be in paramter aMatrix, pointer to the
+    second matrix must be in parameter bMatrix.
+    Accumulator is expected to be in registers XMM0, XMM1, XMM2 and XMM3.
+
+  Output:
+
+    Accumulator is set up in registers XMM0, XMM1, XMM2 and XMM3.
+    Parameter aMatrix is increased by 4, parameter bMatrix is increased by 16.
+
+  Scratch registers:
+
+    XMM4, XMM5, XMM6
+
+-------------------------------------------------------------------------------}
 {$IFDEF MatricesMultiply_4s_Round_SSE}
   {$IFDEF AlignedMemoryAccess}
     MOVAPS    XMM6, dqword ptr [bMatrix]        //  XMM6: bi3   bi2   bi1   bi0
@@ -94,6 +172,33 @@
     ADD       bMatrix, 16  
 {$ENDIF}
 
+{-------------------------------------------------------------------------------
+
+  MatricesMultiply_2d_Round_SSE
+
+  Performs one round of multiplication of two 2x2 double-precision matrices.
+  To complete entire multiplication, two rounds must be done consecutively.
+  First round must be included with symbol FirstRound defined - this ensures
+  that the accumulator is properly set up.
+  Calculation is constructed for row-major matrices, but can be used for
+  column-major matrices if the input matrices switch places.
+
+  Input:
+
+    Pointer to the first matrix must be in paramter aMatrix, pointer to the
+    second matrix must be in parameter bMatrix.
+    Accumulator is expected to be in registers XMM0 and XMM1.
+
+  Output:
+
+    Accumulator is set up in registers XMM0 and XMM1.
+    Parameter aMatrix is increased by 8, parameter bMatrix is increased by 16.
+
+  Scratch registers:
+
+    XMM2, XMM3, XMM4
+
+-------------------------------------------------------------------------------}
 {$IFDEF MatricesMultiply_2d_Round_SSE}
     MOVSD     XMM2, qword ptr [aMatrix]         //  XMM2: 00    a0i
     MOVSD     XMM3, qword ptr [aMatrix + 16]    //  XMM3: 00    a1i
@@ -121,6 +226,40 @@
   {$ENDIF}
 {$ENDIF}
 
+{-------------------------------------------------------------------------------
+
+  MatricesMultiply_3d_Round_SSE
+
+  Performs one round of multiplication of two 3x3 double-precision matrices.
+  To complete entire multiplication, three rounds must be done consecutively.
+  First round must be included with symbol FirstRound defined - this ensures
+  that the accumulator is properly set up, last round must be with symbol
+  LastRound defined - for proper accumulator passing.
+  Calculation is constructed for row-major matrices, but can be used for
+  column-major matrices if the input matrices switch places.
+
+  Input:
+
+    Pointer to the first matrix must be in paramter aMatrix, pointer to the
+    second matrix must be in parameter bMatrix.
+    In x86, 32 bytes must be allocated on stack for accumulator before the first
+    round and deallocated after the last round.
+    Accumulator is expected to be in registers XMM4, XMM5, XMM6, XMM7 and on
+    stack (x86) or in XMM8 and XMM9 (x86-64).
+
+  Output:
+
+    Accumulator is set up in registers XMM4, XMM5, XMM6, XMM7 and on stack for
+    x86 (ESP to ESP + 32) or in XMM8 and XMM9 for x86-64.
+    For last round, values that are accumulated on stack are copied into
+    registers XMM2 and XMM3 (x86 only).
+    Parameter aMatrix is increased by 8, parameter bMatrix is increased by 24.
+
+  Scratch registers:
+
+    XMM0, XMM1, XMM2, XMM3
+
+-------------------------------------------------------------------------------}
 {$IFDEF MatricesMultiply_3d_Round_SSE}
   {$IFDEF AlignedMemoryAccess}
     MOVAPD    XMM0, dqword ptr [bMatrix]        //  XMM0: bi1   bi0
@@ -196,6 +335,42 @@
   {$ENDIF}
 {$ENDIF}
 
+{-------------------------------------------------------------------------------
+
+  MatricesMultiply_4d_Round_SSE
+
+  Performs one round of multiplication of two 4x4 double-precision matrices.
+  To complete entire multiplication, four rounds must be done consecutively.
+  First round must be included with symbol FirstRound defined - this ensures
+  proper accumulator set up and loading of data, last round should be with
+  symbol LastRound defined - only small optimization, not mandatory
+  Rounds 1 and 3 in x86 must be with symbol OddRound defined (not mandatory
+  in x86-64).
+  Calculation is constructed for row-major matrices, but can be used for
+  column-major matrices if the input matrices switch places.
+
+  Input:
+
+    Pointer to the first matrix must be in paramter aMatrix, pointer to the
+    second matrix must be in parameter bMatrix, pointer to resulting matrix must
+    be in parameter Product.
+    Accumulator is expected in registers XMM6 trough XMM13 in x86-64 (in x86,
+    accumulator is not maintained).
+
+  Output:
+
+    Accumulator is not maintained across rounds in x86, values are stored
+    directly into result. In x86-64, accumulator is placed in registers XMM6
+    trough XMM13.
+    In x86, parameter aMatrix is increased by 8 and parameter bMatrix is
+    increased by 32. In x86-64, parameter aMatrix is increased by 32 and
+    parameter Product is increased by 32 each round.
+
+  Scratch registers:
+
+    XMM0 trough XMM7 (XMM6 and XMM7 used for accumulator in x86-64)
+
+-------------------------------------------------------------------------------}
 {$IFDEF MatricesMultiply_4d_Round_SSE}
 {$IFDEF x64} //- 64bit code... - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -209,8 +384,8 @@
 
     MOVSD     XMM2, qword ptr [aMatrix]         //  XMM2: 00    a0i
     MOVSD     XMM4, qword ptr [aMatrix + 32]    //  XMM4: 00    a1i
-    SHUFPD    XMM2, XMM2, 0                     //  XMM2: a0i   a0i
-    SHUFPD    XMM4, XMM4, 0                     //  XMM4: a1i   a1i
+    SHUFPD    XMM2, XMM2, $0 {00}               //  XMM2: a0i   a0i
+    SHUFPD    XMM4, XMM4, $0 {00}               //  XMM4: a1i   a1i
     MOVAPD    XMM3, XMM2                        //  XMM3: a0i   a0i
     MOVAPD    XMM5, XMM4                        //  XMM5: a1i   a1i
 
@@ -233,8 +408,8 @@
 
     MOVSD     XMM2, qword ptr [aMatrix + 64]    //  XMM2: 00    a2i
     MOVSD     XMM4, qword ptr [aMatrix + 96]    //  XMM4: 00    a3i
-    SHUFPD    XMM2, XMM2, 0                     //  XMM2: a2i   a2i
-    SHUFPD    XMM4, XMM4, 0                     //  XMM4: a3i   a3i
+    SHUFPD    XMM2, XMM2, $0 {00}               //  XMM2: a2i   a2i
+    SHUFPD    XMM4, XMM4, $0 {00}               //  XMM4: a3i   a3i
     MOVAPD    XMM3, XMM2                        //  XMM3: a2i   a2i
     MOVAPD    XMM5, XMM4                        //  XMM5: a3i   a3i
 
@@ -262,6 +437,13 @@
 
 {$ELSE x64}  //- 32bit code... - - - - - - - - - - - - - - - - - - - - - - - - -
                                                 //--- odd rounds ---------------------------------------//--- even rounds -----------------
+  {$IFDEF FirstRound}
+    MOVUPD    XMM7, dqword ptr [bMatrix + 96]   //  XMM7: b31   b30
+    MOVUPD    XMM6, dqword ptr [bMatrix + 64]   //  XMM6: b21   b20
+    MOVUPD    XMM4, dqword ptr [bMatrix]        //  XMM4: b01   b00
+    MOVUPD    XMM5, dqword ptr [bMatrix + 32]   //  XMM5: b11   b10
+  {$ENDIF}
+
     MOVSD     XMM0, qword ptr [aMatrix]         //  XMM0: 00    ai0                                     //  XMM0: 00    ai0
     MOVSD     XMM1, qword ptr [aMatrix + 8]     //  XMM1: 00    ai1                                     //  XMM1: 00    ai1
     MOVSD     XMM2, qword ptr [aMatrix + 16]    //  XMM2: 00    ai2                                     //  XMM2: 00    ai2

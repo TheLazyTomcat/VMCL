@@ -22,6 +22,10 @@
   {$IFDEF x64}
     PUSH  RAX
     PUSH  RDX
+  {$ELSE}
+    PUSH  EAX
+    PUSH  EDX
+  {$ENDIF}
 
     MFENCE
     LFENCE
@@ -29,42 +33,26 @@
     MFENCE
     LFENCE
 
+  {$IFDEF x64}
     MOV   [RIP + PrecisionTest.Counters.StartLo], EAX
     MOV   [RIP + PrecisionTest.Counters.StartHi], EDX
 
     POP   RDX
     POP   RAX
 
-  {$IFNDEF EmptyCall}
+    {$IFNDEF EmptyCall}
     CALL [RIP + PrecisionTest.FunctionAddr]
-  {$ENDIF}
-
-    MFENCE
-    LFENCE
-    RDTSC
-    MFENCE
-    LFENCE
-
-    MOV   [RIP + PrecisionTest.Counters.StopLo], EAX
-    MOV   [RIP + PrecisionTest.Counters.StopHi], EDX
+    {$ENDIF}
   {$ELSE}
-    PUSH  EAX
-    PUSH  EDX
-
-    MFENCE
-    LFENCE
-    RDTSC
-    MFENCE
-    LFENCE
-
     MOV   PrecisionTest.Counters.StartLo, EAX
     MOV   PrecisionTest.Counters.StartHi, EDX
 
     POP   EDX
     POP   EAX
-    
-  {$IFNDEF EmptyCall}
+
+    {$IFNDEF EmptyCall}
     CALL PrecisionTest.FunctionAddr
+    {$ENDIF}
   {$ENDIF}
 
     MFENCE
@@ -73,6 +61,10 @@
     MFENCE
     LFENCE
 
+  {$IFDEF x64}
+    MOV   [RIP + PrecisionTest.Counters.StopLo], EAX
+    MOV   [RIP + PrecisionTest.Counters.StopHi], EDX
+  {$ELSE}
     MOV   PrecisionTest.Counters.StopLo, EAX
     MOV   PrecisionTest.Counters.StopHi, EDX
   {$ENDIF}
