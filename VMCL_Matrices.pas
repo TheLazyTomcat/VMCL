@@ -7331,9 +7331,7 @@ end;
 {$ENDIF}
 
 //==============================================================================
-{$IFDEF DevelMsgs}
-  {$MESSAGE 'check whether columns or rows should be really orthonormalized'}
-{$ENDIF}
+
 procedure Orthonormalize(var Matrix: TVMCLMatrix2RMs);
 var
   Col1,Col2:  TVMCLVector2s;

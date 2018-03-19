@@ -207,16 +207,40 @@
 {===============================================================================
                            SSE registers save/restore                                                       
 ===============================================================================}
-
-{
+{*******************************************************************************
   XMM registers does not need to be saved in any system except Windows 64bit.
-}
+*******************************************************************************}
+
+{-------------------------------------------------------------------------------
+
+  Save_XMM6_SSE
+
+  Saves register XMM6 to top of the stack.
+
+  Note:
+  
+    RSP/ESP regiter is decreased by 16.
+
+-------------------------------------------------------------------------------}
+
 {$IFDEF Save_XMM6_SSE}
   {$IFDEF Win64}
     SUB     RSP,  16
     MOVAPS  dqword ptr [RSP + 16], XMM6
   {$ENDIF}
 {$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  Save_XMM6_to_XMM9_SSE
+
+  Saves registers XMM6, XMM7, XMM8 and XMM9 to top of the stack.
+
+  Note:
+
+    RSP/ESP regiter is decreased by 64.
+
+-------------------------------------------------------------------------------}
 
 {$IFDEF Save_XMM6_to_XMM9_SSE}
   {$IFDEF Win64}
@@ -227,6 +251,18 @@
     MOVAPS  dqword ptr [RSP + 48], XMM9
   {$ENDIF}
 {$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  Save_XMM6_to_XMM13_SSE
+
+  Saves registers XMM6 trough XMM13 (8 registers) to top of the stack.
+
+  Note:
+
+    RSP/ESP regiter is decreased by 128.
+
+-------------------------------------------------------------------------------}
 
 {$IFDEF Save_XMM6_to_XMM13_SSE}
   {$IFDEF Win64}
@@ -242,12 +278,36 @@
   {$ENDIF}
 {$ENDIF}
 
+{-------------------------------------------------------------------------------
+
+  Restore_XMM6_SSE
+
+  Restores register XMM6 from current stack.
+
+  Note:
+
+    RSP/ESP regiter is increased by 16.
+
+-------------------------------------------------------------------------------}
+
 {$IFDEF Restore_XMM6_SSE}
   {$IFDEF Win64}
     MOVAPS  XMM6, dqword ptr [RSP]
     ADD     RSP,  16
   {$ENDIF}
 {$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  Restore_XMM6_to_XMM9_SSE
+
+  Restores registers XMM6, XMM7, XMM8 and XMM9 from current stack.
+
+  Note:
+
+    RSP/ESP regiter is increased by 64.
+
+-------------------------------------------------------------------------------}
 
 {$IFDEF Restore_XMM6_to_XMM9_SSE}
   {$IFDEF Win64}
@@ -258,6 +318,18 @@
     ADD     RSP,  64
   {$ENDIF}
 {$ENDIF}
+
+{-------------------------------------------------------------------------------
+
+  Restore_XMM6_to_XMM9_SSE
+
+  Restores registers XMM6 trough XMM13 (8 registers) from current stack.
+
+  Note:
+
+    RSP/ESP regiter is increased by 128.
+
+-------------------------------------------------------------------------------}
 
 {$IFDEF Restore_XMM6_to_XMM13_SSE}
   {$IFDEF Win64}
@@ -277,27 +349,50 @@
                                  Stack alignment
 ===============================================================================}
 
-{$IFDEF AlignStack_16B_Entry}
-{
+{*******************************************************************************
   Stack in 64bit builds should be already aligned on 128bit boundary in all
   systems.
-}
+*******************************************************************************}
+
+{-------------------------------------------------------------------------------
+
+  AlignStack_16B_Entry
+
+  Aligns stack pointer (top of the stack) to 128bit boundary.
+
+  Note:
+
+    ESP regiter is decreased (amount depends on current value, but is always at
+    least 8).
+
+-------------------------------------------------------------------------------}
+
+{$IFDEF AlignStack_16B_Entry}
   {$IFDEF x86}
-    PUSH  EBP
-    MOV   EBP,  ESP
-    AND   ESP,  $FFFFFFF0
-  {$IFDEF DevelMsgs}
-    {$MESSAGE 'Reimplement'}
-  {$ENDIF}
+    PUSH  EAX
+    MOV   EAX,    ESP
+    SUB   ESP,    4
+    ADD   EAX,    4
+    AND   ESP,    $FFFFFFF0
+    MOV   [ESP],  EAX
+    MOV   EAX,    [EAX - 4]
   {$ENDIF}
 {$ENDIF}
 
+{-------------------------------------------------------------------------------
+
+  AlignStack_16B_Leave
+
+  Removes stack pointer alignment done by AlignStack_16B_Entry.
+
+  Note:
+
+    ESP regiter is restored to a value it had before AlignStack_16B_Entry.
+
+-------------------------------------------------------------------------------}
+
 {$IFDEF AlignStack_16B_Leave}
   {$IFDEF x86}
-    MOV   ESP,  EBP
-    POP   EBP
-  {$IFDEF DevelMsgs}
-    {$MESSAGE 'Reimplement'}
-  {$ENDIF}  
+    POP   ESP
   {$ENDIF}
 {$ENDIF}

@@ -204,6 +204,8 @@
   {$ENDIF}
 {$ENDIF}
 
+//- Compilation messages -------------------------------------------------------
+
 {$IF Defined(Debug) or Defined(EnableDevelopmentMessages)}
   {$DEFINE DevelMsgs}
 {$IFEND}
@@ -211,6 +213,8 @@
 {$IF Defined(EnablePerformanceWarnings) and Defined(x64)}
   {$DEFINE PerfWarn_x64}
 {$IFEND}
+
+//- Inclusion selectors --------------------------------------------------------
 
 {$UNDEF CheckMemAlign16_1}
 {$UNDEF CheckMemAlign16_2}
