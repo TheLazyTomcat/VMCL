@@ -11,7 +11,7 @@
 
   Common routines
 
-  ©František Milt 2018-02-26
+  ©František Milt 2018-**-**
 
   Version 1.0 dev
 

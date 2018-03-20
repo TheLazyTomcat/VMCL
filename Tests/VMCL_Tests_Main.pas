@@ -7,11 +7,21 @@
 -------------------------------------------------------------------------------}
 {===============================================================================
 
-  VMCL Test Suite
+  VMCL - Test Suite
 
   Main test suite function
 
-  ©František Milt 2018-02-26
+    To run any of the tests, add entire VMCL library to the program and call
+    procedure called "Main" provided by this unit.
+
+    The test suit offers function of autotesting - when selecting test, just
+    enter "a" and entire currently selected test group (all individual tests)
+    will be executed.
+
+    WARNING - the test suite is written only for console programs, do not use
+              it in GUI programs.
+
+  ©František Milt 2018-**-**
 
   Version 1.0 dev
 
@@ -27,8 +37,6 @@ unit VMCL_Tests_Main;
 
 {$INCLUDE '..\VMCL_defs.inc'}
 
-{.$DEFINE DeterministicRnd}
-
 interface
 
 procedure Main;
@@ -38,8 +46,10 @@ implementation
 uses
   SysUtils,
   VMCL_Common,
-  VMCL_Tests_Common, VMCL_Tests_Vectors, VMCL_Tests_Matrices,
-  VMCL_Tests_Vectors_SSE, VMCL_Tests_Matrices_SSE;
+  VMCL_Tests_Common, VMCL_Tests_Vectors, VMCL_Tests_Matrices
+{$IFNDEF PurePascal}
+  , VMCL_Tests_Vectors_SSE, VMCL_Tests_Matrices_SSE
+{$ENDIF};
 
 //= Main procedure implemntation ===============================================
 
@@ -92,8 +102,8 @@ try
   WriteLn(ColumnText(Format('  %s MatricesUnwindLoops',         [BoolToMark(infMatricesUnwindLoops in VMCL_InfoSet)])));
   repeat
     SelectResult := Select('Test groups','Select test group (X,0 - exit; A - autotest):',
-      [Vectors_Main,Matrices_Main,Vectors_SSE_Main,Matrices_SSE_Main],
-      ['Vectors','Matrices','Vectors SSE','Matrices SSE']);
+      [Vectors_Main,Matrices_Main{$IFNDEF PurePascal},Vectors_SSE_Main,Matrices_SSE_Main{$ENDIF}],
+      ['Vectors','Matrices'{$IFNDEF PurePascal},'Vectors SSE','Matrices SSE'{$ENDIF}]);
   until (SelectResult = VMCL_RESULT_BACK) or (SelectResult = VMCL_RESULT_EXIT);
 except
   on E: Exception do

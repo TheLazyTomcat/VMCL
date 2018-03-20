@@ -9,9 +9,15 @@
 
   VMCL - Vectors & Matrices calculation library
 
-  Vectors
+  Vector types, constants and functions
 
-  ©František Milt 2018-02-26
+    Some provided functions has XYZ in their names. They are all implemented
+    only for 4-dimensional vectors and it indicates the function operates only
+    on lower three entries of the vector. Fourth entry is usually unchanged,
+    ignored or copied from input (see individial function declarations
+    for details).
+
+  ©František Milt 2018-**-**
 
   Version 1.0 dev
 
@@ -289,7 +295,11 @@ Function Vector2(const Vector: TVMCLVector3d): TVMCLVector2d; overload;
 Function Vector2(const Vector: TVMCLVector4d): TVMCLVector2d; overload;
 Function Vector3(const Vector: TVMCLVector4d): TVMCLVector3d; overload;
 
-// lower to higher dimension
+{
+  lower to higher dimension
+  When PositionVector is True, the highest entry is set to 1, otherwise it is
+  set to 0.
+}
 Function Vector3(const Vector: TVMCLVector2s): TVMCLVector3s; overload;
 Function Vector4(const Vector: TVMCLVector2s; PositionVector: Boolean = True): TVMCLVector4s; overload;
 Function Vector4(const Vector: TVMCLVector3s; PositionVector: Boolean = True): TVMCLVector4s; overload;
@@ -333,6 +343,10 @@ Function Vector4d(const Vector: TVMCLVector4sr): TVMCLVector4dr; overload;
     Basic vector functions (zeroing, comparison, etc.)
 ===============================================================================}
 
+{
+  When PositionVector is True, the highest entry is set to 1, otherwise it is
+  set to 0.
+}
 procedure LoadZeroVector(var Vector: TVMCLVector2s); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure LoadZeroVector(var Vector: TVMCLVector3s); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure LoadZeroVectorXYZ(var Vector: TVMCLVector4s); overload;
@@ -351,14 +365,18 @@ Function IsZeroVector(const Vector: TVMCLVector3d): Boolean; overload;{$IFDEF Ca
 Function IsZeroVector(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
+{$message 'implement IsUnitVector'}
+//Function IsUnitVector();
+
+// Dest[3] stays unchanged
 procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVectorXYZ(const Src: TVMCLVector4s; var Dest: TVMCLVector4s); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
-procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
+procedure CopyVectorXYZ(const Src: TVMCLVector4d; var Dest: TVMCLVector4d); overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 Function EqualVectors(const aVector, bVector: TVMCLVector2s): Boolean; overload;
 Function EqualVectors(const aVector, bVector: TVMCLVector3s): Boolean; overload;
@@ -429,6 +447,7 @@ procedure Normalize(var X, Y, Z, W: Double); overload;
     Calculations with one vector
 ===============================================================================}
 
+// Result[3] in XYZ functions is copied from aVector[3]
 Function ScalarMultiply(const Vector: TVMCLVector2s; Scalar: Single): TVMCLVector2s; overload;
 Function ScalarMultiply(const Vector: TVMCLVector3s; Scalar: Single): TVMCLVector3s; overload;
 Function ScalarMultiply(const Vector: TVMCLVector4s; Scalar: Single): TVMCLVector4s; overload;
@@ -442,6 +461,7 @@ Function ScalarMultiplyXYZ(const Vector: TVMCLVector4d; Scalar: Double): TVMCLVe
     Calculations with multiple vectors
 ===============================================================================}
 
+// Result[3] in XYZ functions is copied from aVector[3]
 Function VectorsAdd(const aVector,bVector: TVMCLVector2s): TVMCLVector2s; overload;
 Function VectorsAdd(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsAdd(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
@@ -451,6 +471,7 @@ Function VectorsAdd(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overlo
 Function VectorsAdd(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
 Function VectorsAddXYZ(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
 
+// Result[3] in XYZ functions is copied from aVector[3]
 Function VectorsSubtract(const aVector,bVector: TVMCLVector2s): TVMCLVector2s; overload;
 Function VectorsSubtract(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsSubtract(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
@@ -469,6 +490,10 @@ Function VectorsDotProduct(const aVector,bVector: TVMCLVector3d): Double; overlo
 Function VectorsDotProduct(const aVector,bVector: TVMCLVector4d): Double; overload;
 Function VectorsDotProductXYZ(const aVector,bVector: TVMCLVector4d): Double; overload;
 
+{
+  Cross product on 4-dim vectors is not defined, only lower 3 entries are used
+  in calculation and Result[3] is copied from aVector[3].
+}
 Function VectorsCrossProduct(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsCrossProduct(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
 Function VectorsCrossProduct(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
@@ -480,19 +505,23 @@ Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector4s): Single
 Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector3d): Double; overload;
 Function VectorsBoxProduct(const aVector,bVector,cVector: TVMCLVector4d): Double; overload;
 
-// calculated according to right-hand rule
+// calculated according to right-hand rule, Result[3] is set to 0
 Function VectorsNormal(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsNormal(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
 Function VectorsNormal(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
 Function VectorsNormal(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
 
-// opposite vector to normal vector
+// opposite vector to normal vector, Result[3] is set to 0
 Function VectorsAntinormal(const aVector,bVector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsAntinormal(const aVector,bVector: TVMCLVector4s): TVMCLVector4s; overload;
 Function VectorsAntinormal(const aVector,bVector: TVMCLVector3d): TVMCLVector3d; overload;
 Function VectorsAntinormal(const aVector,bVector: TVMCLVector4d): TVMCLVector4d; overload;
 
-// angle between two vectors, in radians
+{
+  angle between two vectors, in radians
+  Not defined for 4-dim vectors, only lower 3 entries are used in calculation.
+  If magnitude of any of the vectors is 0, the result is set to 0.
+}
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector2s): Single; overload;
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector3s): Single; overload;
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector4s): Single; overload;
@@ -500,7 +529,11 @@ Function VectorsAngleRad(const aVector,bVector: TVMCLVector2d): Double; overload
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector3d): Double; overload;
 Function VectorsAngleRad(const aVector,bVector: TVMCLVector4d): Double; overload;
 
-// angle between two vectors, in degrees
+{
+  angle between two vectors, in degrees
+  Not defined for 4-dim vectors, only lower 3 entries are used in calculation.
+  If magnitude of any of the vectors is 0, the result is set to 0.
+}
 Function VectorsAngleDeg(const aVector,bVector: TVMCLVector2s): Single; overload;
 Function VectorsAngleDeg(const aVector,bVector: TVMCLVector3s): Single; overload;
 Function VectorsAngleDeg(const aVector,bVector: TVMCLVector4s): Single; overload;
@@ -508,7 +541,11 @@ Function VectorsAngleDeg(const aVector,bVector: TVMCLVector2d): Double; overload
 Function VectorsAngleDeg(const aVector,bVector: TVMCLVector3d): Double; overload;
 Function VectorsAngleDeg(const aVector,bVector: TVMCLVector4d): Double; overload;
 
-// projection of vector Vector to vector Base
+{
+  projection of vector Vector to vector Base
+  If the Base has magnitude of 0, the result is set to zero vector.
+  Result[3] in XYZ is set to Vector[3].
+}
 Function VectorsProjection(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
 Function VectorsProjection(const Base,Vector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsProjection(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
@@ -518,7 +555,11 @@ Function VectorsProjection(const Base,Vector: TVMCLVector3d): TVMCLVector3d; ove
 Function VectorsProjection(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
 Function VectorsProjectionXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
 
-// returns orthogonalized Vector to Base
+{
+  returns orthogonalized Vector to Base
+  If the Base has magnitude of 0, the result is set to zero vector.
+  Result[3] in XYZ is set to Vector[3].
+}
 Function VectorsOrthogonal(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
 Function VectorsOrthogonal(const Base,Vector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsOrthogonal(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
@@ -528,7 +569,11 @@ Function VectorsOrthogonal(const Base,Vector: TVMCLVector3d): TVMCLVector3d; ove
 Function VectorsOrthogonal(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
 Function VectorsOrthogonalXYZ(const Base,Vector: TVMCLVector4d): TVMCLVector4d; overload;
 
-// returns orthogonalized and normalized Vector to Base
+{
+  returns orthogonalized and normalized Vector to Base
+  If the Base has magnitude of 0, the result is set to zero vector.
+  Result[3] in XYZ is set to Vector[3].
+}
 Function VectorsOrthonormal(const Base,Vector: TVMCLVector2s): TVMCLVector2s; overload;
 Function VectorsOrthonormal(const Base,Vector: TVMCLVector3s): TVMCLVector3s; overload;
 Function VectorsOrthonormal(const Base,Vector: TVMCLVector4s): TVMCLVector4s; overload;
@@ -1586,7 +1631,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure CopyVectorXYZ(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
+procedure CopyVectorXYZ(const Src: TVMCLVector4s; var Dest: TVMCLVector4s);
 begin
 Move(Src,Dest{%H-},SizeOf(TVMCLVector4s) - SizeOf(Single));
 end;
@@ -1614,7 +1659,7 @@ end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
-procedure CopyVectorXYZ(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
+procedure CopyVectorXYZ(const Src: TVMCLVector4d; var Dest: TVMCLVector4d);
 begin
 Move(Src,Dest{%H-},SizeOf(TVMCLVector4d) - SizeOf(Double));
 end;

@@ -186,7 +186,21 @@
 
   Not defined by default.
 }
-{$DEFINE MatricesUnwindLoops}
+{.$DEFINE MatricesUnwindLoops}
+
+//- VMCL_Tests_Main ------------------------------------------------------------
+
+{
+  DeterministicRnd
+
+    When defined, the RandSeed for pascal random number generator is set to 0 at
+    the start of test suite. Otherwise it is initialized using standard function
+    Randomize.
+    This can be used eg. for test result comparison.
+
+  Not defined by default.
+}
+{.$DEFINE DeterministicRnd}
 
 //= Do not touch following =====================================================
 

@@ -1,3 +1,74 @@
+{-------------------------------------------------------------------------------
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+-------------------------------------------------------------------------------}
+{===============================================================================
+
+  VMCL - Vectors & Matrices calculation library
+
+  Matrices types, constants and functions
+
+    Two distinct types of matrices are provided: column-mayor (CM) and
+    row-mayor (RM) matrices.
+
+    Matrices here are implemented as two-dimensional arrays. Pascal stores
+    arrays in a way, where entries of the last dimension (right-most array
+    index) are stored closest together in memory.
+    Since usual way of adressing entries in matrix is first by row, then by
+    column, this means the arrays, and therefore matrices, are in pascal stored
+    inherently as row-major.
+    To provide for proper CM matrix support, those matrices are stored in memory
+    transposed.
+
+    Let's have following matrix A:
+
+            [a11  a12  a13]
+        A = [a21  a22  a23]
+            [a31  a32  a33]
+
+    If in row-major (RM) order, it will be stored in memory as a sequence:
+
+        a11, a12, a13, a21, a22, a23, a31, a32, a33
+
+    In colomn-major (CM) order, it will be:
+
+        a11, a21, a31, a12, a22, a32, a13, a23, a33
+
+    If you want to work with row-major matrices, declare your variables as a
+    type that has RM in the identifier (eg. TVMCLMatrix3RMs).
+    To work with with column-mayor matrices, use types with CM in the idetifier
+    (eg. TVMCLMatrix4CMd).
+    There are also default types with no order markings in the type identifier.
+    Order of these types depends on whether symbol MatricesColumnMajorIsDefault
+    is defined or not (when it is, they will be in CM order, when not defined,
+    they will be in RM order).
+    When you pass either to the provided functions, the order is recognized at
+    compile time via function overloading and proper calculation is performed.
+
+    WARNING - when directly accessing entries of CM matrices, remember to
+              switch column and row index (first index will be column index,
+              second index row index). When accessing RM entries, use standard
+              matrix notation (row index first, column index second).
+
+    WARNING - all indexing is zero-based, meaning first row has index 0, second
+              has index 1 and so on. This applies to all functions and entire
+              implementation.
+
+  ©František Milt 2018-**-**
+
+  Version 1.0 dev
+
+  Dependencies:
+    AuxTypes    - github.com/ncs-sniper/Lib.AuxTypes
+    BitVector   - github.com/ncs-sniper/Lib.BitVector
+    BitOps      - github.com/ncs-sniper/Lib.BitOps
+    StrRect     - github.com/ncs-sniper/Lib.StrRect
+    SimpleCPUID - github.com/ncs-sniper/Lib.SimpleCPUID
+
+===============================================================================}
 unit VMCL_Matrices;
 
 {$INCLUDE 'VMCL_defs.inc'}
@@ -266,6 +337,7 @@ Function MatrixFormat(CommonFormat:   TVMCLCommonFormat;
     General matrix functions - declaration
 ===============================================================================}
 
+// returns index in linear overlay for given row an column, stride is size of the overlaid matrix
 Function GetLinearOverlayIndex_RM(Row,Col,Stride: Integer): Integer;{$IFDEF CanInline} inline;{$ENDIF}
 Function GetLinearOverlayIndex_CM(Row,Col,Stride: Integer): Integer;{$IFDEF CanInline} inline;{$ENDIF}
 Function GetLinearOverlayIndex(Row,Col,Stride: Integer): Integer;{$IFDEF CanInline} inline;{$ENDIF}
@@ -307,6 +379,11 @@ Function MatToStr(const Matrix: TVMCLMatrix4CMd): String; overload;{$IFDEF CanIn
 {===============================================================================
     Matrix building - declaration
 ===============================================================================}
+
+{
+  Pascal compilers cannot distinguish overloaded funtions by result type,
+  therefore explicitly marked functions are provided fo RM and CM orders.
+}
 
 // building matrix from row vectors
 Function RMMatrixFromRows(const Row1,Row2: TVMCLVector2s): TVMCLMatrix2RMs; overload;
@@ -358,7 +435,7 @@ Function MatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4d)
     Matrix entries access - declaration
 ===============================================================================}
 
-// getting entry
+// getting entry - returns 0 when either Row or Column is out of bounds
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMs; Row, Column: Integer): Single; overload;
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMd; Row, Column: Integer): Double; overload;
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2CMs; Row, Column: Integer): Single; overload;
@@ -374,7 +451,7 @@ Function MatrixGetEntry(const Matrix: TVMCLMatrix4RMd; Row, Column: Integer): Do
 Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMs; Row, Column: Integer): Single; overload;
 Function MatrixGetEntry(const Matrix: TVMCLMatrix4CMd; Row, Column: Integer): Double; overload;
 
-// settings entry
+// settings entry - does not set any entry when either Row or Column is out of bounds
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMs; Row, Column: Integer; Value: Single); overload;
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix2RMd; Row, Column: Integer; Value: Double); overload;
 procedure MatrixSetEntry(var Matrix: TVMCLMatrix2CMs; Row, Column: Integer; Value: Single); overload;
@@ -394,6 +471,7 @@ procedure MatrixSetEntry(var Matrix: TVMCLMatrix4CMd; Row, Column: Integer; Valu
     Matrix vector extraction - declaration
 ===============================================================================}
 
+// returns zero vector when Row is out of bounds
 Function MatrixGetRow(const Matrix: TVMCLMatrix2RMs; Row: Integer): TVMCLVector2s; overload;
 Function MatrixGetRow(const Matrix: TVMCLMatrix2RMd; Row: Integer): TVMCLVector2d; overload;
 Function MatrixGetRow(const Matrix: TVMCLMatrix2CMs; Row: Integer): TVMCLVector2s; overload;
@@ -409,6 +487,7 @@ Function MatrixGetRow(const Matrix: TVMCLMatrix4RMd; Row: Integer): TVMCLVector4
 Function MatrixGetRow(const Matrix: TVMCLMatrix4CMs; Row: Integer): TVMCLVector4s; overload;
 Function MatrixGetRow(const Matrix: TVMCLMatrix4CMd; Row: Integer): TVMCLVector4d; overload;
 
+// returns zero vector when Column is out of bounds
 Function MatrixGetColumn(const Matrix: TVMCLMatrix2RMs; Column: Integer): TVMCLVector2s; overload;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix2RMd; Column: Integer): TVMCLVector2d; overload;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix2CMs; Column: Integer): TVMCLVector2s; overload;
@@ -428,6 +507,7 @@ Function MatrixGetColumn(const Matrix: TVMCLMatrix4CMd; Column: Integer): TVMCLV
    Matrix vector insertion - declaration
 ===============================================================================}
 
+// does not set any entry when Row is out of bounds
 procedure MatrixSetRow(var Matrix: TVMCLMatrix2RMs; Row: Integer; const Data: TVMCLVector2s); overload;
 procedure MatrixSetRow(var Matrix: TVMCLMatrix2RMd; Row: Integer; const Data: TVMCLVector2d); overload;
 procedure MatrixSetRow(var Matrix: TVMCLMatrix2CMs; Row: Integer; const Data: TVMCLVector2s); overload;
@@ -443,6 +523,7 @@ procedure MatrixSetRow(var Matrix: TVMCLMatrix4RMd; Row: Integer; const Data: TV
 procedure MatrixSetRow(var Matrix: TVMCLMatrix4CMs; Row: Integer; const Data: TVMCLVector4s); overload;
 procedure MatrixSetRow(var Matrix: TVMCLMatrix4CMd; Row: Integer; const Data: TVMCLVector4d); overload;
 
+// does not set any entry when Column is out of bounds
 procedure MatrixSetColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer; const Data: TVMCLVector2s); overload;
 procedure MatrixSetColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer; const Data: TVMCLVector2d); overload;
 procedure MatrixSetColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer; const Data: TVMCLVector2s); overload;
@@ -462,6 +543,7 @@ procedure MatrixSetColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer; const Da
     Matrix filling - declaration
 ===============================================================================}
 
+// does not set any entry when Row is out of bounds
 procedure MatrixFillRow(var Matrix: TVMCLMatrix2RMs; Row: Integer; Value: Single); overload;
 procedure MatrixFillRow(var Matrix: TVMCLMatrix2RMd; Row: Integer; Value: Double); overload;
 procedure MatrixFillRow(var Matrix: TVMCLMatrix2CMs; Row: Integer; Value: Single); overload;
@@ -477,6 +559,7 @@ procedure MatrixFillRow(var Matrix: TVMCLMatrix4RMd; Row: Integer; Value: Double
 procedure MatrixFillRow(var Matrix: TVMCLMatrix4CMs; Row: Integer; Value: Single); overload;
 procedure MatrixFillRow(var Matrix: TVMCLMatrix4CMd; Row: Integer; Value: Double); overload;
 
+// does not set any entry when Column is out of bounds
 procedure MatrixFillColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer; Value: Single); overload;
 procedure MatrixFillColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer; Value: Double); overload;
 procedure MatrixFillColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer; Value: Single); overload;
@@ -492,6 +575,7 @@ procedure MatrixFillColumn(var Matrix: TVMCLMatrix4RMd; Column: Integer; Value: 
 procedure MatrixFillColumn(var Matrix: TVMCLMatrix4CMs; Column: Integer; Value: Single); overload;
 procedure MatrixFillColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer; Value: Double); overload;
 
+// fills entire matrix with one value
 procedure MatrixFill(var Matrix: TVMCLMatrix2RMs; Value: Single); overload;
 procedure MatrixFill(var Matrix: TVMCLMatrix2RMd; Value: Double); overload;
 procedure MatrixFill(var Matrix: TVMCLMatrix2CMs; Value: Single); overload;
@@ -511,6 +595,7 @@ procedure MatrixFill(var Matrix: TVMCLMatrix4CMd; Value: Double); overload;
     Matrix spreading - declaration
 ===============================================================================}
 
+// does not change any entry when Row is out of bounds
 procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2RMs; Row: Integer); overload;
 procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2RMd; Row: Integer); overload;
 procedure MatrixSpreadRow(var Matrix: TVMCLMatrix2CMs; Row: Integer); overload;
@@ -526,6 +611,7 @@ procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4RMd; Row: Integer); overload;
 procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4CMs; Row: Integer); overload;
 procedure MatrixSpreadRow(var Matrix: TVMCLMatrix4CMd; Row: Integer); overload;
 
+// does not change any entry when Row is out of bounds
 procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2RMs; Column: Integer); overload;
 procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2RMd; Column: Integer); overload;
 procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix2CMs; Column: Integer); overload;
@@ -545,6 +631,14 @@ procedure MatrixSpreadColumn(var Matrix: TVMCLMatrix4CMd; Column: Integer); over
     Submatrix read access - declaration
 ===============================================================================}
 
+{
+  Returns submatrix starting at selected Row and Column.
+  When IdentityMatrix is set to true, any entry that cannot be obtained from
+  input matrix is filled with 1 when on main diagonal, 0 elsewhere. When not
+  defined, it is filled with 0.
+
+  Row and Column can be outside of allowed index bounds.
+}
 Function GetSubmatrix2(const Matrix: TVMCLMatrix3RMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMs; overload;
 Function GetSubmatrix2(const Matrix: TVMCLMatrix3RMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2RMd; overload;
 Function GetSubmatrix2(const Matrix: TVMCLMatrix3CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix2CMs; overload;
@@ -560,6 +654,22 @@ Function GetSubmatrix3(const Matrix: TVMCLMatrix4RMd; Row,Column: Integer; Ident
 Function GetSubmatrix3(const Matrix: TVMCLMatrix4CMs; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3CMs; overload;
 Function GetSubmatrix3(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer; IdentityMatrix: Boolean = False): TVMCLMatrix3CMd; overload;
 
+{
+  Extracts submatrix by removing Row(1,2) and Column(1,2) from the input matrix.
+
+  Row(1,2) and Column(1,2) are not checked for bounds.
+
+  Example:
+
+        [a11  a12  a13  a14]             Row    = 1
+    A = [a21  a22  a23  a24]             Column = 2
+        [a31  a32  a33  a34]
+        [a41  a42  a43  a44]
+
+        [a11  a12  a14]
+    S = [a31  a32  a34]
+        [a41  a42  a44]
+}
 Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3RMs; Row,Column: Integer): TVMCLMatrix2RMs; overload;
 Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3RMd; Row,Column: Integer): TVMCLMatrix2RMd; overload;
 Function ExtractSubmatrix2(const Matrix: TVMCLMatrix3CMs; Row,Column: Integer): TVMCLMatrix2CMs; overload;
@@ -579,6 +689,12 @@ Function ExtractSubmatrix3(const Matrix: TVMCLMatrix4CMd; Row,Column: Integer): 
     Submatrix write access - declaration
 ===============================================================================}
 
+{
+  Sets entries in the matrix from entries of provided smaller matrix, starting
+  at Row and Column position.
+
+  Row and Column can be outside of allowed index bounds.
+}
 procedure SetSubmatrix2(var Matrix: TVMCLMatrix3RMs; const Submatrix: TVMCLMatrix2RMs; Row,Column: Integer); overload;
 procedure SetSubmatrix2(var Matrix: TVMCLMatrix3RMd; const Submatrix: TVMCLMatrix2RMd; Row,Column: Integer); overload;
 procedure SetSubmatrix2(var Matrix: TVMCLMatrix3CMs; const Submatrix: TVMCLMatrix2CMs; Row,Column: Integer); overload;
@@ -594,6 +710,12 @@ procedure SetSubmatrix3(var Matrix: TVMCLMatrix4RMd; const Submatrix: TVMCLMatri
 procedure SetSubmatrix3(var Matrix: TVMCLMatrix4CMs; const Submatrix: TVMCLMatrix3CMs; Row,Column: Integer); overload;
 procedure SetSubmatrix3(var Matrix: TVMCLMatrix4CMd; const Submatrix: TVMCLMatrix3CMd; Row,Column: Integer); overload;
 
+{
+  Fills submatrix given by starting position and size in matrix with a single
+  value.
+
+  Rows and Columns must both be greater than 0.
+}
 procedure FillSubmatrix(var Matrix: TVMCLMatrix2RMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
 procedure FillSubmatrix(var Matrix: TVMCLMatrix2RMd; FromRow,FromColumn,Rows,Columns: Integer; Value: Double); overload;
 procedure FillSubmatrix(var Matrix: TVMCLMatrix2CMs; FromRow,FromColumn,Rows,Columns: Integer; Value: Single); overload;
@@ -613,6 +735,10 @@ procedure FillSubmatrix(var Matrix: TVMCLMatrix4CMd; FromRow,FromColumn,Rows,Col
     Matrix exchanges - declaration
 ===============================================================================}
 
+{
+  Exchanges individual entries in the matrix.
+  If any index is outside of allowed bounds, nothing is done.
+}
 procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2RMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
 procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2RMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
 procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix2CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
@@ -628,6 +754,10 @@ procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4RMd; SrcRow,SrcColumn,Ds
 procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4CMs; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
 procedure MatrixExchangeEntries(var Matrix: TVMCLMatrix4CMd; SrcRow,SrcColumn,DstRow,DstColumn: Integer); overload;
 
+{
+  Exchanges individual rows of the matrix.
+  If any index is outside of allowed bounds, nothing is done.
+}
 procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2RMs; SrcRow,DstRow: Integer); overload;
 procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2RMd; SrcRow,DstRow: Integer); overload;
 procedure MatrixExchangeRows(var Matrix: TVMCLMatrix2CMs; SrcRow,DstRow: Integer); overload;
@@ -643,6 +773,10 @@ procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4RMd; SrcRow,DstRow: Integer
 procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4CMs; SrcRow,DstRow: Integer); overload;
 procedure MatrixExchangeRows(var Matrix: TVMCLMatrix4CMd; SrcRow,DstRow: Integer); overload;
 
+{
+  Exchanges individual columns of the matrix.
+  If any index is outside of allowed bounds, nothing is done.
+}
 procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2RMs; SrcColumn,DstColumn: Integer); overload;
 procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2RMd; SrcColumn,DstColumn: Integer); overload;
 procedure MatrixExchangeColumns(var Matrix: TVMCLMatrix2CMs; SrcColumn,DstColumn: Integer); overload;
@@ -678,7 +812,11 @@ Function Matrix3(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix3RMd; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix3CMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix3CMd; overload;
 
-// lower to higher dimension
+{
+  lower to higher dimension
+  When IdentityMatrix is set to true, new entries are filled with 1 when on
+  main diagonal, 0 elsewhere.
+}
 Function Matrix3(const Matrix: TVMCLMatrix2RMs; IdentityMatrix: Boolean = False): TVMCLMatrix3RMs; overload;
 Function Matrix3(const Matrix: TVMCLMatrix2RMd; IdentityMatrix: Boolean = False): TVMCLMatrix3RMd; overload;
 Function Matrix3(const Matrix: TVMCLMatrix2CMs; IdentityMatrix: Boolean = False): TVMCLMatrix3CMs; overload;
@@ -835,6 +973,7 @@ Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4RMd; Epsilon: Double = 
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMs; Epsilon: Single = 0): Boolean; overload;
 Function SameMatrices(const aMatrix,bMatrix: TVMCLMatrix4CMd; Epsilon: Double = 0): Boolean; overload;
 
+// returns true when determinant of the matrix is nonzero, false otherwise
 Function Invertible(const Matrix: TVMCLMatrix2RMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Invertible(const Matrix: TVMCLMatrix2RMd): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function Invertible(const Matrix: TVMCLMatrix2CMs): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
@@ -899,6 +1038,49 @@ Function Negative(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix4RMd; overload;
 Function Negative(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
 Function Negative(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
 
+{-------------------------------------------------------------------------------
+
+  Determinants are calculated this way:
+
+- 2x2 matrices - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+      A = [a11  a12]
+          [a21  a22]
+
+      det(A) = a11 * a22 - a12 * a21
+
+- 3x3 matrices - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          [a11  a12  a13]
+      A = [a21  a22  a23]
+          [a31  a32  a33]
+
+      det(A) = a11 * (a22 * a33 - a23 * a32) -
+               a12 * (a21 * a33 - a23 * a31) +
+               a13 * (a21 * a32 - a22 * a31)
+
+      det(A) = (a11a22a33 - a11a23a32) -
+               (a12a21a33 - a12a23a31) +
+               (a13a21a32 - a13a22a31)
+
+      det(A) = a11a22a33 - a11a23a32 - a12a21a33 + a12a23a31 + a13a21a32 - a13a22a31
+
+      det(A) = a11a22a33 + a12a23a31 + a13a21a32 - a11a23a32 - a12a21a33 - a13a22a31
+
+- 4x4 matrices - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          [a11  a12  a13  a14]
+      A = [a21  a22  a23  a24]
+          [a31  a32  a33  a34]
+          [a41  a42  a43  a44]
+
+           [a22  a23  a24]       [a21  a23  a24]       [a21  a22  a24]       [a21  a22  a23]
+      S1 = [a32  a33  a34]  S2 = [a31  a33  a34]  S3 = [a31  a32  a34]  S4 = [a31  a32  a33]
+           [a42  a43  a44]       [a41  a43  a44]       [a41  a42  a44]       [a41  a42  a43]
+
+      det(A) = a11 * det(S1) - a12 * det(S2) + a13 * det(S3) - a14 * det(S4)
+
+-------------------------------------------------------------------------------}
 Function Determinant(const Matrix: TVMCLMatrix2RMs): Single; overload;
 Function Determinant(const Matrix: TVMCLMatrix2RMd): Double; overload;
 Function Determinant(const Matrix: TVMCLMatrix2CMs): Single; overload;
@@ -914,6 +1096,23 @@ Function Determinant(const Matrix: TVMCLMatrix4RMd): Double; overload;
 Function Determinant(const Matrix: TVMCLMatrix4CMs): Single; overload;
 Function Determinant(const Matrix: TVMCLMatrix4CMd): Double; overload;
 
+{-------------------------------------------------------------------------------
+
+  Orthonormalization ensures that columns, when seen as vectors, are orthogonal
+  to each other, and also are all unit vectors (length of 1).
+
+  Modified Gram-Schmidt (MGS) process is used. The calculation is done this way
+  (here described for 3-dim matrix):
+    - first column is normalized
+    - second column is orthonormalized to first column
+    - third column is orthogonalized to first column
+    - third column is orthonormalized to second (already processed) column
+
+  For 4-dimensional matrices, only the first three columns are orthonormalized,
+  and from those only first three rows are calculated. Both fourth row and
+  column stays unchanged.
+
+-------------------------------------------------------------------------------}
 procedure Orthonormalize(var Matrix: TVMCLMatrix2RMs); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix2RMd); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix2CMs); overload;
@@ -929,6 +1128,55 @@ procedure Orthonormalize(var Matrix: TVMCLMatrix4RMd); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMs); overload;
 procedure Orthonormalize(var Matrix: TVMCLMatrix4CMd); overload;
 
+{-------------------------------------------------------------------------------
+
+  Calculates inverse matrix to presented matrix (A), so that:
+
+    inv(A) * A = identity matrix
+
+  Inverse matrices are calculated this way:
+
+- 2x2 matrices - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+      A = [a11  a12]      inv(A) = 1/det(A) * [ a22  -a12]
+          [a21  a22]                          [-a21   a11]
+
+- 3x3 matrices - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          [a11  a12  a13]                       [ det(S11)  -det(S21)   det(S31)]
+      A = [a21  a22  a23]   inv(A) = 1/det(A) * [-det(S12)   det(S22)  -det(S32)]
+          [a31  a32  a33]                       [ det(S13)  -det(S23)   det(S33)]
+
+      Snm = Submatrix(A,n,m)      for example:  S21 = [a12  a13]
+                                                      [a32  a33]
+
+- 4x4 matrices - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          [a11  a12  a13  a14]                        [ det(S11)  -det(S21)   det(S31)  -det(S41)]
+      A = [a21  a22  a23  a24]    inv(A) = 1/det(A) * [-det(S12)   det(S22)  -det(S32)   det(S42)]
+          [a31  a32  a33  a34]                        [ det(S13)  -det(S23)   det(S33)  -det(S43)]
+          [a41  a42  a43  a44]                        [-det(S14))  det(S24)  -det(S34)   det(S44)]
+
+      Snm = Submatrix(A,n,m)
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  InverseAffine is faster way of computing inverse of 4-dimensional matrix, but
+  requires that the last row of matrix is [0,0,0,1], and computes inverse
+  this way:
+
+      A = [M  b]      inv(A) = [inv(M)  -inv(M) * b]
+          [0  1]               [  0           1    ]
+
+        M is 3x3 submatrix (a11 - a33)
+        b is 3-dimensional vector (a14 - a34)
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  When the matrix cannot be inversed (determinant is zero), it is filled with
+  zeroes.
+
+-------------------------------------------------------------------------------}
 Function Inversed(const Matrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 Function Inversed(const Matrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
 Function Inversed(const Matrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
@@ -988,6 +1236,25 @@ Function ScalarMultiply(const Matrix: TVMCLMatrix4RMd; Scalar: Double): TVMCLMat
 Function ScalarMultiply(const Matrix: TVMCLMatrix4CMs; Scalar: Single): TVMCLMatrix4CMs; overload;
 Function ScalarMultiply(const Matrix: TVMCLMatrix4CMd; Scalar: Double): TVMCLMatrix4CMd; overload;
 
+{-------------------------------------------------------------------------------
+
+  Result of matrix-vector multiplication is a vector.
+  It is calculated this way:
+
+          [a11  a12  a13  a14]
+      A = [a21  a22  a23  a24]    v = [v1 v2 v3 v4]
+          [a31  a32  a33  a34]
+          [a41  a42  a43  a44]
+
+              [a11  a12  a13  a14] [v1]   [a11v1 + a12v2 + a13v3 + a14v4]
+      A * v = [a21  a22  a23  a24] [v2] = [a21v1 + a22v2 + a23v3 + a24v4]
+              [a31  a32  a33  a34] [v3]   [a31v1 + a32v2 + a33v3 + a34v4]
+              [a41  a42  a43  a44] [v4]   [a41v1 + a42v2 + a43v3 + a44v4]
+
+  It is the same for lower dimensionality, the missing higher-dimension entries
+  are just omitted from the formula.
+
+-------------------------------------------------------------------------------}
 Function VectorMultiply(const Matrix: TVMCLMatrix2RMs; const Vector: TVMCLVector2s): TVMCLVector2s; overload;
 Function VectorMultiply(const Matrix: TVMCLMatrix2RMd; const Vector: TVMCLVector2d): TVMCLVector2d; overload;
 Function VectorMultiply(const Matrix: TVMCLMatrix2CMs; const Vector: TVMCLVector2s): TVMCLVector2s; overload;
@@ -1037,6 +1304,25 @@ Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4RMd): TVMCLMatrix4R
 Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMs): TVMCLMatrix4CMs; overload;
 Function MatricesSubtract(const aMatrix,bMatrix: TVMCLMatrix4CMd): TVMCLMatrix4CMd; overload;
 
+{-------------------------------------------------------------------------------
+
+  Multiplication of two matrices is computed this way:
+
+          [a11  a12  a13  a14]        [b11  b12  b13  b14]
+      A = [a21  a22  a23  a24]    B = [b21  b22  b23  b24]
+          [a31  a32  a33  a34]        [b31  b32  b33  b34]
+          [a41  a42  a43  a44]        [b41  b42  b43  b44]
+
+    Let's define rij as an entry in result matrix R, i being row index,
+    j column index, then:
+
+      rij = (ai1 * b1j) + (ai2 * b2j) + (ai3 * b3j) + (ai4 * b4j)
+
+    So, for resulting entry on row i and column j, entries from i-th
+    row of first matrix are multiplied with corresponding entries from j-th
+    column of second matrix, and those products are then summed.
+
+-------------------------------------------------------------------------------}
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMs): TVMCLMatrix2RMs; overload;
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2RMd): TVMCLMatrix2RMd; overload;
 Function MatricesMultiply(const aMatrix,bMatrix: TVMCLMatrix2CMs): TVMCLMatrix2CMs; overload;
@@ -1875,7 +2161,6 @@ end;
     Matrix entries access - implementation
 ===============================================================================}
 
-// getting entry
 Function MatrixGetEntry(const Matrix: TVMCLMatrix2RMs; Row, Column: Integer): Single;
 begin
 If CheckRange(Row,Low(Matrix),High(Matrix)) and

@@ -17,9 +17,9 @@
     All returned pointers are guaranteed to be properly aligned for use in fast
     SSE instructions (currently the alignment is set to 128bit boundary, but
     this can be changed). General memory managers might not necessarily
-    guarantee that, that is the main reason why this unit exists.
+    guarantee this alignment, that is the main reason why this unit exists.
 
-  ©František Milt 2018-02-26
+  ©František Milt 2018-**-**
 
   Version 1.0 dev
 

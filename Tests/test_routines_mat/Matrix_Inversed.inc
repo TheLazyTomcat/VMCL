@@ -31,7 +31,7 @@ WriteLn('m3d:'); WriteLn; WriteLn(MatToStr(m3d)); WriteLn; Write(MatToStr(Invers
 WriteLn(' check: ',BoolToStr(SameMatrices(MatricesMultiply(Inversed(m3d),m3d),VMCL_IdentityMatrix3d,1e-12),True));
 WriteLn;
 WriteLn('m4d:'); WriteLn; WriteLn(MatToStr(m4d)); WriteLn; Write(MatToStr(Inversed(m4d),MFS));
-WriteLn('check: ',BoolToStr(SameMatrices(MatricesMultiply(Inversed(m4d),m4d),VMCL_IdentityMatrix4d,1e-12),True));
+WriteLn(' check: ',BoolToStr(SameMatrices(MatricesMultiply(Inversed(m4d),m4d),VMCL_IdentityMatrix4d,1e-12),True));
 WriteLn; RandomMat(m4s); MatrixSetRow(m4s,3,Vector4s(0,0,0,1));
 WriteLn('m4s:'); WriteLn; WriteLn(MatToStr(m4s)); WriteLn;
 WriteLn(MatToStr(Inversed(m4s),MFS) + ' normal'); WriteLn; Write(MatToStr(InversedAffine(m4s),MFS) + ' affine, ');

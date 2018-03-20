@@ -1,3 +1,33 @@
+{-------------------------------------------------------------------------------
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+-------------------------------------------------------------------------------}
+{===============================================================================
+
+  VMCL - Vectors & Matrices calculation library
+
+  Test suite inclusion ASM code fragments
+
+    This file contains assembly code fragments that are inserted directly into
+    ASM functions used in test suite (instead of calling then as a routines).
+    This generates larger, but faster, code by avoiding call overhead.
+
+  ©František Milt 2018-**-**
+
+  Version 1.0 dev
+
+  Dependencies:
+    AuxTypes    - github.com/ncs-sniper/Lib.AuxTypes
+    BitVector   - github.com/ncs-sniper/Lib.BitVector
+    BitOps      - github.com/ncs-sniper/Lib.BitOps
+    StrRect     - github.com/ncs-sniper/Lib.StrRect
+    SimpleCPUID - github.com/ncs-sniper/Lib.SimpleCPUID
+
+===============================================================================}
+
 {.$DEFINE SpeedTestCaller}
 
 {-------------------------------------------------------------------------------
