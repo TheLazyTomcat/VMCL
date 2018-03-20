@@ -2,12 +2,12 @@ Function Vector_VectorsAngleRad_SSE_Prec({%H-}AutoTest: Boolean = False): Intege
 const
   TestCount = 1000000;
 var
-  v2s1,v2s2:  PVector2s;
-  v3s1,v3s2:  PVector3s;
-  v4s1,v4s2:  PVector4s;
-  v2d1,v2d2:  PVector2d;
-  v3d1,v3d2:  PVector3d;
-  v4d1,v4d2:  PVector4d;
+  v2s1,v2s2:  PVMCLVector2s;
+  v3s1,v3s2:  PVMCLVector3s;
+  v4s1,v4s2:  PVMCLVector4s;
+  v2d1,v2d2:  PVMCLVector2d;
+  v3d1,v3d2:  PVMCLVector3d;
+  v4d1,v4d2:  PVMCLVector4d;
   sRes:       Single;
   dRes:       Double;
   FuncPAS_2s: Function(const aVector,bVector: TVMCLVector2s): Single;
@@ -16,12 +16,12 @@ var
   FuncPAS_2d: Function(const aVector,bVector: TVMCLVector2d): Double;
   FuncPAS_3d: Function(const aVector,bVector: TVMCLVector3d): Double;
   FuncPAS_4d: Function(const aVector,bVector: TVMCLVector4d): Double;
-  FuncAMS_2s: procedure(const aVector,bVector: TVMCLVector2s; out Angle: Single);
-  FuncAMS_3s: procedure(const aVector,bVector: TVMCLVector3s; out Angle: Single);
-  FuncAMS_4s: procedure(const aVector,bVector: TVMCLVector4s; out Angle: Single);
-  FuncAMS_2d: procedure(const aVector,bVector: TVMCLVector2d; out Angle: Double);
-  FuncAMS_3d: procedure(const aVector,bVector: TVMCLVector3d; out Angle: Double);
-  FuncAMS_4d: procedure(const aVector,bVector: TVMCLVector4d; out Angle: Double);
+  FuncASM_2s: procedure(const aVector,bVector: TVMCLVector2s; out Angle: Single);
+  FuncASM_3s: procedure(const aVector,bVector: TVMCLVector3s; out Angle: Single);
+  FuncASM_4s: procedure(const aVector,bVector: TVMCLVector4s; out Angle: Single);
+  FuncASM_2d: procedure(const aVector,bVector: TVMCLVector2d; out Angle: Double);
+  FuncASM_3d: procedure(const aVector,bVector: TVMCLVector3d; out Angle: Double);
+  FuncASM_4d: procedure(const aVector,bVector: TVMCLVector4d; out Angle: Double);
   i:          Integer;
   EmptyTicks: Int64;
   Ticks:      Int64;
@@ -34,12 +34,12 @@ FuncPAS_4s := VMCL_Vectors.VectorsAngleRad;
 FuncPAS_2d := VMCL_Vectors.VectorsAngleRad;
 FuncPAS_3d := VMCL_Vectors.VectorsAngleRad;
 FuncPAS_4d := VMCL_Vectors.VectorsAngleRad;
-FuncAMS_2s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncAMS_3s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncAMS_4s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncAMS_2d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncAMS_3d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
-FuncAMS_4d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
+FuncASM_2s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
+FuncASM_3s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
+FuncASM_4s := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
+FuncASM_2d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
+FuncASM_3d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
+FuncASM_4d := VMCL_Vectors_SSE.VectorsAngleRad_SSE;
 WriteLn;
 WriteLn(LineText('VectorsAngleRad_SSE - High precision speed tests'));
 WriteLn;
@@ -87,7 +87,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_2s);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_2s);
   Write(Format('v2s VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v2s1,v2s2),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -154,7 +154,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_3s);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_3s);
   Write(Format('v3s VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v3s1,v3s2),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -221,7 +221,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_4s);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_4s);
   Write(Format('v4s VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v4s1,v4s2),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -310,7 +310,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_2d);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_2d);
   Write(Format('v2d VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v2d1,v2d2),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -399,7 +399,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_3d);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_3d);
   Write(Format('v3d VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v3d1,v3d2),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -488,7 +488,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_4d);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_4d);
   Write(Format('v4d VectorsNormal_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v4d1,v4d2),'a','u')]));
   For i := 1 to TestCount do
     begin

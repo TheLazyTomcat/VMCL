@@ -75,9 +75,9 @@
     When defined, functions that may perform badly in currently compiled mode
     and/or platform will be marked by a hint messages.
 
-  Defined by default.
+  Not defined by default.
 }
-{$DEFINE EnablePerformanceWarnings}
+{.$DEFINE EnablePerformanceWarnings}
 
 {
   EnableDevelopmentMessages
@@ -188,7 +188,37 @@
 }
 {.$DEFINE MatricesUnwindLoops}
 
+//- VMCL_Tests_Main ------------------------------------------------------------
+
+{
+  DeterministicRnd
+
+    When defined, the RandSeed for pascal random number generator is set to 0 at
+    the start of test suite. Otherwise it is initialized using standard function
+    Randomize.
+    This can be used eg. for test result comparison.
+
+  Not defined by default.
+}
+{.$DEFINE DeterministicRnd}
+
 //= Do not touch following =====================================================
+
+{$IFDEF Windows}
+  {$IFDEF x64}
+    {$DEFINE Win64}
+  {$ELSE}
+    {$DEFINE Win32}
+  {$ENDIF}
+{$ELSE}
+  {$IFDEF x64}
+    {$DEFINE Lin64}
+  {$ELSE}
+    {$DEFINE Lin32}
+  {$ENDIF}
+{$ENDIF}
+
+//- Compilation messages -------------------------------------------------------
 
 {$IF Defined(Debug) or Defined(EnableDevelopmentMessages)}
   {$DEFINE DevelMsgs}
@@ -197,4 +227,65 @@
 {$IF Defined(EnablePerformanceWarnings) and Defined(x64)}
   {$DEFINE PerfWarn_x64}
 {$IFEND}
+
+//- Inclusion selectors --------------------------------------------------------
+
+{$UNDEF CheckMemAlign16_1}
+{$UNDEF CheckMemAlign16_2}
+{$UNDEF CheckMemAlign16_3}
+
+{$UNDEF Load_XMM0_to_ST0_1s}
+{$UNDEF Load_XMM0_to_ST0_1d}
+
+{$UNDEF Save_XMM6_SSE}
+{$UNDEF Save_XMM6_to_XMM9_SSE}
+{$UNDEF Save_XMM6_to_XMM13_SSE}
+{$UNDEF Restore_XMM6_SSE}
+{$UNDEF Restore_XMM6_to_XMM9_SSE}
+{$UNDEF Restore_XMM6_to_XMM13_SSE}
+
+{$UNDEF AlignStack_16B_Entry}
+{$UNDEF AlignStack_16B_Leave}
+
+{$UNDEF CrossProduct_4s_SSE}
+{$UNDEF CrossProduct_4d_SSE}
+
+{$UNDEF DotProduct_4s3_SSE}
+{$UNDEF DotProduct_4d3_SSE}
+
+{$UNDEF Magnitude_4s_r2_SSE}
+{$UNDEF Magnitude_4d_r4_SSE}
+
+{$UNDEF Normalize_2s_SSE}
+{$UNDEF Normalize_4s_SSE}
+{$UNDEF Normalize_2d_SSE}
+{$UNDEF Normalize_4d_SSE}
+
+{$UNDEF Negate_4s_SSE}
+{$UNDEF Negate_4d_SSE}
+
+{$UNDEF ArcCosRad_1_x87}
+{$UNDEF ArcCosDeg_1_x87}
+
+{$UNDEF VectorsProjection_2s_SSE}
+{$UNDEF VectorsProjection_4s_SSE}
+{$UNDEF VectorsProjection_2d_SSE}
+{$UNDEF VectorsProjection_3d_SSE}
+{$UNDEF VectorsProjection_4d_SSE}
+
+{$UNDEF MatricesMultiply_2s_Round_SSE}
+{$UNDEF MatricesMultiply_3s_Round_SSE}
+{$UNDEF MatricesMultiply_4s_Round_SSE}
+{$UNDEF MatricesMultiply_2d_Round_SSE}
+{$UNDEF MatricesMultiply_3d_Round_SSE}
+{$UNDEF MatricesMultiply_4d_Round_SSE}
+
+{$UNDEF FunctionVariantXYZ}
+{$UNDEF AlignedMemoryAccess}
+{$UNDEF FirstRound}
+{$UNDEF LastRound}
+{$UNDEF OddRound}
+
+{$UNDEF SpeedTestCaller}
+
 

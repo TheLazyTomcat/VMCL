@@ -1,11 +1,11 @@
 Function Vector_VectorsAngleRad_SSE_Man({%H-}AutoTest: Boolean = False): Integer;
 var
-  v2s1,v2s2:  PVector2s;
-  v3s1,v3s2:  PVector3s;
-  v4s1,v4s2:  PVector4s;
-  v2d1,v2d2:  PVector2d;
-  v3d1,v3d2:  PVector3d;
-  v4d1,v4d2:  PVector4d;
+  v2s1,v2s2:  PVMCLVector2s;
+  v3s1,v3s2:  PVMCLVector3s;
+  v4s1,v4s2:  PVMCLVector4s;
+  v2d1,v2d2:  PVMCLVector2d;
+  v3d1,v3d2:  PVMCLVector3d;
+  v4d1,v4d2:  PVMCLVector4d;
   sRes:       Single;
   dRes:       Double;
 begin

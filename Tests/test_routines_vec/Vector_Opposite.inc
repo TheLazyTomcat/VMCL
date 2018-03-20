@@ -1,11 +1,11 @@
 Function Vector_Opposite({%H-}AutoTest: Boolean = False): Integer;
 var
-  v2s:  TVector2s;
-  v3s:  TVector3s;
-  v4s:  TVector4s;
-  v2d:  TVector2d;
-  v3d:  TVector3d;
-  v4d:  TVector4d;
+  v2s:  TVMCLVector2s;
+  v3s:  TVMCLVector3s;
+  v4s:  TVMCLVector4s;
+  v2d:  TVMCLVector2d;
+  v3d:  TVMCLVector3d;
+  v4d:  TVMCLVector4d;
 begin
 WriteLn;
 WriteLn(LineText('Opposite'));

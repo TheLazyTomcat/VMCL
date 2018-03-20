@@ -2,12 +2,12 @@ Function Vector_VectorsProjection_SSE_Prec({%H-}AutoTest: Boolean = False): Inte
 const
   TestCount = 1000000;
 var
-  v2s1,v2s2,v2s3: PVector2s;
-  v3s1,v3s2,v3s3: PVector3s;
-  v4s1,v4s2,v4s3: PVector4s;
-  v2d1,v2d2,v2d3: PVector2d;
-  v3d1,v3d2,v3d3: PVector3d;
-  v4d1,v4d2,v4d3: PVector4d;
+  v2s1,v2s2,v2s3: PVMCLVector2s;
+  v3s1,v3s2,v3s3: PVMCLVector3s;
+  v4s1,v4s2,v4s3: PVMCLVector4s;
+  v2d1,v2d2,v2d3: PVMCLVector2d;
+  v3d1,v3d2,v3d3: PVMCLVector3d;
+  v4d1,v4d2,v4d3: PVMCLVector4d;
   FuncPAS_2s:   Function(const aVector,bVector: TVMCLVector2s): TVMCLVector2s;
   FuncPAS_3s:   Function(const aVector,bVector: TVMCLVector3s): TVMCLVector3s;
   FuncPAS_4s:   Function(const aVector,bVector: TVMCLVector4s): TVMCLVector4s;
@@ -16,14 +16,14 @@ var
   FuncPAS_3d:   Function(const aVector,bVector: TVMCLVector3d): TVMCLVector3d;
   FuncPAS_4d:   Function(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
   FuncPAS_4d3:  Function(const aVector,bVector: TVMCLVector4d): TVMCLVector4d;
-  FuncAMS_2s:   procedure(const aVector,bVector: TVMCLVector2s; out Projection: TVMCLVector2s);
-  FuncAMS_3s:   procedure(const aVector,bVector: TVMCLVector3s; out Projection: TVMCLVector3s);
-  FuncAMS_4s:   procedure(const aVector,bVector: TVMCLVector4s; out Projection: TVMCLVector4s);
-  FuncAMS_4s3:  procedure(const aVector,bVector: TVMCLVector4s; out Projection: TVMCLVector4s);
-  FuncAMS_2d:   procedure(const aVector,bVector: TVMCLVector2d; out Projection: TVMCLVector2d);
-  FuncAMS_3d:   procedure(const aVector,bVector: TVMCLVector3d; out Projection: TVMCLVector3d);
-  FuncAMS_4d:   procedure(const aVector,bVector: TVMCLVector4d; out Projection: TVMCLVector4d);
-  FuncAMS_4d3:  procedure(const aVector,bVector: TVMCLVector4d; out Projection: TVMCLVector4d);
+  FuncASM_2s:   procedure(const aVector,bVector: TVMCLVector2s; out Projection: TVMCLVector2s);
+  FuncASM_3s:   procedure(const aVector,bVector: TVMCLVector3s; out Projection: TVMCLVector3s);
+  FuncASM_4s:   procedure(const aVector,bVector: TVMCLVector4s; out Projection: TVMCLVector4s);
+  FuncASM_4s3:  procedure(const aVector,bVector: TVMCLVector4s; out Projection: TVMCLVector4s);
+  FuncASM_2d:   procedure(const aVector,bVector: TVMCLVector2d; out Projection: TVMCLVector2d);
+  FuncASM_3d:   procedure(const aVector,bVector: TVMCLVector3d; out Projection: TVMCLVector3d);
+  FuncASM_4d:   procedure(const aVector,bVector: TVMCLVector4d; out Projection: TVMCLVector4d);
+  FuncASM_4d3:  procedure(const aVector,bVector: TVMCLVector4d; out Projection: TVMCLVector4d);
   i:            Integer;
   EmptyTicks:   Int64;
   Ticks:        Int64;
@@ -38,14 +38,14 @@ FuncPAS_2d := VMCL_Vectors.VectorsProjection;
 FuncPAS_3d := VMCL_Vectors.VectorsProjection;
 FuncPAS_4d := VMCL_Vectors.VectorsProjection;
 FuncPAS_4d3 := VMCL_Vectors.VectorsProjectionXYZ;
-FuncAMS_2s := VMCL_Vectors_SSE.VectorsProjection_SSE;
-FuncAMS_3s := VMCL_Vectors_SSE.VectorsProjection_SSE;
-FuncAMS_4s := VMCL_Vectors_SSE.VectorsProjection_SSE;
-FuncAMS_4s3 := VMCL_Vectors_SSE.VectorsProjectionXYZ_SSE;
-FuncAMS_2d := VMCL_Vectors_SSE.VectorsProjection_SSE;
-FuncAMS_3d := VMCL_Vectors_SSE.VectorsProjection_SSE;
-FuncAMS_4d := VMCL_Vectors_SSE.VectorsProjection_SSE;
-FuncAMS_4d3 := VMCL_Vectors_SSE.VectorsProjectionXYZ_SSE;
+FuncASM_2s := VMCL_Vectors_SSE.VectorsProjection_SSE;
+FuncASM_3s := VMCL_Vectors_SSE.VectorsProjection_SSE;
+FuncASM_4s := VMCL_Vectors_SSE.VectorsProjection_SSE;
+FuncASM_4s3 := VMCL_Vectors_SSE.VectorsProjectionXYZ_SSE;
+FuncASM_2d := VMCL_Vectors_SSE.VectorsProjection_SSE;
+FuncASM_3d := VMCL_Vectors_SSE.VectorsProjection_SSE;
+FuncASM_4d := VMCL_Vectors_SSE.VectorsProjection_SSE;
+FuncASM_4d3 := VMCL_Vectors_SSE.VectorsProjectionXYZ_SSE;
 WriteLn;
 WriteLn(LineText('VectorsProjection_SSE - High precision speed tests'));
 WriteLn;
@@ -76,7 +76,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v2s1^); RandomVec(v2s2^); LoadZeroVector(v2s3^);
-      Vector_SpeedTestCaller_3P(v2s1,v2s2,v2s3);
+      Vector_SpeedTestCaller_3P_R(v2s1,v2s2,v2s3);
       If not SameVectors(v2s3^,VectorsProjection(v2s1^,v2s2^),1e-6) then
         begin
           WriteLn('Error');
@@ -93,7 +93,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_2s);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_2s);
   Write(Format('v2s VectorsProjection_SSE(%s):    ',[BoolToMark(CheckMemAlign16(v2s1,v2s2,v2s3),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -143,7 +143,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v3s1^); RandomVec(v3s2^); LoadZeroVector(v3s3^);
-      Vector_SpeedTestCaller_3P(v3s1,v3s2,v3s3);
+      Vector_SpeedTestCaller_3P_R(v3s1,v3s2,v3s3);
       If not SameVectors(v3s3^,VectorsProjection(v3s1^,v3s2^),1e-6) then
         begin
           WriteLn('Error');
@@ -160,7 +160,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_3s);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_3s);
   Write(Format('v3s VectorsProjection_SSE(%s):    ',[BoolToMark(CheckMemAlign16(v3s1,v3s2,v3s3),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -210,7 +210,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v4s1^); RandomVec(v4s2^); LoadZeroVector(v4s3^);
-      Vector_SpeedTestCaller_3P(v4s1,v4s2,v4s3);
+      Vector_SpeedTestCaller_3P_R(v4s1,v4s2,v4s3);
       If not SameVectors(v4s3^,VectorsProjection(v4s1^,v4s2^),1e-6) then
         begin
           WriteLn('Error');
@@ -227,7 +227,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_4s);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_4s);
   Write(Format('v4s VectorsProjection_SSE(%s):    ',[BoolToMark(CheckMemAlign16(v4s1,v4s2,v4s3),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -299,7 +299,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v4s1^); RandomVec(v4s2^); LoadZeroVector(v4s3^);
-      Vector_SpeedTestCaller_3P(v4s1,v4s2,v4s3);
+      Vector_SpeedTestCaller_3P_R(v4s1,v4s2,v4s3);
       If not SameVectors(v4s3^,VectorsProjectionXYZ(v4s1^,v4s2^),1e-6) then
         begin
           WriteLn('Error');
@@ -316,7 +316,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_4s3);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_4s3);
   Write(Format('v4s3 VectorsProjection_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v4s1,v4s2,v4s3),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -388,7 +388,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v2d1^); RandomVec(v2d2^); LoadZeroVector(v2d3^);
-      Vector_SpeedTestCaller_3P(v2d1,v2d2,v2d3);
+      Vector_SpeedTestCaller_3P_R(v2d1,v2d2,v2d3);
       If not SameVectors(v2d3^,VectorsProjection(v2d1^,v2d2^),1e-6) then
         begin
           WriteLn('Error');
@@ -405,7 +405,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_2d);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_2d);
   Write(Format('v2d VectorsProjection_SSE(%s):    ',[BoolToMark(CheckMemAlign16(v2d1,v2d2,v2d3),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -477,7 +477,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v3d1^); RandomVec(v3d2^); LoadZeroVector(v3d3^);
-      Vector_SpeedTestCaller_3P(v3d1,v3d2,v3d3);
+      Vector_SpeedTestCaller_3P_R(v3d1,v3d2,v3d3);
       If not SameVectors(v3d3^,VectorsProjection(v3d1^,v3d2^),1e-6) then
         begin
           WriteLn('Error');
@@ -494,7 +494,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_3d);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_3d);
   Write(Format('v3d VectorsProjection_SSE(%s):    ',[BoolToMark(CheckMemAlign16(v3d1,v3d2,v3d3),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -566,7 +566,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v4d1^); RandomVec(v4d2^); LoadZeroVector(v4d3^);
-      Vector_SpeedTestCaller_3P(v4d1,v4d2,v4d3);
+      Vector_SpeedTestCaller_3P_R(v4d1,v4d2,v4d3);
       If not SameVectors(v4d3^,VectorsProjection(v4d1^,v4d2^),1e-6) then
         begin
           WriteLn('Error');
@@ -583,7 +583,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_4d);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_4d);
   Write(Format('v4d VectorsProjection_SSE(%s):    ',[BoolToMark(CheckMemAlign16(v4d1,v4d2,v4d3),'a','u')]));
   For i := 1 to TestCount do
     begin
@@ -655,7 +655,7 @@ try
   For i := 1 to TestCount do
     begin
       RandomVec(v4d1^); RandomVec(v4d2^); LoadZeroVector(v4d3^);
-      Vector_SpeedTestCaller_3P(v4d1,v4d2,v4d3);
+      Vector_SpeedTestCaller_3P_R(v4d1,v4d2,v4d3);
       If not SameVectors(v4d3^,VectorsProjectionXYZ(v4d1^,v4d2^),1e-6) then
         begin
           WriteLn('Error');
@@ -672,7 +672,7 @@ try
   nSSETicks := Ticks - EmptyTicks;
 
   Ticks := 0;
-  PrecisionTest.FunctionAddr := Addr(FuncAMS_4d3);
+  PrecisionTest.FunctionAddr := Addr(FuncASM_4d3);
   Write(Format('v4d3 VectorsProjection_SSE(%s):   ',[BoolToMark(CheckMemAlign16(v4d1,v4d2,v4d3),'a','u')]));
   For i := 1 to TestCount do
     begin

@@ -1,11 +1,11 @@
 Function Matrix_Determinant({%H-}AutoTest: Boolean = False): Integer;
 var
-  m2s:  TMatrix2s;
-  m3s:  TMatrix3s;
-  m4s:  TMatrix4s;
-  m2d:  TMatrix2d;
-  m3d:  TMatrix3d;
-  m4d:  TMatrix4d;
+  m2s:  TVMCLMatrix2s;
+  m3s:  TVMCLMatrix3s;
+  m4s:  TVMCLMatrix4s;
+  m2d:  TVMCLMatrix2d;
+  m3d:  TVMCLMatrix3d;
+  m4d:  TVMCLMatrix4d;
 begin
 WriteLn;
 WriteLn(LineText('Determinant'));

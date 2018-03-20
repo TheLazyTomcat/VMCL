@@ -1,3 +1,56 @@
+{-------------------------------------------------------------------------------
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+-------------------------------------------------------------------------------}
+{===============================================================================
+
+  VMCL - Vectors & Matrices calculation library
+
+  SSE-implemented vector calculations
+
+    Functions provided by this unit are written in assembly and utilizes SSE
+    instruction extensions for calculations, offering slight speedup compared
+    to pascal-implemented functions. If PurePascal symbol is defined for
+    whatever reason, this unit provides nothing as all functions are ASM-only.
+
+    Since most vector calculations are quite simple, there is not enough space
+    for paralelization. Therefore only functions that are at least marginally
+    faster are provided here. Even so, in some cases, provided functions might
+    be slower than pascal implementation, these functions are marked by proper
+    message when symbol EnablePerformanceWarnings is defined.
+
+    Some functions require that passed parameters are placed in memory on an
+    aligned address - specifically on 128bit boundary. Those functions are
+    marked with "a" at the end of the name. If you pass unaligned data, an
+    access violation error will be raised.
+    Functions marked with "u" do not care for alignment, but are much slower
+    than those accepting only aligned data.
+    Non-specific functions (not marked for vector size/precision nor alignment)
+    checks whether presented data are aligned and calls "u" or "a" function
+    accordingly.
+
+    Instructions from SSE, SSE2 and SSE3 sets are used, and therefore all those
+    three CPU extensions are all required.
+    You can check whether your CPU supports them by looking at global variable
+    VMCL_InfoSet in unit VMCL_Common (value infSupportsSSE must be in the set).
+    If your CPU does not support required instructions, do not call ANY function
+    this unit provides.
+
+  ©František Milt 2018-**-**
+
+  Version 1.0 dev
+
+  Dependencies:
+    AuxTypes    - github.com/ncs-sniper/Lib.AuxTypes
+    BitVector   - github.com/ncs-sniper/Lib.BitVector
+    BitOps      - github.com/ncs-sniper/Lib.BitOps
+    StrRect     - github.com/ncs-sniper/Lib.StrRect
+    SimpleCPUID - github.com/ncs-sniper/Lib.SimpleCPUID
+
+===============================================================================}
 unit VMCL_Vectors_SSE;
 
 {$INCLUDE 'VMCL_defs.inc'}

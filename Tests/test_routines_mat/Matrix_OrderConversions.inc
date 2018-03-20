@@ -1,17 +1,17 @@
 Function Matrix_OrderConversions({%H-}AutoTest: Boolean = False): Integer;
 var
-  m2Rs:   TMatrix2RMs;
-  m3Rs:   TMatrix3RMs;
-  m4Rs:   TMatrix4RMs;
-  m2Rd:   TMatrix2RMd;
-  m3Rd:   TMatrix3RMd;
-  m4Rd:   TMatrix4RMd;
-  m2Cs:   TMatrix2CMs;
-  m3Cs:   TMatrix3CMs;
-  m4Cs:   TMatrix4CMs;
-  m2Cd:   TMatrix2CMd;
-  m3Cd:   TMatrix3CMd;
-  m4Cd:   TMatrix4CMd;
+  m2Rs:   TVMCLMatrix2RMs;
+  m3Rs:   TVMCLMatrix3RMs;
+  m4Rs:   TVMCLMatrix4RMs;
+  m2Rd:   TVMCLMatrix2RMd;
+  m3Rd:   TVMCLMatrix3RMd;
+  m4Rd:   TVMCLMatrix4RMd;
+  m2Cs:   TVMCLMatrix2CMs;
+  m3Cs:   TVMCLMatrix3CMs;
+  m4Cs:   TVMCLMatrix4CMs;
+  m2Cd:   TVMCLMatrix2CMd;
+  m3Cd:   TVMCLMatrix3CMd;
+  m4Cd:   TVMCLMatrix4CMd;
 begin
 WriteLn;
 WriteLn(LineText('Matrix order conversion'));

@@ -1,19 +1,50 @@
+{-------------------------------------------------------------------------------
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+-------------------------------------------------------------------------------}
+{===============================================================================
+
+  VMCL - Test Suite
+
+  SSE-implemented vector calculation tests
+
+  ©František Milt 2018-**-**
+
+  Version 1.0 dev
+
+  Dependencies:
+    AuxTypes    - github.com/ncs-sniper/Lib.AuxTypes
+    BitVector   - github.com/ncs-sniper/Lib.BitVector
+    BitOps      - github.com/ncs-sniper/Lib.BitOps
+    StrRect     - github.com/ncs-sniper/Lib.StrRect
+    SimpleCPUID - github.com/ncs-sniper/Lib.SimpleCPUID
+
+===============================================================================}
 unit VMCL_Tests_Vectors_SSE;
 
 {$INCLUDE '..\VMCL_defs.inc'}
 
 interface
 
+{$IFNDEF PurePascal}
+
 Function Vectors_SSE_Main(AutoTest: Boolean = False): Integer;
 
+{$ENDIF}
+
 implementation
+
+{$IFNDEF PurePascal}
 
 uses
   SysUtils, Windows, Math,
   VMCL_Tests_Common,
   VMCL_Common, VMCL_Alloc, VMCL_Vectors, VMCL_Vectors_SSE;
 
-//- Helpers gor high-precision speed tests -------------------------------------
+//- Helpers for high-precision speed tests -------------------------------------
 var
   PrecisionTest:  TVMCLPrecisionTests;
 
@@ -28,6 +59,17 @@ end;
 
 procedure Vector_SpeedTestCaller_3P(A,B,C: Pointer); register; assembler;
 asm
+{$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
+end;
+
+//--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
+
+procedure Vector_SpeedTestCaller_3P_R(A,B,C: Pointer); register; assembler;
+asm
+{$IFDEF x64}
+    XCHG  A, C    // A = orig C   C = orig A
+    XCHG  B, C    // B = orig A   C = orig B
+{$ENDIF}
 {$DEFINE SpeedTestCaller}{$INCLUDE 'VMCL_Tests_ASM.inc'}{$UNDEF SpeedTestCaller}
 end;
 
@@ -97,5 +139,7 @@ repeat
   AutoTest);
 until (Result = VMCL_RESULT_BACK) or (Result = VMCL_RESULT_EXIT);
 end;
+
+{$ENDIF}
 
 end.

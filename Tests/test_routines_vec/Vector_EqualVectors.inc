@@ -1,11 +1,11 @@
 Function Vector_EqualVectors({%H-}AutoTest: Boolean = False): Integer;
 var
-  v2s_s,v2s_d:  TVector2s;
-  v3s_s,v3s_d:  TVector3s;
-  v4s_s,v4s_d:  TVector4s;
-  v2d_s,v2d_d:  TVector2d;
-  v3d_s,v3d_d:  TVector3d;
-  v4d_s,v4d_d:  TVector4d;
+  v2s_s,v2s_d:  TVMCLVector2s;
+  v3s_s,v3s_d:  TVMCLVector3s;
+  v4s_s,v4s_d:  TVMCLVector4s;
+  v2d_s,v2d_d:  TVMCLVector2d;
+  v3d_s,v3d_d:  TVMCLVector3d;
+  v4d_s,v4d_d:  TVMCLVector4d;
 begin
 WriteLn;
 WriteLn(LineText('EqualVectors'));

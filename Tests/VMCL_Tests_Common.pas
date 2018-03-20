@@ -11,7 +11,7 @@
 
   Common routines
 
-  ©František Milt 2018-02-26
+  ©František Milt 2018-**-**
 
   Version 1.0 dev
 
@@ -33,6 +33,10 @@ uses
   AuxTypes,
   VMCL_Vectors, VMCL_Matrices;
 
+const
+  DefaultWidth = 70;
+  ColumnWidth  = DefaultWidth div 2;
+
 type
   TVMCLTestFunction = Function(AutoTest: Boolean = False): Integer;
 
@@ -50,9 +54,10 @@ type
 Function BoolToMark(Value: Boolean; MarkTrue: String = '+'; MarkFalse: String = '-'): String;
 Function PrecisionTestsTicks(Data: TVMCLPrecisionTests): UInt64;
 
-Function Splitter(SplitterChar: Char = '-'; Count: Integer = 64): String;
-Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 64): String;
-Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = 64): String;
+Function Splitter(SplitterChar: Char = '-'; Count: Integer = DefaultWidth): String;
+Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = DefaultWidth): String;
+Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = DefaultWidth): String;
+Function ColumnText(const Text: String): String;
 
 const
   VMCL_RESULT_BACK = 0;
@@ -125,14 +130,14 @@ end;
 
 //------------------------------------------------------------------------------
 
-Function Splitter(SplitterChar: Char = '-'; Count: Integer = 64): String;
+Function Splitter(SplitterChar: Char = '-'; Count: Integer = DefaultWidth): String;
 begin
 Result := StringOfChar(SplitterChar,Count);
 end;
 
 //------------------------------------------------------------------------------
 
-Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = 64): String;
+Function CenteredText(const Text: String; BorderChar: Char = '-'; Width: Integer = DefaultWidth): String;
 var
   WhiteSpace: Integer;
 begin
@@ -147,7 +152,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = 64): String;
+Function LineText(const Text: String; LineChar: Char = '-'; Width: Integer = DefaultWidth): String;
 begin
 If Length(Text) < (Width - 6) then
   begin
@@ -155,6 +160,13 @@ If Length(Text) < (Width - 6) then
               StringOfChar(LineChar,Width - Length(Text) - 5);
   end
 else Result := Text;
+end;
+
+//------------------------------------------------------------------------------
+
+Function ColumnText(const Text: String): String;
+begin
+Result := Format('%-*s',[ColumnWidth,Text]);
 end;
 
 //------------------------------------------------------------------------------
@@ -199,20 +211,20 @@ repeat
       while i < High(Functions) do
         begin
           If (i >= Low(Tests)) and (i <= High(Tests)) then
-            Write(Format('%-32s',[Format('%4d - %s',[i + 1,Tests[i]])]))
+            Write(ColumnText(Format('%4d - %s',[i + 1,Tests[i]])))
           else
-            Write(Format('%-32s',[Format('%4d - unknown #%d',[i + 1,i])]));
+            Write(ColumnText(Format('%4d - unknown #%d',[i + 1,i])));
           If (Succ(i) >= Low(Tests)) and (Succ(i) <= High(Tests)) then
-            WriteLn(Format('%-32s',[Format('%4d - %s',[i + 2,Tests[Succ(i)]])]))
+            WriteLn(ColumnText(Format('%4d - %s',[i + 2,Tests[Succ(i)]])))
           else
-            WriteLn(Format('%-32s',[Format('%4d - unknown #%d',[i + 2,Succ(i)])]));
+            WriteLn(ColumnText(Format('%4d - unknown #%d',[i + 2,Succ(i)])));
           Inc(i,2);
         end;
       If (Length(Functions) and 1) <> 0 then
         If (High(Functions) >= Low(Tests)) and (High(Functions) <= High(Tests)) then
-          WriteLn(Format('%-32s',[Format('%4d - %s',[High(Functions) + 1,Tests[High(Functions)]])]))
+          WriteLn(ColumnText(Format('%4d - %s',[High(Functions) + 1,Tests[High(Functions)]])))
         else
-          WriteLn(Format('%-32s',[Format('%4d - unknown #%d',[High(Functions) + 1,High(Functions)])]));
+          WriteLn(ColumnText(Format('%4d - unknown #%d',[High(Functions) + 1,High(Functions)])));
       // prompt
       WriteLn;
       Result := Prompt(1,Length(Functions));
@@ -585,7 +597,7 @@ WriteLn('XMM6:  ' + VecToStr(Buff[6]));
 WriteLn('XMM7:  ' + VecToStr(Buff[7]));
 {$IFDEF x64}
 WriteLn('XMM8:  ' + VecToStr(Buff[8]));
-WriteLn('XMM9: ' + VecToStr(Buff[9]));
+WriteLn('XMM9:  ' + VecToStr(Buff[9]));
 WriteLn('XMM10: ' + VecToStr(Buff[10]));
 WriteLn('XMM11: ' + VecToStr(Buff[11]));
 WriteLn('XMM12: ' + VecToStr(Buff[12]));
