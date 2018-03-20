@@ -34,7 +34,7 @@ Function Vectors_Main(AutoTest: Boolean = False): Integer;
 implementation
 
 uses
-  SysUtils,
+  SysUtils,{$IFNDEF FPC} Math,{$ENDIF}
   VMCL_Common, VMCL_Vectors,
   VMCL_Tests_Common;
 
