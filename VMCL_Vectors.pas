@@ -365,8 +365,15 @@ Function IsZeroVector(const Vector: TVMCLVector3d): Boolean; overload;{$IFDEF Ca
 Function IsZeroVector(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
-{$message 'implement IsUnitVector'}
-//Function IsUnitVector();
+// returns true when presented vector has magnitude of 1, false otherwise
+Function IsUnitVector(const Vector: TVMCLVector2s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsUnitVector(const Vector: TVMCLVector3s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsUnitVector(const Vector: TVMCLVector4s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsUnitVectorXYZ(const Vector: TVMCLVector4s): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsUnitVector(const Vector: TVMCLVector2d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsUnitVector(const Vector: TVMCLVector3d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsUnitVector(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
+Function IsUnitVectorXYZ(const Vector: TVMCLVector4d): Boolean; overload;{$IFDEF CanInline} inline;{$ENDIF}
 
 // Dest[3] stays unchanged
 procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s); overload;{$IFDEF CanInline} inline;{$ENDIF}
@@ -1606,6 +1613,62 @@ end;
 Function IsZeroVectorXYZ(const Vector: TVMCLVector4d): Boolean;
 begin
 Result := EqualVectorsXYZ(Vector,VMCL_ZeroVector4d);
+end;
+
+//==============================================================================
+
+Function IsUnitVector(const Vector: TVMCLVector2s): Boolean;
+begin
+Result := SameValue(Magnitude(Vector),1.0,1e-6);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsUnitVector(const Vector: TVMCLVector3s): Boolean;
+begin
+Result := SameValue(Magnitude(Vector),1.0,1e-6);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsUnitVector(const Vector: TVMCLVector4s): Boolean;
+begin
+Result := SameValue(Magnitude(Vector),1.0,1e-6);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsUnitVectorXYZ(const Vector: TVMCLVector4s): Boolean;
+begin
+Result := SameValue(MagnitudeXYZ(Vector),1.0,1e-6);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsUnitVector(const Vector: TVMCLVector2d): Boolean;
+begin
+Result := SameValue(Magnitude(Vector),1.0,1e-12);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsUnitVector(const Vector: TVMCLVector3d): Boolean;
+begin
+Result := SameValue(Magnitude(Vector),1.0,1e-12);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsUnitVector(const Vector: TVMCLVector4d): Boolean;
+begin
+Result := SameValue(Magnitude(Vector),1.0,1e-12);
+end;
+
+//   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+Function IsUnitVectorXYZ(const Vector: TVMCLVector4d): Boolean;
+begin
+Result := SameValue(MagnitudeXYZ(Vector),1.0,1e-12);
 end;
 
 //==============================================================================

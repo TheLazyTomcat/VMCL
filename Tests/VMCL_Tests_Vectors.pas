@@ -44,6 +44,7 @@ uses
 {$INCLUDE '.\test_routines_vec\Vector_Convert.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_LoadZeroVector.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_IsZeroVector.inc'}
+{$INCLUDE '.\test_routines_vec\Vector_IsUnitVector.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_CopyVector.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_EqualVectors.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_SameVectors.inc'}
@@ -72,13 +73,13 @@ begin
 repeat
   Result := Select('Vectors test group','Select test (X - Exit; 0 - Back; A - Autotest):',
 
-    [Vector_Build,Vector_Swizzle,Vector_Convert,Vector_LoadZeroVector,Vector_IsZeroVector,
+    [Vector_Build,Vector_Swizzle,Vector_Convert,Vector_LoadZeroVector,Vector_IsZeroVector,Vector_IsUnitVector,
      Vector_CopyVector,Vector_EqualVectors,Vector_SameVectors,Vector_Opposite,Vector_Magnitude,Vector_Normalized,Vector_Normalize,
      Vector_ScalarMultiply,Vector_VectorsAdd,Vector_VectorsSubtract,Vector_VectorsDotProduct,Vector_VectorsCrossProduct,
      Vector_VectorsBoxProduct,Vector_VectorsNormal,Vector_VectorsAntinormal,Vector_VectorsAngleRad,Vector_VectorsAngleDeg,
      Vector_VectorsProjection,Vector_VectorsOrthogonal,Vector_VectorsOrthonormal],
 
-    ['Vector building','Vector swizzling','Vector conversions','LoadZeroVector','IsZeroVector',
+    ['Vector building','Vector swizzling','Vector conversions','LoadZeroVector','IsZeroVector','IsUnitVector',
      'CopyVector','EqualVectors','SameVectors','Opposite','Magnitude','Normalized','Normalize',
      'ScalarMultiply','VectorsAdd','VectorsSubtract','VectorsDotProduct','VectorsCrossProduct',
      'VectorsBoxProduct','VectorsNormal','VectorsAntinormal','VectorsAngleRad','VectorsAngleDeg',
