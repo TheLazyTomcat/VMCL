@@ -38,6 +38,10 @@ uses
   VMCL_Common, VMCL_Vectors,
   VMCL_Tests_Common;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 5024 OFF} // Parameter "$1" not used
+{$ENDIF}
+
 // testing routines
 {$INCLUDE '.\test_routines_vec\Vector_Build.inc'}
 {$INCLUDE '.\test_routines_vec\Vector_Swizzle.inc'}

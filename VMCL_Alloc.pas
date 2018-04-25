@@ -42,6 +42,10 @@ uses
   BitVector, AuxTypes,
   VMCL_Vectors, VMCL_Matrices;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 3031 OFF} // Values in enumeration types have to be ascending
+{$ENDIF}
+
 {===============================================================================
 --------------------------------------------------------------------------------
                                TVMCLMemorySegment
@@ -49,7 +53,7 @@ uses
 ===============================================================================}
 
 type
-  TVMCLMemoryAlignment = (ma8b,ma32b,ma64b,ma128b,ma256b,ma512b,ma1024b,ma2048b,maNone = ma8b{%H-});
+  TVMCLMemoryAlignment = (ma8b,ma32b,ma64b,ma128b,ma256b,ma512b,ma1024b,ma2048b,maNone = ma8b);
 
 {===============================================================================
     TVMCLMemorySegment - declaration
@@ -235,6 +239,13 @@ implementation
 uses
   SysUtils, Math;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 4055 OFF} // Conversion between ordinals and pointers is not portable
+  {$WARN 4056 OFF} // Conversion between ordinals and pointers is not portable
+  {$WARN 5037 OFF} // Variable "$1" does not seem to be initialized
+{$ENDIF}
+
+
 {===============================================================================
     Auxiliary functions - implementation
 ===============================================================================}
@@ -311,7 +322,7 @@ end;
 Function TVMCLMemorySegment.GetBlock(Index: Integer): Pointer;
 begin
 If (Index >= 0) and (Index < fCount) then
-  Result := {%H-}Pointer({%H-}PtrUInt(fMemory) + (PtrUInt(Index) * PtrUInt(fBlockSize)))
+  Result := Pointer(PtrUInt(fMemory) + (PtrUInt(Index) * PtrUInt(fBlockSize)))
 else
   raise Exception.CreateFmt('TVMCLMemorySegment.GetBlock: Index (%d) out of bounds.',[Index]);
 end;
@@ -376,13 +387,13 @@ fAlignment := Alignment;
 fSize := MinSegmentSize + Pred(MemAlignmentBytes(Alignment));
 GetMem(fMemoryBase,fSize);
 // get actual aligned memory
-If ({%H-}PtrUInt(fMemoryBase) mod PtrUInt(MemAlignmentBytes(fAlignment))) <> 0 then
-  fMemory := {%H-}Pointer({%H-}PtrUInt(fMemoryBase) + (PtrUInt(MemAlignmentBytes(fAlignment)) -
-              ({%H-}PtrUInt(fMemoryBase) mod PtrUInt(MemAlignmentBytes(fAlignment)))))
+If (PtrUInt(fMemoryBase) mod PtrUInt(MemAlignmentBytes(fAlignment))) <> 0 then
+  fMemory := Pointer(PtrUInt(fMemoryBase) + (PtrUInt(MemAlignmentBytes(fAlignment)) -
+              (PtrUInt(fMemoryBase) mod PtrUInt(MemAlignmentBytes(fAlignment)))))
 else
   fMemory := fMemoryBase;
 // get count according to usable aligned memory
-fCount := Integer((PtrUInt(fSize) - ({%H-}PtrUInt(fMemory) - {%H-}PtrUInt(fMemoryBase))) div PtrUInt(fBlockSize));
+fCount := Integer((PtrUInt(fSize) - (PtrUInt(fMemory) - PtrUInt(fMemoryBase))) div PtrUInt(fBlockSize));
 If fCount <= 0 then
   raise Exception.CreateFmt('TVMCLMemorySegment.Create: Count (%d) too small (small memory segment?).',[fCount]);
 If (fCount and 31) <> 0 then
@@ -446,8 +457,8 @@ end;
 
 Function TVMCLMemorySegment.OwnsMemory(Ptr: Pointer): Boolean;
 begin
-Result := ({%H-}PtrUInt(Ptr) >= {%H-}PtrUInt(GetBlock(0))) and
-          ({%H-}PtrUInt(Ptr) <= ({%H-}PtrUInt(GetBlock(Pred(fCount))) + (fBlockSize - 1)));
+Result := (PtrUInt(Ptr) >= PtrUInt(GetBlock(0))) and
+          (PtrUInt(Ptr) <= (PtrUInt(GetBlock(Pred(fCount))) + (fBlockSize - 1)));
 end;
 
 //------------------------------------------------------------------------------
@@ -455,7 +466,7 @@ end;
 Function TVMCLMemorySegment.IndexOf(Ptr: Pointer): Integer;
 begin
 If OwnsMemory(Ptr) then
-  Result := Integer(({%H-}PtrUInt(Ptr) - {%H-}PtrUInt(fMemory)) div fBlockSize)
+  Result := Integer((PtrUInt(Ptr) - PtrUInt(fMemory)) div fBlockSize)
 else
   Result := -1;
 end;
@@ -796,84 +807,84 @@ end;
 
 procedure VMCL_New(out Vec: PVMCLVector2s; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3s; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4s; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector2d; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3d; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4d; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector2sr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3sr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4sr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector2dr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector3dr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Vec: PVMCLVector4dr; Count: UInt32 = 1);
 begin
-Vec := VMCL_AllocMem(SizeOf({%H-}Vec^) * Count);
+Vec := VMCL_AllocMem(SizeOf(Vec^) * Count);
 end;
 
 //------------------------------------------------------------------------------
@@ -964,84 +975,84 @@ end;
 
 procedure VMCL_New(out Mat: PVMCLMatrix2RMs; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix2RMd; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix2CMs; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix2CMd; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix3RMs; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix3RMd; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix3CMs; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix3CMd; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix4RMs; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix4RMd; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix4CMs; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure VMCL_New(out Mat: PVMCLMatrix4CMd; Count: UInt32 = 1);
 begin
-Mat := VMCL_AllocMem(SizeOf({%H-}Mat^) * Count);
+Mat := VMCL_AllocMem(SizeOf(Mat^) * Count);
 end;
 
 //------------------------------------------------------------------------------

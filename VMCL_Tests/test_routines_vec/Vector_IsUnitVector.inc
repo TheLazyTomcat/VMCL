@@ -1,4 +1,4 @@
-Function Vector_IsUnitVector({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_IsUnitVector(AutoTest: Boolean = False): Integer;
 var
   v2s:  TVMCLVector2s;
   v3s:  TVMCLVector3s;

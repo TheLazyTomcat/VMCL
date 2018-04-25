@@ -1,4 +1,4 @@
-Function Matrix_SubmatrixRead({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_SubmatrixRead(AutoTest: Boolean = False): Integer;
 var
   m3s:    TVMCLMatrix3s;
   m4s:    TVMCLMatrix4s;

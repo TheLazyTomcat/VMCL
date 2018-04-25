@@ -38,6 +38,10 @@ uses
   VMCL_Vectors, VMCL_Matrices,
   VMCL_Tests_Common;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 5024 OFF} // Parameter "$1" not used
+{$ENDIF}
+
 // testing routines
 {$INCLUDE '.\test_routines_mat\Matrix_Build.inc'}
 {$INCLUDE '.\test_routines_mat\Matrix_EntriesAccess.inc'}

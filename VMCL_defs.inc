@@ -46,6 +46,11 @@
   CanInline
 
     Indicates that functions can be inlined (inline directive can be used).
+
+  FPC_DisableWarns
+
+    When defined, allows suppressing of out-of-place or nonsensical warnings
+    and hints.
 }
 {$IFDEF FPC}
   {$MODE ObjFPC}{$H+}
@@ -54,6 +59,7 @@
   {$INLINE ON}
   {$DEFINE CanInline}
   {$DEFINE ASMSuppressSizeWarnings}
+  {$DEFINE FPC_DisableWarns}
 {$ELSE}
   {$DEFINE Delphi}
   {$IFNDEF x64}

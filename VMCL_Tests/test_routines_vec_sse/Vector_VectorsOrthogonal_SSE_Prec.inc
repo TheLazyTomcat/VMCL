@@ -1,4 +1,4 @@
-Function Vector_VectorsOrthogonal_SSE_Prec({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_VectorsOrthogonal_SSE_Prec(AutoTest: Boolean = False): Integer;
 const
   TestCount = 1000000;
 var

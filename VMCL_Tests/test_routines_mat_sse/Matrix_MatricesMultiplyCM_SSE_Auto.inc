@@ -1,4 +1,4 @@
-Function Matrix_MatricesMultiplyCM_SSE_Auto({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_MatricesMultiplyCM_SSE_Auto(AutoTest: Boolean = False): Integer;
 const
   ValueCount = 2000000;
 var

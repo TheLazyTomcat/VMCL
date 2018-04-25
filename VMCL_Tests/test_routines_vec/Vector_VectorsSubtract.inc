@@ -1,4 +1,4 @@
-Function Vector_VectorsSubtract({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_VectorsSubtract(AutoTest: Boolean = False): Integer;
 var
   v2s1,v2s2:  TVMCLVector2s;
   v3s1,v3s2:  TVMCLVector3s;

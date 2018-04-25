@@ -1,4 +1,4 @@
-Function Matrix_MatricesMultiplyCM_SSE_Prec({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_MatricesMultiplyCM_SSE_Prec(AutoTest: Boolean = False): Integer;
 const
   TestCount = 2000000;
 var

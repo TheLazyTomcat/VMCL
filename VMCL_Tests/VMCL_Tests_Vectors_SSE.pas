@@ -44,6 +44,11 @@ uses
   VMCL_Tests_Common,
   VMCL_Common, VMCL_Alloc, VMCL_Vectors, VMCL_Vectors_SSE;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 5024 OFF} // Parameter "$1" not used
+  {$WARN 5057 OFF} // Local variable "$1" does not seem to be initialized
+{$ENDIF}
+
 //- Helpers for high-precision speed tests -------------------------------------
 var
   PrecisionTest:  TVMCLPrecisionTests;

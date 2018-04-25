@@ -1,4 +1,4 @@
-Function Vector_IsZeroVector({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_IsZeroVector(AutoTest: Boolean = False): Integer;
 var
   v2s:  TVMCLVector2s;
   v3s:  TVMCLVector3s;

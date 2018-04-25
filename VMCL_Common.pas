@@ -137,25 +137,29 @@ implementation
 uses
   SysUtils, AuxTypes, SimpleCPUID;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 4055 OFF} // Conversion between ordinals and pointers is not portable
+{$ENDIF}
+
 //= Common functions implementation ============================================
 
 Function CheckMemAlign16(Ptr: Pointer): Boolean;
 begin
-Result := ({%H-}PtrUInt(Ptr) and $F) = 0;
+Result := (PtrUInt(Ptr) and $F) = 0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function CheckMemAlign16(Ptr1, Ptr2: Pointer): Boolean;
 begin
-Result := (({%H-}PtrUInt(Ptr1) or {%H-}PtrUInt(Ptr2)) and PtrUInt($F)) = 0;
+Result := ((PtrUInt(Ptr1) or PtrUInt(Ptr2)) and PtrUInt($F)) = 0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 Function CheckMemAlign16(Ptr1, Ptr2, Ptr3: Pointer): Boolean;
 begin
-Result := (({%H-}PtrUInt(Ptr1) or {%H-}PtrUInt(Ptr2) or {%H-}PtrUInt(Ptr3)) and PtrUInt($F)) = 0;
+Result := ((PtrUInt(Ptr1) or PtrUInt(Ptr2) or PtrUInt(Ptr3)) and PtrUInt($F)) = 0;
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
@@ -166,7 +170,7 @@ var
 begin
 Result := True;
 For i := Low(Ptrs) to High(Ptrs) do
-  If ({%H-}PtrUInt(Ptrs[i]) and $F) <> 0 then
+  If (PtrUInt(Ptrs[i]) and $F) <> 0 then
     begin
       Result := False;
       Break{For i};

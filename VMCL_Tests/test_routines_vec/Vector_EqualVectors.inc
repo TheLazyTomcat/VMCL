@@ -1,4 +1,4 @@
-Function Vector_EqualVectors({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_EqualVectors(AutoTest: Boolean = False): Integer;
 var
   v2s_s,v2s_d:  TVMCLVector2s;
   v3s_s,v3s_d:  TVMCLVector3s;

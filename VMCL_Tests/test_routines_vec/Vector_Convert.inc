@@ -1,4 +1,4 @@
-Function Vector_Convert({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_Convert(AutoTest: Boolean = False): Integer;
 var
   v2s:  TVMCLVector2s;  v2sr: TVMCLVector2sr;
   v3s:  TVMCLVector3s;  v3sr: TVMCLVector3sr;

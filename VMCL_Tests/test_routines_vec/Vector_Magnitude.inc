@@ -1,4 +1,4 @@
-Function Vector_Magnitude({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_Magnitude(AutoTest: Boolean = False): Integer;
 var
   v2s:  TVMCLVector2s;
   v3s:  TVMCLVector3s;

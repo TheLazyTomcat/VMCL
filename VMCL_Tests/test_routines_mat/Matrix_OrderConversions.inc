@@ -1,4 +1,4 @@
-Function Matrix_OrderConversions({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_OrderConversions(AutoTest: Boolean = False): Integer;
 var
   m2Rs:   TVMCLMatrix2RMs;
   m3Rs:   TVMCLMatrix3RMs;

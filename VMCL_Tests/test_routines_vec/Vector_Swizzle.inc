@@ -1,4 +1,4 @@
-Function Vector_Swizzle({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_Swizzle(AutoTest: Boolean = False): Integer;
 var
   v2s:          TVMCLVector2s;
   v3s:          TVMCLVector3s;

@@ -1,4 +1,4 @@
-Function Matrix_Conversions({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_Conversions(AutoTest: Boolean = False): Integer;
 var
   m2s:    TVMCLMatrix2s;
   m3s:    TVMCLMatrix3s;

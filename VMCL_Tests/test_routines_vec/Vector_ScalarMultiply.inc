@@ -1,4 +1,4 @@
-Function Vector_ScalarMultiply({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_ScalarMultiply(AutoTest: Boolean = False): Integer;
 var
   v2s:  TVMCLVector2s;
   v3s:  TVMCLVector3s;

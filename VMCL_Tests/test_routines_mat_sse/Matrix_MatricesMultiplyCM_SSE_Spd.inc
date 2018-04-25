@@ -1,4 +1,4 @@
-Function Matrix_MatricesMultiplyCM_SSE_Spd({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_MatricesMultiplyCM_SSE_Spd(AutoTest: Boolean = False): Integer;
 const
   RepeatCount = 50000000;
 var
@@ -14,7 +14,7 @@ var
   StopCnt:        Int64;
   nSSECnt:        Int64;
 begin
-QueryPerformanceFrequency({%H-}Freq);
+QueryPerformanceFrequency(Freq);
 WriteLn;
 WriteLn(LineText('MatricesMultiply_SSE (CM) - Speed tests'));
 WriteLn;
@@ -37,10 +37,10 @@ try
 
   WriteLn;
   Write('m2s * m2s @ nSSE:   ');
-  QueryPerformanceCounter({%H-}StartCnt);
+  QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     m2s3^ := MatricesMultiply(m2s1^,m2s2^);
-  QueryPerformanceCounter({%H-}StopCnt);
+  QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
 
@@ -75,10 +75,10 @@ try
 
   WriteLn;
   Write('m3s * m3s @ nSSE:   ');
-  QueryPerformanceCounter({%H-}StartCnt);
+  QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     m3s3^ := MatricesMultiply(m3s1^,m3s2^);
-  QueryPerformanceCounter({%H-}StopCnt);
+  QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
 
@@ -104,10 +104,10 @@ try
 
   WriteLn;
   Write('m4s * m4s @ nSSE:   ');
-  QueryPerformanceCounter({%H-}StartCnt);
+  QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     m4s3^ := MatricesMultiply(m4s1^,m4s2^);
-  QueryPerformanceCounter({%H-}StopCnt);
+  QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
 
@@ -142,10 +142,10 @@ try
 
   WriteLn;
   Write('m2d * m2d @ nSSE:   ');
-  QueryPerformanceCounter({%H-}StartCnt);
+  QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     m2d3^ := MatricesMultiply(m2d1^,m2d2^);
-  QueryPerformanceCounter({%H-}StopCnt);
+  QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
 
@@ -180,10 +180,10 @@ try
 
   WriteLn;
   Write('m3d * m3d @ nSSE:   ');
-  QueryPerformanceCounter({%H-}StartCnt);
+  QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     m3d3^ := MatricesMultiply(m3d1^,m3d2^);
-  QueryPerformanceCounter({%H-}StopCnt);
+  QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
 
@@ -218,10 +218,10 @@ try
 
   WriteLn;
   Write('m4d * m4d @ nSSE:   ');
-  QueryPerformanceCounter({%H-}StartCnt);
+  QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     m4d3^ := MatricesMultiply(m4d1^,m4d2^);
-  QueryPerformanceCounter({%H-}StopCnt);
+  QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
 

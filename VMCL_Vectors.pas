@@ -595,6 +595,10 @@ implementation
 uses
   Math;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 5058 OFF} // Variable "$1" does not seem to be initialized
+{$ENDIF}
+
 {===============================================================================
     Vector formatting types, constants and functions - implementation
 ===============================================================================}
@@ -1675,56 +1679,56 @@ end;
 
 procedure CopyVector(const Src: TVMCLVector2s; out Dest: TVMCLVector2s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector2s));
+Move(Src,Dest,SizeOf(TVMCLVector2s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector3s; out Dest: TVMCLVector3s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector3s));
+Move(Src,Dest,SizeOf(TVMCLVector3s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector4s; out Dest: TVMCLVector4s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4s));
+Move(Src,Dest,SizeOf(TVMCLVector4s));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVectorXYZ(const Src: TVMCLVector4s; var Dest: TVMCLVector4s);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4s) - SizeOf(Single));
+Move(Src,Dest,SizeOf(TVMCLVector4s) - SizeOf(Single));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector2d; out Dest: TVMCLVector2d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector2d));
+Move(Src,Dest,SizeOf(TVMCLVector2d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector3d; out Dest: TVMCLVector3d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector3d));
+Move(Src,Dest,SizeOf(TVMCLVector3d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVector(const Src: TVMCLVector4d; out Dest: TVMCLVector4d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4d));
+Move(Src,Dest,SizeOf(TVMCLVector4d));
 end;
 
 //   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 procedure CopyVectorXYZ(const Src: TVMCLVector4d; var Dest: TVMCLVector4d);
 begin
-Move(Src,Dest{%H-},SizeOf(TVMCLVector4d) - SizeOf(Double));
+Move(Src,Dest,SizeOf(TVMCLVector4d) - SizeOf(Double));
 end;
 
 //==============================================================================
@@ -1998,7 +2002,7 @@ end;
 Function Normalized(const Vector: TVMCLVector2s): TVMCLVector2s;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -2013,7 +2017,7 @@ end;
 Function Normalized(const Vector: TVMCLVector3s): TVMCLVector3s;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -2029,7 +2033,7 @@ end;
 Function Normalized(const Vector: TVMCLVector4s): TVMCLVector4s;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -2046,7 +2050,7 @@ end;
 Function NormalizedXYZ(const Vector: TVMCLVector4s): TVMCLVector4s;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVectorXYZ(Vector) then
   begin
     VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);
@@ -2063,7 +2067,7 @@ end;
 Function Normalized(const Vector: TVMCLVector2d): TVMCLVector2d;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -2078,7 +2082,7 @@ end;
 Function Normalized(const Vector: TVMCLVector3d): TVMCLVector3d;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -2094,7 +2098,7 @@ end;
 Function Normalized(const Vector: TVMCLVector4d): TVMCLVector4d;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVector(Vector) then
   begin
     VectorMagnitudeRcp := 1 / Magnitude(Vector);
@@ -2111,7 +2115,7 @@ end;
 Function NormalizedXYZ(const Vector: TVMCLVector4d): TVMCLVector4d;
 var
   VectorMagnitudeRcp: Extended;
-begin{%H-}
+begin
 If not IsZeroVectorXYZ(Vector) then
   begin
     VectorMagnitudeRcp := 1 / MagnitudeXYZ(Vector);

@@ -1,4 +1,4 @@
-Function Vector_VectorsOrthonormal_SSE_Spd({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_VectorsOrthonormal_SSE_Spd(AutoTest: Boolean = False): Integer;
 const
   RepeatCount = 20000000;
 var
@@ -14,7 +14,7 @@ var
   StopCnt:        Int64;
   nSSECnt:        Int64;
 begin
-QueryPerformanceFrequency({%H-}Freq);
+QueryPerformanceFrequency(Freq);
 WriteLn;
 WriteLn(LineText('VectorsOrthonormal_SSE - Speed tests'));
 WriteLn;
@@ -34,10 +34,10 @@ try
   RandomVec(v4d1^); RandomVec(v4d2^); LoadZeroVector(v4d3^);
   WriteLn;
   Write('v2s @ nonSSE:  ');
-  QueryPerformanceCounter({%H-}StartCnt);
+  QueryPerformanceCounter(StartCnt);
   For i := 1 to RepeatCount do
     v2s3^ := VectorsOrthonormal(v2s1^,v2s2^);
-  QueryPerformanceCounter({%H-}StopCnt);
+  QueryPerformanceCounter(StopCnt);
   WriteLn(Format('%d ticks (%.2f ms)',[StopCnt - StartCnt,((StopCnt - StartCnt) / Freq) * 1000]));
   nSSECnt := StopCnt - StartCnt;
   Write(Format('v2s @ SSE(%s):  ',[BoolToMark(CheckMemAlign16(v2s1,v2s2,v2s3),'a','u')]));

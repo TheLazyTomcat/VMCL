@@ -1,4 +1,4 @@
-Function Matrix_MatricesMultiplyCM_SSE_Man({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_MatricesMultiplyCM_SSE_Man(AutoTest: Boolean = False): Integer;
 var
   m2s1,m2s2,m2s3: PVMCLMatrix2CMs;
   m3s1,m3s2,m3s3: PVMCLMatrix3CMs;

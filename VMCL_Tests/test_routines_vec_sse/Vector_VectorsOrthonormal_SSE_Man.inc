@@ -1,4 +1,4 @@
-Function Vector_VectorsOrthonormal_SSE_Man({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_VectorsOrthonormal_SSE_Man(AutoTest: Boolean = False): Integer;
 var
   v2s1,v2s2,v2s3: PVMCLVector2s;
   v3s1,v3s2,v3s3: PVMCLVector3s;

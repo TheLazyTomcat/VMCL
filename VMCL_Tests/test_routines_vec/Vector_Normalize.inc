@@ -1,4 +1,4 @@
-Function Vector_Normalize({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_Normalize(AutoTest: Boolean = False): Integer;
 var
   v2s:  TVMCLVector2s;
   v3s:  TVMCLVector3s;

@@ -1343,6 +1343,11 @@ implementation
 uses
   Math;
 
+{$IFDEF FPC_DisableWarns}
+  {$WARN 5058 OFF} // Variable "$1" does not seem to be initialized
+  {$WARN 5060 OFF} // Function result variable does not seem to be initialized
+{$ENDIF}
+
 {===============================================================================
     Matrix formatting types, constants and functions - implementation
 ===============================================================================}
@@ -1813,7 +1818,7 @@ end;
 
 Function RMMatrixFromRows(const Row1,Row2: TVMCLVector2s): TVMCLMatrix2RMs;
 begin
-Move(Row1,Result{%H-}[0],SizeOf(Row1));
+Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
 end;
 
@@ -1821,7 +1826,7 @@ end;
 
 Function RMMatrixFromRows(const Row1,Row2: TVMCLVector2d): TVMCLMatrix2RMd;
 begin
-Move(Row1,Result{%H-}[0],SizeOf(Row1));
+Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
 end;
 
@@ -1845,7 +1850,7 @@ end;
 
 Function RMMatrixFromRows(const Row1,Row2,Row3: TVMCLVector3s): TVMCLMatrix3RMs;
 begin
-Move(Row1,Result{%H-}[0],SizeOf(Row1));
+Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
 Move(Row3,Result[2],SizeOf(Row3));
 end;
@@ -1854,7 +1859,7 @@ end;
 
 Function RMMatrixFromRows(const Row1,Row2,Row3: TVMCLVector3d): TVMCLMatrix3RMd;
 begin
-Move(Row1,Result{%H-}[0],SizeOf(Row1));
+Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
 Move(Row3,Result[2],SizeOf(Row3));
 end;
@@ -1881,7 +1886,7 @@ end;
 
 Function RMMatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4s): TVMCLMatrix4RMs;
 begin
-Move(Row1,Result{%H-}[0],SizeOf(Row1));
+Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
 Move(Row3,Result[2],SizeOf(Row3));
 Move(Row4,Result[3],SizeOf(Row4));
@@ -1891,7 +1896,7 @@ end;
 
 Function RMMatrixFromRows(const Row1,Row2,Row3,Row4: TVMCLVector4d): TVMCLMatrix4RMd;
 begin
-Move(Row1,Result{%H-}[0],SizeOf(Row1));
+Move(Row1,Result[0],SizeOf(Row1));
 Move(Row2,Result[1],SizeOf(Row2));
 Move(Row3,Result[2],SizeOf(Row3));
 Move(Row4,Result[3],SizeOf(Row4));
@@ -2003,7 +2008,7 @@ end;
 
 Function CMMatrixFromColumns(const Column1,Column2: TVMCLVector2s): TVMCLMatrix2CMs;
 begin
-Move(Column1,Result{%H-}[0],SizeOf(Column1));
+Move(Column1,Result[0],SizeOf(Column1));
 Move(Column2,Result[1],SizeOf(Column2));
 end;
 
@@ -2011,7 +2016,7 @@ end;
 
 Function CMMatrixFromColumns(const Column1,Column2: TVMCLVector2d): TVMCLMatrix2CMd;
 begin
-Move(Column1,Result{%H-}[0],SizeOf(Column1));
+Move(Column1,Result[0],SizeOf(Column1));
 Move(Column2,Result[1],SizeOf(Column2));
 end;
 
@@ -2037,7 +2042,7 @@ end;
 
 Function CMMatrixFromColumns(const Column1,Column2,Column3: TVMCLVector3s): TVMCLMatrix3CMs;
 begin
-Move(Column1,Result{%H-}[0],SizeOf(Column1));
+Move(Column1,Result[0],SizeOf(Column1));
 Move(Column2,Result[1],SizeOf(Column2));
 Move(Column3,Result[2],SizeOf(Column3));
 end;
@@ -2046,7 +2051,7 @@ end;
 
 Function CMMatrixFromColumns(const Column1,Column2,Column3: TVMCLVector3d): TVMCLMatrix3CMd;
 begin
-Move(Column1,Result{%H-}[0],SizeOf(Column1));
+Move(Column1,Result[0],SizeOf(Column1));
 Move(Column2,Result[1],SizeOf(Column2));
 Move(Column3,Result[2],SizeOf(Column3));
 end;
@@ -2075,7 +2080,7 @@ end;
 
 Function CMMatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4s): TVMCLMatrix4CMs;
 begin
-Move(Column1,Result{%H-}[0],SizeOf(Column1));
+Move(Column1,Result[0],SizeOf(Column1));
 Move(Column2,Result[1],SizeOf(Column2));
 Move(Column3,Result[2],SizeOf(Column3));
 Move(Column4,Result[3],SizeOf(Column4));
@@ -2085,7 +2090,7 @@ end;
 
 Function CMMatrixFromColumns(const Column1,Column2,Column3,Column4: TVMCLVector4d): TVMCLMatrix4CMd;
 begin
-Move(Column1,Result{%H-}[0],SizeOf(Column1));
+Move(Column1,Result[0],SizeOf(Column1));
 Move(Column2,Result[1],SizeOf(Column2));
 Move(Column3,Result[2],SizeOf(Column3));
 Move(Column4,Result[3],SizeOf(Column4));
@@ -2406,7 +2411,7 @@ end;
 Function MatrixGetRow(const Matrix: TVMCLMatrix2RMs; Row: Integer): TVMCLVector2s;
 begin
 If CheckRange(Row,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Row],Result{%H-},SizeOf(Result))
+  Move(Matrix[Row],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector2S;
 end;
@@ -2416,7 +2421,7 @@ end;
 Function MatrixGetRow(const Matrix: TVMCLMatrix2RMd; Row: Integer): TVMCLVector2d;
 begin
 If CheckRange(Row,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Row],Result{%H-},SizeOf(Result))
+  Move(Matrix[Row],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector2d;
 end;
@@ -2446,7 +2451,7 @@ end;
 Function MatrixGetRow(const Matrix: TVMCLMatrix3RMs; Row: Integer): TVMCLVector3s;
 begin
 If CheckRange(Row,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Row],Result{%H-},SizeOf(Result))
+  Move(Matrix[Row],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector3s;
 end;
@@ -2456,7 +2461,7 @@ end;
 Function MatrixGetRow(const Matrix: TVMCLMatrix3RMd; Row: Integer): TVMCLVector3d;
 begin
 If CheckRange(Row,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Row],Result{%H-},SizeOf(Result))
+  Move(Matrix[Row],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector3d;
 end;
@@ -2486,7 +2491,7 @@ end;
 Function MatrixGetRow(const Matrix: TVMCLMatrix4RMs; Row: Integer): TVMCLVector4s;
 begin
 If CheckRange(Row,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Row],Result{%H-},SizeOf(Result))
+  Move(Matrix[Row],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector4s;
 end;
@@ -2496,7 +2501,7 @@ end;
 Function MatrixGetRow(const Matrix: TVMCLMatrix4RMd; Row: Integer): TVMCLVector4d;
 begin
 If CheckRange(Row,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Row],Result{%H-},SizeOf(Result))
+  Move(Matrix[Row],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector4d;
 end;
@@ -2546,7 +2551,7 @@ end;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix2CMs; Column: Integer): TVMCLVector2s;
 begin
 If CheckRange(Column,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Column],Result{%H-},SizeOf(Result))
+  Move(Matrix[Column],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector2s;
 end;
@@ -2556,7 +2561,7 @@ end;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix2CMd; Column: Integer): TVMCLVector2d; 
 begin
 If CheckRange(Column,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Column],Result{%H-},SizeOf(Result))
+  Move(Matrix[Column],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector2d;
 end;
@@ -2586,7 +2591,7 @@ end;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix3CMs; Column: Integer): TVMCLVector3s;
 begin
 If CheckRange(Column,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Column],Result{%H-},SizeOf(Result))
+  Move(Matrix[Column],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector3s;
 end;
@@ -2596,7 +2601,7 @@ end;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix3CMd; Column: Integer): TVMCLVector3d;
 begin
 If CheckRange(Column,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Column],Result{%H-},SizeOf(Result))
+  Move(Matrix[Column],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector3d;
 end;
@@ -2626,7 +2631,7 @@ end;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix4CMs; Column: Integer): TVMCLVector4s;
 begin
 If CheckRange(Column,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Column],Result{%H-},SizeOf(Result))
+  Move(Matrix[Column],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector4s;
 end;
@@ -2636,7 +2641,7 @@ end;
 Function MatrixGetColumn(const Matrix: TVMCLMatrix4CMd; Column: Integer): TVMCLVector4d;
 begin
 If CheckRange(Column,Low(Matrix),High(Matrix)) then
-  Move(Matrix[Column],Result{%H-},SizeOf(Result))
+  Move(Matrix[Column],Result,SizeOf(Result))
 else
   Result := VMCL_ZeroVector4d;
 end;
@@ -5119,7 +5124,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix3RMs): TVMCLMatrix2RMs;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5127,7 +5132,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix3RMd): TVMCLMatrix2RMd;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5135,7 +5140,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix3CMs): TVMCLMatrix2CMs;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5143,7 +5148,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix3CMd): TVMCLMatrix2CMd;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5151,7 +5156,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix2RMs;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5159,7 +5164,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix2RMd;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5167,7 +5172,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix2CMs;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5175,7 +5180,7 @@ end;
 
 Function Matrix2(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix2CMd;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 end;
 
@@ -5183,7 +5188,7 @@ end;
 
 Function Matrix3(const Matrix: TVMCLMatrix4RMs): TVMCLMatrix3RMs;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 Move(Matrix[2],Result[2],SizeOf(Result[2]));
 end;
@@ -5192,7 +5197,7 @@ end;
 
 Function Matrix3(const Matrix: TVMCLMatrix4RMd): TVMCLMatrix3RMd;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 Move(Matrix[2],Result[2],SizeOf(Result[2]));
 end;
@@ -5201,7 +5206,7 @@ end;
 
 Function Matrix3(const Matrix: TVMCLMatrix4CMs): TVMCLMatrix3CMs;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 Move(Matrix[2],Result[2],SizeOf(Result[2]));
 end;
@@ -5210,7 +5215,7 @@ end;
 
 Function Matrix3(const Matrix: TVMCLMatrix4CMd): TVMCLMatrix3CMd;
 begin
-Move(Matrix[0],Result{%H-}[0],SizeOf(Result[0]));
+Move(Matrix[0],Result[0],SizeOf(Result[0]));
 Move(Matrix[1],Result[1],SizeOf(Result[1]));
 Move(Matrix[2],Result[2],SizeOf(Result[2]));
 end;

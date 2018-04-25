@@ -1,4 +1,4 @@
-Function Vector_VectorsAdd({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_VectorsAdd(AutoTest: Boolean = False): Integer;
 var
   v2s1,v2s2:  TVMCLVector2s;
   v3s1,v3s2:  TVMCLVector3s;

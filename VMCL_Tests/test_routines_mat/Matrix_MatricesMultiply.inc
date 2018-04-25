@@ -1,4 +1,4 @@
-Function Matrix_MatricesMultiply({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_MatricesMultiply(AutoTest: Boolean = False): Integer;
 var
   m2s1,m2s2:  TVMCLMatrix2s;
   m3s1,m3s2:  TVMCLMatrix3s;

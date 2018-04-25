@@ -1,4 +1,4 @@
-Function Vector_VectorsAngleRad_SSE_Auto({%H-}AutoTest: Boolean = False): Integer;
+Function Vector_VectorsAngleRad_SSE_Auto(AutoTest: Boolean = False): Integer;
 const
   ValueCount = 1000000;
   Epsilon    = 1e-3;

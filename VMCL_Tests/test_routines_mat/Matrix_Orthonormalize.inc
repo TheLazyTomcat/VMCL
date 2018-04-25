@@ -1,4 +1,4 @@
-Function Matrix_Orthonormalize({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_Orthonormalize(AutoTest: Boolean = False): Integer;
 var
   m2s:  TVMCLMatrix2s;
   m3s:  TVMCLMatrix3s;

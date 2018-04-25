@@ -1,4 +1,4 @@
-Function Matrix_VectorReplace({%H-}AutoTest: Boolean = False): Integer;
+Function Matrix_VectorReplace(AutoTest: Boolean = False): Integer;
 var
   m2s:  TVMCLMatrix2s;
   m3s:  TVMCLMatrix3s;
